@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Login Page | Sistem Persediaan</title>
 
     <!-- Custom fonts for this template-->
     <link href="/sbadmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,9 +20,18 @@
     <!-- Custom styles for this template-->
     <link href="/sbadmin/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        body {
+        background-image: url('/sbadmin/img/puspembadung.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;  
+        background-size: cover;
+        }
+    </style>
+
 </head>
 
-<body class="bg-gradient-primary">
+<body>
 
     <div class="container">
 
@@ -58,16 +67,11 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <a href="/dashboard" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </a>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
+                                        
                                     </form>
                                     <hr>
                                     <div class="text-center">
