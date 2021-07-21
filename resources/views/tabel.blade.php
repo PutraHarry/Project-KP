@@ -1,4 +1,5 @@
 @extends('layouts.master')
+<<<<<<< Updated upstream
 @push('css')
     <!-- Custom fonts for this template -->
     <link href="/sbadmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -12,6 +13,8 @@
     <!-- Custom styles for this page -->
     <link href="/sbadmin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endpush
+=======
+>>>>>>> Stashed changes
 
 @section('content')
         @if (session()->has('statusInput'))
@@ -25,8 +28,25 @@
               </div>
             </div>
           @endif
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+            <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                        <h1 class="m-0">Tabel</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active">Tabel</li>
+                        </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+      <!-- /.content-header -->
+        
+                <section class="content">
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -113,6 +133,7 @@
                         <!-- /.modal-dialog -->
                     </div>
                     <!-- /.modal -->
+                </section>
                     
 @endsection
 @push('js')
