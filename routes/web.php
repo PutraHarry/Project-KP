@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->name('dashboard');
 
 Route::get('/tabel', function () {
     return view('tabel');
@@ -32,3 +32,7 @@ Route::post('tabel/insert', 'TestController@insert');
 Route::get('/tabel/delete/{id}', 'TestController@delete');
 Route::get('/tabel/edit/{id}', 'TestController@editdata');
 Route::post('/tabel/update/{id}', 'TestController@update');
+
+Route::get('/login', 'LoginController@loginForm')->name('login')->middleware('guest');
+Route::post('/login', 'LoginController@login')->name('Login');
+Route::get('/logout', 'LoginController@logout')->name('logout');
