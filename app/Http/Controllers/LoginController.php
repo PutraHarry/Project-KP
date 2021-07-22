@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
-    public function register(Request $request)
+    /*public function register(Request $request)
     {
         $user = new AdminModel();
         $user->nama ->request->nama;
@@ -19,7 +19,7 @@ class LoginController extends Controller
         $user->save();
 
         return 'sukses';
-    }
+    }*/
 
     public function loginForm()
     {
@@ -28,7 +28,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if(Auth::guard()->attempt(['email' => $request->email, 'password' => $request->password])){
+        if(Auth::guard()->attempt(['username' => $request->username, 'password' => $request->password])){
             return redirect()->route('dashboard');
         } else {
             return redirect()->back()->with('message', 'Email atau Password Anda Salah');
