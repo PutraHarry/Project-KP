@@ -61,7 +61,7 @@
               <div class="card-body">
                     <div class="col-lg-6">
                             <div class="card-body">
-                                <a href="/tabel/create" class="btn btn-primary btn-icon-split">
+                                <a href="/periode/create" class="btn btn-primary btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-save"></i>
                                     </span>

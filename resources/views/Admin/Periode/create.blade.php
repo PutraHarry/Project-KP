@@ -39,7 +39,7 @@ Create Periode Baru
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Periode</a></li>
+                    <li class="breadcrumb-item"><a href="/periode">Periode</a></li>
                     <li class="breadcrumb-item active">Periode Baru</li>
                   </ol>
                 </div>
