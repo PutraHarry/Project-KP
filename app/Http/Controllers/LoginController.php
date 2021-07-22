@@ -39,6 +39,6 @@ class LoginController extends Controller
     {
         Auth::guard()->logout();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('login');
     }
 }

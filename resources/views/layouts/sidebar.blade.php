@@ -156,6 +156,15 @@
               </p>
             </a>
           </li>
+          <li class="nav-header">USER</li>
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">
+              <i class="nav-icon fas fa-arrow-left"></i>
+              <p>
+                Log Out
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
