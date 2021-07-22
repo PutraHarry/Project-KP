@@ -21,6 +21,9 @@ Route::get('/', function () {
 Route::get('/periode', function () {
     return view('/Admin/Periode/show');
 });
+Route::get('/periode/create', function () {
+    return view('/Admin/Periode/create');
+});
 
 
 Route::get('/dashboard', function () {

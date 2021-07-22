@@ -78,6 +78,7 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>No.</th>
                     <th>Perangkat Daerah</th>
                     <th>Nama Periode</th>
                     <th>Tanggal Mulai</th>
@@ -89,6 +90,7 @@
                   </thead>
                   <tbody>
                     <tr>
+                        <td>1</td>
                         <td>Perangkat 1</td>
                         <td>Periode Januari</td>
                         <td>01-01-2021</td>
@@ -98,6 +100,7 @@
                         <td>aksinya</td>
                     </tr>
                     <tr>
+                        <td>2</td>
                         <td>Perangkat 1</td>
                         <td>Periode Januari</td>
                         <td>01-01-2021</td>
@@ -107,6 +110,7 @@
                         <td>aksinya</td>
                     </tr>
                     <tr>
+                        <td>3</td>
                         <td>Perangkat 1</td>
                         <td>Periode Januari</td>
                         <td>01-01-2021</td>
@@ -116,6 +120,7 @@
                         <td>aksinya</td>
                     </tr>
                     <tr>
+                        <td>4</td>
                         <td>Perangkat 1</td>
                         <td>Periode Januari</td>
                         <td>01-01-2021</td>
@@ -127,6 +132,7 @@
                   </tbody>
                   <tfoot>
                     <tr>
+                        <th>No.</th>
                         <th>Perangkat Daerah</th>
                         <th>Nama Periode</th>
                         <th>Tanggal Mulai</th>
