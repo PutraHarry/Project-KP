@@ -3,6 +3,31 @@
 Create Periode Baru
 @endsection
 
+@push('css')
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="/adminlte/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" href="/adminlte/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+    <!-- BS Stepper -->
+    <link rel="stylesheet" href="/adminlte/plugins/bs-stepper/css/bs-stepper.min.css">
+    <!-- dropzonejs -->
+    <link rel="stylesheet" href="/adminlte/plugins/dropzone/min/dropzone.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
+@endpush
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -10,12 +35,12 @@ Create Periode Baru
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>General Form</h1>
+                  <h1>Periode Baru</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">General Form</li>
+                    <li class="breadcrumb-item"><a href="#">Periode</a></li>
+                    <li class="breadcrumb-item active">Periode Baru</li>
                   </ol>
                 </div>
               </div>
@@ -31,31 +56,66 @@ Create Periode Baru
                   <!-- general form elements -->
                   <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Quick Example</h3>
+                      <h3 class="card-title">Create Data Periode Baru</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form>
                       <div class="card-body">
+        
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                            <label>Perangkat Daerah</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
+                            <option>Perangkat Daerah 1</option>
+                            <option>Perangkat Daerah 2</option>
+                            <option>Perangkat Daerah 3</option>
+                            </select>
                         </div>
+                    
                         <div class="form-group">
-                          <label for="exampleInputPassword1">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <label for="exampleInputEmail1">Nama Periode</label>
+                            <input type="text" class="form-control" id="inputPeriode" placeholder="Input Nama Periode">
                         </div>
+                        <!-- Date dd/mm/yyyy -->
                         <div class="form-group">
-                          <label for="exampleInputFile">File input</label>
-                          <div class="input-group">
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="exampleInputFile">
-                              <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            <label>Tanggal Mulai:</label>
+        
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                             </div>
-                            <div class="input-group-append">
-                              <span class="input-group-text">Upload</span>
+                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                             </div>
-                          </div>
+                            <!-- /.input group -->
+                        </div>
+                        <!-- /.form group -->
+                        <!-- Date dd/mm/yyyy -->
+                        <div class="form-group">
+                                <label>Tanggal Selesai:</label>
+            
+                                <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+                        
+                        <!-- select -->
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control">
+                            <option>Open</option>
+                            <option>Close</option>
+                            </select>
+                        </div>
+                        
+                        <!-- textarea -->
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <textarea class="form-control" rows="3" placeholder="Input Keterangan..."></textarea>
                         </div>
                         <div class="form-check">
                           <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -65,215 +125,12 @@ Create Periode Baru
                       <!-- /.card-body -->
       
                       <div class="card-footer">
+                        <button type="submit" class="btn btn-warning">Reset</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
                     </form>
                   </div>
                   <!-- /.card -->
-      
-                  
-                  <!-- Horizontal Form -->
-                  <div class="card card-info">
-                    <div class="card-header">
-                      <h3 class="card-title">Horizontal Form</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form class="form-horizontal">
-                      <div class="card-body">
-                        <div class="form-group row">
-                          <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                          <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                          <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <div class="offset-sm-2 col-sm-10">
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck2">
-                              <label class="form-check-label" for="exampleCheck2">Remember me</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.card-body -->
-                      <div class="card-footer">
-                        <button type="submit" class="btn btn-info">Sign in</button>
-                        <button type="submit" class="btn btn-default float-right">Cancel</button>
-                      </div>
-                      <!-- /.card-footer -->
-                    </form>
-                  </div>
-                  <!-- /.card -->
-      
-                </div>
-                <!--/.col (left) -->
-                <!-- right column -->
-                <div class="col-md-6">
-      
-                  <!-- general form elements disabled -->
-                  <div class="card card-warning">
-                    <div class="card-header">
-                      <h3 class="card-title">General Elements</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                      <form>
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>Text</label>
-                              <input type="text" class="form-control" placeholder="Enter ...">
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label>Text Disabled</label>
-                              <input type="text" class="form-control" placeholder="Enter ..." disabled>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <!-- textarea -->
-                            <div class="form-group">
-                              <label>Textarea</label>
-                              <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label>Textarea Disabled</label>
-                              <textarea class="form-control" rows="3" placeholder="Enter ..." disabled></textarea>
-                            </div>
-                          </div>
-                        </div>
-      
-                        <!-- input states -->
-                        <div class="form-group">
-                          <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Input with
-                            success</label>
-                          <input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ...">
-                        </div>
-                        <div class="form-group">
-                          <label class="col-form-label" for="inputWarning"><i class="far fa-bell"></i> Input with
-                            warning</label>
-                          <input type="text" class="form-control is-warning" id="inputWarning" placeholder="Enter ...">
-                        </div>
-                        <div class="form-group">
-                          <label class="col-form-label" for="inputError"><i class="far fa-times-circle"></i> Input with
-                            error</label>
-                          <input type="text" class="form-control is-invalid" id="inputError" placeholder="Enter ...">
-                        </div>
-      
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <!-- checkbox -->
-                            <div class="form-group">
-                              <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Checkbox</label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="checkbox" checked>
-                                <label class="form-check-label">Checkbox checked</label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="checkbox" disabled>
-                                <label class="form-check-label">Checkbox disabled</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <!-- radio -->
-                            <div class="form-group">
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radio1">
-                                <label class="form-check-label">Radio</label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radio1" checked>
-                                <label class="form-check-label">Radio checked</label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" disabled>
-                                <label class="form-check-label">Radio disabled</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-      
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <!-- select -->
-                            <div class="form-group">
-                              <label>Select</label>
-                              <select class="form-control">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label>Select Disabled</label>
-                              <select class="form-control" disabled>
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-      
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <!-- Select multiple-->
-                            <div class="form-group">
-                              <label>Select Multiple</label>
-                              <select multiple class="form-control">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label>Select Multiple Disabled</label>
-                              <select multiple class="form-control" disabled>
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                    <!-- /.card-body -->
-                  </div>
-                  <!-- /.card -->
-                  
-                </div>
-                <!--/.col (right) -->
-              </div>
               <!-- /.row -->
             </div><!-- /.container-fluid -->
           </section>
@@ -281,11 +138,168 @@ Create Periode Baru
         </div>
 @endsection
 
-@section('js')
+@push('js')
+<!-- jQuery -->
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="/adminlte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/adminlte/plugins/moment/moment.min.js"></script>
+<script src="/adminlte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/adminlte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/adminlte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/adminlte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/adminlte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/adminlte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    })
+
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
+
+  })
+  // BS-Stepper Init
+  document.addEventListener('DOMContentLoaded', function () {
+    window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+  })
+
+  // DropzoneJS Demo Code Start
+  Dropzone.autoDiscover = false
+
+  // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+  var previewNode = document.querySelector("#template")
+  previewNode.id = ""
+  var previewTemplate = previewNode.parentNode.innerHTML
+  previewNode.parentNode.removeChild(previewNode)
+
+  var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+    url: "/target-url", // Set the url
+    thumbnailWidth: 80,
+    thumbnailHeight: 80,
+    parallelUploads: 20,
+    previewTemplate: previewTemplate,
+    autoQueue: false, // Make sure the files aren't queued until manually added
+    previewsContainer: "#previews", // Define the container to display the previews
+    clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+  })
+
+  myDropzone.on("addedfile", function(file) {
+    // Hookup the start button
+    file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+  })
+
+  // Update the total progress bar
+  myDropzone.on("totaluploadprogress", function(progress) {
+    document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+  })
+
+  myDropzone.on("sending", function(file) {
+    // Show the total progress bar when upload starts
+    document.querySelector("#total-progress").style.opacity = "1"
+    // And disable the start button
+    file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+  })
+
+  // Hide the total progress bar when nothing's uploading anymore
+  myDropzone.on("queuecomplete", function(progress) {
+    document.querySelector("#total-progress").style.opacity = "0"
+  })
+
+  // Setup the buttons for all transfers
+  // The "add files" button doesn't need to be setup because the config
+  // `clickable` has already been specified.
+  document.querySelector("#actions .start").onclick = function() {
+    myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+  }
+  document.querySelector("#actions .cancel").onclick = function() {
+    myDropzone.removeAllFiles(true)
+  }
+  // DropzoneJS Demo Code End
+</script>
 <script>
         $(function () {
           bsCustomFileInput.init();
         });
         </script>
-@endsection
+@endpush
