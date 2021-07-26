@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 Route::get('/periode/create', function () {
     return view('/Admin/Periode/create');
-});*/
+});
 
 
 Route::get('/dashboard', function () {
@@ -31,7 +31,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/tabel', function () {
     return view('tabel');
-});
+});*/
 
 Route::get('/tabel', 'TestController@datatest');
 Route::get('tabel/create', 'TestController@createdata');
@@ -39,6 +39,8 @@ Route::post('tabel/insert', 'TestController@insert');
 Route::get('/tabel/delete/{id}', 'TestController@delete');
 Route::get('/tabel/edit/{id}', 'TestController@editdata');
 Route::post('/tabel/update/{id}', 'TestController@update');
+
+Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 
 //PERIODE
 Route::get('/periode', 'PeriodeController@dataPeriode');
