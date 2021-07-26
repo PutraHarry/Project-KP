@@ -58,7 +58,7 @@ Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 //PERIODE
 Route::get('/periode', 'PeriodeController@dataPeriode');
 Route::get('/periode/create', 'PeriodeController@addPeriode');
-
+Route::post('/periode/insert','PeriodeController@insert');
 
 //CONTROLLER FIX
 Route::get('/login', 'LoginController@loginForm')->name('login')->middleware('guest');

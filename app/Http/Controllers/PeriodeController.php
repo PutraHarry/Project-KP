@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PeriodeModel;
+use App\OPDModel;
 use Illuminate\Support\Facades\Validator;
 
 class PeriodeController extends Controller
@@ -24,7 +25,9 @@ class PeriodeController extends Controller
 
     public function addPeriode()
     {
-        return view('Admin.Periode.create');
+        $topd = OPDModel::get();
+
+        return view("Admin.Periode.create", compact('topd'));
     }
 
     public function insertPeriode(Request $request)
@@ -47,7 +50,8 @@ class PeriodeController extends Controller
         $periode->nama = $request->nama;
         $periode->tgl_mulai = $request->tgl_mulai;
         $periode->tgl_selesai = $request->tgl_selesai;
-        $periode->status = $request->sataus;
+        $periode->status = $request->status;
+        $periode->keterangan = $request->keterangan;
 
         $periode->save();
 

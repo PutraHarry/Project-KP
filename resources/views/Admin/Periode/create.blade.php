@@ -66,16 +66,15 @@ Create Periode Baru
                         <div class="form-group">
                             <label>Perangkat Daerah</label>
                             <select class="select2" multiple="multiple" name="id_opd" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
-                            <option value="1">Perangkat Daerah 1</option>
-                            <option value="2">Perangkat Daerah 2</option>
-                            <option value="3">Perangkat Daerah 3</option>
+                            @foreach($topd as $to)
+                            <option value={{ $to->id }}>{{ $to->nama }}</option>
+                            @endforeach
                             </select>
-                    
                         </div>
                     
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama Periode</label>
-                            <input type="text" class="form-control" name="periode" id="inputPeriode" placeholder="Input Nama Periode">
+                            <input type="text" class="form-control" name="nama" id="inputPeriode" placeholder="Input Nama Periode">
                         </div>
                         <!-- Date dd/mm/yyyy -->
                         <div class="form-group">
@@ -85,43 +84,42 @@ Create Periode Baru
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                             </div>
-                            <input type="text" class="form-control" name="tglmulai" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                            <input type="text" class="form-control" name="tgl_mulai" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                             </div>
                             <!-- /.input group -->
                         </div>
                         <!-- /.form group -->
                         <!-- Date dd/mm/yyyy -->
                         <div class="form-group">
-                                <label>Tanggal Selesai:</label>
-            
-                                <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                </div>
-                                <input type="text" class="form-control" name="tglselesai" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
-                                </div>
-                                <!-- /.input group -->
+                            <label>Tanggal Selesai:</label>
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                             </div>
+                            <input type="text" class="form-control" name="tgl_selesai" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                            </div>
+                            <!-- /.input group -->
+                        </div>
                             <!-- /.form group -->
                         
                         <!-- select -->
                         <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control">
-                            <option>Open</option>
-                            <option>Close</option>
+                            <select class="form-control" name="status">
+                            <option value="open">Open</option>
+                            <option value="close">Close</option>
                             </select>
                         </div>
                         
                         <!-- textarea -->
                         <div class="form-group">
                             <label>Keterangan</label>
-                            <textarea class="form-control" rows="3" placeholder="Input Keterangan..."></textarea>
+                            <textarea class="form-control" rows="3" name="keterangan" placeholder="Input Keterangan..."></textarea>
                         </div>
-                        <div class="form-check">
+                        <!--<div class="form-check">
                           <input type="checkbox" class="form-check-input" id="exampleCheck1">
                           <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
+                        </div>-->
                       </div>
                       <!-- /.card-body -->
       
