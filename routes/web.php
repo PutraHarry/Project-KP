@@ -13,17 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//CONTROLLER COBA
 Route::get('/', function () {
     return view('layouts.master');
 });
 
-Route::get('/periode', function () {
+/*Route::get('/periode', function () {
     return view('/Admin/Periode/show');
 });
 Route::get('/periode/create', function () {
     return view('/Admin/Periode/create');
-});
+});*/
 
 
 Route::get('/dashboard', function () {
@@ -41,9 +40,12 @@ Route::get('/tabel/delete/{id}', 'TestController@delete');
 Route::get('/tabel/edit/{id}', 'TestController@editdata');
 Route::post('/tabel/update/{id}', 'TestController@update');
 
+//PERIODE
+Route::get('/periode', 'PeriodeController@dataPeriode');
+Route::get('/periode/create', 'PeriodeController@addPeriode');
+
 
 //CONTROLLER FIX
 Route::get('/login', 'LoginController@loginForm')->name('login')->middleware('guest');
 Route::post('/login', 'LoginController@login')->name('Login');
 Route::get('/logout', 'LoginController@logout')->name('logout');
-
