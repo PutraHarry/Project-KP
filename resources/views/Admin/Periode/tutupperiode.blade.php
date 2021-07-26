@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Create Periode Baru
+Tutup Periode
 @endsection
 
 @push('css')
@@ -35,12 +35,12 @@ Create Periode Baru
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>Periode Baru</h1>
+                  <h1>Tutup Periode</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/periode">Periode</a></li>
-                    <li class="breadcrumb-item active">Periode Baru</li>
+                    <li class="breadcrumb-item active">Tutup Periode</li>
                   </ol>
                 </div>
               </div>
@@ -56,79 +56,25 @@ Create Periode Baru
                   <!-- general form elements -->
                   <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Create Data Periode Baru</h3>
+                      <h3 class="card-title">Tutup Periode Yang Ada</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form id="quickForm">
-                      <div class="card-body">
-        
-                        <div class="form-group">
-                            <label>Perangkat Daerah</label>
-                            <select class="select2" multiple="multiple" name="id_opd" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
-                            <option value="1">Perangkat Daerah 1</option>
-                            <option value="2">Perangkat Daerah 2</option>
-                            <option value="3">Perangkat Daerah 3</option>
-                            </select>
-                    
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Nama Periode</label>
-                            <input type="text" class="form-control" name="periode" id="inputPeriode" placeholder="Input Nama Periode">
-                        </div>
-                        <!-- Date dd/mm/yyyy -->
-                        <div class="form-group">
-                            <label>Tanggal Mulai:</label>
-        
-                            <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                            </div>
-                            <input type="text" class="form-control" name="tglmulai" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
-                            </div>
-                            <!-- /.input group -->
-                        </div>
-                        <!-- /.form group -->
-                        <!-- Date dd/mm/yyyy -->
-                        <div class="form-group">
-                                <label>Tanggal Selesai:</label>
-            
-                                <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                        <label>Pilih Periode Belanja yang akan ditutup</label>
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-append">
+                                                <button type="button" href="#" class="btn btn-info btn-flat"><i class="fas fa-folder"></i></button>
+                                            </span>                                            
+                                        </div>
+                                            <button type="button" href="#" class="btn btn-info btn-flat"><i class="fas fa-arrow-right"> Proses</i></button>
                                 </div>
-                                <input type="text" class="form-control" name="tglselesai" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
-                                </div>
-                                <!-- /.input group -->
                             </div>
-                            <!-- /.form group -->
-                        
-                        <!-- select -->
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select class="form-control">
-                            <option>Open</option>
-                            <option>Close</option>
-                            </select>
-                        </div>
-                        
-                        <!-- textarea -->
-                        <div class="form-group">
-                            <label>Keterangan</label>
-                            <textarea class="form-control" rows="3" placeholder="Input Keterangan..."></textarea>
-                        </div>
-                        <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                      </div>
-                      <!-- /.card-body -->
-      
-                      <div class="card-footer">
-                        <button type="submit" class="btn btn-warning">Reset</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                      </div>
+                        </div>                       
                     </form>
                   </div>
                   <!-- /.card -->
@@ -305,54 +251,54 @@ Create Periode Baru
         </script>
 
 <script>
-  $(function () {
-    $.validator.setDefaults({
-      submitHandler: function () {
-        alert( "Form successful submitted!" );
-      }
+    $(function () {
+      $.validator.setDefaults({
+        submitHandler: function () {
+          alert( "Form successful submitted!" );
+        }
+      });
+      $('#quickForm').validate({
+        rules: {
+          perangkat: {
+            required: true
+          },
+          periode: {
+            required: true
+          },
+          tglmulai: {
+            required: true
+          },
+          tglselesai: {
+            required: true
+          },
+        },
+        messages: {
+          perangkat: {
+            required: "Silahkan Input Perangkat daerah"
+          },
+          periode: {
+            required: "Silahkan input periode"
+          },
+          tglmulai: {
+            required: "Silahkan input tanggal mulai terlebih dahulu"
+          },
+          tglselesai: {
+            required: "Silahkan input tanggal selesai terlebih dahulu"
+          },
+          
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
     });
-    $('#quickForm').validate({
-      rules: {
-        perangkat: {
-          required: true
-        },
-        periode: {
-          required: true
-        },
-        tglmulai: {
-          required: true
-        },
-        tglselesai: {
-          required: true
-        },
-      },
-      messages: {
-        perangkat: {
-          required: "Silahkan Input Perangkat daerah"
-        },
-        periode: {
-          required: "Silahkan input periode"
-        },
-        tglmulai: {
-          required: "Silahkan input tanggal mulai terlebih dahulu"
-        },
-        tglselesai: {
-          required: "Silahkan input tanggal selesai terlebih dahulu"
-        },
-        
-      },
-      errorElement: 'span',
-      errorPlacement: function (error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function (element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function (element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    });
-  });
-  </script>
+    </script>
 @endpush
