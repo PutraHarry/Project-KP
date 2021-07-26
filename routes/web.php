@@ -24,6 +24,13 @@ Route::get('/periode/create', function () {
     return view('/Admin/Periode/create');
 });*/
 
+Route::get('/periode/tutup', function () {
+    return view('/Admin/Periode/tutupperiode');
+});
+Route::get('/periode/buka', function () {
+    return view('/Admin/Periode/bukaperiode');
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

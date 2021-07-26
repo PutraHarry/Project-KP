@@ -60,13 +60,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/periode" class="nav-link">
+                <a href="/periode/tutup" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tutup Periode</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/periode" class="nav-link">
+                <a href="/periode/buka" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buka Periode</p>
                 </a>
