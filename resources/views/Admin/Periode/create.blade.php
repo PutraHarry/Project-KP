@@ -65,11 +65,7 @@ Create Periode Baru
         
                         <div class="form-group">
                             <label>Perangkat Daerah</label>
-                            <select class="select2" multiple="multiple" name="perangkat" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
-                            <option>Perangkat Daerah 1</option>
-                            <option>Perangkat Daerah 2</option>
-                            <option>Perangkat Daerah 3</option>
-                            </select>
+                            
                         </div>
                     
                         <div class="form-group">
