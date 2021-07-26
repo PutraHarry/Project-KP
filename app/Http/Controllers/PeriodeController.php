@@ -3,12 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< Updated upstream
-
-class PeriodeController extends Controller
-{
-    //
-=======
 use App\PeriodeModel;
 use Illuminate\Support\Facades\Validator;
 
@@ -48,7 +42,15 @@ class PeriodeController extends Controller
             return back()->withErrors($validator);
         }
 
+        $periode = new PeriodeModel();
+        $periode->id_opd = $request->id_opd;
+        $periode->nama = $request->nama;
+        $periode->tgl_mulai = $request->tgl_mulai;
+        $periode->tgl_selesai = $request->tgl_selesai;
+        $periode->status = $request->sataus;
+
+        $periode->save();
+
         return redirect('/periode')->with('StatusInput', 'Input Success');
     }
->>>>>>> Stashed changes
 }
