@@ -40,6 +40,12 @@ Route::get('/tabel', function () {
     return view('tabel');
 });*/
 
+Route::get('/saldoawal', function () {
+    return view('/Admin/Saldo/show');
+});
+
+
+
 Route::get('/tabel', 'TestController@datatest');
 Route::get('tabel/create', 'TestController@createdata');
 Route::post('tabel/insert', 'TestController@insert');
