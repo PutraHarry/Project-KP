@@ -32,7 +32,7 @@ Route::get('/periode/buka', function () {
     return view('/Admin/Periode/bukaperiode');
 });
 
-
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

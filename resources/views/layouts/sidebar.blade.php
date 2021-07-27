@@ -13,7 +13,7 @@
           <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{auth()->guard()->user()->username}}</a>
+          <a href="#" class="d-block">placeholder</a>
         </div>
       </div>
 
@@ -76,7 +76,7 @@
 
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-menu"></i>
+              <i class="nav-icon fas fa-bars"></i>
               <p>
                 Saldo Awal
               </p>
@@ -85,7 +85,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-chart-bar"></i>
               <p>
                 Penerimaan
                 <i class="right fas fa-angle-left"></i>
@@ -126,7 +126,7 @@
           </li>
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-bar"></i>
+              <i class="nav-icon fas fa-sitemap"></i>
               <p>
                 Penggunaan
               </p>
@@ -134,7 +134,7 @@
           </li>
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-bar"></i>
+              <i class="nav-icon fas fa-money-check"></i>
               <p>
                 Pengeluaran
               </p>
@@ -142,7 +142,7 @@
           </li>
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-bar"></i>
+              <i class="nav-icon fas fa-warehouse"></i>
               <p>
                 Opname
               </p>
@@ -150,7 +150,7 @@
           </li>
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-bar"></i>
+              <i class="nav-icon fas fa-fire"></i>
               <p>
                 Pemusnahan
               </p>
@@ -159,7 +159,7 @@
           <li class="nav-header">USER</li>
           <li class="nav-item">
             <a href="/logout" class="nav-link">
-              <i class="nav-icon fas fa-arrow-left"></i>
+              <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Log Out
               </p>
