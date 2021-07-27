@@ -93,7 +93,7 @@
                         <td>Periode Januari</td>
                         <td>01-01-2021</td>
                         <td>01-02-2021</td>
-                        <td>Testing</td>
+                        <td>Open</td>
                         <td>Testing</td>
                         <td>aksinya</td>
                     </tr>
@@ -103,7 +103,7 @@
                         <td>Periode Januari</td>
                         <td>01-01-2021</td>
                         <td>01-02-2021</td>
-                        <td>Testing</td>
+                        <td>Open</td>
                         <td>Testing</td>
                         <td>aksinya</td>
                     </tr>
@@ -113,7 +113,7 @@
                         <td>Periode Januari</td>
                         <td>01-01-2021</td>
                         <td>01-02-2021</td>
-                        <td>Testing</td>
+                        <td>Close</td>
                         <td>Testing</td>
                         <td>aksinya</td>
                     </tr>
@@ -123,7 +123,7 @@
                         <td>Periode Januari</td>
                         <td>01-01-2021</td>
                         <td>01-02-2021</td>
-                        <td>Testing</td>
+                        <td>Close</td>
                         <td>Testing</td>
                         <td>aksinya</td>
                     </tr>
