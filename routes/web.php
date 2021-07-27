@@ -31,7 +31,7 @@ Route::get('/periode/buka', function () {
     return view('/Admin/Periode/bukaperiode');
 });
 
-
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -59,6 +59,7 @@ Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 Route::get('/periode', 'PeriodeController@dataPeriode');
 Route::get('/periode/create', 'PeriodeController@addPeriode');
 Route::post('/periode/insert','PeriodeController@insert');
+
 
 //CONTROLLER FIX
 Route::get('/login', 'LoginController@loginForm')->name('login')->middleware('guest');

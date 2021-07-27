@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    
+    Periode Stok
 @endsection
 @push('css')
 <!-- Google Font: Source Sans Pro -->
@@ -50,31 +50,29 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                
+                <h3 class="card-title">List Data Periode</h3>
+                  <div class="card-tools">
+                      <a href="/periode/create" class="btn btn-primary btn-icon-split">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-save"></i>
+                          </span>
+                          <span class="text">Periode Baru</span>
+                      </a>
+                      <a href="#" class="btn btn-success btn-icon-split">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-download"></i>
+                          </span>
+                          <span class="text">Ekspor</span>
+                      </a>
+                  </div>
+              
                 <!--isi tombol disini-->
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                    <div class="col-lg-6">
-                            <div class="card-body">
-                                <a href="/periode/create" class="btn btn-primary btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-save"></i>
-                                    </span>
-                                    <span class="text">Periode Baru</span>
-                                </a>
-                                <a href="#" class="btn btn-success btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-download"></i>
-                                    </span>
-                                    <span class="text">Ekspor</span>
-                                </a>
-                            </div>
-                        </div>
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
