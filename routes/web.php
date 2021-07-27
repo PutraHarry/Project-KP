@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('layouts.master');
 });
 
-Route::get('/periode', function () {
+/*Route::get('/periode', function () {
     return view('/Admin/Periode/show');
 });
 Route::get('/periode/create', function () {
@@ -58,6 +58,7 @@ Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 //PERIODE
 Route::get('/periode', 'PeriodeController@dataPeriode');
 Route::get('/periode/create', 'PeriodeController@addPeriode');
+Route::post('/periode/insert','PeriodeController@insert');
 
 
 //CONTROLLER FIX
