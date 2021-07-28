@@ -144,11 +144,7 @@ Create Saldo Awal Baru
                                             <tr>
                                                 <td>No</td>
                                                 <td>Barang</td>
-<<<<<<< Updated upstream
-                                                <td>Keterangan}</td>
-=======
                                                 <td>Keterangan</td>
->>>>>>> Stashed changes
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm">
                                                         <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i><a>
@@ -164,40 +160,7 @@ Create Saldo Awal Baru
                                     </table>
                                 </div>
                         </div>
-<<<<<<< Updated upstream
-                        <div class="row">
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="inputSaldo">Kode Saldo</label>
-                                    <input type="text" class="form-control" name="nama" id="inputSaldo" placeholder="Kode Saldo" disabled>
-                                    <p style="color:#808080";>kode akan tergenerate setelah mengimpan data saldo baru*</p>
-                                </div>
-                                
-                            </div>
-                            <div class="col-3">
-                                <!-- select -->
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select class="form-control" name="status" disabled>
-                                    <option value="draft">Draft</option>
-                                    <option value="final">Final</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                    <!-- select -->
-                                    <div class="form-group">
-                                        <label>Status</label>
-                                        <select class="form-control" name="status" disabled>
-                                        <option value="draft">Draft</option>
-                                        <option value="final">Final</option>
-                                        </select>
-                                    </div>
-                                </div>
 
-                        </div>
-=======
->>>>>>> Stashed changes
                       </div>
                       
                       <!-- /.card-body -->
