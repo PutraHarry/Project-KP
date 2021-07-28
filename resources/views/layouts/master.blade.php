@@ -6,6 +6,8 @@
   <title>Project Kp | @yield('title')</title>
 
   @include('layouts.style')
+  @stack('css')
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -39,6 +41,7 @@
 <!-- ./wrapper -->
 
 @include('layouts.script')
+@stack('js')
 </body>
 </html>
 /adminlte/
