@@ -18,4 +18,4 @@
   <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="/adminlte/plugins/summernote/summernote-bs4.min.css">
-  @stack('css')
+  
