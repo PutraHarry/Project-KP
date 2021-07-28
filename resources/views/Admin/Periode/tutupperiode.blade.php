@@ -59,29 +59,29 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
-                  <thead class="text-center">
-                  <tr>
+                  <thead>
+                  <tr class="text-center">
                     <th>No.</th>
-                    <th>Perangkat Daerah</th>
+                    <th width="300px">Perangkat Daerah</th>
                     <th>Nama Periode</th>
                     <th>Tanggal Mulai</th>
                     <th>Tanggal Berakhir</th>
                     <th>Status</th>
-                    <th>Keterangan</th>
+                    <th class="text-left">Keterangan</th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach($tutupperiode as $tp)
-                    <tr>
-                      <td class="text-center">{{ $loop->iteration }}</td>
+                    <tr class="text-center">
+                      <td>{{ $loop->iteration }}</td>
                       <td>{{ $tp->id_opd}}</td>
                       <td>{{ $tp->nama }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
                       <td>{{ $tp->status }}</td>
-                      <td>{{ $tp->keterangan }}</td>
-                      <td class="text-center">
+                      <td class="text-left">{{ $tp->keterangan }}</td>
+                      <td>
                           <a href="/periode/create" class="btn btn-primary btn-icon-split">
                             <span class="icon text-white-50">
                                 <i class="fas fa-rocket"></i>
@@ -92,17 +92,17 @@
                     </tr>
                     @endforeach
                   </tbody>
-                  <tfoot class="text-center">
-                    <tr>
+                  <tfoot>
+                    <tr class="text-center">
                         <th>No.</th>
-                        <th>Perangkat Daerah</th>
+                        <th width="300px">Perangkat Daerah</th>
                         <th>Nama Periode</th>
                         <th>Tanggal Mulai</th>
                         <th>Tanggal Berakhir</th>
                         <th>Status</th>
-                        <th>Keterangan</th>
+                        <th class="text-left">Keterangan</th>
                         <th>Aksi</th>
-                    </tr>
+                      </tr>
                   </tfoot>
                 </table>
               </div>
