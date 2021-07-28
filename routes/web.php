@@ -59,6 +59,8 @@ Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 Route::get('/periode', 'PeriodeController@dataPeriode');
 Route::get('/periode/create', 'PeriodeController@addPeriode');
 Route::post('/periode/insert','PeriodeController@insert');
+Route::get('/periode/tutupperiode', 'PeriodeController@tutupPeriode');
+Route::get('/periode/bukaperiode', 'PeriodeController@bukaPeriode');
 
 
 //CONTROLLER FIX
