@@ -81,7 +81,7 @@ Create Saldo Awal Baru
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="inputSaldo">Kode Saldo</label>
-                                    <input type="text" class="form-control" name="nama" id="inputSaldo" placeholder="Kode Saldo" disabled>
+                                    <input type="text" class="form-control" name="nama" id="inputSaldo" placeholder="Kode Saldo">
                                 </div>
                                 
                                 <!-- Date dd/mm/yyyy -->
@@ -158,32 +158,48 @@ Create Saldo Awal Baru
                                         <thead>
                                             <tr>
                                                 <th width="40px" class="text-center">No.</th>
-                                                <th>Barang</th>
-                                                <th>Qty</th>
-                                                <th>Satuan</th>
-                                                <th>Harga</th>
-                                                <th>Total</th>
-                                                <th>Keterangan</th>
-                                                <th width="100px" class="text-center">Aksi</th>
+                                                <th width="500px" class="text-center">Barang</th>
+                                                <th class="text-center">Qty</th>
+                                                <th class="text-center">Satuan</th>
+                                                <th class="text-center">Harga</th>
+                                                <th class="text-center">Total</th>
+                                                <th class="text-center">Keterangan</th>
+                                                <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>No</td>
+                                                <td>1</td>
                                                 <td>
-                                                        <div class="form-group">
-                                                                <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
-                                                                
-                                                                <option>barang1</option>
-                                                                <option>barang3</option>
-                                                                <option>barang2</option>
-                                                                </select>
-                                                        </div>
+                                                    <div class="form-group">
+                                                            <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
+                                                            
+                                                            <option>barang1</option>
+                                                            <option>barang3</option>
+                                                            <option>barang2</option>
+                                                            </select>
+                                                    </div>
                                                 </td>
-                                                <td>Qty</td>
-                                                <td>Satuan</td>
-                                                <td>Harga</td>
-                                                <td>Total</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Input Satuan">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Input Harga">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="total" id="inputTotal" placeholder="Kehitung otomatis" disabled>
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     <select class="form-control" name="keterangan">
                                                     <option value="baik">Baik</option>
@@ -191,24 +207,26 @@ Create Saldo Awal Baru
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm">
-                                                        <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i><a>
+                                                        <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
                                                         <button class="btn btn-sm btn-flat btn-danger" onclick="#"><i class="fa fa-trash"></i></button>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
+                                            <tr>
                                                 <tr>
                                                     <th width="40px" class="text-center">No.</th>
-                                                    <th>Barang</th>
-                                                    <th>Qty</th>
-                                                    <th>Satuan</th>
-                                                    <th>Harga</th>
-                                                    <th>Total</th>
-                                                    <th>Keterangan</th>
-                                                    <th width="100px" class="text-center">Aksi</th>
+                                                    <th width="500px" class="text-center">Barang</th>
+                                                    <th class="text-center">Qty</th>
+                                                    <th class="text-center">Satuan</th>
+                                                    <th class="text-center">Harga</th>
+                                                    <th class="text-center">Total</th>
+                                                    <th class="text-center">Keterangan</th>
+                                                    <th class="text-center">Aksi</th>
                                                 </tr>
-                                            </tfoot>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                         </div>

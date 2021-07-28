@@ -79,13 +79,13 @@
                           </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td>Perangkat 1</td>
+                            <tr class="text-center">
+                                <td>1</td>
+                                <td>KD123BPKAD</td>
                                 <td>Periode Januari</td>
                                 <td>01-01-2021</td>
                                 <td>01-02-2021</td>
-                                <td class="text-center">
+                                <td>
                                     <a href="#" class="btn btn-warning btn-icon-split">
                                       <span class="icon">
                                           <i class="fas fa-edit"></i>
