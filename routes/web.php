@@ -61,6 +61,8 @@ Route::get('/periode/create', 'PeriodeController@addPeriode');
 Route::post('/periode/insert','PeriodeController@insert');
 Route::get('/periode/tutupperiode', 'PeriodeController@tutupPeriode');
 Route::get('/periode/bukaperiode', 'PeriodeController@bukaPeriode');
+Route::get('/periode/bukaperiode/{id}','PeriodeController@prosesBuka');
+Route::get('/periode/tutupperiode/{id}','PeriodeController@prosesTutup');
 
 
 //CONTROLLER FIX

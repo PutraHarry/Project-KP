@@ -90,8 +90,8 @@
                     @foreach($tperiode as $tp)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $tp->id_opd}}</td>
-                      <td>{{ $tp->nama }}</td>
+                      <td>{{ $tp->nama}}</td>
+                      <td>{{ $tp->nama_periode }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
                       <td>{{ $tp->status }}</td>

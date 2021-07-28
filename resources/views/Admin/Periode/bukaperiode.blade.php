@@ -84,13 +84,25 @@
                     @foreach($bukaperiode as $bp)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $bp->id_opd}}</td>
                       <td>{{ $bp->nama }}</td>
+                      <td>{{ $bp->nama_periode }}</td>
                       <td>{{ $bp->tgl_mulai }}</td>
                       <td>{{ $bp->tgl_selesai }}</td>
                       <td>{{ $bp->status }}</td>
+<<<<<<< Updated upstream
                       <td>{{ $bp->keterangan }}</td>
                       <td>aksinya</td>
+=======
+                      <td class="text-left">{{ $bp->keterangan }}</td>
+                      <td>
+                        <button class="btn btn-primary btn-icon-split" onclick="bukaPeriode({{$bp->id}})">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-rocket"></i>
+                          </span>
+                          <span class="text">Proses</span>
+                        </button>
+                      </td>
+>>>>>>> Stashed changes
                     </tr>
                     @endforeach
                   </tbody>
@@ -121,6 +133,35 @@
     </section>
     <!-- /.content -->
 
+    <div class="modal fade" id="modal-buka">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Buka Periode</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <p>Yakin akan membuka periode tersebut?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <a href="/periode/bukaperiode/id" id="bbuka" type="button" class="btn btn-success">Buka</a>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+<script>
+function bukaPeriode(id) {
+$("#bbuka").attr("href", "/periode/bukaperiode/"+id);
+$('#modal-buka').modal('show');
+}
+</script>
           
                     
 @endsection
