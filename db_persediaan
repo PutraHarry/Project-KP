@@ -36,8 +36,11 @@ DROP TABLE IF EXISTS `tb_bidang`;
 
 CREATE TABLE `tb_bidang` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_unit` int(11) DEFAULT NULL,
   `bidang` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `id_unit` (`id_unit`),
+  CONSTRAINT `tb_bidang_ibfk_1` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_bidang` */
@@ -242,14 +245,11 @@ CREATE TABLE `tb_user` (
   `nama` varchar(255) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `id_jabatan` int(11) DEFAULT NULL,
-  `id_unit` int(11) DEFAULT NULL,
   `id_bidang` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_jabatan` (`id_jabatan`),
-  KEY `id_unit` (`id_unit`),
   KEY `id_bidang` (`id_bidang`),
   CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `tb_jabatan` (`id`),
-  CONSTRAINT `tb_user_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`),
   CONSTRAINT `tb_user_ibfk_3` FOREIGN KEY (`id_bidang`) REFERENCES `tb_bidang` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

@@ -54,45 +54,34 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">List Data Periode</h3>
-                  <div class="card-tools">
-                      <a href="#" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                              <i class="fas fa-rocket"></i>
-                          </span>
-                          <span class="text">Proses</span>
-                      </a>
-                  </div>
-              
                 <!--isi tombol disini-->
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
-                  <tr>
+                  <tr class="text-center">
                     <th>No.</th>
-                    <th>Perangkat Daerah</th>
+                    <th width="300px">Perangkat Daerah</th>
                     <th>Nama Periode</th>
                     <th>Tanggal Mulai</th>
                     <th>Tanggal Berakhir</th>
                     <th>Status</th>
-                    <th>Keterangan</th>
+                    <th class="text-left">Keterangan</th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach($tutupperiode as $tp)
-                    <tr>
+                    <tr class="text-center">
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $tp->nama }}</td>
                       <td>{{ $tp->nama_periode }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
                       <td>{{ $tp->status }}</td>
-<<<<<<< Updated upstream
                       <td>{{ $tp->keterangan }}</td>
                       <td>aksinya</td>
-=======
                       <td class="text-left">{{ $tp->keterangan }}</td>
                       <td>
                         <button class="btn btn-primary btn-icon-split" onclick="tutupPeriode({{$tp->id}})">
@@ -102,21 +91,20 @@
                           <span class="text">Proses</span>
                         </button>
                       </td>
->>>>>>> Stashed changes
                     </tr>
                     @endforeach
                   </tbody>
                   <tfoot>
-                    <tr>
+                    <tr class="text-center">
                         <th>No.</th>
-                        <th>Perangkat Daerah</th>
+                        <th width="300px">Perangkat Daerah</th>
                         <th>Nama Periode</th>
                         <th>Tanggal Mulai</th>
                         <th>Tanggal Berakhir</th>
                         <th>Status</th>
-                        <th>Keterangan</th>
+                        <th class="text-left">Keterangan</th>
                         <th>Aksi</th>
-                    </tr>
+                      </tr>
                   </tfoot>
                 </table>
               </div>
