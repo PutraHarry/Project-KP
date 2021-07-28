@@ -54,7 +54,7 @@ Create Periode Baru
         
                         <div class="form-group">
                             <label>Perangkat Daerah</label>
-                            <select class="select2" multiple="multiple" name="id_opd" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
+                            <select class="select2" name="id_opd" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
                             @foreach($topd as $to)
                             <option value={{ $to->id }}>{{ $to->nama }}</option>
                             @endforeach
