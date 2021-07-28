@@ -81,27 +81,18 @@
                   </tr>
                   </thead>
                   <tbody>
+                    @foreach($tutupperiode as $tp)
                     <tr>
-                        <td>1</td>
-                        <td>Perangkat 1</td>
-                        <td>Periode Januari</td>
-                        <td>01-01-2021</td>
-                        <td>01-02-2021</td>
-                        <td>Open</td>
-                        <td>Testing</td>
-                        <td>aksinya</td>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>{{ $tp->id_opd}}</td>
+                      <td>{{ $tp->nama }}</td>
+                      <td>{{ $tp->tgl_mulai }}</td>
+                      <td>{{ $tp->tgl_selesai }}</td>
+                      <td>{{ $tp->status }}</td>
+                      <td>{{ $tp->keterangan }}</td>
+                      <td>aksinya</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Perangkat 1</td>
-                        <td>Periode Januari</td>
-                        <td>01-01-2021</td>
-                        <td>01-02-2021</td>
-                        <td>Open</td>
-                        <td>Testing</td>
-                        <td>aksinya</td>
-                    </tr>
-                    
+                    @endforeach
                   </tbody>
                   <tfoot>
                     <tr>

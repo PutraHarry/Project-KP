@@ -32,22 +32,24 @@ Create Periode Baru
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                  <h1>Periode Baru</h1>
-                </div>
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/periode">Periode</a></li>
-                    <li class="breadcrumb-item active">Periode Baru</li>
-                  </ol>
-                </div>
-              </div>
-            </div><!-- /.container-fluid -->
-          </section>
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Periode Baru</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/periode">Periode</a></li>
+              <li class="breadcrumb-item active">Periode Baru</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
       
           <!-- Main content -->
+        <form action="/periode/insert" method="POST">
+          @csrf
           <section class="content">
             <div class="container-fluid">
               <div class="row">
@@ -65,7 +67,7 @@ Create Periode Baru
         
                         <div class="form-group">
                             <label>Perangkat Daerah</label>
-                            <select class="select2" name="id_opd" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
+                            <select class="select2" name="id_opd" id="id_opd" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
                             @foreach($topd as $to)
                             <option value={{ $to->id }}>{{ $to->nama }}</option>
                             @endforeach
@@ -99,7 +101,7 @@ Create Periode Baru
                         <!-- select -->
                         <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control" name="status">
+                            <select class="form-control" name="status" id="status">
                             <option value="open">Open</option>
                             <option value="close">Close</option>
                             </select>
@@ -108,7 +110,7 @@ Create Periode Baru
                         <!-- textarea -->
                         <div class="form-group">
                             <label>Keterangan</label>
-                            <textarea class="form-control" rows="3" name="keterangan" placeholder="Input Keterangan..."></textarea>
+                            <textarea class="form-control" rows="3" name="keterangan" id="keterangan" placeholder="Input Keterangan..."></textarea>
                         </div>
                         <!--<div class="form-check">
                           <input type="checkbox" class="form-check-input" id="exampleCheck1">
