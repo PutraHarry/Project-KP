@@ -65,6 +65,11 @@ class PeriodeController extends Controller
         return view("Admin.Periode.bukaperiode", compact('bukaperiode'));
     }
 
+    public function prosesBuka()
+    {
+        
+    }
+
     public function tutupPeriode()
     {
         $tutupperiode = periodeModel::where('status', 'open')->get();
