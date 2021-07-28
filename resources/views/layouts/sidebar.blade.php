@@ -75,7 +75,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/saldoawal" class="nav-link">
               <i class="nav-icon fas fa-bars"></i>
               <p>
                 Saldo Awal

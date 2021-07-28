@@ -74,7 +74,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
-                  <thead>
+                  <thead class="text-center">
                   <tr>
                     <th>No.</th>
                     <th>Perangkat Daerah</th>
@@ -89,7 +89,7 @@
                   <tbody>
                     @foreach($tperiode as $tp)
                     <tr>
-                      <td>{{ $loop->iteration }}</td>
+                      <td class="text-center">{{ $loop->iteration }}</td>
                       <td>{{ $tp->id_opd}}</td>
                       <td>{{ $tp->nama }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
@@ -100,7 +100,7 @@
                     </tr>
                     @endforeach
                   </tbody>
-                  <tfoot>
+                  <tfoot class="text-center">
                     <tr>
                         <th>No.</th>
                         <th>Perangkat Daerah</th>
