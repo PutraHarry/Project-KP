@@ -145,11 +145,24 @@
 <script src="/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 
-<!-- AdminLTE App -->
-<script src="/adminlte/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/adminlte/dist/js/demo.js"></script>
+<script src="/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
 <!-- Page specific script -->
+<script>
+  $(function () {
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
         
 
     
