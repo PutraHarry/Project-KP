@@ -44,6 +44,10 @@ Route::get('/saldoawal', function () {
     return view('/Admin/Saldo/show');
 });
 
+Route::get('/saldoawal/create', function () {
+    return view('/Admin/Saldo/create');
+});
+
 
 
 Route::get('/tabel', 'TestController@datatest');

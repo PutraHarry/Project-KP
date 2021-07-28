@@ -54,15 +54,6 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">List Data Periode</h3>
-                  <div class="card-tools">
-                      <a href="#" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                              <i class="fas fa-rocket"></i>
-                          </span>
-                          <span class="text">Proses</span>
-                      </a>
-                  </div>
-              
                 <!--isi tombol disini-->
               </div>
               <!-- /.card-header -->
@@ -89,7 +80,12 @@
                         <td>01-02-2021</td>
                         <td>Open</td>
                         <td>Testing</td>
-                        <td>aksinya</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i><a>
+                                <button class="btn btn-sm btn-flat btn-primary" onclick="#"><i class="fa fa-rocket"></i></button>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>2</td>
