@@ -57,4 +57,18 @@ class PeriodeController extends Controller
 
         return redirect('/periode')->with('StatusInput', 'Input Success');
     }
+
+    public function bukaPeriode()
+    {
+        $bukaperiode = periodeModel::where('status', 'close')->get();
+
+        return view("Admin.Periode.bukaperiode", compact('bukaperiode'));
+    }
+
+    public function tutupPeriode()
+    {
+        $tutupperiode = periodeModel::where('status', 'open')->get();
+
+        return view("Admin.Periode.tutupperiode", compact('tutupperiode'));
+    }
 }
