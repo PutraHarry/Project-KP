@@ -44,6 +44,14 @@ Create Periode Baru
             </ol>
           </div>
         </div>
+        <div>
+            <a href="/periode" class="btn btn-default btn-icon-split">
+                <span class="icon">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">Kembali</span>
+            </a>
+          </div>
       </div><!-- /.container-fluid -->
     </section>
       
@@ -58,7 +66,7 @@ Create Periode Baru
                   <!-- general form elements -->
                   <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Create Data Periode Baru</h3>
+                      <h3 class="card-title">Input Data Periode Baru</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
