@@ -35,7 +35,7 @@ Create Saldo Awal Baru
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>Input Saldo Awal Baru</h1>
+                  <h1>Saldo Awal Baru</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
@@ -43,6 +43,14 @@ Create Saldo Awal Baru
                     <li class="breadcrumb-item active">Saldo Awal Baru</li>
                   </ol>
                 </div>
+              </div>
+              <div>
+                <a href="/saldoawal" class="btn btn-default btn-icon-split">
+                    <span class="icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                    <span class="text">Kembali</span>
+                </a>
               </div>
             </div><!-- /.container-fluid -->
           </section>
@@ -59,11 +67,11 @@ Create Saldo Awal Baru
                       <h3 class="card-title">Input Data Saldo Baru</h3>
                       <div class="card-tools">
                             <a href="#" class="btn btn-danger btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Draft</span>
-                                </a>
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text">Draft</span>
+                            </a>
                             <a href="#" class="btn btn-success btn-icon-split">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-check"></i>
@@ -102,7 +110,7 @@ Create Saldo Awal Baru
                                     <label>Status</label>
                                     <select class="form-control" name="status" disabled>
                                     <option value="draft">Draft</option>
-                                    <option value="final">Final</option>
+                                    <option value="closed">Closed</option>
                                     </select>
                                 </div>
                                 
