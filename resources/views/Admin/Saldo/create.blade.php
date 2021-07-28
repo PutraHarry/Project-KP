@@ -58,12 +58,19 @@ Create Saldo Awal Baru
                     <div class="card-header">
                       <h3 class="card-title">Input Data Saldo Baru</h3>
                       <div class="card-tools">
+                            <a href="#" class="btn btn-danger btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    <span class="text">Draft</span>
+                                </a>
                             <a href="#" class="btn btn-success btn-icon-split">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-check"></i>
                                 </span>
                                 <span class="text">Final</span>
                             </a>
+                            
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -105,6 +112,32 @@ Create Saldo Awal Baru
                                     <textarea class="form-control" rows="3" name="keterangan" placeholder="Input Keterangan..."></textarea>
                                 </div>
                             </div>
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <label>Total Harga:</label>
+                                    <h1>
+                                        <span class="text-bold">Rp.</span>
+                                        <span class="text-bold">10,000.000.000.000</span>
+                                    </h1>
+                                </div>
+                                <div class="row">
+                                        <div class="col-6">
+                                                <div class="text">
+                                                    <label>Nama OPD:</label>
+                                                        <p>Badan Pengelola Keuangan dan Aset Daerah</p>
+                                                    </select>
+                                                </div> 
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text">
+                                                    <label>Nama Unit Kerja:</label>
+                                                        <p>Persediaan</p>
+                                                    </select>
+                                                </div> 
+                                            </div>
+                                </div>
+                            </div>
+                            
 
                         </div>
                         <div class="row">
@@ -126,25 +159,36 @@ Create Saldo Awal Baru
                                             <tr>
                                                 <th width="40px" class="text-center">No.</th>
                                                 <th>Barang</th>
+                                                <th>Qty</th>
+                                                <th>Satuan</th>
+                                                <th>Harga</th>
+                                                <th>Total</th>
                                                 <th>Keterangan</th>
-                                                <th width="100px" class="text-center">Action</th>
+                                                <th width="100px" class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
-                                        
-                                        <tfoot>
-                                            <tr>
-                                                <th width="40px" class="text-center">No.</th>
-                                                <th>Barang</th>
-                                                <th>Keterangan</th>
-                                                <th width="100px" class="text-center">Action</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
-                                            
                                             <tr>
                                                 <td>No</td>
-                                                <td>Barang</td>
-                                                <td>Keterangan</td>
+                                                <td>
+                                                        <div class="form-group">
+                                                                <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
+                                                                
+                                                                <option>barang1</option>
+                                                                <option>barang3</option>
+                                                                <option>barang2</option>
+                                                                </select>
+                                                        </div>
+                                                </td>
+                                                <td>Qty</td>
+                                                <td>Satuan</td>
+                                                <td>Harga</td>
+                                                <td>Total</td>
+                                                <td>
+                                                    <select class="form-control" name="keterangan">
+                                                    <option value="baik">Baik</option>
+                                                    <option value="rusak">Rusak</option>
+                                                </td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm">
                                                         <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i><a>
@@ -152,11 +196,19 @@ Create Saldo Awal Baru
                                                     </div>
                                                 </td>
                                             </tr>
-                                            
-    
-    
-                                            
                                         </tbody>
+                                        <tfoot>
+                                                <tr>
+                                                    <th width="40px" class="text-center">No.</th>
+                                                    <th>Barang</th>
+                                                    <th>Qty</th>
+                                                    <th>Satuan</th>
+                                                    <th>Harga</th>
+                                                    <th>Total</th>
+                                                    <th>Keterangan</th>
+                                                    <th width="100px" class="text-center">Aksi</th>
+                                                </tr>
+                                            </tfoot>
                                     </table>
                                 </div>
                         </div>
