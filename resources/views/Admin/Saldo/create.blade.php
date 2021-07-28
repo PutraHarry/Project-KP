@@ -144,7 +144,11 @@ Create Saldo Awal Baru
                                             <tr>
                                                 <td>No</td>
                                                 <td>Barang</td>
+<<<<<<< Updated upstream
                                                 <td>Keterangan}</td>
+=======
+                                                <td>Keterangan</td>
+>>>>>>> Stashed changes
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm">
                                                         <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i><a>
@@ -160,6 +164,7 @@ Create Saldo Awal Baru
                                     </table>
                                 </div>
                         </div>
+<<<<<<< Updated upstream
                         <div class="row">
                             <div class="col-3">
                                 <div class="form-group">
@@ -191,6 +196,8 @@ Create Saldo Awal Baru
                                 </div>
 
                         </div>
+=======
+>>>>>>> Stashed changes
                       </div>
                       
                       <!-- /.card-body -->

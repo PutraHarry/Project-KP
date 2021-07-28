@@ -59,7 +59,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
-                  <thead>
+                  <thead class="text-center">
                   <tr>
                     <th>No.</th>
                     <th>Perangkat Daerah</th>
@@ -74,18 +74,25 @@
                   <tbody>
                     @foreach($tutupperiode as $tp)
                     <tr>
-                      <td>{{ $loop->iteration }}</td>
+                      <td class="text-center">{{ $loop->iteration }}</td>
                       <td>{{ $tp->id_opd}}</td>
                       <td>{{ $tp->nama }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
                       <td>{{ $tp->status }}</td>
                       <td>{{ $tp->keterangan }}</td>
-                      <td>aksinya</td>
+                      <td class="text-center">
+                          <a href="/periode/create" class="btn btn-primary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-rocket"></i>
+                            </span>
+                            <span class="text">Proses</span>
+                        </a>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>
-                  <tfoot>
+                  <tfoot class="text-center">
                     <tr>
                         <th>No.</th>
                         <th>Perangkat Daerah</th>
