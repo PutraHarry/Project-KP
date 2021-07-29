@@ -18,6 +18,12 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+  <style>
+    body {
+      background-image: url('adminlte/dist/img/LOGO KAB BADUNG.jpg');
+    }
+    </style>
+
   <!-- jQuery -->
     <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
