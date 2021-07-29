@@ -45,7 +45,7 @@ Route::get('/saldoawal', function () {
 });
 Route::get('/saldoawal/create', function () {
     return view('/Admin/Saldo/create');
-});*/
+});
 
 Route::get('/buktiumum', function () {
     return view('/Admin/Bukti-umum/show');
