@@ -76,7 +76,7 @@ Route::get('/periode/tutupperiode/{id}','PeriodeController@prosesTutup');
 Route::get('/saldoawal', 'SaldoAwalController@dataSaldoAwal');
 Route::get('/saldoawal/create', 'SaldoAwalController@addSaldoAwal');
 Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
-
+ 
 //CONTROLLER FIX
 Route::get('/', 'LoginController@loginForm')->name('login')->middleware('guest');
 Route::post('/login', 'LoginController@login')->name('Login');

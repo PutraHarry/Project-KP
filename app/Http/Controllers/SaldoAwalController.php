@@ -44,7 +44,6 @@ class SaldoAwalController extends Controller
         $saldoawal->tgl_input = $request->tgl_input;
         $saldoawal->status_saldo = $request->status_saldo;
         $saldoawal->ket_saldo = $request->ket_saldo;
-
         $saldoawal->save();
         return redirect('/saldoawal')->with('StatusInput', 'Input Success');
     }
