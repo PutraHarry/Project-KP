@@ -67,13 +67,13 @@
                     <th>Tanggal Mulai</th>
                     <th>Tanggal Berakhir</th>
                     <th>Status</th>
-                    <th class="text-left">Keterangan</th>
+                    <th>Keterangan</th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach($tutupperiode as $tp)
-                    <tr class="text-center">
+                    <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $tp->nama_opd }}</td>
                       <td>{{ $tp->nama_periode }}</td>
@@ -100,7 +100,7 @@
                         <th>Tanggal Mulai</th>
                         <th>Tanggal Berakhir</th>
                         <th>Status</th>
-                        <th class="text-left">Keterangan</th>
+                        <th>Keterangan</th>
                         <th>Aksi</th>
                       </tr>
                   </tfoot>

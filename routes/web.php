@@ -38,19 +38,28 @@ Route::get('/dashboard', function () {
 
 Route::get('/tabel', function () {
     return view('tabel');
-});
+});*/
 
 Route::get('/saldoawal', function () {
     return view('/Admin/Saldo/show');
 });
 Route::get('/saldoawal/create', function () {
     return view('/Admin/Saldo/create');
-});*/
+});
+Route::get('/saldoawal/edit', function () {
+    return view('/Admin/Saldo/edit');
+});
 
+Route::get('/buktiumum', function () {
+    return view('/Admin/Bukti-umum/show');
+});
+Route::get('/buktiumum/create', function () {
+    return view('/Admin/Bukti-umum/create');
+});
+Route::get('/buktiumum/edit', function () {
+    return view('/Admin/Bukti-umum/edit');
+});
 
-Route::get('/saldoawal/create', function () {
-    return view('/Admin/Saldo/create');
-});*/
 
 
 
