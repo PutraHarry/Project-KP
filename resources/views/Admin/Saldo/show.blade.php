@@ -82,10 +82,10 @@
                             @foreach($tsaldo as $ts)
                             <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $ts->kode }}</td>
+                                <td>{{ $ts->kode_saldo }}</td>
                                 <td>{{ $ts->tgl_input }}</td>
-                                <td>{{ $ts->status }}</td>
-                                <td>{{ $ts->keterangan }}</td>
+                                <td>{{ $ts->status_saldo }}</td>
+                                <td>{{ $ts->ket_saldo }}</td>
                                 <td>
                                     <a href="#" class="btn btn-warning btn-icon-split">
                                       <span class="icon">
