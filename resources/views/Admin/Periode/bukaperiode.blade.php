@@ -81,8 +81,6 @@
                       <td>{{ $bp->tgl_selesai }}</td>
                       <td>{{ $bp->status }}</td>
                       <td>{{ $bp->keterangan }}</td>
-                      <td>aksinya</td>
-                      <td class="text-left">{{ $bp->keterangan }}</td>
                       <td>
                         <button class="btn btn-primary btn-icon-split" onclick="bukaPeriode({{$bp->id}})">
                           <span class="icon text-white-50">
