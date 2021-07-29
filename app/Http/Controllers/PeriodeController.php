@@ -38,8 +38,8 @@ class PeriodeController extends Controller
             'nama_periode' => 'required',
             'tgl_mulai' => 'required',
             'tgl_selesai' => 'required',
-            'status' => 'required',
-            'keterangan' => 'required',
+            'status_periode' => 'required',
+            'ket_periode' => 'required',
         ]);
 
         if($validator->fails()){
@@ -51,8 +51,8 @@ class PeriodeController extends Controller
         $periode->nama_periode = $request->nama_periode;
         $periode->tgl_mulai = $request->tgl_mulai;
         $periode->tgl_selesai = $request->tgl_selesai;
-        $periode->status = $request->status;
-        $periode->keterangan = $request->keterangan;
+        $periode->status_periode = $request->status_periode;
+        $periode->ket_periode = $request->ketperiode;
 
         $periode->save();
 
@@ -63,7 +63,7 @@ class PeriodeController extends Controller
     {
         $bukaperiode = DB::table('tb_periode')
                        ->join('tb_opd', 'tb_opd.id', '=', 'tb_periode.id_opd')
-                       ->where('status', 'close')
+                       ->where('status_periode', 'close')
                        ->get();
 
         return view("Admin.Periode.bukaperiode", compact('bukaperiode'));
@@ -72,7 +72,7 @@ class PeriodeController extends Controller
     public function prosesBuka($id)
     {
         $bukaperiode = PeriodeModel::find($id);
-        $bukaperiode->status = 'open';
+        $bukaperiode->status_periode = 'open';
         $bukaperiode->update();
 
         return redirect('/periode/bukaperiode')->with('statusInput', 'Buka Periode Berhasil');
@@ -82,7 +82,7 @@ class PeriodeController extends Controller
     {
         $tutupperiode = DB::table('tb_periode')
                         ->join('tb_opd', 'tb_opd.id', '=', 'tb_periode.id_opd')
-                        ->where('status', 'open')
+                        ->where('status_periode', 'open')
                         ->get();
 
         return view("Admin.Periode.tutupperiode", compact('tutupperiode'));
@@ -91,7 +91,7 @@ class PeriodeController extends Controller
     public function prosesTutup($id)
     {
         $tutupperiode = PeriodeModel::find($id);
-        $tutupperiode->status = 'close';
+        $tutupperiode->status_periode = 'close';
         $tutupperiode->update();
 
         return redirect('/periode/tutupperiode')->with('statusInput', 'Tutup Periode Berhasil');

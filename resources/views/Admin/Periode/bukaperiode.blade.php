@@ -79,8 +79,8 @@
                       <td>{{ $bp->nama_periode }}</td>
                       <td>{{ $bp->tgl_mulai }}</td>
                       <td>{{ $bp->tgl_selesai }}</td>
-                      <td>{{ $bp->status }}</td>
-                      <td>{{ $bp->keterangan }}</td>
+                      <td>{{ $bp->status_periode }}</td>
+                      <td>{{ $bp->ket_periode }}</td>
                       <td>
                         <button class="btn btn-primary btn-icon-split" onclick="bukaPeriode({{$bp->id}})">
                           <span class="icon text-white-50">
