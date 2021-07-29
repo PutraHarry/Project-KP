@@ -44,6 +44,11 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
+      <div class="logo_pemkab">
+        <center>
+          <img src="/adminlte/dist/img/logo_pemkab.jpg" alt="Logo Pemkab Badung" style="width:100px; height:100px;">
+        </center>
+      </div>
       <p class="login-box-msg">Silahkan Login Admin</p>
 
       <form action="{{ route('Login') }}" method="post">
