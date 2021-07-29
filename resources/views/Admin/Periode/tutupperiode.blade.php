@@ -79,8 +79,8 @@
                       <td>{{ $tp->nama_periode }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
-                      <td>{{ $tp->status }}</td>
-                      <td>{{ $tp->keterangan }}</td>
+                      <td>{{ $tp->status_periode }}</td>
+                      <td>{{ $tp->ket_peridoe }}</td>
                       <td>
                         <button class="btn btn-primary btn-icon-split" onclick="tutupPeriode({{$tp->id}})">
                           <span class="icon text-white-50">
