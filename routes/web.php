@@ -38,7 +38,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/tabel', function () {
     return view('tabel');
-});
+});*/
 
 Route::get('/saldoawal', function () {
     return view('/Admin/Saldo/show');
