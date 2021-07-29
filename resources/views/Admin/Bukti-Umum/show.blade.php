@@ -71,15 +71,15 @@
                   <table id="example2" class="table table-bordered table-hover">
                       <thead class="text-center">
                           <tr>
-                            <th>No.</th>
+                            <th width="40px">No.</th>
                             <th>Nomor BU</th>
-                            <th>Tanggal Pembuatan BU</th>
+                            <th width="200px">Tanggal Pembuatan BU</th>
                             <th>Aksi</th>
                           </tr>
                           </thead>
                           <tbody>
                             
-                            <tr class="text-center">
+                            <tr>
                                 <td>1</td>
                                 <td>12345678</td>
                                 <td>01-01-2021</td>

@@ -82,20 +82,21 @@
                     <th>Tanggal Mulai</th>
                     <th>Tanggal Berakhir</th>
                     <th>Status</th>
-                    <th class="text-left">Keterangan</th>
+                    <th>Keterangan</th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach($tperiode as $tp)
-                    <tr class="text-center">
+                    <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $tp->nama_opd }}</td>
                       <td>{{ $tp->nama_periode }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
                       <td>{{ $tp->status_periode }}</td>
-                      <td class="text-left">{{ $tp->ket_periode }}</td>
+                      <td>{{ $tp->ket_periode }}</td>
+
                       <td>aksinya</td>
                     </tr>
                     @endforeach
@@ -108,7 +109,7 @@
                       <th>Tanggal Mulai</th>
                       <th>Tanggal Berakhir</th>
                       <th>Status</th>
-                      <th class="text-left">Keterangan</th>
+                      <th>Keterangan</th>
                       <th>Aksi</th>
                     </tr>
                   </tfoot>
