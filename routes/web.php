@@ -45,7 +45,7 @@ Route::get('/saldoawal', function () {
 });
 Route::get('/saldoawal/create', function () {
     return view('/Admin/Saldo/create');
-});
+});*/
 
 
 Route::get('/saldoawal/create', function () {
@@ -66,7 +66,7 @@ Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 //PERIODE
 Route::get('/periode', 'PeriodeController@dataPeriode');
 Route::get('/periode/create', 'PeriodeController@addPeriode');
-Route::post('/periode/insert','PeriodeController@insert');
+Route::post('/periode/insert','PeriodeController@insertPeriode');
 Route::get('/periode/tutupperiode', 'PeriodeController@tutupPeriode');
 Route::get('/periode/bukaperiode', 'PeriodeController@bukaPeriode');
 Route::get('/periode/bukaperiode/{id}','PeriodeController@prosesBuka');
@@ -75,6 +75,7 @@ Route::get('/periode/tutupperiode/{id}','PeriodeController@prosesTutup');
 //SALDO AWAL
 Route::get('/saldoawal', 'SaldoAwalController@dataSaldoAwal');
 Route::get('/saldoawal/create', 'SaldoAwalController@addSaldoAwal');
+Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
 
 //CONTROLLER FIX
 Route::get('/', 'LoginController@loginForm')->name('login')->middleware('guest');
