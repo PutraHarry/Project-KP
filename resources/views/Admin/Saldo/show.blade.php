@@ -79,12 +79,13 @@
                           </tr>
                           </thead>
                           <tbody>
+                            @foreach($tsaldo as $ts)
                             <tr class="text-center">
-                                <td>1</td>
-                                <td>KD123BPKAD</td>
-                                <td>01-01-2021</td>
-                                <td>Draft</td>
-                                <td>Testing</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $ts->kode }}</td>
+                                <td>{{ $ts->tgl_input }}</td>
+                                <td>{{ $ts->status }}</td>
+                                <td>{{ $ts->keterangan }}</td>
                                 <td>
                                     <a href="#" class="btn btn-warning btn-icon-split">
                                       <span class="icon">
@@ -93,8 +94,8 @@
                                       <span class="text">Edit</span>
                                   </a>
                                 </td>
-                             
                             </tr>
+                            @endforeach
                           </tbody>
                           <tfoot class="text-center">
                             <tr>
