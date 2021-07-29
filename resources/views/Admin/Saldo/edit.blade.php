@@ -57,7 +57,8 @@ Edit Saldo Awal Baru
     </section>
     
     <!-- Main content -->
-    <form action="">
+    <form action="/saldoawal/update/{{ $saldoawal->id }}" method="POST">
+        @csrf
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -66,19 +67,18 @@ Edit Saldo Awal Baru
                         <div class="card-header">
                             <h3 class="card-title">Edit Data Saldo Baru</h3>
                             <div class="card-tools">
-                                <a href="#" class="btn btn-danger btn-icon-split">
+                                <button type="submit" class="btn btn-danger btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-edit"></i>
                                     </span>
                                     <span class="text">Draft</span>
-                                </a>
+                                </button>
                                 <a href="#" class="btn btn-success btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-check"></i>
                                     </span>
                                     <span class="text">Final</span>
                                 </a>
-                                
                             </div>
                         </div>
                     </div>
