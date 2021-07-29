@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<<<<<<< Updated upstream
 
   <style>
     body {
@@ -24,6 +25,16 @@
     }
     </style>
 
+=======
+  
+  <!--<style>
+    body {
+      background-image: url('adminlte/dist/img/logo_pemkab.jpg');
+      
+    }
+  </style>-->
+  
+>>>>>>> Stashed changes
   <!-- jQuery -->
     <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->

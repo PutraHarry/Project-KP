@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Create Saldo Awal Baru
+Edit Saldo Awal Baru
 @endsection
 
 @push('css')
@@ -35,12 +35,12 @@ Create Saldo Awal Baru
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>Saldo Awal Baru</h1>
+                  <h1>Data Saldo Awal</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/saldoawal">Saldo awal</a></li>
-                    <li class="breadcrumb-item active">Saldo Awal Baru</li>
+                    <li class="breadcrumb-item active">Edit Saldo Awal</li>
                   </ol>
                 </div>
               </div>
@@ -64,7 +64,7 @@ Create Saldo Awal Baru
                   <!-- general form elements -->
                   <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Input Data Saldo Baru</h3>
+                      <h3 class="card-title">Edit Data Saldo Baru</h3>
                       <div class="card-tools">
                             <a href="#" class="btn btn-danger btn-icon-split">
                                 <span class="icon text-white-50">
@@ -72,6 +72,13 @@ Create Saldo Awal Baru
                                 </span>
                                 <span class="text">Draft</span>
                             </a>
+                            <a href="#" class="btn btn-success btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="text">Final</span>
+                            </a>
+                            
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -82,7 +89,7 @@ Create Saldo Awal Baru
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="inputSaldo">Kode Saldo</label>
-                                    <input type="text" class="form-control" name="nama" id="inputSaldo" placeholder="Kode Saldo">
+                                    <input type="text" class="form-control" name="nama" id="inputSaldo" placeholder="Kode Saldo" disabled>
                                 </div>
                                 
                                 <!-- Date dd/mm/yyyy -->
@@ -141,6 +148,97 @@ Create Saldo Awal Baru
                             
 
                         </div>
+                        <div class="row">
+                                
+                            <div class="col-lg-6">
+                                <div class="card-body">
+                                    
+                                    <a href="#" class="btn btn-warning btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-exchange"></i>
+                                        </span>
+                                        <span class="text">Ubah Data</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="40px" class="text-center">No.</th>
+                                                <th width="500px" class="text-center">Barang</th>
+                                                <th class="text-center">Qty</th>
+                                                <th class="text-center">Satuan</th>
+                                                <th class="text-center">Harga</th>
+                                                <th class="text-center">Total</th>
+                                                <th class="text-center">Keterangan</th>
+                                                <th class="text-center">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                            <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
+                                                            
+                                                            <option>barang1</option>
+                                                            <option>barang3</option>
+                                                            <option>barang2</option>
+                                                            </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Input Satuan">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Input Harga">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="total" id="inputTotal" placeholder="Kehitung otomatis" disabled>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="keterangan">
+                                                    <option value="baik">Baik</option>
+                                                    <option value="rusak">Rusak</option>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
+                                                        <button class="btn btn-sm btn-flat btn-danger" onclick="#"><i class="fa fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <tr>
+                                                    <th width="40px" class="text-center">No.</th>
+                                                    <th width="500px" class="text-center">Barang</th>
+                                                    <th class="text-center">Qty</th>
+                                                    <th class="text-center">Satuan</th>
+                                                    <th class="text-center">Harga</th>
+                                                    <th class="text-center">Total</th>
+                                                    <th class="text-center">Keterangan</th>
+                                                    <th class="text-center">Aksi</th>
+                                                </tr>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                        </div>
+
                       </div>
                       
                       <!-- /.card-body -->
