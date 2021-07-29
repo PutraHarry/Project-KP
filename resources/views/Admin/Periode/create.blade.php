@@ -109,7 +109,7 @@ Create Periode Baru
                         <!-- select -->
                         <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control" name="status" id="status">
+                            <select class="form-control" name="status_periode" id="status_periode">
                             <option value="open">Open</option>
                             <option value="close">Close</option>
                             </select>
@@ -118,7 +118,7 @@ Create Periode Baru
                         <!-- textarea -->
                         <div class="form-group">
                             <label>Keterangan</label>
-                            <textarea class="form-control" rows="3" name="keterangan" id="keterangan" placeholder="Input Keterangan..."></textarea>
+                            <textarea class="form-control" rows="3" name="ket_periode" id="ket_periode" placeholder="Input Keterangan..."></textarea>
                         </div>
                         <!--<div class="form-check">
                           <input type="checkbox" class="form-check-input" id="exampleCheck1">

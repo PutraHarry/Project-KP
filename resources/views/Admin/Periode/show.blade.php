@@ -90,12 +90,12 @@
                     @foreach($tperiode as $tp)
                     <tr class="text-center">
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $tp->id_opd}}</td>
                       <td>{{ $tp->nama }}</td>
+                      <td>{{ $tp->nama_periode }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
-                      <td>{{ $tp->status }}</td>
-                      <td class="text-left">{{ $tp->keterangan }}</td>
+                      <td>{{ $tp->status_periode }}</td>
+                      <td class="text-left">{{ $tp->ket_peridoe }}</td>
                       <td>aksinya</td>
                     </tr>
                     @endforeach

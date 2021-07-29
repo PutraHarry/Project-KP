@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('layouts.master');
 });
 
-/*Route::get('/periode', function () {
+Route::get('/periode', function () {
     return view('/Admin/Periode/show');
 });
 Route::get('/periode/create', function () {
@@ -31,14 +31,14 @@ Route::get('/periode/buka', function () {
     return view('/Admin/Periode/bukaperiode');
 });
 
-/*
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
 Route::get('/tabel', function () {
     return view('tabel');
-});*/
+});
 
 Route::get('/saldoawal', function () {
     return view('/Admin/Saldo/show');
@@ -46,7 +46,6 @@ Route::get('/saldoawal', function () {
 Route::get('/saldoawal/create', function () {
     return view('/Admin/Saldo/create');
 });
-
 
 Route::get('/buktiumum', function () {
     return view('/Admin/Bukti-umum/show');
@@ -57,6 +56,7 @@ Route::get('/buktiumum/create', function () {
 Route::get('/buktiumum/edit', function () {
     return view('/Admin/Bukti-umum/edit');
 });
+
 
 
 
@@ -75,9 +75,14 @@ Route::get('/periode/create', 'PeriodeController@addPeriode');
 Route::post('/periode/insert','PeriodeController@insert');
 Route::get('/periode/tutupperiode', 'PeriodeController@tutupPeriode');
 Route::get('/periode/bukaperiode', 'PeriodeController@bukaPeriode');
+Route::get('/periode/bukaperiode/{id}','PeriodeController@prosesBuka');
+Route::get('/periode/tutupperiode/{id}','PeriodeController@prosesTutup');
 
+//SALDO AWAL
+Route::get('/saldoawal', 'SaldoAwalController@dataSaldoAwal');
+Route::get('/saldoawal/create', 'SaldoAwalController@addSaldoAwal');
 
 //CONTROLLER FIX
-Route::get('/login', 'LoginController@loginForm')->name('login')->middleware('guest');
+Route::get('/', 'LoginController@loginForm')->name('login')->middleware('guest');
 Route::post('/login', 'LoginController@login')->name('Login');
 Route::get('/logout', 'LoginController@logout')->name('logout');

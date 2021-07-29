@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\PeriodeModel;
 use App\OPDModel;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class PeriodeController extends Controller
 {
@@ -16,11 +17,11 @@ class PeriodeController extends Controller
 
     public function dataPeriode()
     {
-        $periodes = PeriodeModel::get();
+        $tperiode = DB::table('tb_periode')
+                    ->join('tb_opd', 'tb_opd.id', '=', 'tb_periode.id_opd')
+                    ->get();
 
-        $tperiode = PeriodeModel::orderby('created_at', 'desc')->get();
-
-        return view("Admin.Periode.show", compact('tperiode', 'periodes'));
+        return view("Admin.Periode.show", compact('tperiode'));
     }
 
     public function addPeriode()
@@ -34,11 +35,11 @@ class PeriodeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id_opd' => 'required',
-            'nama' => 'required',
+            'nama_periode' => 'required',
             'tgl_mulai' => 'required',
             'tgl_selesai' => 'required',
-            'status' => 'required',
-            'keterangan' => 'required',
+            'status_periode' => 'required',
+            'ket_periode' => 'required',
         ]);
 
         if($validator->fails()){
@@ -47,11 +48,11 @@ class PeriodeController extends Controller
 
         $periode = new PeriodeModel();
         $periode->id_opd = $request->id_opd;
-        $periode->nama = $request->nama;
+        $periode->nama_periode = $request->nama_periode;
         $periode->tgl_mulai = $request->tgl_mulai;
         $periode->tgl_selesai = $request->tgl_selesai;
-        $periode->status = $request->status;
-        $periode->keterangan = $request->keterangan;
+        $periode->status_periode = $request->status_periode;
+        $periode->ket_periode = $request->ketperiode;
 
         $periode->save();
 
@@ -60,15 +61,39 @@ class PeriodeController extends Controller
 
     public function bukaPeriode()
     {
-        $bukaperiode = periodeModel::where('status', 'close')->get();
+        $bukaperiode = DB::table('tb_periode')
+                       ->join('tb_opd', 'tb_opd.id', '=', 'tb_periode.id_opd')
+                       ->where('status_periode', 'close')
+                       ->get();
 
         return view("Admin.Periode.bukaperiode", compact('bukaperiode'));
     }
 
+    public function prosesBuka($id)
+    {
+        $bukaperiode = PeriodeModel::find($id);
+        $bukaperiode->status_periode = 'open';
+        $bukaperiode->update();
+
+        return redirect('/periode/bukaperiode')->with('statusInput', 'Buka Periode Berhasil');
+    }
+
     public function tutupPeriode()
     {
-        $tutupperiode = periodeModel::where('status', 'open')->get();
+        $tutupperiode = DB::table('tb_periode')
+                        ->join('tb_opd', 'tb_opd.id', '=', 'tb_periode.id_opd')
+                        ->where('status_periode', 'open')
+                        ->get();
 
         return view("Admin.Periode.tutupperiode", compact('tutupperiode'));
+    }
+    
+    public function prosesTutup($id)
+    {
+        $tutupperiode = PeriodeModel::find($id);
+        $tutupperiode->status_periode = 'close';
+        $tutupperiode->update();
+
+        return redirect('/periode/tutupperiode')->with('statusInput', 'Tutup Periode Berhasil');
     }
 }
