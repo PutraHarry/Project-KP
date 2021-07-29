@@ -94,7 +94,6 @@ Edit Saldo Awal Baru
                                     </div>                               
                                     <div class="form-group">
                                         <label>Tanggal Saldo:</label>
-                    
                                         <div class="input-group">
                                             <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}">
                                         </div>
