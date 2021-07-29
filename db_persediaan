@@ -16,19 +16,23 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_persediaan` /*!40100 DEFAULT CHARACT
 
 USE `db_persediaan`;
 
-/*Table structure for table `tb_barang` */
+/*Table structure for table `tb_barang_gudang` */
 
-DROP TABLE IF EXISTS `tb_barang`;
+DROP TABLE IF EXISTS `tb_barang_gudang`;
 
-CREATE TABLE `tb_barang` (
+CREATE TABLE `tb_barang_gudang` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama` varchar(255) DEFAULT NULL,
-  `harga` int(11) DEFAULT NULL,
-  `satuan` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_barang` int(11) DEFAULT NULL,
+  `harga_barang` int(11) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `satuan_barang` int(11) DEFAULT NULL,
+  `ket_barang` enum('baik','rusak') DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_barang` (`id_barang`),
+  CONSTRAINT `tb_barang_gudang_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `tb_master_barang` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `tb_barang` */
+/*Data for the table `tb_barang_gudang` */
 
 /*Table structure for table `tb_bidang` */
 
@@ -72,10 +76,28 @@ CREATE TABLE `tb_d_bu` (
   KEY `id_BU` (`id_BU`),
   KEY `id_barang` (`id_barang`),
   CONSTRAINT `tb_d_bu_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`),
-  CONSTRAINT `tb_d_bu_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `tb_barang` (`id`)
+  CONSTRAINT `tb_d_bu_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `tb_master_barang` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_d_bu` */
+
+/*Table structure for table `tb_d_opname` */
+
+DROP TABLE IF EXISTS `tb_d_opname`;
+
+CREATE TABLE `tb_d_opname` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_opname` int(11) DEFAULT NULL,
+  `id_barang_gudang` int(11) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_opname` (`id_opname`),
+  KEY `id_barang_gudang` (`id_barang_gudang`),
+  CONSTRAINT `tb_d_opname_ibfk_1` FOREIGN KEY (`id_opname`) REFERENCES `tb_opname` (`id`),
+  CONSTRAINT `tb_d_opname_ibfk_2` FOREIGN KEY (`id_barang_gudang`) REFERENCES `tb_barang_gudang` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `tb_d_opname` */
 
 /*Table structure for table `tb_d_saldo` */
 
@@ -91,7 +113,7 @@ CREATE TABLE `tb_d_saldo` (
   PRIMARY KEY (`id`),
   KEY `id_barang` (`id_barang`),
   KEY `id_saldo` (`id_saldo`),
-  CONSTRAINT `tb_d_saldo_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `tb_barang` (`id`),
+  CONSTRAINT `tb_d_saldo_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `tb_master_barang` (`id`),
   CONSTRAINT `tb_d_saldo_ibfk_2` FOREIGN KEY (`id_saldo`) REFERENCES `tb_saldo_awal` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -121,17 +143,45 @@ CREATE TABLE `tb_jenis_penerimaan` (
 
 /*Data for the table `tb_jenis_penerimaan` */
 
+/*Table structure for table `tb_master_barang` */
+
+DROP TABLE IF EXISTS `tb_master_barang`;
+
+CREATE TABLE `tb_master_barang` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_m_barang` varchar(255) DEFAULT NULL,
+  `harga_m_barang` int(11) DEFAULT NULL,
+  `satuan_m_barang` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `tb_master_barang` */
+
 /*Table structure for table `tb_opd` */
 
 DROP TABLE IF EXISTS `tb_opd`;
 
 CREATE TABLE `tb_opd` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama` varchar(255) DEFAULT NULL,
+  `nama_opd` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_opd` */
+
+/*Table structure for table `tb_opname` */
+
+DROP TABLE IF EXISTS `tb_opname`;
+
+CREATE TABLE `tb_opname` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_opname` varchar(255) DEFAULT NULL,
+  `status_opname` enum('draft','final') DEFAULT NULL,
+  `tgl_opname` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `tb_opname` */
 
 /*Table structure for table `tb_penerimaan` */
 
@@ -141,10 +191,10 @@ CREATE TABLE `tb_penerimaan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_jenis_penerimaan` int(11) DEFAULT NULL,
   `id_BU` int(11) DEFAULT NULL,
-  `kode` varchar(255) DEFAULT NULL,
+  `kode_penerimaan` varchar(255) DEFAULT NULL,
   `tgl_terima` date DEFAULT NULL,
   `pengirim` varchar(255) DEFAULT NULL,
-  `status` enum('draft','final') DEFAULT NULL,
+  `status_penerimaan` enum('draft','final') DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_jenis_penerimaan` (`id_jenis_penerimaan`),
   KEY `id_BU` (`id_BU`),
@@ -160,11 +210,11 @@ DROP TABLE IF EXISTS `tb_pengeluaran`;
 
 CREATE TABLE `tb_pengeluaran` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode` varchar(255) DEFAULT NULL,
+  `kode_pengeluaran` varchar(255) DEFAULT NULL,
   `id_BU` int(11) DEFAULT NULL,
   `tgl_keluar` date DEFAULT NULL,
-  `keterangan` text DEFAULT NULL,
-  `status` enum('draft','final') DEFAULT NULL,
+  `ket_pengeluaran` text DEFAULT NULL,
+  `status_pengeluaran` enum('draft','final') DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_BU` (`id_BU`),
   CONSTRAINT `tb_pengeluaran_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`)
@@ -180,7 +230,7 @@ CREATE TABLE `tb_penggunaan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tgl_penggunaan` date DEFAULT NULL,
   `id_BU` int(11) DEFAULT NULL,
-  `status` enum('draft','approved','final','disetujui') DEFAULT NULL,
+  `status_penggunaan` enum('draft','approved','final','disetujui') DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_BU` (`id_BU`),
   CONSTRAINT `tb_penggunaan_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`)
@@ -195,11 +245,11 @@ DROP TABLE IF EXISTS `tb_periode`;
 CREATE TABLE `tb_periode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_opd` int(11) DEFAULT NULL,
-  `nama` varchar(255) DEFAULT NULL,
+  `nama_periode` varchar(255) DEFAULT NULL,
   `tgl_mulai` date DEFAULT NULL,
   `tgl_selesai` date DEFAULT NULL,
-  `status` enum('open','close') DEFAULT NULL,
-  `keterangan` text DEFAULT NULL,
+  `status_periode` enum('open','close') DEFAULT NULL,
+  `ket_periode` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_opd` (`id_opd`),
   CONSTRAINT `tb_periode_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
@@ -213,10 +263,10 @@ DROP TABLE IF EXISTS `tb_saldo_awal`;
 
 CREATE TABLE `tb_saldo_awal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode` varchar(255) DEFAULT NULL,
+  `kode_saldo` varchar(255) DEFAULT NULL,
   `tgl_input` date DEFAULT NULL,
-  `status` enum('draft','final','closed') DEFAULT NULL,
-  `keterangan` text DEFAULT NULL,
+  `status_saldo` enum('draft','final','closed') DEFAULT NULL,
+  `ket_saldo` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -242,7 +292,7 @@ CREATE TABLE `tb_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `nama` varchar(255) DEFAULT NULL,
+  `nama_user` varchar(255) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `id_jabatan` int(11) DEFAULT NULL,
   `id_bidang` int(11) DEFAULT NULL,
