@@ -51,6 +51,7 @@ Edit Saldo Awal Baru
                     </span>
                     <span class="text">Kembali</span>
                 </a>
+<<<<<<< Updated upstream
               </div>
             </div><!-- /.container-fluid -->
           </section>
@@ -58,10 +59,22 @@ Edit Saldo Awal Baru
           <!-- Main content -->
           <form action="">
           <section class="content">
+=======
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    
+    <!-- Main content -->
+    <form action="/saldoawal/update/{{ $saldoawal->id }}" method="POST">
+        @csrf
+        <section class="content">
+>>>>>>> Stashed changes
             <div class="container-fluid">
               <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
+<<<<<<< Updated upstream
                   <!-- general form elements -->
                   <div class="card card-primary">
                     <div class="card-header">
@@ -80,6 +93,26 @@ Edit Saldo Awal Baru
                                 <span class="text">Final</span>
                             </a>
                             
+=======
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Edit Data Saldo Baru</h3>
+                            <div class="card-tools">
+                                <button type="submit" class="btn btn-danger btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    <span class="text">Draft</span>
+                                </button>
+                                <a href="#" class="btn btn-success btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    <span class="text">Final</span>
+                                </a>
+                                
+                            </div>
+>>>>>>> Stashed changes
                         </div>
                     </div>
                     <!-- /.card-header -->
