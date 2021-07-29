@@ -137,8 +137,7 @@ Create Periode Baru
               <!-- /.row -->
             </div><!-- /.container-fluid -->
           </section>
-          <!-- /.content -->
-        </div>
+        </form>
 @endsection
 
 @push('js')

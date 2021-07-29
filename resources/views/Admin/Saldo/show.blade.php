@@ -87,7 +87,7 @@
                                 <td>{{ $ts->status_saldo }}</td>
                                 <td>{{ $ts->ket_saldo }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-warning btn-icon-split">
+                                    <a href="/saldoawal/edit/{{ $ts->id }}" class="btn btn-warning btn-icon-split">
                                       <span class="icon">
                                           <i class="fas fa-edit"></i>
                                       </span>

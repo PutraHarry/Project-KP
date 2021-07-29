@@ -32,28 +32,28 @@ Create Saldo Awal Baru
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                  <h1>Saldo Awal Baru</h1>
-                </div>
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/saldoawal">Saldo awal</a></li>
-                    <li class="breadcrumb-item active">Saldo Awal Baru</li>
-                  </ol>
-                </div>
-              </div>
-              <div>
-                <a href="/saldoawal" class="btn btn-default btn-icon-split">
-                    <span class="icon">
-                        <i class="fas fa-arrow-left"></i>
-                    </span>
-                    <span class="text">Kembali</span>
-                </a>
-              </div>
-            </div><!-- /.container-fluid -->
-          </section>
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Saldo Awal Baru</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/saldoawal">Saldo awal</a></li>
+              <li class="breadcrumb-item active">Saldo Awal Baru</li>
+            </ol>
+          </div>
+        </div>
+        <div>
+          <a href="/saldoawal" class="btn btn-default btn-icon-split">
+              <span class="icon">
+                  <i class="fas fa-arrow-left"></i>
+              </span>
+              <span class="text">Kembali</span>
+          </a>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
       
           <!-- Main content -->
         <form action="/saldoawal/insert" method="POST">
@@ -82,46 +82,44 @@ Create Saldo Awal Baru
                       <div class="card-body">
                         <div class="row">
                             <div class="col-3">
-                                <div class="form-group">
-                                    <label for="inputSaldo">Kode Saldo</label>
-                                    <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" placeholder="Kode Saldo">
-                                </div>
-                                
-                                <!-- Date dd/mm/yyyy -->
-                                <div class="form-group">
-                                    <label>Tanggal Saldo:</label>
-                                    <div class="input-group">
-                                      <input type="date" class="form-control" name="tgl_input" id="tgl_input">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-                                <!-- /.form group -->
-                                
+                              <div class="form-group">
+                                  <label for="kode_saldo">Kode Saldo</label>
+                                  <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" placeholder="Kode Saldo">
+                              </div>
+                              <!-- Date dd/mm/yyyy -->
+                              <div class="form-group">
+                                  <label>Tanggal Saldo:</label>
+                                  <div class="input-group">
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input">
+                                  </div>
+                                  <!-- /.input group -->
+                              </div>
+                              <!-- /.form group -->
                             </div>
                             <div class="col-3">
-                                <!-- select -->
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select class="form-control" name="status_saldo" id="status_saldo" disabled>
-                                    <option value="draft">Draft</option>
-                                    <option value="closed">Closed</option>
-                                    </select>
-                                </div>
-                                
-                                <!-- textarea -->
-                                <div class="form-group">
-                                    <label>Keterangan</label>
-                                    <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
-                                </div>
+                              <!-- select -->
+                              <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" name="status_saldo" id="status_saldo">
+                                <option value="draft">Draft</option>
+                                <option value="closed">Closed</option>
+                                <option value="final">Final</option>
+                                </select>
+                              </div>
+                              <!-- textarea -->
+                              <div class="form-group">
+                                  <label>Keterangan</label>
+                                  <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
+                              </div>
                             </div>
                             <div class="col-6">
-                                <div class="text-center">
-                                    <label>Total Harga:</label>
-                                    <h1>
-                                        <span class="text-bold">Rp.</span>
-                                        <span class="text-bold">10,000.000.000.000</span>
-                                    </h1>
-                                </div>
+                              <div class="text-center">
+                                  <label>Total Harga:</label>
+                                  <h1>
+                                    <span class="text-bold">Rp.</span>
+                                    <span class="text-bold">10,000.000.000.000</span>
+                                  </h1>
+                              </div>
                                 <div class="row">
                                   <div class="col-6">
                                     <div class="text">
@@ -139,8 +137,6 @@ Create Saldo Awal Baru
                                   </div>
                                 </div>
                             </div>
-                            
-
                         </div>
                       </div>
                       
@@ -151,8 +147,7 @@ Create Saldo Awal Baru
               <!-- /.row -->
             </div><!-- /.container-fluid -->
           </section>
-          <!-- /.content -->
-        </div>
+        </form>
 @endsection
 
 @push('js')

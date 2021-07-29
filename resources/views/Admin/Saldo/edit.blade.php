@@ -51,14 +51,6 @@ Edit Saldo Awal Baru
                     </span>
                     <span class="text">Kembali</span>
                 </a>
-<<<<<<< Updated upstream
-              </div>
-            </div><!-- /.container-fluid -->
-          </section>
-      
-          <!-- Main content -->
-          <section class="content">
-=======
             </div>
         </div>
         <!-- /.container-fluid -->
@@ -67,7 +59,6 @@ Edit Saldo Awal Baru
     <!-- Main content -->
     <form action="">
         <section class="content">
->>>>>>> Stashed changes
             <div class="container-fluid">
                 <div class="row">
                 <div class="col-md-12">
@@ -94,51 +85,6 @@ Edit Saldo Awal Baru
 
                     <!-- form start -->
                     <form id="quickForm">
-<<<<<<< Updated upstream
-                      <div class="card-body">
-                        <div class="row">
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="inputSaldo">Kode Saldo</label>
-                                    <input type="text" class="form-control" name="nama" id="inputSaldo" placeholder="Kode Saldo" disabled>
-                                </div>
-                                
-                                <!-- Date dd/mm/yyyy -->
-                                <div class="form-group">
-                                    <label>Tanggal Saldo:</label>
-                
-                                    <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_saldo" id="tgl_saldo">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-                                <!-- /.form group -->
-                                
-                            </div>
-                            <div class="col-3">
-                                <!-- select -->
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select class="form-control" name="status" disabled>
-                                    <option value="draft">Draft</option>
-                                    <option value="closed">Closed</option>
-                                    </select>
-                                </div>
-                                
-                                <!-- textarea -->
-                                <div class="form-group">
-                                    <label>Keterangan</label>
-                                    <textarea class="form-control" rows="3" name="keterangan" placeholder="Input Keterangan..."></textarea>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="text-center">
-                                    <label>Total Harga:</label>
-                                    <h1>
-                                        <span class="text-bold">Rp.</span>
-                                        <span class="text-bold">10,000.000.000.000</span>
-                                    </h1>
-=======
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-3">
@@ -165,7 +111,6 @@ Edit Saldo Awal Baru
                                         <label>Keterangan</label>
                                         <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan...">{{ $saldoawal->ket_saldo }}</textarea>
                                     </div>
->>>>>>> Stashed changes
                                 </div>
                                 <div class="col-6">
                                     <div class="text-center">
@@ -276,26 +221,11 @@ Edit Saldo Awal Baru
                                 </table>
                             </div>
                         </div>
-<<<<<<< Updated upstream
-
-                      </div>
-                      
-                      <!-- /.card-body -->
-                    </form>
-                  </div>
-                  <!-- /.card -->
-              <!-- /.row -->
-            </div><!-- /.container-fluid -->
-          </section>
-          <!-- /.content -->
-        </div>
-=======
                     </form>    
                 </div><!-- /.container-fluid -->
         </section>
     </form>
     <!-- /.content -->
->>>>>>> Stashed changes
 @endsection
 
 @push('js')
