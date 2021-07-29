@@ -37,28 +37,6 @@ CREATE TABLE `tb_barang_gudang` (
 
 /*Data for the table `tb_barang_gudang` */
 
-/*Table structure for table `tb_bidang` */
-
-DROP TABLE IF EXISTS `tb_bidang`;
-
-CREATE TABLE `tb_bidang` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_unit` int(11) DEFAULT NULL,
-  `bidang` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_unit` (`id_unit`),
-  CONSTRAINT `tb_bidang_ibfk_1` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_bidang` */
-
-insert  into `tb_bidang`(`id`,`id_unit`,`bidang`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,'Semua',NULL,NULL,NULL),
-(2,2,'Persediaan',NULL,NULL,NULL);
-
 /*Table structure for table `tb_bu` */
 
 DROP TABLE IF EXISTS `tb_bu`;
@@ -206,12 +184,12 @@ CREATE TABLE `tb_opd` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_opd` */
 
 insert  into `tb_opd`(`id`,`nama_opd`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'Pemerintah Badung',NULL,NULL,NULL);
+(1,'BPKAD','2021-07-29 10:01:53','2021-07-29 10:01:56','2021-07-29 10:01:57');
 
 /*Table structure for table `tb_opname` */
 
@@ -341,17 +319,20 @@ DROP TABLE IF EXISTS `tb_unit`;
 CREATE TABLE `tb_unit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `unit` varchar(255) DEFAULT NULL,
+  `id_opd` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `id_opd` (`id_opd`),
+  CONSTRAINT `tb_unit_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_unit` */
 
-insert  into `tb_unit`(`id`,`unit`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'Semua',NULL,NULL,NULL),
-(2,'BPKAD',NULL,NULL,NULL);
+insert  into `tb_unit`(`id`,`unit`,`id_opd`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'Persediaan',1,'2021-07-29 10:02:44','2021-07-29 10:02:46','2021-07-29 10:02:47'),
+(2,'Persediaan',1,'2021-07-29 10:02:49','2021-07-29 10:02:51','2021-07-29 10:02:53');
 
 /*Table structure for table `tb_user` */
 
@@ -364,20 +345,20 @@ CREATE TABLE `tb_user` (
   `nama_user` varchar(255) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `id_jabatan` int(11) DEFAULT NULL,
-  `id_bidang` int(11) DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_jabatan` (`id_jabatan`),
-  KEY `id_bidang` (`id_bidang`),
+  KEY `tb_user_ibfk_3` (`id_unit`),
   CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `tb_jabatan` (`id`),
-  CONSTRAINT `tb_user_ibfk_3` FOREIGN KEY (`id_bidang`) REFERENCES `tb_bidang` (`id`)
+  CONSTRAINT `tb_user_ibfk_3` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_user` */
 
-insert  into `tb_user`(`id`,`username`,`password`,`nama_user`,`dob`,`id_jabatan`,`id_bidang`,`created_at`,`updated_at`,`deleted_at`) values 
+insert  into `tb_user`(`id`,`username`,`password`,`nama_user`,`dob`,`id_jabatan`,`id_unit`,`created_at`,`updated_at`,`deleted_at`) values 
 (1,'admin','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','Super Admin','0000-00-00',1,1,NULL,NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
