@@ -18,12 +18,15 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   
-  <!--<style>
+  <style>
     body {
-      background-image: url('adminlte/dist/img/logo_pemkab.jpg');
-      
+      background-image: url('adminlte/dist/img/pemkab_badung.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;  
+      background-size: cover;
+      background-position: center;
     }
-  </style>-->
+  </style>
   
   <!-- jQuery -->
     <script src="/adminlte/plugins/jquery/jquery.min.js"></script>

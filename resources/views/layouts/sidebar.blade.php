@@ -156,6 +156,15 @@
               </p>
             </a>
           </li>
+          <li class="nav-header">SIMDA</li>
+          <li class="nav-item">
+            <a href="/buktiumum" class="nav-link">
+              <i class="nav-icon fas fa-file-alt "></i>
+              <p>
+                Bukti Umum
+              </p>
+            </a>
+          </li>
           <li class="nav-header">USER</li>
           <li class="nav-item">
             <a href="/logout" class="nav-link">

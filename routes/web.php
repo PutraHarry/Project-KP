@@ -48,8 +48,14 @@ Route::get('/saldoawal/create', function () {
 });
 
 
-Route::get('/saldoawal/create', function () {
-    return view('/Admin/Saldo/create');
+Route::get('/buktiumum', function () {
+    return view('/Admin/Bukti-umum/show');
+});
+Route::get('/buktiumum/create', function () {
+    return view('/Admin/Bukti-umum/create');
+});
+Route::get('/buktiumum/edit', function () {
+    return view('/Admin/Bukti-umum/edit');
 });
 
 
