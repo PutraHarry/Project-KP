@@ -164,15 +164,15 @@ Edit Saldo Awal Baru
                             <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
-                                            <tr>
-                                                <th width="40px" class="text-center">No.</th>
-                                                <th width="500px" class="text-center">Barang</th>
-                                                <th class="text-center">Qty</th>
-                                                <th class="text-center">Satuan</th>
-                                                <th class="text-center">Harga</th>
-                                                <th class="text-center">Total</th>
-                                                <th class="text-center">Keterangan</th>
-                                                <th class="text-center">Aksi</th>
+                                            <tr class="text-center">
+                                                <th width="40px">No.</th>
+                                                <th width="400px">Barang</th>
+                                                <th width="120px">Qty</th>
+                                                <th>Satuan</th>
+                                                <th>Harga</th>
+                                                <th>Total</th>
+                                                <th width="200px">Keterangan</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -195,12 +195,12 @@ Edit Saldo Awal Baru
                                                 </td>
                                                 <td>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Input Satuan">
+                                                        <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Satuan">
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Input Harga">
+                                                        <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Harga">
                                                     </div>
                                                 </td>
                                                 <td>
@@ -223,15 +223,15 @@ Edit Saldo Awal Baru
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <tr>
-                                                    <th width="40px" class="text-center">No.</th>
-                                                    <th width="500px" class="text-center">Barang</th>
-                                                    <th class="text-center">Qty</th>
-                                                    <th class="text-center">Satuan</th>
-                                                    <th class="text-center">Harga</th>
-                                                    <th class="text-center">Total</th>
-                                                    <th class="text-center">Keterangan</th>
-                                                    <th class="text-center">Aksi</th>
+                                                <tr class="text-center">
+                                                    <th width="40px">No.</th>
+                                                    <th width="400px">Barang</th>
+                                                    <th>Qty</th>
+                                                    <th>Satuan</th>
+                                                    <th>Harga</th>
+                                                    <th>Total</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </tr>
                                         </tfoot>
