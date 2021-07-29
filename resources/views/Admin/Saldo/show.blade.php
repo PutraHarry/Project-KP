@@ -81,19 +81,11 @@
                           <tbody>
                             @foreach($tsaldo as $ts)
                             <tr class="text-center">
-<<<<<<< Updated upstream
-                                <td>1</td>
-                                <td>KD123BPKAD</td>
-                                <td>Periode Januari</td>
-                                <td>01-01-2021</td>
-                                <td>01-02-2021</td>
-=======
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $ts->kode }}</td>
                                 <td>{{ $ts->tgl_input }}</td>
                                 <td>{{ $ts->status }}</td>
                                 <td>{{ $ts->keterangan }}</td>
->>>>>>> Stashed changes
                                 <td>
                                     <a href="#" class="btn btn-warning btn-icon-split">
                                       <span class="icon">
