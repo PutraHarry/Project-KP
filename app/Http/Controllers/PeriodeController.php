@@ -52,7 +52,7 @@ class PeriodeController extends Controller
         $periode->tgl_mulai = $request->tgl_mulai;
         $periode->tgl_selesai = $request->tgl_selesai;
         $periode->status_periode = $request->status_periode;
-        $periode->ket_periode = $request->ketperiode;
+        $periode->ket_periode = $request->ket_periode;
 
         $periode->save();
 

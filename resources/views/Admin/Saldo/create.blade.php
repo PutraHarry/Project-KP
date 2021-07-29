@@ -56,6 +56,8 @@ Create Saldo Awal Baru
           </section>
       
           <!-- Main content -->
+        <form action="/saldoawal/insert" method="POST">
+          @csrf
           <section class="content">
             <div class="container-fluid">
               <div class="row">
@@ -66,6 +68,7 @@ Create Saldo Awal Baru
                     <div class="card-header">
                       <h3 class="card-title">Input Data Saldo Baru</h3>
                       <div class="card-tools">
+<<<<<<< Updated upstream
                             <a href="#" class="btn btn-danger btn-icon-split">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-edit"></i>
@@ -73,6 +76,15 @@ Create Saldo Awal Baru
                                 <span class="text">Draft</span>
                             </a>
                         </div>
+=======
+                        <button type="submit" class="btn btn-danger btn-icon-split">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-edit"></i>
+                          </span>
+                          <span class="text">Draft</span>
+                        </button>
+                      </div>
+>>>>>>> Stashed changes
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -82,15 +94,14 @@ Create Saldo Awal Baru
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="inputSaldo">Kode Saldo</label>
-                                    <input type="text" class="form-control" name="nama" id="inputSaldo" placeholder="Kode Saldo">
+                                    <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" placeholder="Kode Saldo">
                                 </div>
                                 
                                 <!-- Date dd/mm/yyyy -->
                                 <div class="form-group">
                                     <label>Tanggal Saldo:</label>
-                
                                     <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_saldo" id="tgl_saldo">
+                                      <input type="date" class="form-control" name="tgl_input" id="tgl_input">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -101,7 +112,7 @@ Create Saldo Awal Baru
                                 <!-- select -->
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <select class="form-control" name="status" disabled>
+                                    <select class="form-control" name="status_saldo" id="status_saldo" disabled>
                                     <option value="draft">Draft</option>
                                     <option value="closed">Closed</option>
                                     </select>
@@ -110,7 +121,7 @@ Create Saldo Awal Baru
                                 <!-- textarea -->
                                 <div class="form-group">
                                     <label>Keterangan</label>
-                                    <textarea class="form-control" rows="3" name="keterangan" placeholder="Input Keterangan..."></textarea>
+                                    <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -122,20 +133,20 @@ Create Saldo Awal Baru
                                     </h1>
                                 </div>
                                 <div class="row">
-                                        <div class="col-6">
-                                                <div class="text">
-                                                    <label>Nama OPD:</label>
-                                                        <p>Badan Pengelola Keuangan dan Aset Daerah</p>
-                                                    </select>
-                                                </div> 
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text">
-                                                    <label>Nama Unit Kerja:</label>
-                                                        <p>Persediaan</p>
-                                                    </select>
-                                                </div> 
-                                            </div>
+                                  <div class="col-6">
+                                    <div class="text">
+                                        <label>Nama OPD:</label>
+                                            <p>Badan Pengelola Keuangan dan Aset Daerah</p>
+                                        </select>
+                                    </div> 
+                                  </div>
+                                  <div class="col-6">
+                                    <div class="text">
+                                        <label>Nama Unit Kerja:</label>
+                                            <p>Persediaan</p>
+                                        </select>
+                                    </div> 
+                                  </div>
                                 </div>
                             </div>
                             
@@ -173,10 +184,6 @@ Create Saldo Awal Baru
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     })
-
-    
-
-
     //Bootstrap Duallistbox
     $('.duallistbox').bootstrapDualListbox()
 

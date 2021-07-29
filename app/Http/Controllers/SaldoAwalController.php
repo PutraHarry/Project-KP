@@ -25,4 +25,27 @@ class SaldoAwalController extends Controller
     {
         return view("Admin.Saldo.create");
     }
+
+    public function insertSaldoAwal(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'kode_saldo' => 'required',
+            'tgl_input' => 'required',
+            'status_saldo' => 'required',
+            'ket_saldo' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $saldoawal = new SaldoAwalModel();
+        $saldoawal->kode_saldo = $request->kode_saldo;
+        $saldoawal->tgl_input = $request->tgl_input;
+        $saldoawal->status_saldo = $request->status_saldo;
+        $saldoawal->ket_saldo = $request->ket_saldo;
+
+        $saldoawal->save();
+        return redirect('/saldoawal')->with('StatusInput', 'Input Success');
+    }
 }

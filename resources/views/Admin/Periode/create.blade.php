@@ -77,14 +77,14 @@ Create Periode Baru
                             <label>Perangkat Daerah</label>
                             <select class="select2" name="id_opd" id="id_opd" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
                             @foreach($topd as $to)
-                            <option value={{ $to->id }}>{{ $to->nama }}</option>
+                            <option value={{ $to->id }}>{{ $to->nama_opd }}</option>
                             @endforeach
                             </select>
                         </div>
                     
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama Periode</label>
-                            <input type="text" class="form-control" name="nama" id="inputPeriode" placeholder="Input Nama Periode">
+                            <input type="text" class="form-control" name="nama_periode" id="nama_periode" placeholder="Input Nama Periode">
                         </div>
                         <!-- Date dd/mm/yyyy -->
                         <div class="form-group">
