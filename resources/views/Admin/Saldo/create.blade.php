@@ -66,15 +66,6 @@ Create Saldo Awal Baru
                     <div class="card-header">
                       <h3 class="card-title">Input Data Saldo Baru</h3>
                       <div class="card-tools">
-<<<<<<< Updated upstream
-                            <a href="#" class="btn btn-danger btn-icon-split">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-edit"></i>
-                                </span>
-                                <span class="text">Draft</span>
-                            </a>
-                        </div>
-=======
                         <button type="submit" class="btn btn-danger btn-icon-split">
                           <span class="icon text-white-50">
                               <i class="fas fa-edit"></i>
@@ -82,7 +73,6 @@ Create Saldo Awal Baru
                           <span class="text">Draft</span>
                         </button>
                       </div>
->>>>>>> Stashed changes
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
