@@ -75,19 +75,19 @@
                     @foreach($tutupperiode as $tp)
                     <tr class="text-center">
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $tp->id_opd}}</td>
                       <td>{{ $tp->nama }}</td>
+                      <td>{{ $tp->nama_periode }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
-                      <td>{{ $tp->status }}</td>
-                      <td class="text-left">{{ $tp->keterangan }}</td>
+                      <td>{{ $tp->status_periode }}</td>
+                      <td>{{ $tp->ket_peridoe }}</td>
                       <td>
-                          <a href="/periode/create" class="btn btn-primary btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-rocket"></i>
-                            </span>
-                            <span class="text">Proses</span>
-                        </a>
+                        <button class="btn btn-primary btn-icon-split" onclick="tutupPeriode({{$tp->id}})">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-rocket"></i>
+                          </span>
+                          <span class="text">Proses</span>
+                        </button>
                       </td>
                     </tr>
                     @endforeach
@@ -119,6 +119,35 @@
     </section>
     <!-- /.content -->
 
+    <div class="modal fade" id="modal-tutup">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Tutup Periode</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <p>Yakin akan menutup periode tersebut?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <a href="/periode/tutupperiode/id" id="btutup" type="button" class="btn btn-success">Tutup</a>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+<script>
+function tutupPeriode(id) {
+$("#btutup").attr("href", "/periode/tutupperiode/"+id);
+$('#modal-tutup').modal('show');
+}
+</script>
           
                     
 @endsection
