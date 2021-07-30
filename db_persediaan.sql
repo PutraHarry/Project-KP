@@ -1,6 +1,6 @@
 /*
-SQLyog Enterprise v13.1.1 (32 bit)
-MySQL - 10.4.8-MariaDB : Database - db_persediaan
+SQLyog Ultimate v12.4.3 (64 bit)
+MySQL - 10.4.6-MariaDB : Database - db_persediaan
 *********************************************************************
 */
 
@@ -12,9 +12,23 @@ MySQL - 10.4.8-MariaDB : Database - db_persediaan
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_persediaan` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_persediaan` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `db_persediaan`;
+
+/*Table structure for table `tb_barang` */
+
+DROP TABLE IF EXISTS `tb_barang`;
+
+CREATE TABLE `tb_barang` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) DEFAULT NULL,
+  `harga` int(11) DEFAULT NULL,
+  `satuan` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `tb_barang` */
 
 /*Table structure for table `tb_barang_gudang` */
 
@@ -37,6 +51,18 @@ CREATE TABLE `tb_barang_gudang` (
 
 /*Data for the table `tb_barang_gudang` */
 
+/*Table structure for table `tb_bidang` */
+
+DROP TABLE IF EXISTS `tb_bidang`;
+
+CREATE TABLE `tb_bidang` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bidang` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `tb_bidang` */
+
 /*Table structure for table `tb_bu` */
 
 DROP TABLE IF EXISTS `tb_bu`;
@@ -44,14 +70,17 @@ DROP TABLE IF EXISTS `tb_bu`;
 CREATE TABLE `tb_bu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `no_BU` varchar(255) DEFAULT NULL,
-  `tgl_BU` int(11) DEFAULT NULL,
+  `tgl_BU` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_bu` */
+
+insert  into `tb_bu`(`id`,`no_BU`,`tgl_BU`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'3434346','2021-07-30','2021-07-30 21:45:31',NULL,NULL);
 
 /*Table structure for table `tb_d_bu` */
 
@@ -290,9 +319,12 @@ CREATE TABLE `tb_periode` (
   PRIMARY KEY (`id`),
   KEY `id_opd` (`id_opd`),
   CONSTRAINT `tb_periode_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_periode` */
+
+insert  into `tb_periode`(`id`,`id_opd`,`nama_periode`,`tgl_mulai`,`tgl_selesai`,`status_periode`,`ket_periode`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,1,'test','2021-07-01','2021-07-31','open','test','2021-07-29 03:46:41','2021-07-30 02:29:49',NULL);
 
 /*Table structure for table `tb_saldo_awal` */
 
@@ -308,9 +340,14 @@ CREATE TABLE `tb_saldo_awal` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_saldo_awal` */
+
+insert  into `tb_saldo_awal`(`id`,`kode_saldo`,`tgl_input`,`status_saldo`,`ket_saldo`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'KP123BPKAD','2021-08-30','final','dfn','2021-07-29 05:32:41','2021-07-30 04:02:56',NULL),
+(2,'KP456BPKAD','2021-07-21','final','asdfkasnfk','2021-07-30 02:10:17','2021-07-30 04:03:04',NULL),
+(3,'KP789BPKAD','2021-07-06','draft','anfkjs','2021-07-30 02:15:04','2021-07-30 02:15:04',NULL);
 
 /*Table structure for table `tb_unit` */
 

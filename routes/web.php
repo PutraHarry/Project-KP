@@ -38,7 +38,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/tabel', function () {
     return view('tabel');
-});*/
+});
 
 Route::get('/saldoawal', function () {
     return view('/Admin/Saldo/show');
@@ -58,7 +58,7 @@ Route::get('/buktiumum/create', function () {
 });
 Route::get('/buktiumum/edit', function () {
     return view('/Admin/Bukti-umum/edit');
-});
+});*/
 
 
 
@@ -71,6 +71,11 @@ Route::get('/tabel/edit/{id}', 'TestController@editdata');
 Route::post('/tabel/update/{id}', 'TestController@update');
 
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
+ 
+//CONTROLLER FIX
+Route::get('/', 'LoginController@loginForm')->name('login')->middleware('guest');
+Route::post('/login', 'LoginController@login')->name('Login');
+Route::get('/logout', 'LoginController@logout')->name('logout');
 
 //PERIODE
 Route::get('/periode', 'PeriodeController@dataPeriode');
@@ -88,8 +93,9 @@ Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
 Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal');
 Route::post('/saldoawal/update/{id}', 'SaldoAwalController@updateSaldoAwal');
 Route::get('/saldoawal/statusfinal/{id}', 'SaldoAwalController@prosesFinal');
- 
-//CONTROLLER FIX
-Route::get('/', 'LoginController@loginForm')->name('login')->middleware('guest');
-Route::post('/login', 'LoginController@login')->name('Login');
-Route::get('/logout', 'LoginController@logout')->name('logout');
+
+//BUKTI UMUM
+Route::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');
+Route::get('/buktiumum/create', 'BuktiUmumController@addBuktiUmum');
+Route::post('/buktiumum/insert','BuktiUmumController@insertBuktiUmumm');
+Route::get('/buktiumum/edit/{id}', 'BuktiUmumController@editBuktiUmum');
