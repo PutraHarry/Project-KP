@@ -100,10 +100,8 @@ Create Saldo Awal Baru
                               <!-- select -->
                               <div class="form-group">
                                 <label>Status</label>
-                                <select class="form-control" name="status_saldo" id="status_saldo">
+                                <select class="form-control" name="status_saldo" id="status_saldo" disabled>
                                 <option value="draft">Draft</option>
-                                <option value="closed">Closed</option>
-                                <option value="final">Final</option>
                                 </select>
                               </div>
                               <!-- textarea -->

@@ -57,30 +57,11 @@ Edit Saldo Awal Baru
     </section>
     
     <!-- Main content -->
-    <form action="">
+    <form action="/saldoawal/update/{{ $saldoawal->id }}" method="POST">
+        @csrf
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-<<<<<<< Updated upstream
-                <div class="col-md-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Edit Data Saldo Baru</h3>
-                            <div class="card-tools">
-                                <a href="#" class="btn btn-danger btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Draft</span>
-                                </a>
-                                <a href="#" class="btn btn-success btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <span class="text">Final</span>
-                                </a>
-                                
-=======
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-header">
@@ -99,7 +80,6 @@ Edit Saldo Awal Baru
                                         <span class="text">Final</span>
                                     </button>
                                 </div>
->>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>
@@ -115,7 +95,6 @@ Edit Saldo Awal Baru
                                     </div>                               
                                     <div class="form-group">
                                         <label>Tanggal Saldo:</label>
-                    
                                         <div class="input-group">
                                             <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}">
                                         </div>
@@ -249,8 +228,6 @@ Edit Saldo Awal Baru
         </section>
     </form>
     <!-- /.content -->
-<<<<<<< Updated upstream
-=======
 
     <div class="modal fade" id="modal-sfinal">
         <div class="modal-dialog">
@@ -274,7 +251,6 @@ Edit Saldo Awal Baru
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
->>>>>>> Stashed changes
 @endsection
 
 @push('js')
