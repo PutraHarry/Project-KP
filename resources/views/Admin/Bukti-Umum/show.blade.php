@@ -78,13 +78,13 @@
                           </tr>
                           </thead>
                           <tbody>
-                            
+                            @foreach($tbukti as $tb)
                             <tr>
-                                <td>1</td>
-                                <td>12345678</td>
-                                <td>01-01-2021</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $tb->no_BU }}</td>
+                                <td>{{ $tb->tgl_BU }}</td>
                                 <td>
-                                    <a href="/buktiumum/edit" class="btn btn-warning btn-icon-split">
+                                    <a href="/buktiumum/edit/{{ $tb->id }}" class="btn btn-warning btn-icon-split">
                                       <span class="icon">
                                           <i class="fas fa-edit"></i>
                                       </span>
@@ -92,7 +92,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            
+                            @endforeach
                           </tbody>
                           <tfoot class="text-center">
                             <tr>

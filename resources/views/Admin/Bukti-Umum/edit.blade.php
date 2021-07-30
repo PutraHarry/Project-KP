@@ -84,7 +84,7 @@ Edit Saldo Awal Baru
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="inputSaldo">Nomor Bukti Umum</label>
-                                    <input type="text" class="form-control" name="buktiumum" id="inputBU" placeholder="Nomor BU" disabled>
+                                    <input type="text" class="form-control" name="no_BU" id="no_BU" placeholder="Nomor BU" value="{{ $buktiumum->no_BU }}" disabled>
                                 </div>
                                 
                                 <!-- Date dd/mm/yyyy -->
@@ -92,19 +92,12 @@ Edit Saldo Awal Baru
                                     <label>Tanggal Pembuatan BU:</label>
                 
                                     <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_bu" id="tgl_bu" disabled>
+                                    <input type="date" class="form-control" name="tgl_BU" id="tgl_BU" value="{{ $buktiumum->tgl_BU }}" disabled>
                                     </div>
                                     <!-- /.input group -->
                                 </div>
                                 <!-- /.form group -->
                                 
-                            </div>
-                            <div class="col-3">
-                                <!-- textarea -->
-                                <div class="form-group">
-                                    <label>Keterangan</label>
-                                    <textarea class="form-control" rows="3" name="keterangan" placeholder="Input Keterangan..." disabled></textarea>
-                                </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-center">

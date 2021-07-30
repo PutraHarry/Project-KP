@@ -57,7 +57,7 @@ Create Periode Baru
     </section>
       
           <!-- Main content -->
-        <form action="/periode/insert" method="POST">
+        <form action="/buktiumum/insert" method="POST">
           @csrf
           <section class="content">
             <div class="container-fluid">
@@ -75,22 +75,17 @@ Create Periode Baru
                       <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputBU">Nomor Bukti Umum</label>
-                            <input type="text" class="form-control" name="nobuktiumum" id="inputBU" placeholder="Input Nomor Bukti Umum">
+                            <input type="text" class="form-control" name="no_BU" id="no_BU" placeholder="Input Nomor Bukti Umum">
                         </div>
                         <!-- Date dd/mm/yyyy -->
                         <div class="form-group col-2">
                             <label>Tanggal Pembuatan BU:</label>
         
                             <div class="input-group">
-                            <input type="date" class="form-control" name="tgl_bu" id="tgl_bu">
+                            <input type="date" class="form-control" name="tgl_BU" id="tgl_BU">
                             </div>
                             <!-- /.input group -->
                         </div>            
-                        <!-- textarea -->
-                        <div class="form-group">
-                            <label>Keterangan</label>
-                            <textarea class="form-control" rows="3" name="ket_periode" id="ket_periode" placeholder="Input Keterangan..."></textarea>
-                        </div>
                         <!--<div class="form-check">
                           <input type="checkbox" class="form-check-input" id="exampleCheck1">
                           <label class="form-check-label" for="exampleCheck1">Check me out</label>
@@ -105,11 +100,12 @@ Create Periode Baru
                     </form>
                   </div>
                   <!-- /.card -->
+                </div>
               <!-- /.row -->
             </div><!-- /.container-fluid -->
           </section>
           <!-- /.content -->
-        </div>
+        </form>
 @endsection
 
 @push('js')
