@@ -57,9 +57,7 @@ class SaldoAwalController extends Controller
     public function updateSaldoAwal($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'kode_saldo' => 'required',
             'tgl_input' => 'required',
-            'status_saldo' => 'required',
             'ket_saldo' => 'required',
         ]);
 
@@ -68,11 +66,9 @@ class SaldoAwalController extends Controller
         }
 
         $saldoawal = SaldoAwalModel::find($id);
-        $saldoawal->kode_saldo = $request->kode_saldo;
         $saldoawal->tgl_input = $request->tgl_input;
-        $saldoawal->status_saldo = $request->status_saldo;
         $saldoawal->ket_saldo = $request->ket_saldo;
-        $saldoawal->update();
+        $saldoawal->save();
         return redirect('/saldoawal')->with('StatusInput', 'Update Success');
     }
 }
