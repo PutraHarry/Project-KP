@@ -73,12 +73,6 @@ Edit Saldo Awal Baru
                                         </span>
                                         <span class="text">Draft</span>
                                     </button>
-                                    <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $saldoawal->id }})">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-check"></i>
-                                        </span>
-                                        <span class="text">Final</span>
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -228,29 +222,6 @@ Edit Saldo Awal Baru
         </section>
     </form>
     <!-- /.content -->
-
-    <div class="modal fade" id="modal-sfinal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Final Saldo</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            <p>Yakin akan merubah status menjadi final?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a href="/saldoawal/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
-            </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
 @endsection
 
 @push('js')
@@ -282,12 +253,7 @@ Edit Saldo Awal Baru
   })
   
 </script>
-<script>
-    function statusfinal(id) {
-    $("#sfinal").attr("href", "/saldoawal/statusfinal/"+id);
-    $('#modal-sfinal').modal('show');
-    }
-    </script>
+
 
 
 @endpush
