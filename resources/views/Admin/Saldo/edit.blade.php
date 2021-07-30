@@ -277,6 +277,16 @@ Edit Saldo Awal Baru
       theme: 'bootstrap4'
     })
 
+    
+
+
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
+
   })
   
 </script>
