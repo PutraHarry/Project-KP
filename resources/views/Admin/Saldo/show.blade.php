@@ -17,17 +17,17 @@
 @endpush
 
 @section('content')
-        @if (session()->has('statusInput'))
-            <div class="row">
-              <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
-                  {{session()->get('statusInput')}}
-                  <button type="button" class="close" data-dismiss="alert"
-                      aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-            </div>
-          @endif
+  @if (session()->has('statusInput'))
+    <div class="row">
+      <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
+          {{session()->get('statusInput')}}
+          <button type="button" class="close" data-dismiss="alert"
+              aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+    </div>
+  @endif
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
