@@ -62,23 +62,18 @@ Edit Saldo Awal Baru
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                <div class="col-md-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Edit Data Saldo Baru</h3>
-                            <div class="card-tools">
-                                <button type="submit" class="btn btn-danger btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Draft</span>
-                                </button>
-                                <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $saldoawal->id }})">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <span class="text">Final</span>
-                                </button>
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Edit Data Saldo Baru</h3>
+                                <div class="card-tools">
+                                    <button type="submit" class="btn btn-danger btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="text">Draft</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -135,126 +130,98 @@ Edit Saldo Awal Baru
                                     </div>
                                 </div>
                             </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-warning btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exchange"></i>
-                                        </span>
-                                        <span class="text">Ubah Data</span>
-                                    </a>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card-body">
+                                        <a href="#" class="btn btn-warning btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-exchange"></i>
+                                            </span>
+                                            <span class="text">Ubah Data</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th width="40px">No.</th>
+                                                <th width="400px">Barang</th>
+                                                <th width="120px">Qty</th>
+                                                <th>Satuan</th>
+                                                <th>Harga</th>
+                                                <th>Total</th>
+                                                <th width="200px">Keterangan</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
+                                                        <option>barang1</option>
+                                                        <option>barang3</option>
+                                                        <option>barang2</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Satuan">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Harga">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="total" id="inputTotal" placeholder="Kehitung otomatis" disabled>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="keterangan">
+                                                    <option value="baik">Baik</option>
+                                                    <option value="rusak">Rusak</option>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
+                                                        <button class="btn btn-sm btn-flat btn-danger" onclick="#"><i class="fa fa-trash"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot> 
+                                            <tr class="text-center">
+                                                <th width="40px">No.</th>
+                                                <th width="400px">Barang</th>
+                                                <th>Qty</th>
+                                                <th>Satuan</th>
+                                                <th>Harga</th>
+                                                <th>Total</th>
+                                                <th>Keterangan</th>
+                                                <th>Aksi</th>
+                                            </tr> 
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th width="40px">No.</th>
-                                            <th width="400px">Barang</th>
-                                            <th width="120px">Qty</th>
-                                            <th>Satuan</th>
-                                            <th>Harga</th>
-                                            <th>Total</th>
-                                            <th width="200px">Keterangan</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
-                                                    <option>barang1</option>
-                                                    <option>barang3</option>
-                                                    <option>barang2</option>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Satuan">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Harga">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="total" id="inputTotal" placeholder="Kehitung otomatis" disabled>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <select class="form-control" name="keterangan">
-                                                <option value="baik">Baik</option>
-                                                <option value="rusak">Rusak</option>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-sm">
-                                                    <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
-                                                    <button class="btn btn-sm btn-flat btn-danger" onclick="#"><i class="fa fa-trash"></i></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot> 
-                                        <tr class="text-center">
-                                            <th width="40px">No.</th>
-                                            <th width="400px">Barang</th>
-                                            <th>Qty</th>
-                                            <th>Satuan</th>
-                                            <th>Harga</th>
-                                            <th>Total</th>
-                                            <th>Keterangan</th>
-                                            <th>Aksi</th>
-                                        </tr> 
-                                    </tfoot>
-                                </table>
-                            </div>
                         </div>
-                    </form>    
-                </div><!-- /.container-fluid -->
+                    </form>
+                </div>    
+            </div><!-- /.container-fluid -->
         </section>
     </form>
     <!-- /.content -->
-
-    <div class="modal fade" id="modal-sfinal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Final Saldo</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            <p>Yakin akan merubah status menjadi final?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a href="/saldoawal/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
-            </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-  
-  <script>
-  function statusfinal(id) {
-  $("#sfinal").attr("href", "/saldoawal/statusfinal/"+id);
-  $('#modal-sfinal').modal('show');
-  }
-  </script>
 @endsection
 
 @push('js')
@@ -276,11 +243,7 @@ Edit Saldo Awal Baru
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     })
-
-    
-
-
-    //Bootstrap Duallistbox
+     //Bootstrap Duallistbox
     $('.duallistbox').bootstrapDualListbox()
 
     $("input[data-bootstrap-switch]").each(function(){
@@ -290,6 +253,7 @@ Edit Saldo Awal Baru
   })
   
 </script>
+
 
 
 @endpush

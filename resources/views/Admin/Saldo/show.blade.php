@@ -91,10 +91,7 @@
                                       <span class="icon">
                                           <i class="fas fa-edit"></i>
                                       </span>
-                                      <span class="text">Edit</span>
-<<<<<<< Updated upstream
-                                  </a>
-=======
+                                      <span class="text">Edit</span>>
                                     </a>
                                     @if ($ts->status_saldo == 'draft')
                                     <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
@@ -104,7 +101,6 @@
                                       <span class="text">Final</span>
                                     </button>
                                     @endif
->>>>>>> Stashed changes
                                 </td>
                             </tr>
                             @endforeach
@@ -133,7 +129,28 @@
         <!-- /.container-fluid -->
       </section>
     <!-- /.content -->
-
+    <div class="modal fade" id="modal-sfinal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Final Saldo</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+          <p>Yakin akan merubah status menjadi final?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <a href="/saldoawal/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
+          </div>
+          </div>
+          <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
           
                     
 @endsection
@@ -169,8 +186,10 @@
   });
 </script>
 
-    
-                    
-
-    
+<script>
+  function statusfinal(id) {
+  $("#sfinal").attr("href", "/saldoawal/statusfinal/"+id);
+  $('#modal-sfinal').modal('show');
+  }
+</script>
 @endpush

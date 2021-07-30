@@ -87,7 +87,7 @@ Route::get('/saldoawal/create', 'SaldoAwalController@addSaldoAwal');
 Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
 Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal');
 Route::post('/saldoawal/update/{id}', 'SaldoAwalController@updateSaldoAwal');
-Route::get('/saldoawal/updatestatus/{id}', 'SaldoAwalController@prosesFinal');
+Route::get('/saldoawal/statusfinal/{id}', 'SaldoAwalController@prosesFinal');
  
 //CONTROLLER FIX
 Route::get('/', 'LoginController@loginForm')->name('login')->middleware('guest');
