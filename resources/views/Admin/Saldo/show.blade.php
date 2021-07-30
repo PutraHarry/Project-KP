@@ -91,7 +91,7 @@
                                       <span class="icon">
                                           <i class="fas fa-edit"></i>
                                       </span>
-                                      <span class="text">Edit</span>>
+                                      <span class="text">Edit</span>
                                     </a>
                                     @if ($ts->status_saldo == 'draft')
                                     <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
