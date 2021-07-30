@@ -68,7 +68,16 @@ class SaldoAwalController extends Controller
         $saldoawal = SaldoAwalModel::find($id);
         $saldoawal->tgl_input = $request->tgl_input;
         $saldoawal->ket_saldo = $request->ket_saldo;
-        $saldoawal->save();
+        $saldoawal->update();
         return redirect('/saldoawal')->with('StatusInput', 'Update Success');
+    }
+
+    public function prosesFinal($id)
+    {
+        $saldoawal = SaldoAwalModel::find($id);
+        $saldoawal->status_saldo = 'final';
+        $saldoawal->update();
+        
+        return redirect('/saldoawal')->with('statusInput', 'Status Final Berhasil');
     }
 }
