@@ -82,6 +82,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/penerimaan" class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p>
+                Penerimaan
+              </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
