@@ -18,16 +18,16 @@
 
 @section('content')
   @if (session()->has('statusInput'))
-    <div class="row">
-      <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
-          {{session()->get('statusInput')}}
-          <button type="button" class="close" data-dismiss="alert"
-              aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
+      <div class="row">
+        <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
+            {{session()->get('statusInput')}}
+            <button type="button" class="close" data-dismiss="alert"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
       </div>
-    </div>
-  @endif
+    @endif
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -38,12 +38,12 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
               <li class="breadcrumb-item active">Saldo Awal</li>
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
     <!-- Main content -->
@@ -56,20 +56,18 @@
                   <h3 class="card-title">List Data Saldo</h3>
                     <div class="card-tools">
                         <a href="/saldoawal/create" class="btn btn-primary btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-save"></i>
+                            <span class="icon">
+                                <i class="fas fa-plus"></i>
                             </span>
                             <span class="text">Saldo Baru</span>
                         </a>
                     </div>
-                
-                  <!--isi tombol disini-->
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                   <table id="example2" class="table table-bordered table-hover">
-                      <thead class="text-center">
-                          <tr>
+                      <thead>
+                          <tr class="text-center">
                             <th>No.</th>
                             <th>Kode Saldo Awal</th>
                             <th>Tanggal Saldo Awal</th>
@@ -77,83 +75,62 @@
                             <th>Keterangan</th>
                             <th>Aksi</th>
                           </tr>
-                          </thead>
-                          <tbody>
-                            @foreach($tsaldo as $ts)
-                            <tr class="text-center">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $ts->kode_saldo }}</td>
-                                <td>{{ $ts->tgl_input }}</td>
-                                <td>{{ $ts->status_saldo }}</td>
-                                <td>{{ $ts->ket_saldo }}</td>
-                                <td>
-                                    <a href="/saldoawal/edit/{{ $ts->id }}" class="btn btn-warning btn-icon-split">
-                                      <span class="icon">
-                                          <i class="fas fa-edit"></i>
-                                      </span>
-                                      <span class="text">Edit</span>
-                                    </a>
-                                    @if ($ts->status_saldo == 'draft')
-                                    <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
-                                      <span class="icon text-white-50">
-                                          <i class="fas fa-check"></i>
-                                      </span>
-                                      <span class="text">Final</span>
-                                    </button>
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
-                          </tbody>
-                          <tfoot class="text-center">
-                            <tr>
-                                <th>No.</th>
-                                <th>Kode Saldo Awal</th>
-                                <th>Tanggal Saldo Awal</th>
-                                <th>Status</th>
-                                <th>Keterangan</th>
-                                <th>Aksi</th>
-                            </tr>
-                          </tfoot>
+                      </thead>
+                      <tbody>
+                        @foreach($tsaldo as $ts)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $ts->kode_saldo }}</td>
+                            <td>{{ $ts->tgl_input }}</td>
+                            <td>{{ $ts->status_saldo }}</td>
+                            <td>{{ $ts->ket_saldo }}</td>
+                            <td class="text-center">
+                                <a href="/saldoawal/edit/{{ $ts->id }}" class="btn btn-warning btn-icon-split">
+                                  <span class="icon">
+                                      <i class="fas fa-edit"></i>
+                                  </span>
+                                  <span class="text">Edit</span>
+                                </a>
+                                @if ($ts->status_saldo == 'draft')
+                                <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
+                                  <span class="icon text-white-50">
+                                      <i class="fas fa-check"></i>
+                                  </span>
+                                  <span class="text">Final</span>
+                                </button>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
                   </table>
                 </div>
-                <!-- /.card-body -->
               </div>
-              <!-- /.card -->
-  
             </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
       </section>
-    <!-- /.content -->
     <div class="modal fade" id="modal-sfinal">
       <div class="modal-dialog">
           <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">Final Saldo</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-header">
+                <h4 class="modal-title">Final Saldo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <p>Yakin akan merubah status menjadi final?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="/saldoawal/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
+            </div>
           </div>
-          <div class="modal-body">
-          <p>Yakin akan merubah status menjadi final?</p>
-          </div>
-          <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <a href="/saldoawal/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
-          </div>
-          </div>
-          <!-- /.modal-content -->
       </div>
-      <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
-          
-                    
 @endsection
+
 @push('js')
 <!-- jQuery -->
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>

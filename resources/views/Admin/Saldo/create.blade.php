@@ -35,7 +35,7 @@ Create Saldo Awal Baru
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Saldo Awal Baru</h1>
+            <h1>Persediaan Kab Badung</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -52,100 +52,161 @@ Create Saldo Awal Baru
               <span class="text">Kembali</span>
           </a>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
       
-          <!-- Main content -->
-        <form action="/saldoawal/insert" method="POST">
-          @csrf
-          <section class="content">
-            <div class="container-fluid">
-              <div class="row">
-                <!-- left column -->
-                <div class="col-md-12">
-                  <!-- general form elements -->
-                  <div class="card card-primary">
-                    <div class="card-header">
-                      <h3 class="card-title">Input Data Saldo Baru</h3>
-                      <div class="card-tools">
-                        <button type="submit" class="btn btn-danger btn-icon-split">
-                          <span class="icon text-white-50">
-                              <i class="fas fa-edit"></i>
-                          </span>
-                          <span class="text">Draft</span>
-                        </button>
-                      </div>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form id="quickForm">
-                      <div class="card-body">
-                        <div class="row">
-                            <div class="col-3">
-                              <div class="form-group">
-                                  <label for="kode_saldo">Kode Saldo</label>
-                                  <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" placeholder="Kode Saldo">
+    <!-- Main content -->
+    <form action="/saldoawal/insert" method="POST">
+      @csrf
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Input Data Saldo Baru</h3>
+                  <div class="card-tools">
+                    <button type="submit" class="btn btn-danger btn-icon-split">
+                      <span class="icon text-white-50">
+                          <i class="fas fa-edit"></i>
+                      </span>
+                      <span class="text">Draft</span>
+                    </button>
+                  </div>
+                </div>
+
+                <form id="quickForm">
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                          <div class="form-group">
+                              <label for="kode_saldo">Kode Saldo</label>
+                              <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" placeholder="Kode Saldo">
+                          </div>
+                          <div class="form-group">
+                              <label>Tanggal Saldo:</label>
+                              <div class="input-group">
+                                <input type="date" class="form-control" name="tgl_input" id="tgl_input">
+                              </div>  
+                          </div>  
+                        </div>
+                        <div class="col-3">
+                          <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" name="status_saldo" id="status_saldo" disabled>
+                            <option value="draft">Draft</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                              <label>Keterangan</label>
+                              <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="text-center">
+                              <label>Total Harga:</label>
+                              <h1>
+                                <span class="text-bold">Rp.</span>
+                                <span class="text-bold">10,000.000.000.000</span>
+                              </h1>
+                          </div>
+                            <div class="row">
+                              <div class="col-6">
+                                <div class="text">
+                                    <label>Nama OPD:</label>
+                                        <p>Badan Pengelola Keuangan dan Aset Daerah</p>
+                                    </select>
+                                </div> 
                               </div>
-                              <!-- Date dd/mm/yyyy -->
-                              <div class="form-group">
-                                  <label>Tanggal Saldo:</label>
-                                  <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input">
-                                  </div>
-                                  <!-- /.input group -->
+                              <div class="col-6">
+                                <div class="text">
+                                    <label>Nama Unit Kerja:</label>
+                                        <p>Persediaan</p>
+                                    </select>
+                                </div> 
                               </div>
-                              <!-- /.form group -->
-                            </div>
-                            <div class="col-3">
-                              <!-- select -->
-                              <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status_saldo" id="status_saldo" disabled>
-                                <option value="draft">Draft</option>
-                                </select>
-                              </div>
-                              <!-- textarea -->
-                              <div class="form-group">
-                                  <label>Keterangan</label>
-                                  <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
-                              </div>
-                            </div>
-                            <div class="col-6">
-                              <div class="text-center">
-                                  <label>Total Harga:</label>
-                                  <h1>
-                                    <span class="text-bold">Rp.</span>
-                                    <span class="text-bold">10,000.000.000.000</span>
-                                  </h1>
-                              </div>
-                                <div class="row">
-                                  <div class="col-6">
-                                    <div class="text">
-                                        <label>Nama OPD:</label>
-                                            <p>Badan Pengelola Keuangan dan Aset Daerah</p>
-                                        </select>
-                                    </div> 
-                                  </div>
-                                  <div class="col-6">
-                                    <div class="text">
-                                        <label>Nama Unit Kerja:</label>
-                                            <p>Persediaan</p>
-                                        </select>
-                                    </div> 
-                                  </div>
-                                </div>
                             </div>
                         </div>
-                      </div>
-                      
-                      <!-- /.card-body -->
-                    </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card-body">
+                                <a href="#" class="btn btn-warning btn-icon-split">
+                                    <span class="icon">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    <span class="text">Ubah Data</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th width="40px">No.</th>
+                                        <th width="400px">Barang</th>
+                                        <th width="120px">Qty</th>
+                                        <th>Satuan</th>
+                                        <th>Harga</th>
+                                        <th>Total</th>
+                                        <th width="200px">Keterangan</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
+                                                <option>barang1</option>
+                                                <option>barang3</option>
+                                                <option>barang2</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Satuan">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Harga">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="total" id="inputTotal" placeholder="Kehitung otomatis" disabled>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="keterangan">
+                                            <option value="baik">Baik</option>
+                                            <option value="rusak">Rusak</option>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
+                                                <button class="btn btn-sm btn-flat btn-danger" onclick="#"><i class="fa fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                   </div>
-                  <!-- /.card -->
-              <!-- /.row -->
-            </div><!-- /.container-fluid -->
-          </section>
-        </form>
+                </form>
+            </div>
+        </div>
+      </section>
+    </form>
 @endsection
 
 @push('js')

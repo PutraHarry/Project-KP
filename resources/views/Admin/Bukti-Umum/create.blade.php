@@ -36,7 +36,6 @@ Create Periode Baru
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Persediaan Kab Badung</h1>
-            <h3>Bukti Umum</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -53,59 +52,52 @@ Create Periode Baru
                 <span class="text">Kembali</span>
             </a>
           </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
       
-          <!-- Main content -->
-        <form action="/buktiumum/insert" method="POST">
-          @csrf
-          <section class="content">
-            <div class="container-fluid">
-              <div class="row">
-                <!-- left column -->
-                <div class="col-md-12">
-                  <!-- general form elements -->
-                  <div class="card card-primary">
-                    <div class="card-header">
-                      <h3 class="card-title">Input Data Bukti Umum Baru</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form id="quickForm">
-                      <div class="card-body">
-                        <div class="form-group">
-                            <label for="exampleInputBU">Nomor Bukti Umum</label>
-                            <input type="text" class="form-control" name="no_BU" id="no_BU" placeholder="Input Nomor Bukti Umum">
-                        </div>
-                        <!-- Date dd/mm/yyyy -->
-                        <div class="form-group col-2">
-                            <label>Tanggal Pembuatan BU:</label>
-        
-                            <div class="input-group">
-                            <input type="date" class="form-control" name="tgl_BU" id="tgl_BU">
-                            </div>
-                            <!-- /.input group -->
-                        </div>            
-                        <!--<div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>-->
-                      </div>
-                      <!-- /.card-body -->
-      
-                      <div class="card-footer">
-                        <button type="submit" class="btn btn-warning">Reset</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- /.card -->
+    <!-- Main content -->
+    <form action="/periode/insert" method="POST">
+      @csrf
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Input Data Bukti Umum Baru</h3>
                 </div>
-              <!-- /.row -->
-            </div><!-- /.container-fluid -->
-          </section>
-          <!-- /.content -->
-        </form>
+                <form id="quickForm">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputBU">Nomor Bukti Umum</label>
+                        <input type="text" class="form-control" name="nobuktiumum" id="inputBU" placeholder="Input Nomor Bukti Umum">
+                    </div>
+                    <div class="row">
+                      <div class="col-3">
+                          <div class="form-group">
+                              <label>Tanggal Pembuatan BU:</label>
+          
+                              <div class="input-group">
+                              <input type="date" class="form-control" name="tgl_bu" id="tgl_bu">
+                              </div>
+                          </div>  
+                      </div>
+                    </div>  
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea class="form-control" rows="3" name="ket_periode" id="ket_periode" placeholder="Input Keterangan..."></textarea>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-warning">Reset</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+        </div>
+      </section>
+    </form>
 @endsection
 
 @push('js')

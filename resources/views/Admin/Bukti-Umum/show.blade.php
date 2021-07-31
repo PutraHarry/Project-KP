@@ -17,17 +17,17 @@
 @endpush
 
 @section('content')
-        @if (session()->has('statusInput'))
-            <div class="row">
-              <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
-                  {{session()->get('statusInput')}}
-                  <button type="button" class="close" data-dismiss="alert"
-                      aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-            </div>
-          @endif
+  @if (session()->has('statusInput'))
+      <div class="row">
+        <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
+            {{session()->get('statusInput')}}
+            <button type="button" class="close" data-dismiss="alert"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      </div>
+    @endif
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -35,16 +35,15 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Persediaan Kab Badung</h1>
-            <h3>Bukti Umum</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
               <li class="breadcrumb-item active">Bukti Umum</li>
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
     <!-- Main content -->
@@ -57,16 +56,13 @@
                   <h3 class="card-title">List Data Bukti Umum</h3>
                     <div class="card-tools">
                         <a href="/buktiumum/create" class="btn btn-primary btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-save"></i>
+                            <span class="icon">
+                                <i class="fas fa-plus"></i>
                             </span>
                             <span class="text">BU Baru</span>
                         </a>
                     </div>
-                
-                  <!--isi tombol disini-->
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
                   <table id="example2" class="table table-bordered table-hover">
                       <thead class="text-center">
@@ -76,50 +72,33 @@
                             <th width="200px">Tanggal Pembuatan BU</th>
                             <th>Aksi</th>
                           </tr>
-                          </thead>
-                          <tbody>
-                            @foreach($tbukti as $tb)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $tb->no_BU }}</td>
-                                <td>{{ $tb->tgl_BU }}</td>
-                                <td>
-                                    <a href="/buktiumum/edit/{{ $tb->id }}" class="btn btn-warning btn-icon-split">
-                                      <span class="icon">
-                                          <i class="fas fa-edit"></i>
-                                      </span>
-                                      <span class="text">Edit</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            @endforeach
-                          </tbody>
-                          <tfoot class="text-center">
-                            <tr>
-                                <th>No.</th>
-                                <th>Nomor BU</th>
-                                <th>Tanggal Pembuatan BU</th>
-                                <th>Aksi</th>
-                            </tr>
-                          </tfoot>
+                       </thead>
+                      <tbody>
+                        @foreach($tbukti as $tb)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $tb->no_BU }}</td>
+                            <td>{{ $tb->tgl_BU }}</td>
+                            <td class="text-center">
+                                <a href="/buktiumum/edit/{{ $tb->id }}" class="btn btn-warning btn-icon-split">
+                                  <span class="icon">
+                                      <i class="fas fa-edit"></i>
+                                  </span>
+                                  <span class="text">Edit</span>
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
                   </table>
                 </div>
-                <!-- /.card-body -->
               </div>
-              <!-- /.card -->
-  
             </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
       </section>
-    <!-- /.content -->
-
-          
-                    
 @endsection
+
 @push('js')
 <!-- jQuery -->
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
