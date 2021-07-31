@@ -60,7 +60,9 @@ Route::get('/buktiumum/edit', function () {
     return view('/Admin/Bukti-umum/edit');
 });
 
-
+Route::get('/penerimaan', function () {
+    return view('/Admin/Penerimaan/show');
+});
 
 
 Route::get('/tabel', 'TestController@datatest');
