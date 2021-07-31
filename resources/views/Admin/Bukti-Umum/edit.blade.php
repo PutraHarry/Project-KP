@@ -32,75 +32,67 @@ Edit Saldo Awal Baru
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                  <h1>Data Bukti Umum</h1>
-                </div>
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/buktiumum">Bukti Umum</a></li>
-                    <li class="breadcrumb-item active">Edit Bukti Umum</li>
-                  </ol>
-                </div>
-              </div>
-              <div>
-                <a href="/buktiumum" class="btn btn-default btn-icon-split">
-                    <span class="icon">
-                        <i class="fas fa-arrow-left"></i>
-                    </span>
-                    <span class="text">Kembali</span>
-                </a>
-              </div>
-            </div><!-- /.container-fluid -->
-          </section>
+        <div class="container-fluid">
+            <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Persediaan Kab Badung</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/buktiumum">Bukti Umum</a></li>
+                <li class="breadcrumb-item active">Edit Bukti Umum</li>
+                </ol>
+            </div>
+            </div>
+            <div>
+            <a href="/buktiumum" class="btn btn-default btn-icon-split">
+                <span class="icon">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">Kembali</span>
+            </a>
+            </div>
+        </div>
+    </section>
       
-          <!-- Main content -->
-          <section class="content">
-            <div class="container-fluid">
-              <div class="row">
-                <!-- left column -->
-                <div class="col-md-12">
-                  <!-- general form elements -->
-                  <div class="card card-primary">
-                    <div class="card-header">
-                      <h3 class="card-title">Edit Data Bukti Umum</h3>
-                      <div class="card-tools">
-                            
-                            <a href="#" class="btn btn-success btn-icon-split">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                                <span class="text">Simpan</span>
-                            </a>
-                            
-                        </div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Edit Data Bukti Umum</h3>
+                    <div class="card-tools">
+                        
+                        <a href="#" class="btn btn-success btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Simpan</span>
+                        </a>
+                        
                     </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form id="quickForm">
-                      <div class="card-body">
+                </div>
+               
+                <form id="quickForm">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="inputSaldo">Nomor Bukti Umum</label>
                                     <input type="text" class="form-control" name="buktiumum" id="inputBU" placeholder="Nomor BU" disabled>
                                 </div>
-                                
-                                <!-- Date dd/mm/yyyy -->
                                 <div class="form-group">
                                     <label>Tanggal Pembuatan BU:</label>
                 
                                     <div class="input-group">
                                     <input type="date" class="form-control" name="tgl_bu" id="tgl_bu" disabled>
                                     </div>
-                                    <!-- /.input group -->
                                 </div>
-                                <!-- /.form group -->
                                 
                             </div>
                             <div class="col-3">
-                                <!-- textarea -->
                                 <div class="form-group">
                                     <label>Keterangan</label>
                                     <textarea class="form-control" rows="3" name="keterangan" placeholder="Input Keterangan..." disabled></textarea>
@@ -115,33 +107,31 @@ Edit Saldo Awal Baru
                                     </h1>
                                 </div>
                                 <div class="row">
+                                    <div class="col-6">
+                                            <div class="text">
+                                                <label>Nama OPD:</label>
+                                                    <p>Badan Pengelola Keuangan dan Aset Daerah</p>
+                                                </select>
+                                            </div> 
+                                        </div>
                                         <div class="col-6">
-                                                <div class="text">
-                                                    <label>Nama OPD:</label>
-                                                        <p>Badan Pengelola Keuangan dan Aset Daerah</p>
-                                                    </select>
-                                                </div> 
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text">
-                                                    <label>Nama Unit Kerja:</label>
-                                                        <p>Persediaan</p>
-                                                    </select>
-                                                </div> 
-                                            </div>
+                                            <div class="text">
+                                                <label>Nama Unit Kerja:</label>
+                                                    <p>Persediaan</p>
+                                                </select>
+                                            </div> 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
-
-                        </div>
+                        
                         <div class="row">
-                                
-                            <div class="col-lg-6">
+                             <div class="col-lg-6">
                                 <div class="card-body">
                                     
                                     <a href="#" class="btn btn-warning btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exchange"></i>
+                                        <span class="icon">
+                                            <i class="fas fa-edit"></i>
                                         </span>
                                         <span class="text">Ubah Data</span>
                                     </a>
@@ -221,19 +211,13 @@ Edit Saldo Awal Baru
                                         </tfoot>
                                     </table>
                                 </div>
+                            </div>
                         </div>
-
-                      </div>
-                      
-                      <!-- /.card-body -->
-                    </form>
-                  </div>
-                  <!-- /.card -->
-              <!-- /.row -->
-            </div><!-- /.container-fluid -->
-          </section>
-          <!-- /.content -->
+                    </div>
+                </form>
+            </div>
         </div>
+    </section>
 @endsection
 
 @push('js')

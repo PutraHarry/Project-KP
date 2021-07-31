@@ -17,33 +17,33 @@
 @endpush
 
 @section('content')
-        @if (session()->has('statusInput'))
-            <div class="row">
-              <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
-                  {{session()->get('statusInput')}}
-                  <button type="button" class="close" data-dismiss="alert"
-                      aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-            </div>
-          @endif
+  @if (session()->has('statusInput'))
+      <div class="row">
+        <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
+            {{session()->get('statusInput')}}
+            <button type="button" class="close" data-dismiss="alert"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      </div>
+    @endif
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tutup Periode</h1>
+            <h1>Persediaan Kab Badung</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
               <li class="breadcrumb-item active">Tutup Periode Stok</li>
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
     <!-- Main content -->
@@ -53,35 +53,33 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">List Data Periode</h3>
-                <!--isi tombol disini-->
+                <h3 class="card-title">Tutup Periode</h3>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
-                  <tr class="text-center">
-                    <th>No.</th>
-                    <th width="300px">Perangkat Daerah</th>
-                    <th>Nama Periode</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Berakhir</th>
-                    <th>Status</th>
-                    <th>Keterangan</th>
-                    <th>Aksi</th>
-                  </tr>
+                    <tr class="text-center">
+                      <th>No.</th>
+                      <th width="300px">Perangkat Daerah</th>
+                      <th>Nama Periode</th>
+                      <th>Tanggal Mulai</th>
+                      <th>Tanggal Berakhir</th>
+                      <th>Status</th>
+                      <th>Keterangan</th>
+                      <th>Aksi</th>
+                    </tr>
                   </thead>
                   <tbody>
                     @foreach($tutupperiode as $tp)
                     <tr>
-                      <td>{{ $loop->iteration }}</td>
+                      <td class="text-center">{{ $loop->iteration }}</td>
                       <td>{{ $tp->nama_opd }}</td>
                       <td>{{ $tp->nama_periode }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
                       <td>{{ $tp->status_periode }}</td>
                       <td>{{ $tp->ket_periode }}</td>
-                      <td>
+                      <td class="text-center">
                         <button class="btn btn-primary btn-icon-split" onclick="tutupPeriode({{$tp->id}})">
                           <span class="icon text-white-50">
                             <i class="fas fa-rocket"></i>
@@ -92,32 +90,13 @@
                     </tr>
                     @endforeach
                   </tbody>
-                  <tfoot>
-                    <tr class="text-center">
-                        <th>No.</th>
-                        <th width="300px">Perangkat Daerah</th>
-                        <th>Nama Periode</th>
-                        <th>Tanggal Mulai</th>
-                        <th>Tanggal Berakhir</th>
-                        <th>Status</th>
-                        <th>Keterangan</th>
-                        <th>Aksi</th>
-                      </tr>
-                  </tfoot>
                 </table>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 
     <div class="modal fade" id="modal-tutup">
       <div class="modal-dialog">
@@ -136,21 +115,10 @@
             <a href="/periode/tutupperiode/id" id="btutup" type="button" class="btn btn-success">Tutup</a>
           </div>
         </div>
-        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
-
-<script>
-function tutupPeriode(id) {
-$("#btutup").attr("href", "/periode/tutupperiode/"+id);
-$('#modal-tutup').modal('show');
-}
-</script>
-          
-                    
 @endsection
+
 @push('js')
 
 <!-- Bootstrap 4 -->
@@ -181,7 +149,12 @@ $('#modal-tutup').modal('show');
     });
   });
 </script>
-        
 
-    
+<script>
+    function tutupPeriode(id) {
+    $("#btutup").attr("href", "/periode/tutupperiode/"+id);
+    $('#modal-tutup').modal('show');
+    }
+</script>
+  
 @endpush
