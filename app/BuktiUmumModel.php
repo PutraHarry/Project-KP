@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Periode extends Model
+class BuktiUmumModel extends Model
 {
-    //
+    protected $table = 'tb_bu';
 }

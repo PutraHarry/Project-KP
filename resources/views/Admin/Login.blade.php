@@ -17,7 +17,17 @@
   <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+  
+  <style>
+    body {
+      background-image: url('adminlte/dist/img/pemkab_badung.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;  
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+  
   <!-- jQuery -->
     <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -34,6 +44,11 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
+      <div class="logo_pemkab">
+        <center>
+          <img src="/adminlte/dist/img/logo_pemkab.jpg" alt="Logo Pemkab Badung" style="width:100px; height:100px;">
+        </center>
+      </div>
       <p class="login-box-msg">Silahkan Login Admin</p>
 
       <form action="{{ route('Login') }}" method="post">
