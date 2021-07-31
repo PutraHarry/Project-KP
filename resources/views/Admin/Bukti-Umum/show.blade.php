@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Periode Stok
+    Bukti Umum
 @endsection
 @push('css')
 <!-- Google Font: Source Sans Pro -->
@@ -34,12 +34,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Periode</h1>
+            <h1>Persediaan Kab Badung</h1>
+            <h3>Bukti Umum</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Periode Stok</li>
+              <li class="breadcrumb-item active">Bukti Umum</li>
             </ol>
           </div>
         </div>
@@ -48,84 +49,72 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">List Data Periode</h3>
-                  <div class="card-tools">
-                      <a href="/periode/create" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                              <i class="fas fa-save"></i>
-                          </span>
-                          <span class="text">Periode Baru</span>
-                      </a>
-                      <a href="#" class="btn btn-success btn-icon-split">
-                          <span class="icon text-white-50">
-                              <i class="fas fa-download"></i>
-                          </span>
-                          <span class="text">Ekspor</span>
-                      </a>
-                  </div>
-              
-                <!--isi tombol disini-->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">List Data Bukti Umum</h3>
+                    <div class="card-tools">
+                        <a href="/buktiumum/create" class="btn btn-primary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-save"></i>
+                            </span>
+                            <span class="text">BU Baru</span>
+                        </a>
+                    </div>
+                
+                  <!--isi tombol disini-->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example2" class="table table-bordered table-hover">
+                      <thead class="text-center">
+                          <tr>
+                            <th width="40px">No.</th>
+                            <th>Nomor BU</th>
+                            <th width="200px">Tanggal Pembuatan BU</th>
+                            <th>Aksi</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                            @foreach($tbukti as $tb)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $tb->no_BU }}</td>
+                                <td>{{ $tb->tgl_BU }}</td>
+                                <td>
+                                    <a href="/buktiumum/edit/{{ $tb->id }}" class="btn btn-warning btn-icon-split">
+                                      <span class="icon">
+                                          <i class="fas fa-edit"></i>
+                                      </span>
+                                      <span class="text">Edit</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                          <tfoot class="text-center">
+                            <tr>
+                                <th>No.</th>
+                                <th>Nomor BU</th>
+                                <th>Tanggal Pembuatan BU</th>
+                                <th>Aksi</th>
+                            </tr>
+                          </tfoot>
+                  </table>
+                </div>
+                <!-- /.card-body -->
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                  <thead class="text-center">
-                  <tr>
-                    <th>No.</th>
-                    <th width="300px">Perangkat Daerah</th>
-                    <th>Nama Periode</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Berakhir</th>
-                    <th>Status</th>
-                    <th>Keterangan</th>
-                    <th>Aksi</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($tperiode as $tp)
-                    <tr>
-                      <td>{{ $loop->iteration }}</td>
-                      <td>{{ $tp->nama_opd }}</td>
-                      <td>{{ $tp->nama_periode }}</td>
-                      <td>{{ $tp->tgl_mulai }}</td>
-                      <td>{{ $tp->tgl_selesai }}</td>
-                      <td>{{ $tp->status_periode }}</td>
-                      <td>{{ $tp->ket_periode }}</td>
-
-                      <td>aksinya</td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                  <tfoot class="text-center">
-                    <tr>
-                      <th>No.</th>
-                      <th width="300px">Perangkat Daerah</th>
-                      <th>Nama Periode</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Tanggal Berakhir</th>
-                      <th>Status</th>
-                      <th>Keterangan</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
+              <!-- /.card -->
+  
             </div>
-            <!-- /.card -->
-
+            <!-- /.col -->
           </div>
-          <!-- /.col -->
+          <!-- /.row -->
         </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </section>
+        <!-- /.container-fluid -->
+      </section>
     <!-- /.content -->
 
           

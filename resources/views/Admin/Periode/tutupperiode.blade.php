@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Periode Stok
+    Tutup Periode Stok
 @endsection
 @push('css')
 <!-- Google Font: Source Sans Pro -->
@@ -34,12 +34,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Periode</h1>
+            <h1>Tutup Periode</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Periode Stok</li>
+              <li class="breadcrumb-item active">Tutup Periode Stok</li>
             </ol>
           </div>
         </div>
@@ -54,28 +54,13 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">List Data Periode</h3>
-                  <div class="card-tools">
-                      <a href="/periode/create" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                              <i class="fas fa-save"></i>
-                          </span>
-                          <span class="text">Periode Baru</span>
-                      </a>
-                      <a href="#" class="btn btn-success btn-icon-split">
-                          <span class="icon text-white-50">
-                              <i class="fas fa-download"></i>
-                          </span>
-                          <span class="text">Ekspor</span>
-                      </a>
-                  </div>
-              
                 <!--isi tombol disini-->
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
-                  <thead class="text-center">
-                  <tr>
+                  <thead>
+                  <tr class="text-center">
                     <th>No.</th>
                     <th width="300px">Perangkat Daerah</th>
                     <th>Nama Periode</th>
@@ -87,7 +72,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($tperiode as $tp)
+                    @foreach($tutupperiode as $tp)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $tp->nama_opd }}</td>
@@ -96,22 +81,28 @@
                       <td>{{ $tp->tgl_selesai }}</td>
                       <td>{{ $tp->status_periode }}</td>
                       <td>{{ $tp->ket_periode }}</td>
-
-                      <td>aksinya</td>
+                      <td>
+                        <button class="btn btn-primary btn-icon-split" onclick="tutupPeriode({{$tp->id}})">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-rocket"></i>
+                          </span>
+                          <span class="text">Proses</span>
+                        </button>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>
-                  <tfoot class="text-center">
-                    <tr>
-                      <th>No.</th>
-                      <th width="300px">Perangkat Daerah</th>
-                      <th>Nama Periode</th>
-                      <th>Tanggal Mulai</th>
-                      <th>Tanggal Berakhir</th>
-                      <th>Status</th>
-                      <th>Keterangan</th>
-                      <th>Aksi</th>
-                    </tr>
+                  <tfoot>
+                    <tr class="text-center">
+                        <th>No.</th>
+                        <th width="300px">Perangkat Daerah</th>
+                        <th>Nama Periode</th>
+                        <th>Tanggal Mulai</th>
+                        <th>Tanggal Berakhir</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
+                      </tr>
                   </tfoot>
                 </table>
               </div>
@@ -128,12 +119,40 @@
     </section>
     <!-- /.content -->
 
+    <div class="modal fade" id="modal-tutup">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Tutup Periode</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <p>Yakin akan menutup periode tersebut?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <a href="/periode/tutupperiode/id" id="btutup" type="button" class="btn btn-success">Tutup</a>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+<script>
+function tutupPeriode(id) {
+$("#btutup").attr("href", "/periode/tutupperiode/"+id);
+$('#modal-tutup').modal('show');
+}
+</script>
           
                     
 @endsection
 @push('js')
-<!-- jQuery -->
-<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables  & Plugins -->
@@ -162,9 +181,7 @@
     });
   });
 </script>
-
-    
-                    
+        
 
     
 @endpush

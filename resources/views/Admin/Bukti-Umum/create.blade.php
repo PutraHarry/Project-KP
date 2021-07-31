@@ -35,17 +35,18 @@ Create Periode Baru
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Periode Baru</h1>
+            <h1>Persediaan Kab Badung</h1>
+            <h3>Bukti Umum</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/periode">Periode</a></li>
-              <li class="breadcrumb-item active">Periode Baru</li>
+              <li class="breadcrumb-item"><a href="/periode">Bukti Umum</a></li>
+              <li class="breadcrumb-item active">Bukti Umum Baru</li>
             </ol>
           </div>
         </div>
         <div>
-            <a href="/periode" class="btn btn-default btn-icon-split">
+            <a href="/buktiumum" class="btn btn-default btn-icon-split">
                 <span class="icon">
                     <i class="fas fa-arrow-left"></i>
                 </span>
@@ -56,7 +57,7 @@ Create Periode Baru
     </section>
       
           <!-- Main content -->
-        <form action="/periode/insert" method="POST">
+        <form action="/buktiumum/insert" method="POST">
           @csrf
           <section class="content">
             <div class="container-fluid">
@@ -66,60 +67,25 @@ Create Periode Baru
                   <!-- general form elements -->
                   <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Input Data Periode Baru</h3>
+                      <h3 class="card-title">Input Data Bukti Umum Baru</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form id="quickForm">
                       <div class="card-body">
-        
                         <div class="form-group">
-                            <label>Perangkat Daerah</label>
-                            <select class="select2" name="id_opd" id="id_opd" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
-                            @foreach($topd as $to)
-                            <option value={{ $to->id }}>{{ $to->nama_opd }}</option>
-                            @endforeach
-                            </select>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Nama Periode</label>
-                            <input type="text" class="form-control" name="nama_periode" id="nama_periode" placeholder="Input Nama Periode">
+                            <label for="exampleInputBU">Nomor Bukti Umum</label>
+                            <input type="text" class="form-control" name="no_BU" id="no_BU" placeholder="Input Nomor Bukti Umum">
                         </div>
                         <!-- Date dd/mm/yyyy -->
-                        <div class="form-group">
-                            <label>Tanggal Mulai:</label>
+                        <div class="form-group col-2">
+                            <label>Tanggal Pembuatan BU:</label>
         
                             <div class="input-group">
-                            <input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai">
+                            <input type="date" class="form-control" name="tgl_BU" id="tgl_BU">
                             </div>
                             <!-- /.input group -->
-                        </div>
-                        <!-- /.form group -->
-                        <!-- Date dd/mm/yyyy -->
-                        <div class="form-group">
-                            <label>Tanggal Selesai:</label>
-                            <div class="input-group">
-                            <input type="date" class="form-control" name="tgl_selesai" id="tgl_selesai">
-                            </div>
-                            <!-- /.input group -->
-                        </div>
-                            <!-- /.form group -->
-                        
-                        <!-- select -->
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select class="form-control" name="status_periode" id="status_periode">
-                            <option value="open">Open</option>
-                            <option value="close">Close</option>
-                            </select>
-                        </div>
-                        
-                        <!-- textarea -->
-                        <div class="form-group">
-                            <label>Keterangan</label>
-                            <textarea class="form-control" rows="3" name="ket_periode" id="ket_periode" placeholder="Input Keterangan..."></textarea>
-                        </div>
+                        </div>            
                         <!--<div class="form-check">
                           <input type="checkbox" class="form-check-input" id="exampleCheck1">
                           <label class="form-check-label" for="exampleCheck1">Check me out</label>
@@ -134,9 +100,11 @@ Create Periode Baru
                     </form>
                   </div>
                   <!-- /.card -->
+                </div>
               <!-- /.row -->
             </div><!-- /.container-fluid -->
           </section>
+          <!-- /.content -->
         </form>
 @endsection
 

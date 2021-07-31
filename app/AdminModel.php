@@ -7,13 +7,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class AdminModel extends Authenticatable
 {
-    protected $table = 'tb_admin';
+    protected $table = 'tb_user';
 
     protected $guard = 'admin';
 
     public $timestamps = false;
 
     protected $fillable = [
+        'username',
         'email',
         'password',
     ];
