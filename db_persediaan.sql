@@ -240,7 +240,7 @@ CREATE TABLE `tb_opname` (
 /*Data for the table `tb_opname` */
 
 insert  into `tb_opname`(`id`,`kode_opname`,`status_opname`,`tgl_opname`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'AAA/12/A','draft','2021-07-31',NULL,NULL,NULL);
+(1,'AAA/12/A','final','2021-07-31',NULL,NULL,NULL);
 
 /*Table structure for table `tb_penerimaan` */
 
