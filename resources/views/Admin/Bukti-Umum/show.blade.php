@@ -72,14 +72,15 @@
                             <th width="200px">Tanggal Pembuatan BU</th>
                             <th>Aksi</th>
                           </tr>
-                      </thead>
-                      <tbody> 
+                       </thead>
+                      <tbody>
+                        @foreach($tbukti as $tb)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>12345678</td>
-                            <td>01-01-2021</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $tb->no_BU }}</td>
+                            <td>{{ $tb->tgl_BU }}</td>
                             <td class="text-center">
-                                <a href="/buktiumum/edit" class="btn btn-warning btn-icon-split">
+                                <a href="/buktiumum/edit/{{ $tb->id }}" class="btn btn-warning btn-icon-split">
                                   <span class="icon">
                                       <i class="fas fa-edit"></i>
                                   </span>
@@ -87,6 +88,7 @@
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                       </tbody>
                   </table>
                 </div>
@@ -95,10 +97,8 @@
           </div>
         </div>
       </section>
-
-          
-                    
 @endsection
+
 @push('js')
 <!-- jQuery -->
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>

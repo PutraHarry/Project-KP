@@ -72,12 +72,6 @@ Edit Saldo Awal
                                         </span>
                                         <span class="text">Draft</span>
                                     </button>
-                                    <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $saldoawal->id }})">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-check"></i>
-                                        </span>
-                                        <span class="text">Final</span>
-                                    </button>
                                 </div>
                             </div>
                             
@@ -263,12 +257,7 @@ Edit Saldo Awal
   })
   
 </script>
-<script>
-    function statusfinal(id) {
-    $("#sfinal").attr("href", "/saldoawal/statusfinal/"+id);
-    $('#modal-sfinal').modal('show');
-    }
-    </script>
+
 
 
 @endpush

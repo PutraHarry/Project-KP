@@ -66,42 +66,69 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                   <table id="example2" class="table table-bordered table-hover">
-                    <thead class="text-center">
-                      <tr>
-                        <th>No.</th>
-                        <th>Kode Saldo Awal</th>
-                        <th>Tanggal Saldo Awal</th>
-                        <th>Status</th>
-                        <th>Keterangan</th>
-                        <th>Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($tsaldo as $ts)
-                      <tr>
-                          <td class="text-center">{{ $loop->iteration }}</td>
-                          <td>{{ $ts->kode_saldo }}</td>
-                          <td>{{ $ts->tgl_input }}</td>
-                          <td>{{ $ts->status_saldo }}</td>
-                          <td>{{ $ts->ket_saldo }}</td>
-                          <td class="text-center">
-                              <a href="/saldoawal/edit/{{ $ts->id }}" class="btn btn-warning btn-icon-split">
-                                <span class="icon">
-                                    <i class="fas fa-edit"></i>
-                                </span>
-                                <span class="text">Edit</span>
-                            </a>
-                          </td>
-                      </tr>
-                      @endforeach
-                    </tbody>     
+                      <thead>
+                          <tr class="text-center">
+                            <th>No.</th>
+                            <th>Kode Saldo Awal</th>
+                            <th>Tanggal Saldo Awal</th>
+                            <th>Status</th>
+                            <th>Keterangan</th>
+                            <th>Aksi</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($tsaldo as $ts)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $ts->kode_saldo }}</td>
+                            <td>{{ $ts->tgl_input }}</td>
+                            <td>{{ $ts->status_saldo }}</td>
+                            <td>{{ $ts->ket_saldo }}</td>
+                            <td class="text-center">
+                                <a href="/saldoawal/edit/{{ $ts->id }}" class="btn btn-warning btn-icon-split">
+                                  <span class="icon">
+                                      <i class="fas fa-edit"></i>
+                                  </span>
+                                  <span class="text">Edit</span>
+                                </a>
+                                @if ($ts->status_saldo == 'draft')
+                                <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
+                                  <span class="icon text-white-50">
+                                      <i class="fas fa-check"></i>
+                                  </span>
+                                  <span class="text">Final</span>
+                                </button>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
                   </table>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>                    
+      </section>
+    <div class="modal fade" id="modal-sfinal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Final Saldo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <p>Yakin akan merubah status menjadi final?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="/saldoawal/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
+            </div>
+          </div>
+      </div>
+    </div>
 @endsection
 
 @push('js')
@@ -136,8 +163,10 @@
   });
 </script>
 
-    
-                    
-
-    
+<script>
+  function statusfinal(id) {
+  $("#sfinal").attr("href", "/saldoawal/statusfinal/"+id);
+  $('#modal-sfinal').modal('show');
+  }
+</script>
 @endpush

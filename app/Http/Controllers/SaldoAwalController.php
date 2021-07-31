@@ -44,7 +44,7 @@ class SaldoAwalController extends Controller
         $saldoawal->status_saldo = 'draft';
         $saldoawal->ket_saldo = $request->ket_saldo;
         $saldoawal->save();
-        return redirect('/saldoawal')->with('StatusInput', 'Input Success');
+        return redirect('/saldoawal')->with('statusInput', 'Input Success');
     }
 
     public function editSaldoAwal($id)
@@ -68,7 +68,7 @@ class SaldoAwalController extends Controller
         $saldoawal->tgl_input = $request->tgl_input;
         $saldoawal->ket_saldo = $request->ket_saldo;
         $saldoawal->update();
-        return redirect('/saldoawal')->with('StatusInput', 'Update Success');
+        return redirect('/saldoawal')->with('statusInput', 'Update Success');
     }
 
     public function prosesFinal($id)
