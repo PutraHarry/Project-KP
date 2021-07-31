@@ -64,6 +64,9 @@ Route::get('/penerimaan', function () {
     return view('/Admin/Penerimaan/show');
 });
 
+Route::get('/penerimaan/create', function () {
+    return view('/Admin/Penerimaan/create');
+});
 
 Route::get('/tabel', 'TestController@datatest');
 Route::get('tabel/create', 'TestController@createdata');
