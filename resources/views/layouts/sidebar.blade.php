@@ -133,7 +133,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/penggunaan" class="nav-link">
               <i class="nav-icon fas fa-sitemap"></i>
               <p>
                 Penggunaan

@@ -78,175 +78,175 @@
                       <div class="tab-content">
                           <div class="active tab-pane" id="tbobat">
                               <table id="dataObat" class="table table-responsive-md table-bordered table-hover">
-                                  <thead class="text-center">
-                                      <tr>
+                                  <thead>
+                                      <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Obat</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
-                                        <th>Keterangan</th>
+                                        <th>Pengirim</th>
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr class="text-center">
-                                        <td>1</td>
-                                        <td>Penerimaan Obat</td>
-                                        <td>01-01-2021</td>
-                                        <td>testing</td>
-                                        <td>Keterangan testing</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning btn-icon-split">
-                                              <span class="icon">
-                                                  <i class="fas fa-edit"></i>
-                                              </span>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-icon-split">
-                                                <span class="icon">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                              </a>
-                                          </td>
+                                    <tr>
+                                      <td class="text-center">1</td>
+                                      <td>Penerimaan Obat</td>
+                                      <td>01-01-2021</td>
+                                      <td>testing</td>
+                                      <td>Keterangan testing</td>
+                                      <td class="text-center">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
+                                          <span class="icon">
+                                              <i class="fas fa-edit"></i>
+                                          </span>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                            <span class="icon">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                          </a>
+                                      </td>
                                     </tr>
                                   </tbody>
                               </table>
                           </div>
                           <div class="tab-pane" id="tbnon-obat">
                               <table id="dataNonObat" class="table table-responsive-md table-bordered table-hover">
-                                  <thead class="text-center">
-                                      <tr>
+                                  <thead>
+                                      <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Non Obat</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
-                                        <th>Keterangan</th>
+                                        <th>Pengirim</th>
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr class="text-center">
-                                        <td>1</td>
-                                        <td>Penerimaan Non Obat</td>
-                                        <td>01-01-2021</td>
-                                        <td>testing</td>
-                                        <td>Keterangan testing</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning btn-icon-split">
-                                              <span class="icon">
-                                                  <i class="fas fa-edit"></i>
-                                              </span>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-icon-split">
-                                                <span class="icon">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                              </a>
-                                          </td>
+                                    <tr>
+                                      <td class="text-center">1</td>
+                                      <td>Penerimaan Non Obat</td>
+                                      <td>01-01-2021</td>
+                                      <td>testing</td>
+                                      <td>Keterangan testing</td>
+                                      <td class="text-center">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
+                                          <span class="icon">
+                                              <i class="fas fa-edit"></i>
+                                          </span>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                            <span class="icon">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                          </a>
+                                      </td>
                                     </tr>
                                   </tbody>
                               </table>
                           </div>
                           <div class="tab-pane" id="tbhibah">
                               <table id="dataHibah" class="table table-responsive-md table-bordered table-hover">
-                                  <thead class="text-center">
-                                      <tr>
+                                  <thead>
+                                      <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Hibah</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
-                                        <th>Keterangan</th>
+                                        <th>Pengirim</th>
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr class="text-center">
-                                        <td>1</td>
-                                        <td>Penerimaan Hibah</td>
-                                        <td>01-01-2021</td>
-                                        <td>testing</td>
-                                        <td>Keterangan testing</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning btn-icon-split">
-                                              <span class="icon">
-                                                  <i class="fas fa-edit"></i>
-                                              </span>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-icon-split">
-                                                <span class="icon">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                              </a>
-                                          </td>
+                                    <tr>
+                                      <td class="text-center">1</td>
+                                      <td>Penerimaan Hibah</td>
+                                      <td>01-01-2021</td>
+                                      <td>testing</td>
+                                      <td>Keterangan testing</td>
+                                      <td class="text-center">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
+                                          <span class="icon">
+                                              <i class="fas fa-edit"></i>
+                                          </span>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                            <span class="icon">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                          </a>
+                                      </td>
                                     </tr>
                                   </tbody>
                               </table>
                           </div>
                             <div class="tab-pane" id="tbnon-hibah">
                               <table id="dataNonHibah" class="table table-responsive-md table-bordered table-hover">
-                                  <thead class="text-center">
-                                      <tr>
+                                  <thead>
+                                      <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Non Hibah</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
-                                        <th>Keterangan</th>
+                                        <th>Pengirim</th>
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr class="text-center">
-                                        <td>1</td>
-                                        <td>Penerimaan Non Hibah</td>
-                                        <td>01-01-2021</td>
-                                        <td>testing</td>
-                                        <td>Keterangan testing</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning btn-icon-split">
-                                              <span class="icon">
-                                                  <i class="fas fa-edit"></i>
-                                              </span>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-icon-split">
-                                                <span class="icon">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                              </a>
-                                          </td>
+                                    <tr>
+                                      <td class="text-center">1</td>
+                                      <td>Penerimaan Non Hibah</td>
+                                      <td>01-01-2021</td>
+                                      <td>testing</td>
+                                      <td>Keterangan testing</td>
+                                      <td  class="text-center">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
+                                          <span class="icon">
+                                              <i class="fas fa-edit"></i>
+                                          </span>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                            <span class="icon">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                          </a>
+                                      </td>
                                     </tr>
                                   </tbody>
                               </table>
                           </div>
                           <div class="tab-pane" id="tbnon-apbd">
                               <table id="dataNonAPBD" class="table table-responsive-md table-bordered table-hover">
-                                  <thead class="text-center">
-                                      <tr>
+                                  <thead>
+                                      <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Non APBD</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
-                                        <th>Keterangan</th>
+                                        <th>Pengirim</th>
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr class="text-center">
-                                        <td>1</td>
-                                        <td>Penerimaan Non APBD</td>
-                                        <td>01-01-2021</td>
-                                        <td>testing</td>
-                                        <td>Keterangan testing</td>
-                                        <td>
-                                          <a href="#" class="btn btn-warning btn-icon-split">
+                                    <tr>
+                                      <td class="text-center">1</td>
+                                      <td>Penerimaan Non APBD</td>
+                                      <td>01-01-2021</td>
+                                      <td>testing</td>
+                                      <td>Keterangan testing</td>
+                                      <td class="text-center">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
+                                          <span class="icon">
+                                              <i class="fas fa-edit"></i>
+                                          </span>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-icon-split">
                                             <span class="icon">
-                                                <i class="fas fa-edit"></i>
+                                                <i class="fas fa-trash"></i>
                                             </span>
                                           </a>
-                                          <a href="#" class="btn btn-danger btn-icon-split">
-                                              <span class="icon">
-                                                  <i class="fas fa-trash"></i>
-                                              </span>
-                                            </a>
-                                        </td>
+                                      </td>
                                     </tr>
                                   </tbody>
                               </table>
