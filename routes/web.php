@@ -67,6 +67,19 @@ Route::get('/penerimaan', function () {
 Route::get('/penerimaan/create', function () {
     return view('/Admin/Penerimaan/create');
 });
+Route::get('/penerimaan/edit', function () {
+    return view('/Admin/Penerimaan/edit');
+});
+
+Route::get('/penggunaan', function () {
+    return view('/Admin/Penggunaan/show');
+});
+Route::get('/penggunaan/create', function () {
+    return view('/Admin/Penggunaan/create');
+});
+Route::get('/penggunaan/edit', function () {
+    return view('/Admin/Penggunaan/edit');
+});
 
 Route::get('/tabel', 'TestController@datatest');
 Route::get('tabel/create', 'TestController@createdata');

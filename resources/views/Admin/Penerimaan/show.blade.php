@@ -96,7 +96,7 @@
                                       <td>testing</td>
                                       <td>Keterangan testing</td>
                                       <td class="text-center">
-                                        <a href="#" class="btn btn-warning btn-icon-split">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
                                           <span class="icon">
                                               <i class="fas fa-edit"></i>
                                           </span>
@@ -131,7 +131,7 @@
                                       <td>testing</td>
                                       <td>Keterangan testing</td>
                                       <td class="text-center">
-                                        <a href="#" class="btn btn-warning btn-icon-split">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
                                           <span class="icon">
                                               <i class="fas fa-edit"></i>
                                           </span>
@@ -166,7 +166,7 @@
                                       <td>testing</td>
                                       <td>Keterangan testing</td>
                                       <td class="text-center">
-                                        <a href="#" class="btn btn-warning btn-icon-split">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
                                           <span class="icon">
                                               <i class="fas fa-edit"></i>
                                           </span>
@@ -201,7 +201,7 @@
                                       <td>testing</td>
                                       <td>Keterangan testing</td>
                                       <td  class="text-center">
-                                        <a href="#" class="btn btn-warning btn-icon-split">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
                                           <span class="icon">
                                               <i class="fas fa-edit"></i>
                                           </span>
@@ -236,7 +236,7 @@
                                       <td>testing</td>
                                       <td>Keterangan testing</td>
                                       <td class="text-center">
-                                        <a href="#" class="btn btn-warning btn-icon-split">
+                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
                                           <span class="icon">
                                               <i class="fas fa-edit"></i>
                                           </span>

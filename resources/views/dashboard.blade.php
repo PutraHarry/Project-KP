@@ -89,7 +89,7 @@
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/penerimaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -104,7 +104,7 @@
               <div class="icon">
                 <i class="ion ion-network"></i>
               </div>
-              <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/penggunaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -122,7 +122,7 @@
                 <div class="icon">
                   <i class="ion ion-ios-paper"></i>
                 </div>
-                <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="pengeluaran" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
