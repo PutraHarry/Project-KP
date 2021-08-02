@@ -81,6 +81,16 @@ Route::get('/penggunaan/edit', function () {
     return view('/Admin/Penggunaan/edit');
 });
 
+Route::get('/pengeluaran', function () {
+    return view('/Admin/Pengeluaran/show');
+});
+Route::get('/pengeluaran/create', function () {
+    return view('/Admin/Pengeluaran/create');
+});
+Route::get('/pengeluaran/edit', function () {
+    return view('/Admin/Pengeluaran/edit');
+});
+
 Route::get('/tabel', 'TestController@datatest');
 Route::get('tabel/create', 'TestController@createdata');
 Route::post('tabel/insert', 'TestController@insert');

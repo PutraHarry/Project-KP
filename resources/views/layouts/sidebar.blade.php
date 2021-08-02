@@ -141,7 +141,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/pengeluaran" class="nav-link">
               <i class="nav-icon fas fa-money-check"></i>
               <p>
                 Pengeluaran
@@ -149,7 +149,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/opname" class="nav-link">
               <i class="nav-icon fas fa-warehouse"></i>
               <p>
                 Opname
@@ -157,7 +157,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/pemusnahan" class="nav-link">
               <i class="nav-icon fas fa-fire"></i>
               <p>
                 Pemusnahan
