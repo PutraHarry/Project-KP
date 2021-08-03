@@ -82,7 +82,7 @@
                             <td>Gedung BPKAD</td>
                             <td>Kominfo</td>
                             <td>01-01-2021</td>
-                            <td>Final</td>
+                            <td><span class="badge badge-primary">Final</span></td>
                             <td class="text-center">
                                 <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
                                   <span class="icon">
@@ -91,6 +91,51 @@
                                   <span class="text">Edit</span>
                                 </a>
                             </td>
+                        </tr>
+                        <tr>
+                          <td class="text-center">2</td>
+                          <td>Gedung BPKAD</td>
+                          <td>Kominfo</td>
+                          <td>01-01-2021</td>
+                          <td><span class="badge badge-warning">Draft</span></td>
+                          <td class="text-center">
+                              <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text">Edit</span>
+                              </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-center">3</td>
+                          <td>Gedung BPKAD</td>
+                          <td>Kominfo</td>
+                          <td>01-01-2021</td>
+                          <td><span class="badge badge-info">Disetujui</span></td>
+                          <td class="text-center">
+                              <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text">Edit</span>
+                              </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-center">4</td>
+                          <td>Gedung BPKAD</td>
+                          <td>Kominfo</td>
+                          <td>01-01-2021</td>
+                          <td><span class="badge badge-success">Approved</span></td>
+                          <td class="text-center">
+                              <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text">Edit</span>
+                              </a>
+                          </td>
                         </tr>
                       </tbody>
                   </table>

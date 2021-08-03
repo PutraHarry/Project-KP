@@ -80,6 +80,10 @@ Route::get('/penggunaan/create', function () {
 Route::get('/penggunaan/edit', function () {
     return view('/Admin/Penggunaan/edit');
 });
+Route::get('/penggunaan/show-detail', function () {
+    return view('/Admin/Penggunaan/show-detail');
+});
+
 
 Route::get('/pengeluaran', function () {
     return view('/Admin/Pengeluaran/show');
@@ -90,6 +94,10 @@ Route::get('/pengeluaran/create', function () {
 Route::get('/pengeluaran/edit', function () {
     return view('/Admin/Pengeluaran/edit');
 });
+Route::get('/laporan', function () {
+    return view('/Admin/Laporan/show');
+});
+
 
 Route::get('/tabel', 'TestController@datatest');
 Route::get('tabel/create', 'TestController@createdata');
