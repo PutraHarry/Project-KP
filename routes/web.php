@@ -125,5 +125,5 @@ Route::get('/saldoawal/statusfinal/{id}', 'SaldoAwalController@prosesFinal');
 //BUKTI UMUM
 Route::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');
 Route::get('/buktiumum/create', 'BuktiUmumController@addBuktiUmum');
-Route::post('/buktiumum/insert','BuktiUmumController@insertBuktiUmumm');
+Route::post('/buktiumum/insert','BuktiUmumController@insertBuktiUmum');
 Route::get('/buktiumum/edit/{id}', 'BuktiUmumController@editBuktiUmum');
