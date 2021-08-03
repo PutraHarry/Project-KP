@@ -61,6 +61,6 @@ class BuktiUmumController extends Controller
         }
 
         
-        return redirect('/saldoawal')->with('statusInput', 'Update Success');
+        return redirect('/buktiumum')->with('statusInput', 'Update Success');
     }
 }
