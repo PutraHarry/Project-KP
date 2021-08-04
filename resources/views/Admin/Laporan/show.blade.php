@@ -34,24 +34,86 @@
             <div class="card-body">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-lg-4 col-6">
+                    <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                        <h3>Laporan Persediaan</h3>
+                        <h4>Laporan Persediaan</h4>
+                            <div class="text">
+                                <p>Per-kegiatan Untuk Periode Aktif</p>
+                            </div>
                         </div>
+                        
                         <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                         </div>
                         <a href="/laporan/laporan-persediaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                     </div>
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                            <h4>Laporan Persediaan</h4>
+                                <div class="text">
+                                    <p>Per-kegiatan</p>
+                                </div>
+                            </div>
+                            <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="/laporan/laporan-persediaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                            <h4>Laporan Persediaan</h4>
+                                <div class="text">
+                                    <p>Dinas</p>
+                                </div>
+                            </div>
+                            <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="/laporan/laporan-persediaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                            <h4>Laporan Persediaan</h4>
+                                <div class="text">
+                                    <p>Per Bidang/Unit Kerja</p>
+                                </div>
+                            </div>
+                            <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="/laporan/laporan-persediaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                            <h4>Laporan Rekap Persediaan</h4>
+                                
+                            </div>
+                            <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="/laporan/laporan-persediaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-info">
                         <div class="inner">
-                        <h3>Kartu Barang</h3>
+                        <h4>Kartu Barang</h4>
                         </div>
                         <div class="icon">
                         <i class="ion ion-android-menu"></i>
@@ -60,11 +122,11 @@
                     </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-info">
                         <div class="inner">
-                        <h3>Kartu Persediaan Barang</h3>
+                        <h4>Kartu Persediaan Barang</h4>
                         </div>
                         <div class="icon">
                         <i class="ion ion-android-menu"></i>
@@ -76,11 +138,11 @@
                 <!-- /.row -->
                 <div class="row">
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-lg-3 col-6">
                         <!-- small box -->
-                        <div class="small-box bg-danger">
+                        <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>Buku Penerimaan Barang</h3>
+                            <h4>Buku Penerimaan Barang</h4>
                         </div>
                         <div class="icon">
                             <i class="ion ion-ios-paper"></i>
@@ -89,11 +151,11 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-lg-3 col-6">
                         <!-- small box -->
                         <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>Laporan Pengeluaran Barang</h3>
+                            <h4>Laporan Pengeluaran Barang</h4>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -102,11 +164,11 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
+                    <div class="col-lg-3 col-6">
                         <!-- small box -->
-                        <div class="small-box bg-success">
+                        <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>Bukti Pengambilan Barang</h3>   
+                            <h4>Bukti Pengambilan Barang</h4>   
                         </div>
                         <div class="icon">
                             <i class="ion ion-ios-paper"></i>
@@ -114,6 +176,18 @@
                         <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                            <h4>Laporan Opname</h4>
+                            </div>
+                            <div class="icon">
+                            <i class="ion ion-android-menu"></i>
+                            </div>
+                            <a href="/saldoawal" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                        </div>
                 </div>
             </div>
         </div>
