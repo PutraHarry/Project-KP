@@ -34,16 +34,16 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Buka Data Periode</h1>
+            <h1>Persediaan Kab Badung</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Periode Stok</li>
+              <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+              <li class="breadcrumb-item active">Buka Periode Stok</li>
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
     <!-- Main content -->
@@ -53,46 +53,11 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">List Data Periode</h3>
-                                <!--isi tombol disini-->
+                <h3 class="card-title">Buka Periode</h3>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
-                  <tr class="text-center">
-                    <th>No.</th>
-                    <th width="300px">Perangkat Daerah</th>
-                    <th>Nama Periode</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Berakhir</th>
-                    <th>Status</th>
-                    <th class="text-left">Keterangan</th>
-                    <th>Aksi</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($bukaperiode as $bp)
-                    <tr class="text-center">
-                      <td>{{ $loop->iteration }}</td>
-                      <td>{{ $bp->nama_opd }}</td>
-                      <td>{{ $bp->nama_periode }}</td>
-                      <td>{{ $bp->tgl_mulai }}</td>
-                      <td>{{ $bp->tgl_selesai }}</td>
-                      <td>{{ $bp->status_periode }}</td>
-                      <td>{{ $bp->ket_periode }}</td>
-                      <td>
-                        <button class="btn btn-primary btn-icon-split" onclick="bukaPeriode({{$bp->id}})">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-rocket"></i>
-                          </span>
-                          <span class="text">Proses</span>
-                        </button>
-                      </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                  <tfoot>
                     <tr class="text-center">
                       <th>No.</th>
                       <th width="300px">Perangkat Daerah</th>
@@ -103,21 +68,35 @@
                       <th class="text-left">Keterangan</th>
                       <th>Aksi</th>
                     </tr>
-                  </tfoot>
+                  </thead>
+                  <tbody>
+                    @foreach($bukaperiode as $bp)
+                    <tr class="text-center">
+                      <td class="text-center">{{ $loop->iteration }}</td>
+                      <td>{{ $bp->nama_opd }}</td>
+                      <td>{{ $bp->nama_periode }}</td>
+                      <td>{{ $bp->tgl_mulai }}</td>
+                      <td>{{ $bp->tgl_selesai }}</td>
+                      <td>{{ $bp->status_periode }}</td>
+                      <td>{{ $bp->ket_periode }}</td>
+                      <td class="text-center">
+                        <button class="btn btn-primary btn-icon-split" onclick="bukaPeriode({{$bp->id}})">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-rocket"></i>
+                          </span>
+                          <span class="text">Proses</span>
+                        </button>
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
                 </table>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 
     <div class="modal fade" id="modal-buka">
       <div class="modal-dialog">
@@ -136,20 +115,8 @@
             <a href="/periode/bukaperiode/id" id="bbuka" type="button" class="btn btn-success">Buka</a>
           </div>
         </div>
-        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-
-<script>
-function bukaPeriode(id) {
-$("#bbuka").attr("href", "/periode/bukaperiode/"+id);
-$('#modal-buka').modal('show');
-}
-</script>
-          
-                    
+    </div>                    
 @endsection
 @push('js')
 
@@ -179,5 +146,12 @@ $('#modal-buka').modal('show');
     });
   });
 </script>
+
+<script>
+    function bukaPeriode(id) {
+    $("#bbuka").attr("href", "/periode/bukaperiode/"+id);
+    $('#modal-buka').modal('show');
+    }
+    </script>
     
 @endpush

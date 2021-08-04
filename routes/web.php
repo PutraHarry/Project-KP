@@ -60,8 +60,6 @@ Route::get('/buktiumum/edit', function () {
     return view('/Admin/Bukti-umum/edit');
 });
 
-<<<<<<< Updated upstream
-=======
 Route::get('/penerimaan', function () {
     return view('/Admin/Penerimaan/show');
 });
@@ -85,8 +83,19 @@ Route::get('/penggunaan/edit', function () {
 Route::get('/penggunaan/show-detail', function () {
     return view('/Admin/Penggunaan/show-detail');
 });
->>>>>>> Stashed changes
 
+Route::get('/pengeluaran', function () {
+    return view('/Admin/Pengeluaran/show');
+});
+Route::get('/pengeluaran/create', function () {
+    return view('/Admin/Pengeluaran/create');
+});
+Route::get('/pengeluaran/edit', function () {
+    return view('/Admin/Pengeluaran/edit');
+});
+Route::get('/laporan', function () {
+    return view('/Admin/Laporan/show');
+});
 
 
 Route::get('/tabel', 'TestController@datatest');

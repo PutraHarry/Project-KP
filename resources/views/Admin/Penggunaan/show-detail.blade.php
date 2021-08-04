@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Create Saldo Awal Baru
+Lihaat Data Penggunaan
 @endsection
 
 @push('css')
@@ -39,13 +39,13 @@ Create Saldo Awal Baru
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/saldoawal">Saldo awal</a></li>
-              <li class="breadcrumb-item active">Saldo Awal Baru</li>
+              <li class="breadcrumb-item"><a href="/penggunaan">Penggunaan</a></li>
+              <li class="breadcrumb-item active">Data Penggunaan</li>
             </ol>
           </div>
         </div>
         <div>
-          <a href="/saldoawal" class="btn btn-default btn-icon-split">
+          <a href="/penggunaan" class="btn btn-default btn-icon-split">
               <span class="icon">
                   <i class="fas fa-arrow-left"></i>
               </span>
@@ -56,7 +56,7 @@ Create Saldo Awal Baru
     </section>
       
     <!-- Main content -->
-    <form action="/saldoawal/insert" method="POST">
+    <form action="#" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -64,13 +64,13 @@ Create Saldo Awal Baru
             <div class="col-md-12">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Input Data Saldo Baru</h3>
+                  <h3 class="card-title">Edit Data Penggunaan Barang Baru</h3>
                   <div class="card-tools">
-                    <button type="submit" class="btn btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-edit"></i>
-                      </span>
-                      <span class="text">Draft</span>
+                    <button type="submit" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Approve</span>
                     </button>
                   </div>
                 </div>
@@ -79,27 +79,22 @@ Create Saldo Awal Baru
                   <div class="card-body">
                     <div class="row">
                         <div class="col-3">
-                          <div class="form-group">
-                              <label for="kode_saldo">Kode Saldo</label>
-                              <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" placeholder="Kode Saldo">
-                          </div>
-                          <div class="form-group">
-                              <label>Tanggal Saldo:</label>
-                              <div class="input-group">
-                                <input type="date" class="form-control" name="tgl_input" id="tgl_input">
-                              </div>  
-                          </div>  
+                            <div class="form-group">
+                                <label>Tanggal Penggunaan Barang:</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input" disabled>
+                                </div>  
+                            </div>
                         </div>
                         <div class="col-3">
                           <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control" name="status_saldo" id="status_saldo" disabled>
+                            <select class="form-control" name="status_penggunaan" id="status_penggunaan" disabled>
                             <option value="draft">Draft</option>
+                            <option value="final">Final</option>
+                            <option value="disetujui">Disetujui</option> <!--jika diaprove pembantu pengurus barang-->
+                            <option value="approved">Approved</option> <!--hanya bisa oleh atasan langsung-->
                             </select>
-                          </div>
-                          <div class="form-group">
-                              <label>Keterangan</label>
-                              <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
                           </div>
                         </div>
                         <div class="col-6">
@@ -109,36 +104,36 @@ Create Saldo Awal Baru
                                 <span class="text-bold">Rp.</span>
                                 <span class="text-bold">10,000.000.000.000</span>
                               </h1>
-                          </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <div class="text">
-                                    <label>Nama OPD:</label>
-                                        <p>Badan Pengelola Keuangan dan Aset Daerah</p>
-                                    </select>
-                                </div> 
-                              </div>
-                              <div class="col-6">
-                                <div class="text">
-                                    <label>Nama Unit Kerja:</label>
-                                        <p>Persediaan</p>
-                                    </select>
-                                </div> 
-                              </div>
-                            </div>
+                          </div>    
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card-body">
-                                <a href="#" class="btn btn-warning btn-icon-split">
-                                    <span class="icon">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Ubah Data</span>
-                                </a>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Nota Bukti Umum</label>
+                                <select class="select2" name="id_buktiumum" id="id_buktiumum" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;" disabled>
+                                    <option value="bu1">Nota Bu 1</option>
+                                    <option value="bu2">Nota Bu 2</option>
+                                    <option value="bu3">Nota Bu 3</option>
+                                </select>
                             </div>
                         </div>
+                        <div class="col-3">
+                            <div class="text">
+                                <label>Lokasi Gudang:</label>
+                                    <p>Badan Pengelola Keuangan dan Aset Daerah</p>
+                                </select>
+                            </div> 
+                        </div>
+                        <div class="col-3">
+                            <div class="text">
+                                <label>Lokasi Unit Kerja:</label>
+                                    <p>Persediaan</p>
+                                </select>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -150,7 +145,6 @@ Create Saldo Awal Baru
                                         <th>Harga</th>
                                         <th>Total</th>
                                         <th width="200px">Keterangan</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -158,7 +152,7 @@ Create Saldo Awal Baru
                                         <td class="text-center">1</td>
                                         <td>
                                             <div class="form-group">
-                                                <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
+                                                <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;" disabled>
                                                 <option>barang1</option>
                                                 <option>barang3</option>
                                                 <option>barang2</option>
@@ -167,12 +161,12 @@ Create Saldo Awal Baru
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas">
+                                                <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas" disabled>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Satuan">
+                                                <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Satuan" disabled>
                                             </div>
                                         </td>
                                         <td>
@@ -186,15 +180,9 @@ Create Saldo Awal Baru
                                             </div>
                                         </td>
                                         <td>
-                                            <select class="form-control" name="keterangan">
+                                            <select class="form-control" name="keterangan" disabled>
                                             <option value="baik">Baik</option>
                                             <option value="rusak">Rusak</option>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group btn-group-sm">
-                                                <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
-                                                <button class="btn btn-sm btn-flat btn-danger" onclick="#"><i class="fa fa-trash"></i></button>
-                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>

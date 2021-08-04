@@ -48,7 +48,7 @@
           <!-- /.card -->
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
@@ -63,7 +63,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
@@ -78,7 +78,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
@@ -89,29 +89,29 @@
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/penerimaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>Penggunaan</h3>
-
-                <p>Pengelolaan Data Penggunaan</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-network"></i>
-              </div>
-              <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class="col-lg-3 col-6">
+             <!-- ./col -->
+          <div class="col-lg-4 col-6">
+              <!-- small box -->
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3>Penggunaan</h3>
+  
+                  <p>Pengelolaan Data Penggunaan</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-network"></i>
+                </div>
+                <a href="/penggunaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
@@ -122,11 +122,11 @@
                 <div class="icon">
                   <i class="ion ion-ios-paper"></i>
                 </div>
-                <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/pengeluaran" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
@@ -140,37 +140,55 @@
                 <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+          </div>
+          <div class="row">
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h3>Pemusnahan</h3>
-  
-                  <p>Pengelolaan Data Pemusnahan</p>
+            <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3>Pemusnahan</h3>
+    
+                    <p>Pengelolaan Data Pemusnahan</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-ios-flame"></i>
+                  </div>
+                  <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-                <div class="icon">
-                  <i class="ion ion-ios-flame"></i>
-                </div>
-                <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
               </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>Bukti Umum</h3>
-  
-                  <p>Pengelolaan Data Bukti Umum</p>
+              <!-- ./col -->
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3>Bukti Umum</h3>
+    
+                    <p>Pengelolaan Data Bukti Umum</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-android-document"></i>
+                  </div>
+                  <a href="/buktiumum" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-                <div class="icon">
-                  <i class="ion ion-android-document"></i>
-                </div>
-                <a href="/buktiumum" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
               </div>
-            </div>
-            <!-- ./col -->
+              <!-- ./col -->
+              <!-- ./col -->
+              <div class="col-lg-4 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-primary">
+                    <div class="inner">
+                      <h3>Pelaporan</h3>
+      
+                      <p>Pelaporan Data</p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-android-document"></i>
+                    </div>
+                    <a href="/laporan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+                </div>
+                <!-- ./col -->
           </div>
       </div><!-- /.container-fluid -->
     </section>

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Bukti Umum
+    Pengeluaran
 @endsection
 @push('css')
 <!-- Google Font: Source Sans Pro -->
@@ -39,7 +39,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-              <li class="breadcrumb-item active">Bukti Umum</li>
+              <li class="breadcrumb-item active">Pengeluaran</li>
             </ol>
           </div>
         </div>
@@ -53,34 +53,38 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">List Data Bukti Umum</h3>
+                  <h3 class="card-title">List Data Pengeluaran</h3>
                     <div class="card-tools">
-                        <a href="/buktiumum/create" class="btn btn-primary btn-icon-split">
+                        <a href="/pengeluaran/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>
                             </span>
-                            <span class="text">BU Baru</span>
+                            <span class="text">Buat Baru</span>
                         </a>
                     </div>
                 </div>
+                <!-- /.card-header -->
                 <div class="card-body">
                   <table id="example2" class="table table-bordered table-hover">
-                      <thead class="text-center">
-                          <tr>
-                            <th width="40px">No.</th>
-                            <th>Nomor BU</th>
-                            <th width="200px">Tanggal Pembuatan BU</th>
+                      <thead>
+                          <tr class="text-center">
+                            <th>No.</th>
+                            <th>Kode Pengeluaran</th>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                           </tr>
-                       </thead>
+                      </thead>
                       <tbody>
-                        @foreach($tbukti as $tb)
                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $tb->no_BU }}</td>
-                            <td>{{ $tb->tgl_BU }}</td>
+                            <td class="text-center">1</td>
+                            <td>123-456-789</td>
+                            <td>01-01-2021</td>
+                            <td>Final</td>
+                            <td>Keterangan testing</td>
                             <td class="text-center">
-                                <a href="/buktiumum/edit/{{ $tb->id }}" class="btn btn-warning btn-icon-split">
+                                <a href="/pengeluaran/edit/" class="btn btn-warning btn-icon-split">
                                   <span class="icon">
                                       <i class="fas fa-edit"></i>
                                   </span>
@@ -88,7 +92,6 @@
                                 </a>
                             </td>
                         </tr>
-                        @endforeach
                       </tbody>
                   </table>
                 </div>
@@ -97,6 +100,25 @@
           </div>
         </div>
       </section>
+    <div class="modal fade" id="modal-sfinal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Final Pengeluaran</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <p>Yakin akan merubah status menjadi final?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="/pengeluaran/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
+            </div>
+          </div>
+      </div>
+    </div>
 @endsection
 
 @push('js')
@@ -131,8 +153,10 @@
   });
 </script>
 
-    
-                    
-
-    
+<script>
+  function statusfinal(id) {
+  $("#sfinal").attr("href", "/penggunaan/statusfinal/"+id);
+  $('#modal-sfinal').modal('show');
+  }
+</script>
 @endpush

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Saldo Awal
+    Penggunaan
 @endsection
 @push('css')
 <!-- Google Font: Source Sans Pro -->
@@ -39,7 +39,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-              <li class="breadcrumb-item active">Saldo Awal</li>
+              <li class="breadcrumb-item active">Penggunaan</li>
             </ol>
           </div>
         </div>
@@ -53,13 +53,13 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">List Data Saldo</h3>
+                  <h3 class="card-title">List Data Penggunaan Barang</h3>
                     <div class="card-tools">
-                        <a href="/saldoawal/create" class="btn btn-primary btn-icon-split">
+                        <a href="/penggunaan/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>
                             </span>
-                            <span class="text">Saldo Baru</span>
+                            <span class="text">Buat Baru</span>
                         </a>
                     </div>
                 </div>
@@ -69,39 +69,74 @@
                       <thead>
                           <tr class="text-center">
                             <th>No.</th>
-                            <th>Kode Saldo Awal</th>
-                            <th>Tanggal Saldo Awal</th>
+                            <th>Lokasi Gudang</th>
+                            <th>Lokasi Tujuan</th>
+                            <th>Tanggal</th>
                             <th>Status</th>
-                            <th>Keterangan</th>
                             <th>Aksi</th>
                           </tr>
                       </thead>
                       <tbody>
-                        @foreach($tsaldo as $ts)
                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $ts->kode_saldo }}</td>
-                            <td>{{ $ts->tgl_input }}</td>
-                            <td>{{ $ts->status_saldo }}</td>
-                            <td>{{ $ts->ket_saldo }}</td>
+                            <td class="text-center">1</td>
+                            <td>Gedung BPKAD</td>
+                            <td>Kominfo</td>
+                            <td>01-01-2021</td>
+                            <td><span class="badge badge-primary">Final</span></td>
                             <td class="text-center">
-                                <a href="/saldoawal/edit/{{ $ts->id }}" class="btn btn-warning btn-icon-split">
+                                <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
                                   <span class="icon">
                                       <i class="fas fa-edit"></i>
                                   </span>
                                   <span class="text">Edit</span>
                                 </a>
-                                @if ($ts->status_saldo == 'draft')
-                                <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
-                                  <span class="icon text-white-50">
-                                      <i class="fas fa-check"></i>
-                                  </span>
-                                  <span class="text">Final</span>
-                                </button>
-                                @endif
                             </td>
                         </tr>
-                        @endforeach
+                        <tr>
+                          <td class="text-center">2</td>
+                          <td>Gedung BPKAD</td>
+                          <td>Kominfo</td>
+                          <td>01-01-2021</td>
+                          <td><span class="badge badge-warning">Draft</span></td>
+                          <td class="text-center">
+                              <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text">Edit</span>
+                              </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-center">3</td>
+                          <td>Gedung BPKAD</td>
+                          <td>Kominfo</td>
+                          <td>01-01-2021</td>
+                          <td><span class="badge badge-info">Disetujui</span></td>
+                          <td class="text-center">
+                              <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text">Edit</span>
+                              </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-center">4</td>
+                          <td>Gedung BPKAD</td>
+                          <td>Kominfo</td>
+                          <td>01-01-2021</td>
+                          <td><span class="badge badge-success">Approved</span></td>
+                          <td class="text-center">
+                              <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text">Edit</span>
+                              </a>
+                          </td>
+                        </tr>
                       </tbody>
                   </table>
                 </div>
@@ -114,7 +149,7 @@
       <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Final Saldo</h4>
+                <h4 class="modal-title">Final Penggunaan</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -124,7 +159,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a href="/saldoawal/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
+                <a href="/penggunaan/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
             </div>
           </div>
       </div>
@@ -165,7 +200,7 @@
 
 <script>
   function statusfinal(id) {
-  $("#sfinal").attr("href", "/saldoawal/statusfinal/"+id);
+  $("#sfinal").attr("href", "/penggunaan/statusfinal/"+id);
   $('#modal-sfinal').modal('show');
   }
 </script>

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Create Saldo Awal Baru
+Edit Penerimaan Baru
 @endsection
 
 @push('css')
@@ -39,13 +39,13 @@ Create Saldo Awal Baru
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/saldoawal">Saldo awal</a></li>
-              <li class="breadcrumb-item active">Saldo Awal Baru</li>
+              <li class="breadcrumb-item"><a href="/penerimaan">Penerimaan</a></li>
+              <li class="breadcrumb-item active">Edit Penerimaan</li>
             </ol>
           </div>
         </div>
         <div>
-          <a href="/saldoawal" class="btn btn-default btn-icon-split">
+          <a href="/penerimaan" class="btn btn-default btn-icon-split">
               <span class="icon">
                   <i class="fas fa-arrow-left"></i>
               </span>
@@ -56,7 +56,7 @@ Create Saldo Awal Baru
     </section>
       
     <!-- Main content -->
-    <form action="/saldoawal/insert" method="POST">
+    <form action="#" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -64,7 +64,7 @@ Create Saldo Awal Baru
             <div class="col-md-12">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Input Data Saldo Baru</h3>
+                  <h3 class="card-title">Edit Data Penerimaan</h3>
                   <div class="card-tools">
                     <button type="submit" class="btn btn-danger btn-icon-split">
                       <span class="icon text-white-50">
@@ -79,37 +79,48 @@ Create Saldo Awal Baru
                   <div class="card-body">
                     <div class="row">
                         <div class="col-3">
-                          <div class="form-group">
-                              <label for="kode_saldo">Kode Saldo</label>
-                              <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" placeholder="Kode Saldo">
-                          </div>
-                          <div class="form-group">
-                              <label>Tanggal Saldo:</label>
-                              <div class="input-group">
-                                <input type="date" class="form-control" name="tgl_input" id="tgl_input">
-                              </div>  
-                          </div>  
+                            <div class="form-group">
+                                <label>Jenis Penerimaan</label>
+                                <select class="form-control" name="status_penerimaan" id="status_penerimaan">
+                                    <option value="obat">Obat</option>
+                                    <option value="non-obat">Non Obat</option>
+                                    <option value="hibah">Hibah</option>
+                                    <option value="non-hibah">Non Hibah</option>
+                                    <option value="non-apbd">Non APBD</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="penerimaan">Nama Penerimaan</label>
+                                <input type="text" class="form-control" name="penerimaan" id="penerimaan" placeholder="Kode Saldo">
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Penerimaan:</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input">
+                                </div>  
+                            </div>  
                         </div>
                         <div class="col-3">
-                          <div class="form-group">
-                            <label>Status</label>
-                            <select class="form-control" name="status_saldo" id="status_saldo" disabled>
-                            <option value="draft">Draft</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                              <label>Keterangan</label>
-                              <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="text-center">
-                              <label>Total Harga:</label>
-                              <h1>
-                                <span class="text-bold">Rp.</span>
-                                <span class="text-bold">10,000.000.000.000</span>
-                              </h1>
-                          </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" name="status_penerimaan" id="status_penerimaan" disabled>
+                                <option value="draft">Draft</option>
+                                <option value="final">Final</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Pengirim</label>
+                                <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim">
+                            </div>
+                            </div>
+                            <div class="col-6">
+                            <div class="text-center">
+                                <label>Total Harga:</label>
+                                <h1>
+                                    <span class="text-bold">Rp.</span>
+                                    <span class="text-bold">10,000.000.000.000</span>
+                                </h1>
+                            </div>
                             <div class="row">
                               <div class="col-6">
                                 <div class="text">

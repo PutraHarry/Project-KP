@@ -82,6 +82,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/penerimaan" class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p>
+                Penerimaan
+              </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -125,7 +133,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/penggunaan" class="nav-link">
               <i class="nav-icon fas fa-sitemap"></i>
               <p>
                 Penggunaan
@@ -133,7 +141,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/pengeluaran" class="nav-link">
               <i class="nav-icon fas fa-money-check"></i>
               <p>
                 Pengeluaran
@@ -141,7 +149,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/opname" class="nav-link">
               <i class="nav-icon fas fa-warehouse"></i>
               <p>
                 Opname
@@ -149,7 +157,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/pemusnahan" class="nav-link">
               <i class="nav-icon fas fa-fire"></i>
               <p>
                 Pemusnahan
@@ -162,6 +170,15 @@
               <i class="nav-icon fas fa-file-alt "></i>
               <p>
                 Bukti Umum
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">PELAPORAN</li>
+          <li class="nav-item">
+            <a href="/laporan" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Laporan
               </p>
             </a>
           </li>
