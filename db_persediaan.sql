@@ -160,28 +160,6 @@ insert  into `tb_jabatan`(`id`,`jabatan`,`created_at`,`updated_at`,`deleted_at`)
 (4,'Kabid',NULL,NULL,NULL),
 (5,'Kasubag',NULL,NULL,NULL);
 
-/*Table structure for table `tb_jenis_penerimaan` */
-
-DROP TABLE IF EXISTS `tb_jenis_penerimaan`;
-
-CREATE TABLE `tb_jenis_penerimaan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `jenis` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_jenis_penerimaan` */
-
-insert  into `tb_jenis_penerimaan`(`id`,`jenis`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'Non Obat',NULL,NULL,NULL),
-(2,'Obat',NULL,NULL,NULL),
-(3,'Hibah Non Obat',NULL,NULL,NULL),
-(4,'Hibah Obat',NULL,NULL,NULL),
-(5,'Non APBD',NULL,NULL,NULL);
-
 /*Table structure for table `tb_master_barang` */
 
 DROP TABLE IF EXISTS `tb_master_barang`;
@@ -248,9 +226,9 @@ DROP TABLE IF EXISTS `tb_penerimaan`;
 
 CREATE TABLE `tb_penerimaan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_jenis_penerimaan` int(11) DEFAULT NULL,
   `id_BU` int(11) DEFAULT NULL,
   `kode_penerimaan` varchar(255) DEFAULT NULL,
+  `jenis_penerimaan` enum('APBD Non Obat','APBD Obat','Hibah Non Obat','Hibah Obat','Non APBD') DEFAULT NULL,
   `tgl_terima` date DEFAULT NULL,
   `pengirim` varchar(255) DEFAULT NULL,
   `status_penerimaan` enum('draft','final') DEFAULT NULL,
@@ -258,16 +236,15 @@ CREATE TABLE `tb_penerimaan` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_jenis_penerimaan` (`id_jenis_penerimaan`),
+  KEY `id_jenis_penerimaan` (`jenis_penerimaan`),
   KEY `id_BU` (`id_BU`),
-  CONSTRAINT `tb_penerimaan_ibfk_1` FOREIGN KEY (`id_jenis_penerimaan`) REFERENCES `tb_jenis_penerimaan` (`id`),
   CONSTRAINT `tb_penerimaan_ibfk_2` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_penerimaan` */
 
-insert  into `tb_penerimaan`(`id`,`id_jenis_penerimaan`,`id_BU`,`kode_penerimaan`,`tgl_terima`,`pengirim`,`status_penerimaan`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,5,1,'KOM/123/A','2021-07-31','Suardana','final',NULL,NULL,NULL);
+insert  into `tb_penerimaan`(`id`,`id_BU`,`kode_penerimaan`,`jenis_penerimaan`,`tgl_terima`,`pengirim`,`status_penerimaan`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,1,'KOM/123/A','Non APBD','2021-07-31','Suardana','final',NULL,NULL,NULL);
 
 /*Table structure for table `tb_pengeluaran` */
 
