@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SaldoAwalModel;
+use App\BarangModel;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -23,7 +24,9 @@ class SaldoAwalController extends Controller
 
     public function addSaldoAwal()
     {
-        return view("Admin.Saldo.create");
+        $tbarang = BarangModel::get();
+
+        return view("Admin.Saldo.create", compact("tbarang"));
     }
 
     public function insertSaldoAwal(Request $request)

@@ -58,8 +58,34 @@ Route::get('/buktiumum/create', function () {
 });
 Route::get('/buktiumum/edit', function () {
     return view('/Admin/Bukti-umum/edit');
+});
+
+<<<<<<< Updated upstream
+=======
+Route::get('/penerimaan', function () {
+    return view('/Admin/Penerimaan/show');
+});
+
+Route::get('/penerimaan/create', function () {
+    return view('/Admin/Penerimaan/create');
+});
+Route::get('/penerimaan/edit', function () {
+    return view('/Admin/Penerimaan/edit');
 });*/
 
+Route::get('/penggunaan', function () {
+    return view('/Admin/Penggunaan/show');
+});
+Route::get('/penggunaan/create', function () {
+    return view('/Admin/Penggunaan/create');
+});
+Route::get('/penggunaan/edit', function () {
+    return view('/Admin/Penggunaan/edit');
+});
+Route::get('/penggunaan/show-detail', function () {
+    return view('/Admin/Penggunaan/show-detail');
+});
+>>>>>>> Stashed changes
 
 
 
@@ -93,6 +119,15 @@ Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
 Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal');
 Route::post('/saldoawal/update/{id}', 'SaldoAwalController@updateSaldoAwal');
 Route::get('/saldoawal/statusfinal/{id}', 'SaldoAwalController@prosesFinal');
+
+//PENERIMAAN
+Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan');
+Route::get('/penerimaan/create', 'PenerimaanController@addPenerimaan');
+Route::get('/penerimaan/edit', 'PenerimaanController@editPenerimaan');
+
+//PENGGUNAAN
+
+//PENGELUARAN
 
 //BUKTI UMUM
 Route::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');
