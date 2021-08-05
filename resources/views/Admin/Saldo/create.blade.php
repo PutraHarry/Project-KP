@@ -127,7 +127,7 @@ Create Saldo Awal Baru
                               </div>
                             </div>
                         </div>
-                    </div>                   
+                    </div>
                 </form>
             </div>
         </div>
