@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SaldoAwalModel;
 use App\BarangModel;
+use App\DetailSaldoAwalModel;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -47,13 +48,17 @@ class SaldoAwalController extends Controller
         $saldoawal->status_saldo = 'draft';
         $saldoawal->ket_saldo = $request->ket_saldo;
         $saldoawal->save();
-        return redirect('/saldoawal')->with('statusInput', 'Input Success');
+        
+        
+        return redirect()->route('saldoawaledit', ['id' => $saldoawal->id]);
     }
 
     public function editSaldoAwal($id)
     {
         $saldoawal = SaldoAwalModel::find($id);
-        return view("Admin.Saldo.edit", compact('saldoawal'));
+        $tbarang = BarangModel::get();
+
+        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang'));
     }
 
     public function updateSaldoAwal($id, Request $request)
@@ -72,6 +77,11 @@ class SaldoAwalController extends Controller
         $saldoawal->ket_saldo = $request->ket_saldo;
         $saldoawal->update();
         return redirect('/saldoawal')->with('statusInput', 'Update Success');
+    }
+    
+    public function insertDetailSaldoBarang()
+    {
+        
     }
 
     public function prosesFinal($id)
