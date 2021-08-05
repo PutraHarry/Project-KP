@@ -127,88 +127,98 @@ Create Saldo Awal Baru
                               </div>
                             </div>
                         </div>
-<<<<<<< Updated upstream
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card-body">
-                                <a href="#" class="btn btn-warning btn-icon-split">
-                                    <span class="icon">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Ubah Data</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th width="40px">No.</th>
-                                        <th width="400px">Barang</th>
-                                        <th width="120px">Qty</th>
-                                        <th>Satuan</th>
-                                        <th>Harga</th>
-                                        <th>Total</th>
-                                        <th width="200px">Keterangan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td>
-                                            <div class="form-group">
-                                                <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
-                                                <option>barang1</option>
-                                                <option>barang3</option>
-                                                <option>barang2</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Satuan">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Harga">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="total" id="inputTotal" placeholder="Kehitung otomatis" disabled>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <select class="form-control" name="keterangan">
-                                            <option value="baik">Baik</option>
-                                            <option value="rusak">Rusak</option>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group btn-group-sm">
-                                                <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
-                                                <button class="btn btn-sm btn-flat btn-danger" onclick="#"><i class="fa fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                  </div>
-=======
-                    </div>                   
->>>>>>> Stashed changes
                 </form>
             </div>
         </div>
+      </section>
+    </form>
+    <form action="" method="">
+      <section class="content">
+        <div class="container-fluid">
+          <form id="quickForm">
+            <div class="card card-default">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="card-body">
+                              <a href="#" class="btn btn-warning btn-icon-split">
+                                  <span class="icon">
+                                      <i class="fas fa-edit"></i>
+                                  </span>
+                                  <span class="text">Ubah Data</span>
+                              </a>
+                          </div>
+                      </div>
+                      <div class="table-responsive">
+                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                              <thead>
+                                  <tr class="text-center">
+                                      <th width="40px">No.</th>
+                                      <th width="400px">Barang</th>
+                                      <th width="120px">Qty</th>
+                                      <th>Satuan</th>
+                                      <th>Harga</th>
+                                      <th>Total</th>
+                                      <th width="200px">Keterangan</th>
+                                      <th>Aksi</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td class="text-center">1</td>
+                                      <td>
+                                          <div class="form-group">
+                                              <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
+                                              <option>barang1</option>
+                                              <option>barang3</option>
+                                              <option>barang2</option>
+                                              </select>
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <div class="form-group">
+                                              <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas">
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <div class="form-group">
+                                              <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Satuan">
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <div class="form-group">
+                                              <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Harga">
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <div class="form-group">
+                                              <input type="text" class="form-control" name="total" id="inputTotal" placeholder="Kehitung otomatis" disabled>
+                                          </div>
+                                      </td>
+                                      <td>
+                                          <select class="form-control" name="keterangan">
+                                          <option value="baik">Baik</option>
+                                          <option value="rusak">Rusak</option>
+                                      </td>
+                                      <td class="text-center">
+                                          <div class="btn-group btn-group-sm">
+                                              <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
+                                              <button class="btn btn-sm btn-flat btn-danger" onclick="#"><i class="fa fa-trash"></i></button>
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
       </section>
     </form>
 @endsection
