@@ -56,7 +56,7 @@ Edit Saldo Awal
     </section>
     
     <!-- Main content -->
-    <form action="/saldoawal/update" method="POST">
+    <form action="/saldoawal/update/{{ $idEdit }}" method="POST">
         @csrf
         <section class="content">
             <div class="container-fluid">
@@ -133,23 +133,14 @@ Edit Saldo Awal
             </div>
         </section>
     </form>
-    <form action="" method="">
+    <form action="/saldoawal/updateDetail" method="POST">
+        @csrf
         <section class="content">
             <div class="container-fluid">
             <form id="quickForm">
                 <div class="card card-default">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card-body">
-                                <a href="#" class="btn btn-warning btn-icon-split">
-                                    <span class="icon">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Ubah Data</span>
-                                </a>
-                            </div>
-                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -203,7 +194,9 @@ Edit Saldo Awal
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group btn-group-sm">
-                                                <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
+                                                <button type="submit" class="btn btn-success">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>

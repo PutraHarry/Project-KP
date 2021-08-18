@@ -57,8 +57,9 @@ class SaldoAwalController extends Controller
     {
         $saldoawal = SaldoAwalModel::find($id);
         $tbarang = BarangModel::get();
+        $idEdit = $id;
 
-        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang'));
+        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang', 'idEdit'));
     }
 
     public function updateSaldoAwal($id, Request $request)
@@ -79,9 +80,17 @@ class SaldoAwalController extends Controller
         return redirect('/saldoawal')->with('statusInput', 'Update Success');
     }
     
-    public function insertDetailSaldoBarang()
+    public function insertDetailSaldoBarang($id, Request $request)
     {
-        
+        $dsaldoawal =  new DetailSaldoAwal();
+        $dsaldoawal->id_saldo = $id;
+        $dsaldoawal->id_barang = $request->id_barang;
+        $dsaldoawal->qty = $request->qty;
+        $dsaldoawal->harga = $request->harga;
+        $dsaldoawal->keterangan = $request->keterangan;
+        $dsaldoawal->save();
+
+        return redirect()->route('saldoawaledit', ['id' => $id]);
     }
 
     public function prosesFinal($id)

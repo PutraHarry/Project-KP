@@ -128,6 +128,7 @@ Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
 Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal')->name('saldoawaledit');
 Route::post('/saldoawal/update/{id}', 'SaldoAwalController@updateSaldoAwal');
 Route::get('/saldoawal/statusfinal/{id}', 'SaldoAwalController@prosesFinal');
+Route::post('/saldoawal/updateDetail', 'SaldoAwalController@insertDetailSaldoBarang');
 
 //PENERIMAAN
 Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan');
