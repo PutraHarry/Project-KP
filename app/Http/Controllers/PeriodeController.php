@@ -15,10 +15,19 @@ class PeriodeController extends Controller
         $this->middleware('auth:admin');
     }
 
+    /*public function PeriodeAktif()
+    {
+        $open = ['open'];
+
+        $dataPeriode = PeriodeModel::whereIn('status_periode', $open)->first();
+
+        return view("layouts.topbar", compact('dataPeriode'));
+    }*/
+
     public function dataPeriode()
     {
         $tperiode = DB::table('tb_periode')
-                    ->join('tb_opd', 'tb_opd.id', '=', 'tb_periode.id_opd')
+                    ->join('tb_opd', 'tb_opd.id_opd', '=', 'tb_periode.id_opd')
                     ->get();
 
         return view("Admin.Periode.show", compact('tperiode'));
@@ -62,7 +71,7 @@ class PeriodeController extends Controller
     public function bukaPeriode()
     {
         $bukaperiode = DB::table('tb_periode')
-                       ->join('tb_opd', 'tb_opd.id', '=', 'tb_periode.id_opd')
+                       ->join('tb_opd', 'tb_opd.id_opd', '=', 'tb_periode.id_opd')
                        ->where('status_periode', 'close')
                        ->get();
 
@@ -71,6 +80,20 @@ class PeriodeController extends Controller
 
     public function prosesBuka($id)
     {
+        $open = ['open'];
+
+        $dataPeriode = PeriodeModel::whereIn('status_periode', $open)->first();
+        
+        //dd($id_dataPeriode);
+        if($dataPeriode){
+            $id_dataPeriode = $dataPeriode->id;
+
+            $ubah_dataPeriode = PeriodeModel::find($id_dataPeriode);
+            $ubah_dataPeriode->status_periode = 'close';
+            $ubah_dataPeriode->update();
+        }
+
+        //dd($id);
         $bukaperiode = PeriodeModel::find($id);
         $bukaperiode->status_periode = 'open';
         $bukaperiode->update();
@@ -81,7 +104,7 @@ class PeriodeController extends Controller
     public function tutupPeriode()
     {
         $tutupperiode = DB::table('tb_periode')
-                        ->join('tb_opd', 'tb_opd.id', '=', 'tb_periode.id_opd')
+                        ->join('tb_opd', 'tb_opd.id_opd', '=', 'tb_periode.id_opd')
                         ->where('status_periode', 'open')
                         ->get();
 

@@ -13,7 +13,7 @@
           <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">placeholder</a>
+          <a href="#" class="d-block">{{auth()->guard()->user()->username}}</a>
         </div>
       </div>
 
@@ -150,7 +150,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a href="/opname" class="nav-link">
               <i class="nav-icon fas fa-warehouse"></i>
               <p>
@@ -165,7 +165,7 @@
                 Pemusnahan
               </p>
             </a>
-          </li>
+          </li>-->
           <li class="nav-header">SIMDA</li>
           <li class="nav-item">
             <a href="/buktiumum" class="nav-link">
