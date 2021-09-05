@@ -81,12 +81,12 @@ Edit Saldo Awal
                             <div class="col-3">
                             <div class="form-group">
                                 <label for="kode_saldo">Kode Saldo</label>
-                                <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" value="{{ $saldoawal->kode_saldo }}" placeholder="Kode Saldo">
+                                <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" value="{{ $saldoawal->kode_saldo }}" placeholder="Kode Saldo" disabled>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Saldo:</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}">
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}" disabled>
                                 </div>  
                             </div>  
                             </div>
@@ -99,7 +99,7 @@ Edit Saldo Awal
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan...">{{ $saldoawal->ket_saldo }}</textarea>
+                                <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..." disabled>{{ $saldoawal->ket_saldo }}</textarea>
                             </div>
                             </div>
                             <div class="col-6">
@@ -136,6 +136,7 @@ Edit Saldo Awal
     <form action="" method="">
         <section class="content">
             <div class="container-fluid">
+<<<<<<< Updated upstream
             <form id="quickForm">
                 <div class="card card-default">
                 <div class="card-body">
@@ -209,15 +210,79 @@ Edit Saldo Awal
                                     </tr>
                                 </tbody>
                             </table>
+=======
+                <form id="quickForm">
+                    <div class="card card-default">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th width="40px">No.</th>
+                                                <th width="400px">Barang</th>
+                                                <th width="120px">Qty</th>
+                                                <th>Satuan</th>
+                                                <th>Harga</th>
+                                                <th>Total</th>
+                                                <th width="200px">Keterangan</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">1</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
+                                                        @foreach ($tbarang as $tb)
+                                                        <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
+                                                        @endforeach
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="harga" id="harga" placeholder="Harga">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" disabled>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="keterangan">
+                                                    <option value="baik">Baik</option>
+                                                    <option value="rusak">Rusak</option>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="submit" class="btn btn-success">
+                                                            <i class="fas fa-check"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+>>>>>>> Stashed changes
                         </div>
                     </div>
-                    </div>
-                </div>
-
-                </div>
-            </form>
+                </form>
             </div>
-
         </section>
     </form>
     <div class="modal fade" id="modal-sfinal">

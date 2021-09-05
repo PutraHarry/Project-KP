@@ -44,35 +44,37 @@
           </li>
     
           <li class="nav-header">MENU</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                Periode
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/periode" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Periode Stok</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/periode/tutupperiode" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tutup Periode</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/periode/bukaperiode" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Buka Periode</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          @if (auth()->guard('admin')->user()->id_jabatan == '1')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-calendar-alt"></i>
+                <p>
+                  Periode
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/periode" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Periode Stok</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/periode/tutupperiode" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tutup Periode</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/periode/bukaperiode" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Buka Periode</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endif
 
           <li class="nav-item">
             <a href="/saldoawal" class="nav-link">
@@ -91,7 +93,7 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-bar"></i>
               <p>
@@ -131,7 +133,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="/penggunaan" class="nav-link">
               <i class="nav-icon fas fa-sitemap"></i>

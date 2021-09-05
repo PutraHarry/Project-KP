@@ -13,7 +13,7 @@ class SaldoAwalController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
     }
 
     public function dataSaldoAwal()
@@ -81,7 +81,19 @@ class SaldoAwalController extends Controller
     
     public function insertDetailSaldoBarang()
     {
+<<<<<<< Updated upstream
         
+=======
+        $dsaldoawal = new DetailSaldoAwalModel();
+        $dsaldoawal->id_saldo = $id;
+        $dsaldoawal->id_barang = $request->id_barang;
+        $dsaldoawal->qty = $request->qty;
+        $dsaldoawal->harga = $request->harga;
+        $dsaldoawal->keterangan = $request->keterangan;
+        $dsaldoawal->save();
+
+        return redirect()->back();
+>>>>>>> Stashed changes
     }
 
     public function prosesFinal($id)
