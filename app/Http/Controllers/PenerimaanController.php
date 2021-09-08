@@ -17,11 +17,11 @@ class PenerimaanController extends Controller
 
     public function dataPenerimaan()
     {
-        $tpenerimaanobat = PenerimaanModel::where('id_jenis_penerimaan', '1')->get();
-        $tpenerimaannonobat = PenerimaanModel::where('id_jenis_penerimaan', '2')->get();
-        $tpenerimaanhibah = PenerimaanModel::where('id_jenis_penerimaan', '3')->get();
-        $tpenerimaannonhibah = PenerimaanModel::where('id_jenis_penerimaan', '4')->get();
-        $tpenerimaannonapbd = PenerimaanModel::where('id_jenis_penerimaan', '5')->get();
+        $tpenerimaanobat = PenerimaanModel::where('jenis_penerimaan', 'APBD Obat')->get();
+        $tpenerimaannonobat = PenerimaanModel::where('jenis_penerimaan', 'APBD Non Obat')->get();
+        $tpenerimaanhibah = PenerimaanModel::where('jenis_penerimaan', 'Hibah Obat')->get();
+        $tpenerimaannonhibah = PenerimaanModel::where('jenis_penerimaan', 'Hibah Non Obat')->get();
+        $tpenerimaannonapbd = PenerimaanModel::where('jenis_penerimaan', 'Non APBD')->get();
         
 
         return view("Admin.Penerimaan.show", compact("tpenerimaanobat","tpenerimaannonobat","tpenerimaanhibah","tpenerimaannonhibah","tpenerimaannonapbd"));

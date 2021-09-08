@@ -133,7 +133,7 @@ Create Saldo Awal Baru
         </div>
       </section>
     </form>
-    <form action="" method="">
+    <!--<form action="" method="">
       <section class="content">
         <div class="container-fluid">
           <form id="quickForm">
@@ -220,7 +220,7 @@ Create Saldo Awal Baru
         </div>
 
       </section>
-    </form>
+    </form>-->
 @endsection
 
 @push('js')
