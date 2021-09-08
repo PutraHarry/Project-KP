@@ -59,7 +59,9 @@ class SaldoAwalController extends Controller
         $tbarang = BarangModel::get();
         $idEdit = $id;
 
-        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang', 'idEdit'));
+        $detailSaldoAwal = DetailSaldoAwalModel::with('barang')->where('id_saldo',$id)->get();
+        
+        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang', 'idEdit', 'detailSaldoAwal'));
     }
 
     public function updateSaldoAwal($id, Request $request)
@@ -82,14 +84,41 @@ class SaldoAwalController extends Controller
     
     public function insertDetailSaldoBarang($id, Request $request)
     {
+        //dd($id);
         $dsaldoawal = new DetailSaldoAwalModel();
         $dsaldoawal->id_saldo = $id;
         $dsaldoawal->id_barang = $request->id_barang;
         $dsaldoawal->qty = $request->qty;
-        $dsaldoawal->harga = $request->harga;
+        $dsaldoawal->harga = $request->total;
         $dsaldoawal->keterangan = $request->keterangan;
         $dsaldoawal->save();
       
+        $msaldoawal = SaldoAwalModel::find($id);
+        $msaldoawal->total = $msaldoawal->total + $request->total;
+        $msaldoawal->update();
+      
+        return redirect()->back();
+    }
+
+    public function editDetailSaldoBarang($id, Request $request)
+    {
+        //dd($id);
+        $dsaldoawal = DetailSaldoAwalModel::find($id);
+
+        $newTotal = $request->total;
+        $oldTotal = $dsaldoawal->total;
+        $gapTotal = $newTotal-$oldTotal;
+
+
+        $dsaldoawal->id_barang = $request->id_barang;
+        $dsaldoawal->qty = $request->qty;
+        $dsaldoawal->harga = $request->total;
+        $dsaldoawal->keterangan = $request->keterangan;
+        $dsaldoawal->update();
+
+        $msaldoawal = SaldoAwalModel::find($dsaldoawal->id_saldo);
+        $msaldoawal->total = $msaldoawal->total + $gapTotal;
+        $msaldoawal->update();
         return redirect()->back();
     }
 

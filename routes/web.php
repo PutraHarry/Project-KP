@@ -128,7 +128,9 @@ Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
 Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal')->name('saldoawaledit');
 Route::post('/saldoawal/update/{id}', 'SaldoAwalController@updateSaldoAwal');
 Route::get('/saldoawal/statusfinal/{id}', 'SaldoAwalController@prosesFinal');
-Route::post('/saldoawal/updateDetail', 'SaldoAwalController@insertDetailSaldoBarang');
+Route::post('/saldoawal/updateDetail/{id}', 'SaldoAwalController@insertDetailSaldoBarang');
+Route::post('/saldoawal/editDetail/{id}', 'SaldoAwalController@editDetailSaldoBarang');
+
 
 //PENERIMAAN
 Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan');
