@@ -128,6 +128,11 @@ Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
 Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal')->name('saldoawaledit');
 Route::post('/saldoawal/update/{id}', 'SaldoAwalController@updateSaldoAwal');
 Route::get('/saldoawal/statusfinal/{id}', 'SaldoAwalController@prosesFinal');
+<<<<<<< Updated upstream
+=======
+Route::post('/saldoawal/updateDetail/{id}', 'SaldoAwalController@insertDetailSaldoBarang');
+Route::post('/saldoawal/editDetail/{id}', 'SaldoAwalController@editDetailSaldoBarang');
+>>>>>>> Stashed changes
 
 //PENERIMAAN
 Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan');

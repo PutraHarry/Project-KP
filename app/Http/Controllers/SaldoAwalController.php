@@ -58,7 +58,13 @@ class SaldoAwalController extends Controller
         $saldoawal = SaldoAwalModel::find($id);
         $tbarang = BarangModel::get();
 
+<<<<<<< Updated upstream
         return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang'));
+=======
+        $detailSaldoAwal = DetailSaldoAwalModel::with('barang')->where('id_saldo',$id)->get();
+        
+        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang', 'idEdit', 'detailSaldoAwal'));
+>>>>>>> Stashed changes
     }
 
     public function updateSaldoAwal($id, Request $request)
@@ -82,16 +88,50 @@ class SaldoAwalController extends Controller
     public function insertDetailSaldoBarang()
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         
 =======
+=======
+        //dd($id);
+>>>>>>> Stashed changes
         $dsaldoawal = new DetailSaldoAwalModel();
         $dsaldoawal->id_saldo = $id;
         $dsaldoawal->id_barang = $request->id_barang;
         $dsaldoawal->qty = $request->qty;
-        $dsaldoawal->harga = $request->harga;
+        $dsaldoawal->harga = $request->total;
         $dsaldoawal->keterangan = $request->keterangan;
         $dsaldoawal->save();
 
+<<<<<<< Updated upstream
+=======
+        $msaldoawal = SaldoAwalModel::find($id);
+        $msaldoawal->total = $msaldoawal->total + $request->total;
+        $msaldoawal->update();
+      
+        return redirect()->back();
+    }
+
+    public function editDetailSaldoBarang($id, Request $request)
+    {
+        //dd($id);
+        $dsaldoawal = DetailSaldoAwalModel::find($id);
+
+        $newTotal = $request->total;
+        $oldTotal = $dsaldoawal->total;
+        $gapTotal = $newTotal-$oldTotal;
+
+
+        $dsaldoawal->id_barang = $request->id_barang;
+        $dsaldoawal->qty = $request->qty;
+        $dsaldoawal->harga = $request->total;
+        $dsaldoawal->keterangan = $request->keterangan;
+        $dsaldoawal->update();
+
+        $msaldoawal = SaldoAwalModel::find($dsaldoawal->id_saldo);
+        $msaldoawal->total = $msaldoawal->total + $gapTotal;
+        $msaldoawal->update();
+      
+>>>>>>> Stashed changes
         return redirect()->back();
 >>>>>>> Stashed changes
     }

@@ -15,4 +15,8 @@ class DetailSaldoAwalModel extends Model
         'harga',
         'keterangan',
     ];
+
+    public function barang(){
+        return $this->belongsTo(BarangModel::class, 'id_barang');
+    }
 }
