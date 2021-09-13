@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BuktiUmumModel;
+use App\PeriodeModel;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -18,12 +19,30 @@ class BuktiUmumController extends Controller
     {
         $tbukti = BuktiUmumModel::get();
 
-        return view("Admin.Bukti-Umum.show", compact("tbukti"));
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
+        return view("Admin.Bukti-Umum.show", compact("tbukti", "periodeAktif"));
     }
 
     public function addBuktiUmum()
     {
-        return view("Admin.Bukti-Umum.create");
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
+        return view("Admin.Bukti-Umum.create", "periodeAktif");
     }
 
     public function insertBuktiUmum(Request $request)
@@ -47,7 +66,18 @@ class BuktiUmumController extends Controller
     public function editBuktiUmum($id)
     {
         $buktiumum = BuktiUmumModel::find($id);
-        return view("Admin.Bukti-Umum.edit", compact("buktiumum"));
+
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
+        return view("Admin.Bukti-Umum.edit", compact("buktiumum", "periodeAktif"));
     }
 
     public function updateBuktiUmum($id, Request $request)

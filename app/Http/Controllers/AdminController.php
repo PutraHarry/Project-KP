@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PeriodeModel;
 
 class AdminController extends Controller
 {
@@ -13,6 +14,17 @@ class AdminController extends Controller
     
     public function dashboard()
     {
-        return view('dashboard');
+        $open = ['open'];
+        
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+        
+        
+        return view("dashboard", compact("periodeAktif"));
     }
 }

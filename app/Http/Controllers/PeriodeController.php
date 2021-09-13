@@ -30,14 +30,32 @@ class PeriodeController extends Controller
                     ->join('tb_opd', 'tb_opd.id_opd', '=', 'tb_periode.id_opd')
                     ->get();
 
-        return view("Admin.Periode.show", compact('tperiode'));
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
+        return view("Admin.Periode.show", compact('tperiode', 'periodeAktif'));
     }
 
     public function addPeriode()
     {
         $topd = OPDModel::get();
 
-        return view("Admin.Periode.create", compact('topd'));
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
+        return view("Admin.Periode.create", compact('topd', 'periodeAktif'));
     }
 
     public function insertPeriode(Request $request)
@@ -75,7 +93,16 @@ class PeriodeController extends Controller
                        ->where('status_periode', 'close')
                        ->get();
 
-        return view("Admin.Periode.bukaperiode", compact('bukaperiode'));
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
+        return view("Admin.Periode.bukaperiode", compact('bukaperiode', 'periodeAktif'));
     }
 
     public function prosesBuka($id)
@@ -108,7 +135,16 @@ class PeriodeController extends Controller
                         ->where('status_periode', 'open')
                         ->get();
 
-        return view("Admin.Periode.tutupperiode", compact('tutupperiode'));
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
+        return view("Admin.Periode.tutupperiode", compact('tutupperiode', 'periodeAktif'));
     }
     
     public function prosesTutup($id)

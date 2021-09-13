@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\SaldoAwalModel;
 use App\BarangModel;
 use App\DetailSaldoAwalModel;
+use App\PeriodeModel;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -20,14 +21,32 @@ class SaldoAwalController extends Controller
     {
         $tsaldo = SaldoAwalModel::get();
 
-        return view("Admin.Saldo.show", compact("tsaldo"));
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
+        return view("Admin.Saldo.show", compact("tsaldo", "periodeAktif"));
     }
 
     public function addSaldoAwal()
     {
         $tbarang = BarangModel::get();
 
-        return view("Admin.Saldo.create", compact("tbarang"));
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
+        return view("Admin.Saldo.create", compact("tbarang", "periodeAktif"));
     }
 
     public function insertSaldoAwal(Request $request)
@@ -59,9 +78,18 @@ class SaldoAwalController extends Controller
         $tbarang = BarangModel::get();
         $idEdit = $id;
 
+        $open = ['open'];
+
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        if ($dataPeriodeAktif) {
+            $periodeAktif = $dataPeriodeAktif->nama_periode;
+        } else{
+            $periodeAktif = "-";
+        }
+
         $detailSaldoAwal = DetailSaldoAwalModel::with('barang')->where('id_saldo',$id)->get();
         
-        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang', 'idEdit', 'detailSaldoAwal'));
+        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang', 'idEdit', 'detailSaldoAwal', "periodeAktif"));
     }
 
     public function updateSaldoAwal($id, Request $request)
