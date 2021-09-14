@@ -78,29 +78,29 @@
                       </thead>
                       <tbody>
                         @foreach($tsaldo as $ts)
-                        <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $ts->kode_saldo }}</td>
-                            <td>{{ $ts->tgl_input }}</td>
-                            <td>{{ $ts->status_saldo }}</td>
-                            <td>{{ $ts->ket_saldo }}</td>
-                            <td class="text-center">
-                                <a href="/saldoawal/edit/{{ $ts->id }}" class="btn btn-warning btn-icon-split">
-                                  <span class="icon">
-                                      <i class="fas fa-edit"></i>
-                                  </span>
-                                  <span class="text">Edit</span>
-                                </a>
-                                @if ($ts->status_saldo == 'draft')
-                                <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
-                                  <span class="icon text-white-50">
-                                      <i class="fas fa-check"></i>
-                                  </span>
-                                  <span class="text">Final</span>
-                                </button>
-                                @endif
-                            </td>
-                        </tr>
+                          <tr>
+                              <td class="text-center">{{ $loop->iteration }}</td>
+                              <td>{{ $ts->kode_saldo }}</td>
+                              <td>{{ $ts->tgl_input }}</td>
+                              <td>{{ $ts->status_saldo }}</td>
+                              <td>{{ $ts->ket_saldo }}</td>
+                              <td class="text-center">
+                                  <a href="/saldoawal/edit/{{ $ts->id }}" class="btn btn-warning btn-icon-split">
+                                    <span class="icon">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    <span class="text">Edit</span>
+                                  </a>
+                                  @if ($ts->status_saldo == 'draft')
+                                  <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    <span class="text">Final</span>
+                                  </button>
+                                  @endif
+                              </td>
+                          </tr>
                         @endforeach
                       </tbody>
                   </table>

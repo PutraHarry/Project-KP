@@ -89,25 +89,27 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td class="text-center">1</td>
-                                      <td>Penerimaan Obat</td>
-                                      <td>01-01-2021</td>
-                                      <td>testing</td>
-                                      <td>Keterangan testing</td>
-                                      <td class="text-center">
-                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
-                                          <span class="icon">
-                                              <i class="fas fa-edit"></i>
-                                          </span>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                    @foreach ($tpenerimaanObat as $tpo)
+                                      <tr>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $tpo->kode_penerimaan }}</td>
+                                        <td>{{ $tpo->tgl_terima }}</td>
+                                        <td>{{ $tpo->status_penerimaan }}</td>
+                                        <td>{{ $tpo->pengirim }}</td>
+                                        <td class="text-center">
+                                          <a href="/penerimaan/edit/{{ $tpo->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                      </td>
-                                    </tr>
+                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                              <span class="icon">
+                                                  <i class="fas fa-trash"></i>
+                                              </span>
+                                            </a>
+                                        </td>
+                                      </tr>
+                                    @endforeach
                                   </tbody>
                               </table>
                           </div>
@@ -124,25 +126,27 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td class="text-center">1</td>
-                                      <td>Penerimaan Non Obat</td>
-                                      <td>01-01-2021</td>
-                                      <td>testing</td>
-                                      <td>Keterangan testing</td>
-                                      <td class="text-center">
-                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
-                                          <span class="icon">
-                                              <i class="fas fa-edit"></i>
-                                          </span>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                    @foreach ($tpenerimaanNonObat as $tpno)
+                                      <tr>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $tpno->kode_penerimaan }}</td>
+                                        <td>{{ $tpno->tgl_terima }}</td>
+                                        <td>{{ $tpno->status_penerimaan }}</td>
+                                        <td>{{ $tpno->pengirim }}</td>
+                                        <td class="text-center">
+                                          <a href="/penerimaan/edit/{{ $tpno->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                      </td>
-                                    </tr>
+                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                              <span class="icon">
+                                                  <i class="fas fa-trash"></i>
+                                              </span>
+                                            </a>
+                                        </td>
+                                      </tr>
+                                    @endforeach
                                   </tbody>
                               </table>
                           </div>
@@ -159,25 +163,27 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td class="text-center">1</td>
-                                      <td>Penerimaan Hibah</td>
-                                      <td>01-01-2021</td>
-                                      <td>testing</td>
-                                      <td>Keterangan testing</td>
-                                      <td class="text-center">
-                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
-                                          <span class="icon">
-                                              <i class="fas fa-edit"></i>
-                                          </span>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                    @foreach ($tpenerimaanHibah as $tph)
+                                      <tr>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $tph->kode_penerimaan }}</td>
+                                        <td>{{ $tph->tgl_terima }}</td>
+                                        <td>{{ $tph->status_penerimaan }}</td>
+                                        <td>{{ $tph->pengirim }}</td>
+                                        <td class="text-center">
+                                          <a href="/penerimaan/edit/{{ $tph->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                      </td>
-                                    </tr>
+                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                              <span class="icon">
+                                                  <i class="fas fa-trash"></i>
+                                              </span>
+                                            </a>
+                                        </td>
+                                      </tr>
+                                    @endforeach
                                   </tbody>
                               </table>
                           </div>
@@ -194,25 +200,27 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td class="text-center">1</td>
-                                      <td>Penerimaan Non Hibah</td>
-                                      <td>01-01-2021</td>
-                                      <td>testing</td>
-                                      <td>Keterangan testing</td>
-                                      <td  class="text-center">
-                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
-                                          <span class="icon">
-                                              <i class="fas fa-edit"></i>
-                                          </span>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                    @foreach ($tpenerimaanNonHibah as $tpnh)
+                                      <tr>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $tpnh->kode_penerimaan }}</td>
+                                        <td>{{ $tpnh->tgl_terima }}</td>
+                                        <td>{{ $tpnh->status_penerimaan }}</td>
+                                        <td>{{ $tpnh->pengirim }}</td>
+                                        <td class="text-center">
+                                          <a href="/penerimaan/edit/{{ $tpnh->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                      </td>
-                                    </tr>
+                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                              <span class="icon">
+                                                  <i class="fas fa-trash"></i>
+                                              </span>
+                                            </a>
+                                        </td>
+                                      </tr>
+                                    @endforeach
                                   </tbody>
                               </table>
                           </div>
@@ -229,25 +237,27 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td class="text-center">1</td>
-                                      <td>Penerimaan Non APBD</td>
-                                      <td>01-01-2021</td>
-                                      <td>testing</td>
-                                      <td>Keterangan testing</td>
-                                      <td class="text-center">
-                                        <a href="/penerimaan/edit" class="btn btn-warning btn-icon-split">
-                                          <span class="icon">
-                                              <i class="fas fa-edit"></i>
-                                          </span>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                    @foreach ($tpenerimaanNonAPBD as $tpna)
+                                      <tr>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $tpna->kode_penerimaan }}</td>
+                                        <td>{{ $tpna->tgl_terima }}</td>
+                                        <td>{{ $tpna->status_penerimaan }}</td>
+                                        <td>{{ $tpna->pengirim }}</td>
+                                        <td class="text-center">
+                                          <a href="/penerimaan/edit/{{ $tpna->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                      </td>
-                                    </tr>
+                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                              <span class="icon">
+                                                  <i class="fas fa-trash"></i>
+                                              </span>
+                                            </a>
+                                        </td>
+                                      </tr>
+                                    @endforeach
                                   </tbody>
                               </table>
                           </div>

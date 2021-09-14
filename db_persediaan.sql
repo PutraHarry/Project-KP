@@ -1,6 +1,6 @@
 /*
-SQLyog Enterprise v13.1.1 (32 bit)
-MySQL - 10.4.8-MariaDB : Database - db_persediaan
+SQLyog Ultimate v12.4.3 (64 bit)
+MySQL - 10.4.6-MariaDB : Database - db_usahacamilan
 *********************************************************************
 */
 
@@ -12,381 +12,376 @@ MySQL - 10.4.8-MariaDB : Database - db_persediaan
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_persediaan` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_usahacamilan` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `db_persediaan`;
+USE `db_usahacamilan`;
 
-/*Table structure for table `tb_barang_gudang` */
+/*Table structure for table `tb_bahan` */
 
-DROP TABLE IF EXISTS `tb_barang_gudang`;
+DROP TABLE IF EXISTS `tb_bahan`;
 
-CREATE TABLE `tb_barang_gudang` (
+CREATE TABLE `tb_bahan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_barang` int(11) DEFAULT NULL,
-  `harga_barang` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
-  `satuan_barang` int(11) DEFAULT NULL,
-  `ket_barang` enum('baik','rusak') DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_barang` (`id_barang`),
-  CONSTRAINT `tb_barang_gudang_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `tb_master_barang` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_barang_gudang` */
-
-insert  into `tb_barang_gudang`(`id`,`id_barang`,`harga_barang`,`qty`,`satuan_barang`,`ket_barang`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,34000,1,0,'baik',NULL,NULL,NULL);
-
-/*Table structure for table `tb_bu` */
-
-DROP TABLE IF EXISTS `tb_bu`;
-
-CREATE TABLE `tb_bu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `no_BU` varchar(255) DEFAULT NULL,
-  `tgl_BU` date DEFAULT NULL,
-  `ket_BU` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_bu` */
-
-insert  into `tb_bu`(`id`,`no_BU`,`tgl_BU`,`ket_BU`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'BPKAD/12/A','2021-07-31','Penerimaan Tinta dari Kominfo\r\n',NULL,NULL,NULL),
-(2,'BPKAD/11/B','2021-07-30','Penerimaan Obat',NULL,NULL,NULL),
-(3,'BPKAD/11/D','2021-07-31','Penggunaan Kertas',NULL,NULL,NULL);
-
-/*Table structure for table `tb_d_bu` */
-
-DROP TABLE IF EXISTS `tb_d_bu`;
-
-CREATE TABLE `tb_d_bu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_BU` int(11) DEFAULT NULL,
-  `id_barang` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_BU` (`id_BU`),
-  KEY `id_barang` (`id_barang`),
-  CONSTRAINT `tb_d_bu_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`),
-  CONSTRAINT `tb_d_bu_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `tb_master_barang` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
-/*Data for the table `tb_d_bu` */
+/*Data for the table `tb_bahan` */
 
-insert  into `tb_d_bu`(`id`,`id_BU`,`id_barang`,`qty`,`harga`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,2,2,40000,NULL,NULL,NULL),
-(2,3,1,1,34000,NULL,NULL,NULL);
+insert  into `tb_bahan`(`id`,`nama`,`jumlah`,`harga`) values 
+(1,'Tepung 500gr',40,12000),
+(2,'Telur ',100,1500),
+(3,'Gula 1kg',50,25000),
+(4,'Singkong 1kg',30,30000),
+(5,'Kentang 1kg',50,25000),
+(6,'Jahe 1kg',20,20000),
+(7,'Cabe 1kg',30,20000),
+(8,'Nanas 1kg',10,40000),
+(9,'Minyak l Liter',40,15000),
+(10,'Asem 1 kg',40,10000);
 
-/*Table structure for table `tb_d_opname` */
+/*Table structure for table `tb_d_distribusi` */
 
-DROP TABLE IF EXISTS `tb_d_opname`;
+DROP TABLE IF EXISTS `tb_d_distribusi`;
 
-CREATE TABLE `tb_d_opname` (
+CREATE TABLE `tb_d_distribusi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_opname` int(11) DEFAULT NULL,
-  `id_barang_gudang` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `id_distribusi` int(11) DEFAULT NULL,
+  `id_produk` int(11) DEFAULT NULL,
+  `jml` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_opname` (`id_opname`),
-  KEY `id_barang_gudang` (`id_barang_gudang`),
-  CONSTRAINT `tb_d_opname_ibfk_1` FOREIGN KEY (`id_opname`) REFERENCES `tb_opname` (`id`),
-  CONSTRAINT `tb_d_opname_ibfk_2` FOREIGN KEY (`id_barang_gudang`) REFERENCES `tb_barang_gudang` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  KEY `id_distribusi` (`id_distribusi`),
+  KEY `id_produk` (`id_produk`),
+  CONSTRAINT `tb_d_distribusi_ibfk_1` FOREIGN KEY (`id_distribusi`) REFERENCES `tb_distribusi` (`id`),
+  CONSTRAINT `tb_d_distribusi_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `tb_produk` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
-/*Data for the table `tb_d_opname` */
+/*Data for the table `tb_d_distribusi` */
 
-insert  into `tb_d_opname`(`id`,`id_opname`,`id_barang_gudang`,`qty`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,1,1,NULL,NULL,NULL);
+insert  into `tb_d_distribusi`(`id`,`id_distribusi`,`id_produk`,`jml`) values 
+(1,1,6,5),
+(2,1,8,5),
+(3,1,9,10),
+(4,1,10,10),
+(5,2,1,10),
+(6,2,2,10),
+(7,2,9,10),
+(8,3,4,30),
+(9,3,5,40),
+(10,3,7,10);
 
-/*Table structure for table `tb_d_saldo` */
+/*Table structure for table `tb_d_pembelian` */
 
-DROP TABLE IF EXISTS `tb_d_saldo`;
+DROP TABLE IF EXISTS `tb_d_pembelian`;
 
-CREATE TABLE `tb_d_saldo` (
+CREATE TABLE `tb_d_pembelian` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_saldo` int(11) DEFAULT NULL,
-  `id_barang` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
+  `id_pembelian` int(11) DEFAULT NULL,
+  `id_bahan` int(11) DEFAULT NULL,
+  `jml` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_pembelian` (`id_pembelian`),
+  KEY `id_bahan` (`id_bahan`),
+  CONSTRAINT `tb_d_pembelian_ibfk_1` FOREIGN KEY (`id_pembelian`) REFERENCES `tb_pembelian` (`id`),
+  CONSTRAINT `tb_d_pembelian_ibfk_2` FOREIGN KEY (`id_bahan`) REFERENCES `tb_bahan` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_d_pembelian` */
+
+insert  into `tb_d_pembelian`(`id`,`id_pembelian`,`id_bahan`,`jml`) values 
+(1,1,6,20),
+(2,1,7,20),
+(3,1,2,10),
+(4,2,1,10),
+(5,2,3,5),
+(6,2,2,40),
+(7,3,4,20),
+(8,3,5,20),
+(9,3,8,10);
+
+/*Table structure for table `tb_d_produksi` */
+
+DROP TABLE IF EXISTS `tb_d_produksi`;
+
+CREATE TABLE `tb_d_produksi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_produksi` int(11) DEFAULT NULL,
+  `id_bahan` int(11) DEFAULT NULL,
+  `jml` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_produksi` (`id_produksi`),
+  KEY `id_bahan` (`id_bahan`),
+  CONSTRAINT `tb_d_produksi_ibfk_1` FOREIGN KEY (`id_produksi`) REFERENCES `tb_produksi` (`id`),
+  CONSTRAINT `tb_d_produksi_ibfk_2` FOREIGN KEY (`id_bahan`) REFERENCES `tb_bahan` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_d_produksi` */
+
+insert  into `tb_d_produksi`(`id`,`id_produksi`,`id_bahan`,`jml`) values 
+(1,1,5,5),
+(2,1,9,1),
+(3,2,4,5),
+(4,2,7,5),
+(5,3,4,5),
+(6,3,9,5),
+(7,4,3,10),
+(8,4,6,10),
+(9,5,3,10),
+(10,5,10,10),
+(11,6,3,10),
+(12,6,7,10),
+(13,6,10,10),
+(14,7,1,10),
+(15,7,3,10),
+(16,7,8,2),
+(17,8,1,10),
+(18,8,3,10),
+(19,9,1,10),
+(20,9,3,10),
+(21,10,1,10),
+(22,10,2,10),
+(23,10,3,10);
+
+/*Table structure for table `tb_d_retur` */
+
+DROP TABLE IF EXISTS `tb_d_retur`;
+
+CREATE TABLE `tb_d_retur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_retur` int(11) DEFAULT NULL,
+  `id_produk` int(11) DEFAULT NULL,
+  `jml` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_retur` (`id_retur`),
+  KEY `id_produk` (`id_produk`),
+  CONSTRAINT `tb_d_retur_ibfk_1` FOREIGN KEY (`id_retur`) REFERENCES `tb_retur` (`id`),
+  CONSTRAINT `tb_d_retur_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `tb_produk` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_d_retur` */
+
+insert  into `tb_d_retur`(`id`,`id_retur`,`id_produk`,`jml`) values 
+(1,1,6,5),
+(2,1,8,5),
+(3,2,5,20),
+(4,2,7,10);
+
+/*Table structure for table `tb_distribusi` */
+
+DROP TABLE IF EXISTS `tb_distribusi`;
+
+CREATE TABLE `tb_distribusi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_karyawan` int(11) DEFAULT NULL,
+  `id_vendor` int(11) DEFAULT NULL,
+  `tgl_distribusi` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_vendor` (`id_vendor`),
+  KEY `id_karyawan` (`id_karyawan`),
+  CONSTRAINT `tb_distribusi_ibfk_1` FOREIGN KEY (`id_vendor`) REFERENCES `tb_vendor` (`id`),
+  CONSTRAINT `tb_distribusi_ibfk_2` FOREIGN KEY (`id_karyawan`) REFERENCES `tb_karyawan` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_distribusi` */
+
+insert  into `tb_distribusi`(`id`,`id_karyawan`,`id_vendor`,`tgl_distribusi`) values 
+(1,1,4,'2021-05-20 20:59:56'),
+(2,3,2,'2021-05-20 21:00:10'),
+(3,2,1,'2021-05-22 21:00:28'),
+(4,4,3,'2021-05-12 22:13:16'),
+(5,2,2,'2021-05-15 22:13:50'),
+(6,1,1,'2021-01-21 22:14:10'),
+(7,4,2,'2021-01-29 22:14:26'),
+(8,3,4,'2021-02-17 22:14:41'),
+(9,2,3,'2021-03-21 22:14:55'),
+(10,1,4,'2021-04-01 22:15:10'),
+(11,4,1,'2021-04-14 22:15:31'),
+(12,1,4,'2021-04-29 22:15:51'),
+(13,1,3,'2021-06-10 22:16:13'),
+(14,3,3,'2021-06-30 22:16:38');
+
+/*Table structure for table `tb_jenis_produk` */
+
+DROP TABLE IF EXISTS `tb_jenis_produk`;
+
+CREATE TABLE `tb_jenis_produk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `jenis` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_jenis_produk` */
+
+insert  into `tb_jenis_produk`(`id`,`jenis`) values 
+(1,'Keripik'),
+(2,'Permen'),
+(3,'Kue kering');
+
+/*Table structure for table `tb_karyawan` */
+
+DROP TABLE IF EXISTS `tb_karyawan`;
+
+CREATE TABLE `tb_karyawan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) DEFAULT NULL,
+  `tgl_lahir` date DEFAULT NULL,
+  `gender` enum('Laki-laki','Perempuan') DEFAULT NULL,
+  `noHP` varchar(12) DEFAULT NULL,
+  `alamat` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_karyawan` */
+
+insert  into `tb_karyawan`(`id`,`nama`,`tgl_lahir`,`gender`,`noHP`,`alamat`) values 
+(1,'Harry Putra','2000-03-24','Laki-laki','082236552502','Denpasar, Bali'),
+(2,'Dadang Suherman','1995-01-01','Laki-laki','081111122222','Denpasar, Bali'),
+(3,'Adinda Gayatri','2000-03-09','Perempuan','081234567890','Tabanan, Bali'),
+(4,'Tyagi Jisnu','2000-04-18','Laki-laki','089087456321','Karangasem, Bali');
+
+/*Table structure for table `tb_pembelian` */
+
+DROP TABLE IF EXISTS `tb_pembelian`;
+
+CREATE TABLE `tb_pembelian` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_karyawan` int(11) DEFAULT NULL,
+  `id_supplier` int(11) DEFAULT NULL,
+  `tgl_pembelian` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_karyawan` (`id_karyawan`),
+  KEY `id_supplier` (`id_supplier`),
+  CONSTRAINT `tb_pembelian_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `tb_karyawan` (`id`),
+  CONSTRAINT `tb_pembelian_ibfk_2` FOREIGN KEY (`id_supplier`) REFERENCES `tb_supplier` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_pembelian` */
+
+insert  into `tb_pembelian`(`id`,`id_karyawan`,`id_supplier`,`tgl_pembelian`) values 
+(1,2,1,'2021-05-01 20:41:20'),
+(2,1,3,'2021-05-04 20:41:39'),
+(3,3,2,'2021-05-11 20:42:02');
+
+/*Table structure for table `tb_produk` */
+
+DROP TABLE IF EXISTS `tb_produk`;
+
+CREATE TABLE `tb_produk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) DEFAULT NULL,
+  `id_jenis_produk` int(11) DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
-  `keterangan` enum('baik','rusak') DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_barang` (`id_barang`),
-  KEY `id_saldo` (`id_saldo`),
-  CONSTRAINT `tb_d_saldo_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `tb_master_barang` (`id`),
-  CONSTRAINT `tb_d_saldo_ibfk_2` FOREIGN KEY (`id_saldo`) REFERENCES `tb_saldo_awal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  KEY `id_jenis_produk` (`id_jenis_produk`),
+  CONSTRAINT `tb_produk_ibfk_1` FOREIGN KEY (`id_jenis_produk`) REFERENCES `tb_jenis_produk` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
-/*Data for the table `tb_d_saldo` */
+/*Data for the table `tb_produk` */
 
-insert  into `tb_d_saldo`(`id`,`id_saldo`,`id_barang`,`qty`,`harga`,`keterangan`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,1,2,34000,'baik',NULL,NULL,NULL);
+insert  into `tb_produk`(`id`,`nama`,`id_jenis_produk`,`harga`) values 
+(1,'Keripik Kentang',1,NULL),
+(2,'Keripik Singkong Balado',1,NULL),
+(3,'Keripik Singkong Original',1,NULL),
+(4,'Permen Jahe',2,NULL),
+(5,'Permen Asem',2,NULL),
+(6,'Kue Nastar',3,NULL),
+(7,'Permen Rujak',2,NULL),
+(8,'Kue Hastangel',3,NULL),
+(9,'Putri Salju',3,NULL),
+(10,'Eggroll',3,NULL);
 
-/*Table structure for table `tb_jabatan` */
+/*Table structure for table `tb_produksi` */
 
-DROP TABLE IF EXISTS `tb_jabatan`;
+DROP TABLE IF EXISTS `tb_produksi`;
 
-CREATE TABLE `tb_jabatan` (
+CREATE TABLE `tb_produksi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `jabatan` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `id_produk` int(11) DEFAULT NULL,
+  `id_karyawan` int(11) DEFAULT NULL,
+  `tgl_produksi` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_produk` (`id_produk`),
+  KEY `id_karyawan` (`id_karyawan`),
+  CONSTRAINT `tb_produksi_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `tb_produk` (`id`),
+  CONSTRAINT `tb_produksi_ibfk_2` FOREIGN KEY (`id_karyawan`) REFERENCES `tb_karyawan` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_produksi` */
+
+insert  into `tb_produksi`(`id`,`id_produk`,`id_karyawan`,`tgl_produksi`) values 
+(1,1,3,'2021-05-12 20:45:06'),
+(2,2,3,'2021-05-13 20:45:37'),
+(3,3,3,'2021-05-13 20:45:52'),
+(4,4,2,'2021-05-15 20:46:09'),
+(5,5,2,'2021-05-15 20:46:22'),
+(6,7,2,'2021-05-15 20:46:34'),
+(7,6,1,'2021-05-16 20:46:48'),
+(8,8,1,'2021-05-16 20:47:02'),
+(9,9,3,'2021-05-16 20:47:30'),
+(10,10,1,'2021-05-16 20:47:50');
+
+/*Table structure for table `tb_retur` */
+
+DROP TABLE IF EXISTS `tb_retur`;
+
+CREATE TABLE `tb_retur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_karyawan` int(11) DEFAULT NULL,
+  `id_vendor` int(11) DEFAULT NULL,
+  `tgl_retur` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_vendor` (`id_vendor`),
+  KEY `id_karyawan` (`id_karyawan`),
+  CONSTRAINT `tb_retur_ibfk_1` FOREIGN KEY (`id_vendor`) REFERENCES `tb_vendor` (`id`),
+  CONSTRAINT `tb_retur_ibfk_2` FOREIGN KEY (`id_karyawan`) REFERENCES `tb_karyawan` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_retur` */
+
+insert  into `tb_retur`(`id`,`id_karyawan`,`id_vendor`,`tgl_retur`) values 
+(1,1,4,'2021-05-30 21:05:46'),
+(2,2,1,'2021-05-30 21:06:05');
+
+/*Table structure for table `tb_supplier` */
+
+DROP TABLE IF EXISTS `tb_supplier`;
+
+CREATE TABLE `tb_supplier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) DEFAULT NULL,
+  `alamat` varchar(255) DEFAULT NULL,
+  `noHP` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
-/*Data for the table `tb_jabatan` */
+/*Data for the table `tb_supplier` */
 
-insert  into `tb_jabatan`(`id`,`jabatan`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'Super Admin',NULL,NULL,NULL),
-(2,'Staf Bidang',NULL,NULL,NULL),
-(3,'PPBP',NULL,NULL,NULL),
-(4,'Kabid',NULL,NULL,NULL),
-(5,'Kasubag',NULL,NULL,NULL);
+insert  into `tb_supplier`(`id`,`nama`,`alamat`,`noHP`) values 
+(1,'Supplier Jaya','Jimbaran, Badung, Bali','036144044012'),
+(2,'Supplier Agung','Denpasar, Bali','14046'),
+(3,'Supplier Makmur','Tabanan, Bali','089797787911');
 
-/*Table structure for table `tb_master_barang` */
+/*Table structure for table `tb_vendor` */
 
-DROP TABLE IF EXISTS `tb_master_barang`;
+DROP TABLE IF EXISTS `tb_vendor`;
 
-CREATE TABLE `tb_master_barang` (
+CREATE TABLE `tb_vendor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_m_barang` varchar(255) DEFAULT NULL,
-  `harga_m_barang` int(11) DEFAULT NULL,
-  `satuan_m_barang` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `noHP` varchar(12) DEFAULT NULL,
+  `alamat` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
-/*Data for the table `tb_master_barang` */
+/*Data for the table `tb_vendor` */
 
-insert  into `tb_master_barang`(`id`,`nama_m_barang`,`harga_m_barang`,`satuan_m_barang`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'Kertas HVS 70',34000,'Rim',NULL,NULL,NULL),
-(2,'Tinta Hitam',40000,'Buah',NULL,NULL,NULL);
-
-/*Table structure for table `tb_opd` */
-
-DROP TABLE IF EXISTS `tb_opd`;
-
-CREATE TABLE `tb_opd` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_opd` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_opd` */
-
-insert  into `tb_opd`(`id`,`nama_opd`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'BPKAD','2021-07-29 10:01:53','0000-00-00 00:00:00','0000-00-00 00:00:00'),
-(2,'Kominfo',NULL,NULL,NULL);
-
-/*Table structure for table `tb_opname` */
-
-DROP TABLE IF EXISTS `tb_opname`;
-
-CREATE TABLE `tb_opname` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode_opname` varchar(255) DEFAULT NULL,
-  `status_opname` enum('draft','final') DEFAULT NULL,
-  `tgl_opname` date DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_opname` */
-
-insert  into `tb_opname`(`id`,`kode_opname`,`status_opname`,`tgl_opname`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'AAA/12/A','final','2021-07-31',NULL,NULL,NULL);
-
-/*Table structure for table `tb_penerimaan` */
-
-DROP TABLE IF EXISTS `tb_penerimaan`;
-
-CREATE TABLE `tb_penerimaan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_BU` int(11) DEFAULT NULL,
-  `kode_penerimaan` varchar(255) DEFAULT NULL,
-  `jenis_penerimaan` enum('APBD Non Obat','APBD Obat','Hibah Non Obat','Hibah Obat','Non APBD') DEFAULT NULL,
-  `tgl_terima` date DEFAULT NULL,
-  `pengirim` varchar(255) DEFAULT NULL,
-  `status_penerimaan` enum('draft','final') DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_jenis_penerimaan` (`jenis_penerimaan`),
-  KEY `id_BU` (`id_BU`),
-  CONSTRAINT `tb_penerimaan_ibfk_2` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_penerimaan` */
-
-insert  into `tb_penerimaan`(`id`,`id_BU`,`kode_penerimaan`,`jenis_penerimaan`,`tgl_terima`,`pengirim`,`status_penerimaan`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,'KOM/123/A','Non APBD','2021-07-31','Suardana','final',NULL,NULL,NULL);
-
-/*Table structure for table `tb_pengeluaran` */
-
-DROP TABLE IF EXISTS `tb_pengeluaran`;
-
-CREATE TABLE `tb_pengeluaran` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode_pengeluaran` varchar(255) DEFAULT NULL,
-  `id_BU` int(11) DEFAULT NULL,
-  `tgl_keluar` date DEFAULT NULL,
-  `ket_pengeluaran` text DEFAULT NULL,
-  `status_pengeluaran` enum('draft','final') DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_BU` (`id_BU`),
-  CONSTRAINT `tb_pengeluaran_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_pengeluaran` */
-
-insert  into `tb_pengeluaran`(`id`,`kode_pengeluaran`,`id_BU`,`tgl_keluar`,`ket_pengeluaran`,`status_pengeluaran`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'BPKAD/123/A',3,'2021-07-31','Kertas\r\n','final',NULL,NULL,NULL);
-
-/*Table structure for table `tb_penggunaan` */
-
-DROP TABLE IF EXISTS `tb_penggunaan`;
-
-CREATE TABLE `tb_penggunaan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tgl_penggunaan` date DEFAULT NULL,
-  `id_BU` int(11) DEFAULT NULL,
-  `status_penggunaan` enum('draft','approved','final','disetujui') DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_BU` (`id_BU`),
-  CONSTRAINT `tb_penggunaan_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_penggunaan` */
-
-insert  into `tb_penggunaan`(`id`,`tgl_penggunaan`,`id_BU`,`status_penggunaan`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'2021-07-30',3,'disetujui',NULL,NULL,NULL);
-
-/*Table structure for table `tb_periode` */
-
-DROP TABLE IF EXISTS `tb_periode`;
-
-CREATE TABLE `tb_periode` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_opd` int(11) DEFAULT NULL,
-  `nama_periode` varchar(255) DEFAULT NULL,
-  `tgl_mulai` date DEFAULT NULL,
-  `tgl_selesai` date DEFAULT NULL,
-  `status_periode` enum('open','close') DEFAULT NULL,
-  `ket_periode` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_opd` (`id_opd`),
-  CONSTRAINT `tb_periode_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_periode` */
-
-insert  into `tb_periode`(`id`,`id_opd`,`nama_periode`,`tgl_mulai`,`tgl_selesai`,`status_periode`,`ket_periode`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,'Juli 2021','2021-07-01','2021-07-31','open','Periode Juli 2021','0000-00-00 00:00:00','0000-00-00 00:00:00',NULL);
-
-/*Table structure for table `tb_saldo_awal` */
-
-DROP TABLE IF EXISTS `tb_saldo_awal`;
-
-CREATE TABLE `tb_saldo_awal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode_saldo` varchar(255) DEFAULT NULL,
-  `tgl_input` date DEFAULT NULL,
-  `status_saldo` enum('draft','final','closed') DEFAULT NULL,
-  `ket_saldo` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_saldo_awal` */
-
-insert  into `tb_saldo_awal`(`id`,`kode_saldo`,`tgl_input`,`status_saldo`,`ket_saldo`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'ABC/123/D','2021-07-29','draft','Testing','2021-07-30 00:53:13','2021-07-30 01:30:44',NULL);
-
-/*Table structure for table `tb_unit` */
-
-DROP TABLE IF EXISTS `tb_unit`;
-
-CREATE TABLE `tb_unit` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `unit` varchar(255) DEFAULT NULL,
-  `id_opd` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_opd` (`id_opd`),
-  CONSTRAINT `tb_unit_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_unit` */
-
-insert  into `tb_unit`(`id`,`unit`,`id_opd`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'Persediaan',1,'2021-07-29 10:02:44','2021-07-29 10:02:46',NULL),
-(2,'Aset',1,'2021-07-29 10:02:49','2021-07-29 10:02:51',NULL),
-(3,'Umum',2,'2021-07-29 11:30:04','2021-07-29 11:30:07',NULL);
-
-/*Table structure for table `tb_user` */
-
-DROP TABLE IF EXISTS `tb_user`;
-
-CREATE TABLE `tb_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `nama_user` varchar(255) DEFAULT NULL,
-  `dob` date DEFAULT NULL,
-  `id_jabatan` int(11) DEFAULT NULL,
-  `id_unit` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_jabatan` (`id_jabatan`),
-  KEY `tb_user_ibfk_3` (`id_unit`),
-  CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `tb_jabatan` (`id`),
-  CONSTRAINT `tb_user_ibfk_3` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_user` */
-
-insert  into `tb_user`(`id`,`username`,`password`,`nama_user`,`dob`,`id_jabatan`,`id_unit`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'admin','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','Super Admin','0000-00-00',1,1,NULL,NULL,NULL);
+insert  into `tb_vendor`(`id`,`nama`,`noHP`,`alamat`) values 
+(1,'Jaya Perkasa','441446','Badung Jimbaran, Bali'),
+(2,'Bintang berdua','481481','Tabanan, Bali'),
+(3,'Selalu Maju','14095','Gianyar, Bali'),
+(4,'Tetap Moondoor','123654','Denpasar, Bali');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -133,9 +133,10 @@ Route::post('/saldoawal/editDetail/{id}', 'SaldoAwalController@editDetailSaldoBa
 
 
 //PENERIMAAN
-Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan');
+Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan')->name('penerimaan');
 Route::get('/penerimaan/create', 'PenerimaanController@addPenerimaan');
-Route::get('/penerimaan/edit', 'PenerimaanController@editPenerimaan');
+Route::post('/penerimaan/insert', 'PenerimaanController@insertPenerimaan')->name('insertPenerimaan');
+Route::get('/penerimaan/edit/{id}', 'PenerimaanController@editPenerimaan')->name('penerimaanEdit');
 
 //PENGGUNAAN
 

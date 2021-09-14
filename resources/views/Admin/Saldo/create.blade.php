@@ -107,7 +107,7 @@ Create Saldo Awal Baru
                               <label>Total Harga:</label>
                               <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold">10,000.000.000.000</span>
+                                <span class="text-bold">0</span>
                               </h1>
                           </div>
                             <div class="row">

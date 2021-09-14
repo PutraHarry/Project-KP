@@ -32,9 +32,6 @@
               </h3>
 
               <div class="card-tools">
-                <button type="button" class="btn bg-default btn-sm" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
               </div>
             </div>
             <div class="card-body">
