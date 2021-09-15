@@ -80,31 +80,32 @@ Edit Penerimaan Baru
                     <div class="row">
                       <div class="col-3">
                         <div class="form-group">
-                            <label>Jenis Penerimaan</label>
-                            <select class="form-control" name="status_penerimaan" id="status_penerimaan">
-                                @foreach ($jenisPenerimaan as $jp)
-                                  <option value="{{ $jp }}">{{ $jp }}</option>
-                                @endforeach
-                            </select>
+                          <label>Jenis Penerimaan</label>
+                          <select class="form-control" name="status_penerimaan" id="status_penerimaan">
+                            @foreach ($jenisPenerimaan as $jp)
+                              <option value="{{ $jp }}" @if($tpenerimaan->jenis_penerimaan == $jp) selected @endif>{{ $jp }}</option>
+                            @endforeach
+                          </select>
                         </div>
                         <div class="form-group">
-                            <label for="penerimaan">Nama Penerimaan</label>
-                            <input type="text" class="form-control" name="penerimaan" id="penerimaan" placeholder="Kode Saldo" value="{{ $tpenerimaan->kode_penerimaan }}">
+                          <label for="penerimaan">Nama Penerimaan</label>
+                          <input type="text" class="form-control" name="penerimaan" id="penerimaan" placeholder="Kode Saldo" value="{{ $tpenerimaan->kode_penerimaan }}">
                         </div>
                         <div class="form-group">
-                            <label>Tanggal Penerimaan:</label>
-                            <div class="input-group">
-                                <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenerimaan->tgl_terima }}">
-                            </div>  
+                          <label>Tanggal Penerimaan:</label>
+                          <div class="input-group">
+                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenerimaan->tgl_terima }}">
+                          </div>  
                         </div>  
                       </div>
                       <div class="col-3">
                         <div class="form-group">
-                            <label>Status</label>
-                            <select class="form-control" name="status_penerimaan" id="status_penerimaan" readonly>
-                              <option value="draft">Draft</option>
-                              <option value="final">Final</option>
-                            </select>
+                          <label>Status</label>
+                          <select class="form-control" name="status_penerimaan" id="status_penerimaan" disabled>
+                          @foreach ($statusPenerimaan as $sp)
+                            <option value="{{ $sp }}" @if($tpenerimaan->status_penerimaan == $sp) selected @endif>{{ $sp }}</option>
+                          @endforeach
+                          </select>
                         </div>
                         <div class="form-group">
                             <label>Pengirim</label>

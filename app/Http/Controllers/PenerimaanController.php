@@ -83,6 +83,7 @@ class PenerimaanController extends Controller
         $idEdit = $id;
 
         $jenisPenerimaan = ['APBD Non Obat', 'APBD Obat', 'Hibah Non Obat', 'Hibah Obat', 'Non APBD'];
+        $statusPenerimaan = ['draft', 'final'];
         //dd($jenisPenerimaan);
         $open = ['open'];
 
@@ -93,7 +94,7 @@ class PenerimaanController extends Controller
             $periodeAktif = "-";
         }
 
-        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan'));
+        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan', 'statusPenerimaan'));
     }
 
     public function FunctionName(Type $var = null)
