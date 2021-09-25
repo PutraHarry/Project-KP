@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\PenerimaanModel;
 use App\BarangModel;
 use App\PeriodeModel;
+use App\DetailPenerimaanModel;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -94,11 +95,70 @@ class PenerimaanController extends Controller
             $periodeAktif = "-";
         }
 
-        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan', 'statusPenerimaan'));
+        $detailPenerimaan = DetailPenerimaanModel::with('barang')->where('id_penerimaan',$id)->get();
+
+        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan', 'statusPenerimaan', 'detailPenerimaan'));
     }
 
-    public function FunctionName(Type $var = null)
+    public function updatePenerimaan($id, Request $request)
     {
-        # code...
+        $validator = Validator::make($request->all(), [
+            'jenis_penerimaan' => 'required',
+            'namaPenerimaan' => 'required',
+            'tgl_input' => 'required',
+            'pengirim' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $penerimaan = PenerimaanModel::find($id);
+        $penerimaan->kode_penerimaan = $request->namaPenerimaan;
+        $penerimaan->jenis_penerimaan = $request->jenis_penerimaan;
+        $penerimaan->tgl_terima = $request->tgl_input;
+        $penerimaan->pengirim = $request->pengirim;
+        $penerimaan->update();
+        
+        return redirect()->route('penerimaan')->with('statusInput', 'Update Success');
+    }
+
+    public function insertDetailPenerimaan($id, Request $request)
+    {
+        $dpenerimaan = new DetailPenerimaanModel();
+        $dpenerimaan->id_penerimaan = $id;
+        $dpenerimaan->id_barang = $request->id_barang;
+        $dpenerimaan->qty = $request->qty;
+        $dpenerimaan->harga = $request->total;
+        $dpenerimaan->keterangan = $request->keterangan;
+        $dpenerimaan->save();
+      
+        $mpenerimaan = PenerimaanModel::find($id);
+        $mpenerimaan->total = $mpenerimaan->total + $request->total;
+        $mpenerimaan->update();
+      
+        return redirect()->back();
+    }
+
+    public function editDetailPenerimaan($id, Request $request)
+    {
+        //dd($id);
+        $dpenerimaan = DetailPenerimaanModel::find($id);
+
+        $newTotal = $request->total;
+        $oldTotal = $dpenerimaan->total;
+        $gapTotal = $newTotal-$oldTotal;
+
+
+        $dpenerimaan->id_barang = $request->id_barang;
+        $dpenerimaan->qty = $request->qty;
+        $dpenerimaan->harga = $request->total;
+        $dpenerimaan->keterangan = $request->keterangan;
+        $dpenerimaan->update();
+
+        $mpenerimaan = PenerimaanModel::find($dpenerimaan->id_saldo);
+        $mpenerimaan->total = $mpenerimaan->total + $gapTotal;
+        $mpenerimaan->update();
+        return redirect()->back();
     }
 }
