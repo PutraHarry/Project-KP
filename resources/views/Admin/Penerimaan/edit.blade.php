@@ -57,7 +57,7 @@ Edit Penerimaan Baru
     
   <!-- Main content -->
   <section>
-    <form action="#" method="POST">
+    <form action="/penerimaan/update/{{ $idEdit }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -81,7 +81,7 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div class="form-group">
                           <label>Jenis Penerimaan</label>
-                          <select class="form-control" name="status_penerimaan" id="status_penerimaan">
+                          <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan">
                             @foreach ($jenisPenerimaan as $jp)
                               <option value="{{ $jp }}" @if($tpenerimaan->jenis_penerimaan == $jp) selected @endif>{{ $jp }}</option>
                             @endforeach
@@ -89,7 +89,7 @@ Edit Penerimaan Baru
                         </div>
                         <div class="form-group">
                           <label for="penerimaan">Nama Penerimaan</label>
-                          <input type="text" class="form-control" name="penerimaan" id="penerimaan" placeholder="Kode Saldo" value="{{ $tpenerimaan->kode_penerimaan }}">
+                          <input type="text" class="form-control" name="namaPenerimaan" id="namaPenerimaan" placeholder="Kode Saldo" value="{{ $tpenerimaan->kode_penerimaan }}">
                         </div>
                         <div class="form-group">
                           <label>Tanggal Penerimaan:</label>
@@ -117,7 +117,7 @@ Edit Penerimaan Baru
                             <label>Total Harga:</label>
                             <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold">10,000.000.000.000</span>
+                                <span class="text-bold">{{ $tpenerimaan->total }}</span>
                             </h1>
                         </div>
                         <div class="row">
@@ -146,7 +146,7 @@ Edit Penerimaan Baru
         </div>
       </section>
     </form>
-    <form action="/saldoawal/updateDetail/#" method="POST">
+    <form action="/saldoawal/updateDetail/{{ $idEdit }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -169,6 +169,24 @@ Edit Penerimaan Baru
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($detailPenerimaan as $dp)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td> {{ $dp->barang->nama_m_barang }} </td>
+                            <td> {{ $dp->qty }} </td>
+                            <td> {{ $dp->barang->satuan_m_barang }} </td>
+                            <td> {{ $dp->barang->harga_m_barang }} </td>
+                            <td> {{ $dp->harga }} </td>
+                            <td> {{ $dp->keterangan }} </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-warning" type="button" onclick="editpenerimaan({{ $dp->id }},{{ $dp->barang->id }},{{ $dp->qty }},'{{ $dp->barang->satuan_m_barang }}',{{ $dp->barang->harga_m_barang }},'{{ $dp->keterangan }}')">
+                                        <i class="fas fa-edit"></i>
+                                      </button>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
                         <tr>
                           <td class="text-center">1</td>
                           <td>
@@ -225,6 +243,51 @@ Edit Penerimaan Baru
       </section>
     </form>
   </section>
+
+  <div class="modal fade" id="modal-sfinal">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <form action="" id="edit_form" method="POST">
+                  @csrf
+                  <div class="modal-header">
+                      <h4 class="modal-title">Edit Detail Penerimaan</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-group">
+                          <select class="select2" name="id_barang" id="edit_id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
+                          @foreach ($tbarang as $tb)
+                          <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
+                          @endforeach
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <input type="number" class="form-control" name="qty" id="edit_qty" placeholder="Kuantitas" value="">
+                      </div>
+                      <div class="form-group">
+                          <input type="text" class="form-control" name="satuan" id="edit_satuan" placeholder="Satuan">
+                      </div>
+                      <div class="form-group">
+                          <input type="number" class="form-control" name="harga" id="edit_harga" placeholder="Harga">
+                      </div>
+                      <div class="form-group">
+                          <input type="text" class="form-control" name="total" id="edit_total" placeholder="Kehitung otomatis" readonly>
+                      </div>
+                      <select class="form-control" name="keterangan" id="edit_keterangan">
+                          <option value="baik">Baik</option>
+                          <option value="rusak">Rusak</option>
+                      </select>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success">Simpan</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
 @endsection
 
 @push('js')
@@ -253,9 +316,74 @@ Edit Penerimaan Baru
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
 
+    //Data Barang
+    var barang_id = $('#id_barang').val();
+    var barangs = {!! json_encode($tbarang->toArray()) !!}
+    barangs.forEach(element => {
+      if(element.id == barang_id){
+        $('#harga').val(element.harga_m_barang);
+        $('#satuan').val(element.satuan_m_barang);
+      }
+    });
+
+    $('#id_barang').change(function(){
+      var id_barang = $('#id_barang').val();
+      var barang = {!! json_encode($tbarang->toArray()) !!}
+      barang.forEach(element => {
+        if(element.id == id_barang){
+          $('#harga').val(element.harga_m_barang);
+          $('#satuan').val(element.satuan_m_barang);
+        }
+      });
+    })
+
+    $('#qty').keyup(function(){
+        $('#total').val($('#qty').val() * $('#harga').val());
+    })
   })
   
 </script>
 
+<script>
+  $(function () {
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 
+<script>
+  function editpenerimaan(id, id_barang, qty, satuan, harga, keterangan) {
+      $("#edit_form").attr("action", "/penerimaan/editDetail/"+id);
+      $('#edit_id_barang').val(id_barang).change();
+      $('#edit_qty').val(qty);
+      $('#edit_satuan').val(satuan);
+      $('#edit_harga').val(harga);
+      $('#edit_keterangan').val(keterangan);
+      $('#edit_total').val($('#edit_qty').val() * $('#edit_harga').val());
+      $('#modal-sfinal').modal('show');
+  }
+
+  $('#edit_id_barang').change(function(){
+      var id_barang = $('#edit_id_barang').val();
+      var barang = {!! json_encode($tbarang->toArray()) !!}
+      barang.forEach(element => {
+          if(element.id == id_barang){
+              $('#edit_harga').val(element.harga_m_barang);
+              $('#edit_satuan').val(element.satuan_m_barang);
+              $('#edit_total').val($('#edit_qty').val() * $('#edit_harga').val());
+          }
+      });
+  })
+
+  $('#edit_qty').keyup(function(){
+      $('#edit_total').val($('#edit_qty').val() * $('#edit_harga').val());
+  })
+</script>
 @endpush

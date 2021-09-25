@@ -35,8 +35,6 @@ class SaldoAwalController extends Controller
 
     public function addSaldoAwal()
     {
-        $tbarang = BarangModel::get();
-
         $open = ['open'];
 
         $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
