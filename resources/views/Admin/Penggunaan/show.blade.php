@@ -77,66 +77,33 @@
                           </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>Gedung BPKAD</td>
-                            <td>Kominfo</td>
-                            <td>01-01-2021</td>
-                            <td><span class="badge badge-primary">Final</span></td>
+                        @foreach ($tpenggunaan as $tp)
+                          <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $tp->gudang_asal }}</td>
+                            <td>{{ $tp->gudang_tujuan }}</td>
+                            <td>{{ $tp->tgl_penggunaan }}</td>
+                            <td>
+                              @if($tp->status_penggunaan == "draft")
+                                <span class="badge badge-warning">Draft</span>
+                              @elseif($tp->status_penggunaan == "final")
+                                <span class="badge badge-primary">Final</span>
+                              @elseif($tp->status_penggunaan == "approved")
+                                <span class="badge badge-success">Approved</span>
+                              @elseif($tp->status_penggunaan == "disetujui")
+                                <span class="badge badge-info">Disetujui</span>
+                              @endif
+                            </td>
                             <td class="text-center">
-                                <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
+                                <a href="/penggunaan/edit/{{ $tp->id }}" class="btn btn-warning btn-icon-split">
                                   <span class="icon">
                                       <i class="fas fa-edit"></i>
                                   </span>
                                   <span class="text">Edit</span>
                                 </a>
                             </td>
-                        </tr>
-                        <tr>
-                          <td class="text-center">2</td>
-                          <td>Gedung BPKAD</td>
-                          <td>Kominfo</td>
-                          <td>01-01-2021</td>
-                          <td><span class="badge badge-warning">Draft</span></td>
-                          <td class="text-center">
-                              <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
-                                <span class="icon">
-                                    <i class="fas fa-edit"></i>
-                                </span>
-                                <span class="text">Edit</span>
-                              </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="text-center">3</td>
-                          <td>Gedung BPKAD</td>
-                          <td>Kominfo</td>
-                          <td>01-01-2021</td>
-                          <td><span class="badge badge-info">Disetujui</span></td>
-                          <td class="text-center">
-                              <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
-                                <span class="icon">
-                                    <i class="fas fa-edit"></i>
-                                </span>
-                                <span class="text">Edit</span>
-                              </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="text-center">4</td>
-                          <td>Gedung BPKAD</td>
-                          <td>Kominfo</td>
-                          <td>01-01-2021</td>
-                          <td><span class="badge badge-success">Approved</span></td>
-                          <td class="text-center">
-                              <a href="/penggunaan/edit/" class="btn btn-warning btn-icon-split">
-                                <span class="icon">
-                                    <i class="fas fa-edit"></i>
-                                </span>
-                                <span class="text">Edit</span>
-                              </a>
-                          </td>
-                        </tr>
+                          </tr>
+                        @endforeach
                       </tbody>
                   </table>
                 </div>

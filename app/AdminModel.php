@@ -18,4 +18,9 @@ class AdminModel extends Authenticatable
         'email',
         'password',
     ];
+
+    public function unit()
+    {
+        return $this->belongsTo(UnitModel::class, 'id_unit', 'id');
+    }
 }

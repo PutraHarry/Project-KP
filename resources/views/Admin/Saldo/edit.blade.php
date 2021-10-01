@@ -114,14 +114,14 @@ Edit Saldo Awal
                                                     <div class="col-6">
                                                         <div class="text">
                                                             <label>Nama OPD:</label>
-                                                                <p>Badan Pengelola Keuangan dan Aset Daerah</p>
+                                                                <p>{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
                                                             </select>
                                                         </div> 
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="text">
                                                             <label>Nama Unit Kerja:</label>
-                                                                <p>Persediaan</p>
+                                                                <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
                                                             </select>
                                                         </div> 
                                                     </div>

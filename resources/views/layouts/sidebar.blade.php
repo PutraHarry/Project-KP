@@ -13,7 +13,7 @@
           <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{auth()->guard()->user()->username}}</a>
+          <a href="#" class="d-block">{{Auth::guard('admin')->user()->username}}</a>
         </div>
       </div>
 
