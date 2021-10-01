@@ -88,7 +88,7 @@ Edit Penggunaan
                             <div class="form-group">
                                 <label>Tanggal Penggunaan Barang:</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input">
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenggunaan->tgl_penggunaan }}">
                                 </div>  
                             </div>
                         </div>
@@ -118,38 +118,28 @@ Edit Penggunaan
                             <div class="form-group">
                                 <label>Nota Bukti Umum</label>
                                 <select class="select2" name="id_buktiumum" id="id_buktiumum" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
-                                    <option value="bu1">Nota Bu 1</option>
-                                    <option value="bu2">Nota Bu 2</option>
-                                    <option value="bu3">Nota Bu 3</option>
+                                  @foreach($tpenerimaan as $tp)  
+                                    <option value={{ $tp->id }} @if($tp->id == $tpenggunaan->id_BU) selected @endif>{{ $tp->kode_penerimaan }}</option>
+                                  @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="text">
                                 <label>Lokasi Gudang:</label>
-                                    <p>Badan Pengelola Keuangan dan Aset Daerah</p>
+                                    <p>{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
                                 </select>
                             </div> 
                         </div>
                         <div class="col-3">
                             <div class="text">
                                 <label>Lokasi Unit Kerja:</label>
-                                    <p>Persediaan</p>
+                                    <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
                                 </select>
                             </div> 
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card-body">
-                                <a href="#" class="btn btn-warning btn-icon-split">
-                                    <span class="icon">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Ubah Data</span>
-                                </a>
-                            </div>
-                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>

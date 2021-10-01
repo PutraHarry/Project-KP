@@ -142,6 +142,10 @@ Route::post('/penerimaan/updateDetail/{id}', 'PenerimaanController@insertDetailP
 Route::post('/penerimaan/editDetail/{id}', 'PenerimaanController@editDetailPenerimaan')->name('editDetailPenerimaan');
 
 //PENGGUNAAN
+Route::get('/penggunaan', 'PenggunaanController@dataPenggunaan')->name('penggunaan');
+Route::get('/penggunaan/create', 'PenggunaanController@createPenggunaan')->name('createPenggunaan');
+Route::post('/penggunaan/insert', 'PenggunaanController@insertPenggunaan')->name('insertPenggunaan');
+Route::get('/penggunaan/edit/{id}', 'PenggunaanController@editPenggunaan')->name('editPenggunaan');
 
 //PENGELUARAN
 

@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class PeriodeModel extends Model
+class DetailPengeluaranModel extends Model
 {
-    protected $table = 'tb_periode';
+    protected $table = 'tb_d_pengeluaran';
 }

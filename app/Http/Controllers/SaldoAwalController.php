@@ -44,7 +44,9 @@ class SaldoAwalController extends Controller
             $periodeAktif = "-";
         }
 
-        return view("Admin.Saldo.create", compact("tbarang", "periodeAktif"));
+
+
+        return view("Admin.Saldo.create", compact("periodeAktif"));
     }
 
     public function insertSaldoAwal(Request $request)
