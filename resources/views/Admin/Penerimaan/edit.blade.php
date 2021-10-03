@@ -146,7 +146,7 @@ Edit Penerimaan Baru
         </div>
       </section>
     </form>
-    <form action="/saldoawal/updateDetail/{{ $idEdit }}" method="POST">
+    <form action="/penerimaan/updateDetail/{{ $idEdit }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -169,18 +169,18 @@ Edit Penerimaan Baru
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($detailPenerimaan as $dp)
+                        @foreach($detailPenerimaan as $dpen)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td> {{ $dp->barang->nama_m_barang }} </td>
-                            <td> {{ $dp->qty }} </td>
-                            <td> {{ $dp->barang->satuan_m_barang }} </td>
-                            <td> {{ $dp->barang->harga_m_barang }} </td>
-                            <td> {{ $dp->harga }} </td>
-                            <td> {{ $dp->keterangan }} </td>
+                            <td> {{ $dpen->barang->nama_m_barang }} </td>
+                            <td> {{ $dpen->qty }} </td>
+                            <td> {{ $dpen->barang->satuan_m_barang }} </td>
+                            <td> {{ $dpen->barang->harga_m_barang }} </td>
+                            <td> {{ $dpen->harga }} </td>
+                            <td> {{ $dpen->keterangan }} </td>
                             <td class="text-center">
                                 <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-warning" type="button" onclick="editpenerimaan({{ $dp->id }},{{ $dp->barang->id }},{{ $dp->qty }},'{{ $dp->barang->satuan_m_barang }}',{{ $dp->barang->harga_m_barang }},'{{ $dp->keterangan }}')">
+                                    <button class="btn btn-warning" type="button" onclick="editpenerimaan({{ $dpen->id }},{{ $dpen->barang->id }},{{ $dpen->qty }},'{{ $dpen->barang->satuan_m_barang }}',{{ $dpen->barang->harga_m_barang }},'{{ $dpen->keterangan }}')">
                                         <i class="fas fa-edit"></i>
                                       </button>
                                 </div>
@@ -188,7 +188,7 @@ Edit Penerimaan Baru
                         </tr>
                         @endforeach
                         <tr>
-                          <td class="text-center">1</td>
+                          <td class="text-center"></td>
                           <td>
                             <div class="form-group">
                               <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">

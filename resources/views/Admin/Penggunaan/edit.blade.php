@@ -119,7 +119,7 @@ Edit Penggunaan
                                 <label>Nota Bukti Umum</label>
                                 <select class="select2" name="id_buktiumum" id="id_buktiumum" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
                                   @foreach($tpenerimaan as $tp)  
-                                    <option value={{ $tp->id }} @if($tp->id == $tpenggunaan->id_BU) selected @endif>{{ $tp->kode_penerimaan }}</option>
+                                    <option value={{ $tp->id }} @if($tp->id == $tpenggunaan->id_penerimaan) selected @endif>{{ $tp->kode_penerimaan }}</option>
                                   @endforeach
                                 </select>
                             </div>
@@ -151,53 +151,20 @@ Edit Penggunaan
                                         <th>Harga</th>
                                         <th>Total</th>
                                         <th width="200px">Keterangan</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td>
-                                            <div class="form-group">
-                                                <select class="select2" name="#" id="#" data-placeholder="Pilih Barang" style="width: 100%;">
-                                                <option>barang1</option>
-                                                <option>barang3</option>
-                                                <option>barang2</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="qty" id="inputQty" placeholder="Kuantitas">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="satuan" id="inputSatuan" placeholder="Satuan">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="harga" id="inputHarga" placeholder="Harga">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="total" id="inputTotal" placeholder="Kehitung otomatis" disabled>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <select class="form-control" name="keterangan">
-                                            <option value="baik">Baik</option>
-                                            <option value="rusak">Rusak</option>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group btn-group-sm">
-                                                <a href="#" class="btn btn-success"><i class="fas fa-check"></i><a>
-                                                <button class="btn btn-sm btn-flat btn-danger" onclick="#"><i class="fa fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @foreach ($barangPenggunaan as $bpeng)
+                                        <tr>
+                                          <td class="text-center">{{ $loop->iteration }}</td>
+                                          <td> {{ $bpeng->barang->nama_m_barang }} </td>
+                                          <td> {{ $bpeng->qty }} </td>
+                                          <td> {{ $bpeng->barang->satuan_m_barang }} </td>
+                                          <td> {{ $bpeng->barang->harga_m_barang }} </td>
+                                          <td> {{ $bpeng->harga }} </td>
+                                          <td> {{ $bpeng->keterangan }} </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

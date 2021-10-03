@@ -125,6 +125,7 @@ class PenerimaanController extends Controller
 
     public function insertDetailPenerimaan($id, Request $request)
     {
+        //dd($request);
         $dpenerimaan = new DetailPenerimaanModel();
         $dpenerimaan->id_penerimaan = $id;
         $dpenerimaan->id_barang = $request->id_barang;
