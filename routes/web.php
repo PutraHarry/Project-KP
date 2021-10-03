@@ -69,8 +69,7 @@ Route::get('/penerimaan/create', function () {
 });
 Route::get('/penerimaan/edit', function () {
     return view('/Admin/Penerimaan/edit');
-});*/
-
+});
 Route::get('/penggunaan', function () {
     return view('/Admin/Penggunaan/show');
 });
@@ -84,6 +83,7 @@ Route::get('/penggunaan/show-detail', function () {
     return view('/Admin/Penggunaan/show-detail');
 });
 
+
 Route::get('/pengeluaran', function () {
     return view('/Admin/Pengeluaran/show');
 });
@@ -95,7 +95,7 @@ Route::get('/pengeluaran/edit', function () {
 });
 Route::get('/laporan', function () {
     return view('/Admin/Laporan/show');
-});
+});*/
 
 
 Route::get('/tabel', 'TestController@datatest');
@@ -148,6 +148,9 @@ Route::post('/penggunaan/insert', 'PenggunaanController@insertPenggunaan')->name
 Route::get('/penggunaan/edit/{id}', 'PenggunaanController@editPenggunaan')->name('editPenggunaan');
 
 //PENGELUARAN
+Route::get('/pengeluaran', 'PengeluaranController@dataPengeluaran')->name('pengeluaran');
+Route::get('/pengeluaran/create', 'PengeluaranController@createPengeluaran')->name('createPengeluaran');
+Route::get('/pengeluaran/edit', 'PengeluaranController@editPengeluaran')->name('editPengeluaran');
 
 //BUKTI UMUM
 Route::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');

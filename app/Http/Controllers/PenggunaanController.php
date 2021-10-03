@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\PenggunaanModel;
 use App\PeriodeModel;
 use App\PenerimaanModel;
+use App\DetailPenerimaanModel;
+use App\DetailPenggunaanModel;
 
 
 class PenggunaanController extends Controller
@@ -62,12 +64,27 @@ class PenggunaanController extends Controller
 
         $penggunaan = new PenggunaanModel();
         $penggunaan->tgl_penggunaan = $request->tgl_input;
-        $penggunaan->id_BU = $request->id_penerimaan;
+        $penggunaan->id_penerimaan = $request->id_penerimaan;
         $penggunaan->gudang_asal = Auth::user()->unit->opd->nama_opd;
         $penggunaan->gudang_tujuan = Auth::user()->unit->unit;
         $penggunaan->status_penggunaan = "draft";
         //dd($penggunaan);
         $penggunaan->save();
+
+        $penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$penggunaan->id_penerimaan])->get();
+        //dd($penerimaan);
+
+        foreach ($penerimaan as $dataPenerimaan) {
+            $detailPenggunaan = new DetailPenggunaanModel();
+            $detailPenggunaan->id_penggunaan = $penggunaan->id;
+            $detailPenggunaan->id_barang = $dataPenerimaan->id_barang;
+            $detailPenggunaan->qty = $dataPenerimaan->qty;
+            $detailPenggunaan->harga = $dataPenerimaan->harga;
+            $detailPenggunaan->keterangan = $dataPenerimaan->keterangan;
+            //dd($detailPenggunaan);
+            $detailPenggunaan->save();
+        }
+
         
         return redirect()->route('editPenggunaan', ['id' => $penggunaan->id]);
     }
@@ -85,8 +102,9 @@ class PenggunaanController extends Controller
 
         $tpenggunaan = PenggunaanModel::find($id);
         $tpenerimaan = PenerimaanModel::get();
+        $barangPenggunaan = DetailPenggunaanModel::with('barang')->where('id_penggunaan', $id)->get();
         $idEdit = $id;
 
-        return view("Admin.Penggunaan.edit", compact('periodeAktif', 'tpenggunaan', 'idEdit', 'tpenerimaan'));
+        return view("Admin.Penggunaan.edit", compact('periodeAktif', 'tpenggunaan', 'idEdit', 'tpenerimaan', 'barangPenggunaan'));
     }
 }
