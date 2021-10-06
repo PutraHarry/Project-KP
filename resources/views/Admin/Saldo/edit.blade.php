@@ -73,6 +73,12 @@ Edit Saldo Awal
                                             </span>
                                             <span class="text">Draft</span>
                                         </button>
+                                        <button type="submit" class="btn btn-success btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-check"></i>
+                                            </span>
+                                            <span class="text">Final</span>
+                                        </button>
                                     </div>
                                 </div>
                                 <form id="quickForm">
