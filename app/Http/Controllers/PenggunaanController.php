@@ -107,4 +107,11 @@ class PenggunaanController extends Controller
 
         return view("Admin.Penggunaan.edit", compact('periodeAktif', 'tpenggunaan', 'idEdit', 'tpenerimaan', 'barangPenggunaan'));
     }
+
+    public function getDataDetailPenerimaan($id)
+    {
+        $detailPenerimaan = DetailPenerimaanModel::with('barang')->where('id_penerimaan',$id)->get();
+
+        return response()->json($detailPenerimaan);
+    }
 }

@@ -27,6 +27,7 @@ Edit Penggunaan
     <link rel="stylesheet" href="/adminlte/plugins/dropzone/min/dropzone.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endpush
 
 @section('content')
@@ -116,8 +117,8 @@ Edit Penggunaan
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Nota Bukti Umum</label>
-                                <select class="select2" name="id_buktiumum" id="id_buktiumum" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
+                                <label>Kode Penerimaan</label>
+                                <select class="select2" name="id_penerimaan" id="id_penerimaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
                                   @foreach($tpenerimaan as $tp)  
                                     <option value={{ $tp->id }} @if($tp->id == $tpenggunaan->id_penerimaan) selected @endif>{{ $tp->kode_penerimaan }}</option>
                                   @endforeach
@@ -154,17 +155,9 @@ Edit Penggunaan
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($barangPenggunaan as $bpeng)
-                                        <tr>
-                                          <td class="text-center">{{ $loop->iteration }}</td>
-                                          <td> {{ $bpeng->barang->nama_m_barang }} </td>
-                                          <td> {{ $bpeng->qty }} </td>
-                                          <td> {{ $bpeng->barang->satuan_m_barang }} </td>
-                                          <td> {{ $bpeng->barang->harga_m_barang }} </td>
-                                          <td> {{ $bpeng->harga }} </td>
-                                          <td> {{ $bpeng->keterangan }} </td>
-                                        </tr>
-                                    @endforeach
+                                    <tr>
+                                        <div id="data"></div>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -178,7 +171,6 @@ Edit Penggunaan
 @endsection
 
 @push('js')
-
 <!-- Bootstrap 4 -->
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
@@ -202,10 +194,23 @@ Edit Penggunaan
     $("input[data-bootstrap-switch]").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
-
   })
+
+  $('#id_penerimaan').change(function() {
+      if($('#id_penerimaan').val() != ""){ 
+          let id = $(this).val();
+          $.ajax({
+              type: 'GET',
+              url: '/penggunaan/detailPenerimaan/'+id,
+              success: function (response){
+                  $('#data').empty();
+                  response.forEach(element => {
+                      $('#data').append('<td class="text-center"></td>' + '<td>' + element['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element['satuan_m_barang'] + '</td> <td>' + element['harga_m_barang'] + '</td> <td>' + element['total'] + '</td> x<td>' + element['keterangan'] + '</td>');
+                  });
+              }
+          });
+      } 
+  });
   
 </script>
-
-
 @endpush
