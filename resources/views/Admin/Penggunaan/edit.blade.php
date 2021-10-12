@@ -109,7 +109,7 @@ Edit Penggunaan
                               <label>Total Harga:</label>
                               <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold" id="total_harga">10,000.000.000.000</span>
+                                <span class="text-bold" id="total_harga"></span>
                               </h1>
                           </div>    
                         </div>
@@ -192,6 +192,26 @@ Edit Penggunaan
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
   })
+
+      let id = $('#id_penerimaan').val();
+      $.ajax({
+          type: 'GET',
+          url: '/penggunaan/detailPenerimaan/'+id,
+          success: function (response){
+            console.log(response);
+              $('#data').empty();
+              let count = 0;
+              let total_harga = 0;
+              response.forEach(element => {
+                count = count + 1;
+                total_harga = total_harga + element['harga'];
+                  $('#data').append('<tr><td class="text-center">'+count+'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
+              });
+              $('#total_harga').text(total_harga);
+              total_harga = 0;
+              count = 0;
+          }
+      });
 
   $('#id_penerimaan').change(function() {
       if($('#id_penerimaan').val() != ""){ 
