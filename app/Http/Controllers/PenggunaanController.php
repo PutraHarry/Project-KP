@@ -71,7 +71,7 @@ class PenggunaanController extends Controller
         //dd($penggunaan);
         $penggunaan->save();
 
-        $penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$penggunaan->id_penerimaan])->get();
+        /*$penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$penggunaan->id_penerimaan])->get();
         //dd($penerimaan);
 
         foreach ($penerimaan as $dataPenerimaan) {
@@ -83,7 +83,7 @@ class PenggunaanController extends Controller
             $detailPenggunaan->keterangan = $dataPenerimaan->keterangan;
             //dd($detailPenggunaan);
             $detailPenggunaan->save();
-        }
+        }*/
 
         
         return redirect()->route('editPenggunaan', ['id' => $penggunaan->id]);
