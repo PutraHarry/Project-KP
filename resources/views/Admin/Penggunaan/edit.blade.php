@@ -109,7 +109,7 @@ Edit Penggunaan
                               <label>Total Harga:</label>
                               <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold">10,000.000.000.000</span>
+                                <span class="text-bold" id="total_harga">10,000.000.000.000</span>
                               </h1>
                           </div>    
                         </div>
@@ -154,10 +154,7 @@ Edit Penggunaan
                                         <th width="200px">Keterangan</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <div id="data"></div>
-                                    </tr>
+                                <tbody id="data">
                                 </tbody>
                             </table>
                         </div>
@@ -203,10 +200,18 @@ Edit Penggunaan
               type: 'GET',
               url: '/penggunaan/detailPenerimaan/'+id,
               success: function (response){
+                console.log(response);
                   $('#data').empty();
+                  let count = 0;
+                  let total_harga = 0;
                   response.forEach(element => {
-                      $('#data').append('<td class="text-center"></td>' + '<td>' + element['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element['satuan_m_barang'] + '</td> <td>' + element['harga_m_barang'] + '</td> <td>' + element['total'] + '</td> x<td>' + element['keterangan'] + '</td>');
+                    count = count + 1;
+                    total_harga = total_harga + element['harga'];
+                      $('#data').append('<tr><td class="text-center">'+count+'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
                   });
+                  $('#total_harga').text(total_harga);
+                  total_harga = 0;
+                  count = 0;
               }
           });
       } 

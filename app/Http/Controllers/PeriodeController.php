@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\PeriodeModel;
 use App\OPDModel;
+use App\UnitModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -14,15 +17,6 @@ class PeriodeController extends Controller
     {
         $this->middleware('auth:admin');
     }
-
-    /*public function PeriodeAktif()
-    {
-        $open = ['open'];
-
-        $dataPeriode = PeriodeModel::whereIn('status_periode', $open)->first();
-
-        return view("layouts.topbar", compact('dataPeriode'));
-    }*/
 
     public function dataPeriode()
     {
@@ -149,9 +143,37 @@ class PeriodeController extends Controller
     
     public function prosesTutup($id)
     {
+        $lastest_id = PeriodeModel::max('id');
         $tutupperiode = PeriodeModel::find($id);
         $tutupperiode->status_periode = 'close';
         $tutupperiode->update();
+
+        if($tutupperiode->id == $lastest_id){
+            $tanggal_selesai_sebelum = $tutupperiode->tgl_selesai;
+            $tanggal_mulai_baru = Carbon::parse($tanggal_selesai_sebelum)->addDays(1);
+            $tanggal_selesai_baru = Carbon::parse($tanggal_mulai_baru)->addMonths(1)->subDays(1);
+
+            //Nama Periode
+            $nama_bulan = $tanggal_mulai_baru->locale('id')->monthName;
+            $nama_tahun = $tanggal_mulai_baru->locale('id')->year;
+            $nama_periode = "Periode ".$nama_bulan." ".$nama_tahun;
+
+            //Get Opd Id
+            // $user = Auth::user()->id;
+            // $unit = UnitModel::find($user->id_unit);
+            // $opd_id = OPDModel::find($unit->id_opd)->id;
+
+            //Periode Baru
+            $periode_baru = new PeriodeModel();
+            $periode_baru->id_opd = Auth::user()->unit->opd->id_opd;
+            $periode_baru->nama_periode = $nama_periode;
+            $periode_baru->tgl_mulai = $tanggal_mulai_baru;
+            $periode_baru->tgl_selesai = $tanggal_selesai_baru;
+            $periode_baru->status_periode = "open";
+            $periode_baru->ket_periode = $nama_periode;
+            $periode_baru->save();
+        }
+
 
         return redirect('/periode/tutupperiode')->with('statusInput', 'Tutup Periode Berhasil');
     }
