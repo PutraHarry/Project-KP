@@ -165,7 +165,7 @@
                 Pemusnahan
               </p>
             </a>
-          </li>-->
+          </li>
           <li class="nav-header">SIMDA</li>
           <li class="nav-item">
             <a href="/buktiumum" class="nav-link">
@@ -174,7 +174,7 @@
                 Bukti Umum
               </p>
             </a>
-          </li>
+          </li>-->
           <li class="nav-header">PELAPORAN</li>
           <li class="nav-item">
             <a href="/laporan" class="nav-link">
