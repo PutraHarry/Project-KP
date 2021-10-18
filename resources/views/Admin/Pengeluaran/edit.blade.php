@@ -72,6 +72,12 @@ Edit Pengeluaran Baru
                       </span>
                       <span class="text">Draft</span>
                     </button>
+                    <button type="submit" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Final</span>
+                    </button>
                   </div>
                 </div>
 
@@ -84,14 +90,6 @@ Edit Pengeluaran Baru
                               <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran">
                           </div>
                           <div class="form-group">
-                            <label>Nota Bukti Umum</label>
-                            <select class="select2" name="id_buktiumum" id="id_buktiumum" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
-                                <option value="bu1">Nota Bu 1</option>
-                                <option value="bu2">Nota Bu 2</option>
-                                <option value="bu3">Nota Bu 3</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
                               <label>Tanggal Pengeluaran:</label>
                               <div class="input-group">
                                 <input type="date" class="form-control" name="tgl_input" id="tgl_input">
@@ -101,9 +99,7 @@ Edit Pengeluaran Baru
                         <div class="col-3">
                           <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control" name="status_saldo" id="status_saldo" disabled>
-                            <option value="draft">Draft</option>
-                            </select>
+                            <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
                           </div>
                           <div class="form-group">
                               <label>Keterangan</label>

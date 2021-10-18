@@ -96,11 +96,7 @@ Edit Penggunaan
                         <div class="col-3">
                           <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control" name="status_penggunaan" id="status_penggunaan" disabled>
-                            <option value="draft">Draft</option>
-                            <option value="final">Final</option>
-                            <option value="disetujui">Disetujui</option> <!--jika diaprove pembantu pengurus barang-->
-                            <option value="approved">Approved</option> <!--hanya bisa oleh atasan langsung-->
+                            <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
                             </select>
                           </div>
                         </div>

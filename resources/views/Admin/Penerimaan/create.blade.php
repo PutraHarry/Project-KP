@@ -102,10 +102,7 @@ Create Penerimaan Baru
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Status</label>
-                                <select class="form-control" name="status_penerimaan" id="status_penerimaan" readonly>
-                                <option value="draft">Draft</option>
-                                <option value="final">Final</option>
-                                </select>
+                                <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
                             </div>
                             <div class="form-group">
                                 <label>Pengirim</label>
