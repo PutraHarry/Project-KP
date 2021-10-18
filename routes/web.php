@@ -147,6 +147,7 @@ Route::get('/penggunaan/create', 'PenggunaanController@createPenggunaan')->name(
 Route::post('/penggunaan/insert', 'PenggunaanController@insertPenggunaan')->name('insertPenggunaan');
 Route::get('/penggunaan/edit/{id}', 'PenggunaanController@editPenggunaan')->name('editPenggunaan');
 Route::get('/penggunaan/detailPenerimaan/{id}', 'PenggunaanController@getDataDetailPenerimaan')->name('getDataDetail');
+Route::post('/penggunaan/final/{idPenggunaan}/detail/{idPenerimaan}', 'PenggunaanController@finalPenggunaan')->name('finalPenggunaan');
 
 //PENGELUARAN
 Route::get('/pengeluaran', 'PengeluaranController@dataPengeluaran')->name('pengeluaran');
