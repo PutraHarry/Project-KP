@@ -13,7 +13,7 @@
           <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">placeholder</a>
+          <a href="#" class="d-block">{{Auth::guard('admin')->user()->username}}</a>
         </div>
       </div>
 
@@ -44,35 +44,37 @@
           </li>
     
           <li class="nav-header">MENU</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                Periode
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/periode" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Periode Stok</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/periode/tutupperiode" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tutup Periode</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/periode/bukaperiode" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Buka Periode</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          @if (auth()->guard('admin')->user()->id_jabatan == '1')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-calendar-alt"></i>
+                <p>
+                  Periode
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/periode" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Periode Stok</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/periode/tutupperiode" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tutup Periode</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/periode/bukaperiode" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Buka Periode</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endif
 
           <li class="nav-item">
             <a href="/saldoawal" class="nav-link">
@@ -82,8 +84,16 @@
               </p>
             </a>
           </li>
-
           <li class="nav-item">
+            <a href="/penerimaan" class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p>
+                Penerimaan
+              </p>
+            </a>
+          </li>
+
+          <!--<li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-bar"></i>
               <p>
@@ -123,9 +133,9 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/penggunaan" class="nav-link">
               <i class="nav-icon fas fa-sitemap"></i>
               <p>
                 Penggunaan
@@ -133,15 +143,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/pengeluaran" class="nav-link">
               <i class="nav-icon fas fa-money-check"></i>
               <p>
                 Pengeluaran
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+          <!--<li class="nav-item">
+            <a href="/opname" class="nav-link">
               <i class="nav-icon fas fa-warehouse"></i>
               <p>
                 Opname
@@ -149,7 +159,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="/pemusnahan" class="nav-link">
               <i class="nav-icon fas fa-fire"></i>
               <p>
                 Pemusnahan
@@ -162,6 +172,32 @@
               <i class="nav-icon fas fa-file-alt "></i>
               <p>
                 Bukti Umum
+              </p>
+            </a>
+          </li>-->
+          <li class="nav-header">Admin</li>
+          <li class="nav-item">
+            <a href="/tambah-user" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Tambah User
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/master-barang" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Master Barang
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">PELAPORAN</li>
+          <li class="nav-item">
+            <a href="/laporan" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Laporan
               </p>
             </a>
           </li>

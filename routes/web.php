@@ -58,9 +58,61 @@ Route::get('/buktiumum/create', function () {
 });
 Route::get('/buktiumum/edit', function () {
     return view('/Admin/Bukti-umum/edit');
+});
+
+Route::get('/penerimaan', function () {
+    return view('/Admin/Penerimaan/show');
+});
+
+Route::get('/penerimaan/create', function () {
+    return view('/Admin/Penerimaan/create');
+});
+Route::get('/penerimaan/edit', function () {
+    return view('/Admin/Penerimaan/edit');
+});
+Route::get('/penggunaan', function () {
+    return view('/Admin/Penggunaan/show');
+});
+Route::get('/penggunaan/create', function () {
+    return view('/Admin/Penggunaan/create');
+});
+Route::get('/penggunaan/edit', function () {
+    return view('/Admin/Penggunaan/edit');
+});
+Route::get('/penggunaan/show-detail', function () {
+    return view('/Admin/Penggunaan/show-detail');
+});
+
+
+Route::get('/pengeluaran', function () {
+    return view('/Admin/Pengeluaran/show');
+});
+Route::get('/pengeluaran/create', function () {
+    return view('/Admin/Pengeluaran/create');
+});
+Route::get('/pengeluaran/edit', function () {
+    return view('/Admin/Pengeluaran/edit');
+});
+Route::get('/laporan', function () {
+    return view('/Admin/Laporan/show');
 });*/
 
+Route::get('/tambah-user', function () {
+    return view('/Admin/Tambah-User/show');
+});
+Route::get('/tambah-user/create', function () {
+    return view('/Admin/Tambah-User/create');
+});
+Route::get('/tambah-user/edit', function () {
+    return view('/Admin/Tambah-User/edit');
+});
 
+Route::get('/master-barang', function () {
+    return view('/Admin/Master-Barang/show');
+});
+Route::get('/master-barang/create', function () {
+    return view('/Admin/Master-Barang/create');
+});
 
 
 Route::get('/tabel', 'TestController@datatest');
@@ -90,12 +142,37 @@ Route::get('/periode/tutupperiode/{id}','PeriodeController@prosesTutup');
 Route::get('/saldoawal', 'SaldoAwalController@dataSaldoAwal');
 Route::get('/saldoawal/create', 'SaldoAwalController@addSaldoAwal');
 Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
-Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal');
+Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal')->name('saldoawaledit');
 Route::post('/saldoawal/update/{id}', 'SaldoAwalController@updateSaldoAwal');
 Route::get('/saldoawal/statusfinal/{id}', 'SaldoAwalController@prosesFinal');
+Route::post('/saldoawal/updateDetail/{id}', 'SaldoAwalController@insertDetailSaldoBarang');
+Route::post('/saldoawal/editDetail/{id}', 'SaldoAwalController@editDetailSaldoBarang');
+
+
+//PENERIMAAN
+Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan')->name('penerimaan');
+Route::get('/penerimaan/create', 'PenerimaanController@addPenerimaan');
+Route::post('/penerimaan/insert', 'PenerimaanController@insertPenerimaan')->name('insertPenerimaan');
+Route::get('/penerimaan/edit/{id}', 'PenerimaanController@editPenerimaan')->name('penerimaanEdit');
+Route::post('/penerimaan/update/{id}', 'PenerimaanController@updatePenerimaan')->name('updatePenerimaan');
+Route::post('/penerimaan/updateDetail/{id}', 'PenerimaanController@insertDetailPenerimaan')->name('updateDetailPenerimaan');
+Route::post('/penerimaan/editDetail/{id}', 'PenerimaanController@editDetailPenerimaan')->name('editDetailPenerimaan');
+
+//PENGGUNAAN
+Route::get('/penggunaan', 'PenggunaanController@dataPenggunaan')->name('penggunaan');
+Route::get('/penggunaan/create', 'PenggunaanController@createPenggunaan')->name('createPenggunaan');
+Route::post('/penggunaan/insert', 'PenggunaanController@insertPenggunaan')->name('insertPenggunaan');
+Route::get('/penggunaan/edit/{id}', 'PenggunaanController@editPenggunaan')->name('editPenggunaan');
+Route::get('/penggunaan/detailPenerimaan/{id}', 'PenggunaanController@getDataDetailPenerimaan')->name('getDataDetail');
+Route::post('/penggunaan/final/{idPenggunaan}/detail/{idPenerimaan}', 'PenggunaanController@finalPenggunaan')->name('finalPenggunaan');
+
+//PENGELUARAN
+Route::get('/pengeluaran', 'PengeluaranController@dataPengeluaran')->name('pengeluaran');
+Route::get('/pengeluaran/create', 'PengeluaranController@createPengeluaran')->name('createPengeluaran');
+Route::get('/pengeluaran/edit', 'PengeluaranController@editPengeluaran')->name('editPengeluaran');
 
 //BUKTI UMUM
 Route::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');
 Route::get('/buktiumum/create', 'BuktiUmumController@addBuktiUmum');
-Route::post('/buktiumum/insert','BuktiUmumController@insertBuktiUmumm');
+Route::post('/buktiumum/insert','BuktiUmumController@insertBuktiUmum');
 Route::get('/buktiumum/edit/{id}', 'BuktiUmumController@editBuktiUmum');
