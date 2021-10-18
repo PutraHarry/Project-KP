@@ -73,6 +73,12 @@ Edit Penerimaan Baru
                       </span>
                       <span class="text">Draft</span>
                     </button>
+                    <button type="submit" class="btn btn-success btn-icon-split">
+                      <span class="icon text-white-50">
+                          <i class="fas fa-check"></i>
+                      </span>
+                      <span class="text">Final</span>
+                  </button>
                   </div>
                 </div>
                 <form id="quickForm">
@@ -101,11 +107,7 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div class="form-group">
                           <label>Status</label>
-                          <select class="form-control" name="status_penerimaan" id="status_penerimaan" disabled>
-                          @foreach ($statusPenerimaan as $sp)
-                            <option value="{{ $sp }}" @if($tpenerimaan->status_penerimaan == $sp) selected @endif>{{ $sp }}</option>
-                          @endforeach
-                          </select>
+                          <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
                         </div>
                         <div class="form-group">
                             <label>Pengirim</label>

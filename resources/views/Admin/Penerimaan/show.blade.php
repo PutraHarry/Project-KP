@@ -94,7 +94,13 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpo->kode_penerimaan }}</td>
                                         <td>{{ $tpo->tgl_terima }}</td>
-                                        <td>{{ $tpo->status_penerimaan }}</td>
+                                        <td>
+                                          @if($tpo->status_penerimaan == "draft")
+                                            <span class="badge badge-primary">Draft</span>
+                                          @elseif($tpo->status_penerimaan == "final")
+                                            <span class="badge badge-danger">Final</span>                       
+                                          @endif    
+                                        </td>
                                         <td>{{ $tpo->pengirim }}</td>
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tpo->id }}" class="btn btn-warning btn-icon-split">
@@ -131,7 +137,13 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpno->kode_penerimaan }}</td>
                                         <td>{{ $tpno->tgl_terima }}</td>
-                                        <td>{{ $tpno->status_penerimaan }}</td>
+                                        <td>
+                                          @if($tpno->status_penerimaan == "draft")
+                                            <span class="badge badge-primary">Draft</span>
+                                          @elseif($tpno->status_penerimaan == "final")
+                                            <span class="badge badge-danger">Final</span>                       
+                                          @endif  
+                                        </td>
                                         <td>{{ $tpno->pengirim }}</td>
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tpno->id }}" class="btn btn-warning btn-icon-split">
@@ -168,7 +180,13 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tph->kode_penerimaan }}</td>
                                         <td>{{ $tph->tgl_terima }}</td>
-                                        <td>{{ $tph->status_penerimaan }}</td>
+                                        <td>
+                                          @if($tph->status_penerimaan == "draft")
+                                            <span class="badge badge-primary">Draft</span>
+                                          @elseif($tph->status_penerimaan == "final")
+                                            <span class="badge badge-danger">Final</span>                       
+                                          @endif  
+                                        </td>
                                         <td>{{ $tph->pengirim }}</td>
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tph->id }}" class="btn btn-warning btn-icon-split">
@@ -205,7 +223,13 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpnh->kode_penerimaan }}</td>
                                         <td>{{ $tpnh->tgl_terima }}</td>
-                                        <td>{{ $tpnh->status_penerimaan }}</td>
+                                        <td>
+                                          @if($tpnh->status_penerimaan == "draft")
+                                            <span class="badge badge-primary">Draft</span>
+                                          @elseif($tpnh->status_penerimaan == "final")
+                                            <span class="badge badge-danger">Final</span>                       
+                                          @endif  
+                                        </td>
                                         <td>{{ $tpnh->pengirim }}</td>
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tpnh->id }}" class="btn btn-warning btn-icon-split">
@@ -242,7 +266,13 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpna->kode_penerimaan }}</td>
                                         <td>{{ $tpna->tgl_terima }}</td>
-                                        <td>{{ $tpna->status_penerimaan }}</td>
+                                        <td>
+                                          @if($tpna->status_penerimaan == "draft")
+                                            <span class="badge badge-primary">Draft</span>
+                                          @elseif($tpna->status_penerimaan == "final")
+                                            <span class="badge badge-danger">Final</span>                       
+                                          @endif  
+                                        </td>
                                         <td>{{ $tpna->pengirim }}</td>
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tpna->id }}" class="btn btn-warning btn-icon-split">

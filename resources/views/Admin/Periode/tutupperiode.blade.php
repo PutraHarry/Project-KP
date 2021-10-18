@@ -77,7 +77,13 @@
                       <td>{{ $tp->nama_periode }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
-                      <td>{{ $tp->status_periode }}</td>
+                      <td>
+                        @if($tp->status_periode == "open")
+                          <span class="badge badge-primary">Open</span>
+                        @elseif($tp->status_periode == "close")
+                          <span class="badge badge-danger">Close</span>                       
+                        @endif    
+                      </td>
                       <td>{{ $tp->ket_periode }}</td>
                       <td class="text-center">
                         <button class="btn btn-primary btn-icon-split" onclick="tutupPeriode({{$tp->id}})">

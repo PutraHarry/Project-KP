@@ -71,13 +71,19 @@
                   </thead>
                   <tbody>
                     @foreach($bukaperiode as $bp)
-                    <tr class="text-center">
+                    <tr>
                       <td class="text-center">{{ $loop->iteration }}</td>
                       <td>{{ $bp->nama_opd }}</td>
                       <td>{{ $bp->nama_periode }}</td>
                       <td>{{ $bp->tgl_mulai }}</td>
                       <td>{{ $bp->tgl_selesai }}</td>
-                      <td>{{ $bp->status_periode }}</td>
+                      <td>
+                        @if($bp->status_periode == "open")
+                          <span class="badge badge-primary">Open</span>
+                        @elseif($bp->status_periode == "close")
+                          <span class="badge badge-danger">Close</span>                       
+                        @endif    
+                      </td>
                       <td>{{ $bp->ket_periode }}</td>
                       <td class="text-center">
                         <button class="btn btn-primary btn-icon-split" onclick="bukaPeriode({{$bp->id}})">

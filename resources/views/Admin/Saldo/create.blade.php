@@ -71,13 +71,7 @@ Create Saldo Awal Baru
                           <i class="fas fa-edit"></i>
                       </span>
                       <span class="text">Draft</span>
-                    </button>
-                    <button type="submit" class="btn btn-success btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        <span class="text">Final</span>
-                    </button>
+                    </button>                    
                   </div>
                 </div>
 
@@ -99,9 +93,7 @@ Create Saldo Awal Baru
                         <div class="col-3">
                           <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control" name="status_saldo" id="status_saldo" disabled>
-                            <option value="draft">Draft</option>
-                            </select>
+                            <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>                                                   
                           </div>
                           <div class="form-group">
                               <label>Keterangan</label>

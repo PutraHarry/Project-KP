@@ -82,7 +82,13 @@
                               <td class="text-center">{{ $loop->iteration }}</td>
                               <td>{{ $ts->kode_saldo }}</td>
                               <td>{{ $ts->tgl_input }}</td>
-                              <td>{{ $ts->status_saldo }}</td>
+                              <td>
+                                @if($ts->status_saldo == "draft")
+                                  <span class="badge badge-warning">Draft</span>
+                                @elseif($ts->status_saldo == "final")
+                                  <span class="badge badge-primary">Final</span>
+                                @endif
+                              </td>
                               <td>{{ $ts->ket_saldo }}</td>
                               <td class="text-center">
                                   <a href="/saldoawal/edit/{{ $ts->id }}" class="btn btn-warning btn-icon-split">

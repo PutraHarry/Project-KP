@@ -99,8 +99,7 @@ Edit Saldo Awal
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label>Status</label>
-                                                    <select class="form-control" name="status_saldo" id="status_saldo" disabled>
-                                                    <option value="draft">Draft</option>
+                                                    <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
