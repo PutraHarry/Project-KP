@@ -114,4 +114,9 @@ class PenggunaanController extends Controller
 
         return response()->json($detailPenerimaan);
     }
+
+    public function finalPenggunaan($idPenggunaan, $idPenerimaan)
+    {
+        
+    }
 }

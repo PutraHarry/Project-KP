@@ -111,8 +111,8 @@ Edit Penerimaan Baru
                             <label>Pengirim</label>
                             <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}">
                         </div>
-                        </div>
-                        <div class="col-6">
+                      </div>
+                      <div class="col-6">
                         <div class="text-center">
                             <label>Total Harga:</label>
                             <h1>

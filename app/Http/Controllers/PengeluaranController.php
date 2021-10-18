@@ -26,7 +26,9 @@ class PengeluaranController extends Controller
             $periodeAktif = "-";
         }
 
-        return view("Admin.Pengeluaran.show", compact('periodeAktif',));
+        $tpengeluaran = PengeluaranModel::get();
+
+        return view("Admin.Pengeluaran.show", compact('periodeAktif', 'tpengeluaran'));
     }
 
     public function createPengeluaran()
