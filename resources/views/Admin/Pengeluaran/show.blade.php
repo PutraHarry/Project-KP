@@ -77,12 +77,13 @@
                           </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>123-456-789</td>
-                            <td>01-01-2021</td>
-                            <td>Final</td>
-                            <td>Keterangan testing</td>
+                        @foreach ($tpengeluaran as $tp)
+                          <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $tp->kode_pengeluaran }}</td>
+                            <td>{{ $tp->tgl_keluar }}</td>
+                            <td>{{ $tp->status_pengeluaran }}</td>
+                            <td>{{ $tp->ket_pengeluaran }}</td>
                             <td class="text-center">
                                 <a href="/pengeluaran/edit" class="btn btn-warning btn-icon-split">
                                   <span class="icon">
@@ -91,7 +92,8 @@
                                   <span class="text">Edit</span>
                                 </a>
                             </td>
-                        </tr>
+                          </tr>
+                        @endforeach
                       </tbody>
                   </table>
                 </div>
