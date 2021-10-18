@@ -27,6 +27,7 @@ Edit Penggunaan
     <link rel="stylesheet" href="/adminlte/plugins/dropzone/min/dropzone.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endpush
 
 @section('content')
@@ -108,7 +109,7 @@ Edit Penggunaan
                               <label>Total Harga:</label>
                               <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold">10,000.000.000.000</span>
+                                <span class="text-bold" id="total_harga"></span>
                               </h1>
                           </div>    
                         </div>
@@ -116,8 +117,8 @@ Edit Penggunaan
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Nota Bukti Umum</label>
-                                <select class="select2" name="id_buktiumum" id="id_buktiumum" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
+                                <label>Kode Penerimaan</label>
+                                <select class="select2" name="id_penerimaan" id="id_penerimaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
                                   @foreach($tpenerimaan as $tp)  
                                     <option value={{ $tp->id }} @if($tp->id == $tpenggunaan->id_penerimaan) selected @endif>{{ $tp->kode_penerimaan }}</option>
                                   @endforeach
@@ -153,18 +154,7 @@ Edit Penggunaan
                                         <th width="200px">Keterangan</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($barangPenggunaan as $bpeng)
-                                        <tr>
-                                          <td class="text-center">{{ $loop->iteration }}</td>
-                                          <td> {{ $bpeng->barang->nama_m_barang }} </td>
-                                          <td> {{ $bpeng->qty }} </td>
-                                          <td> {{ $bpeng->barang->satuan_m_barang }} </td>
-                                          <td> {{ $bpeng->barang->harga_m_barang }} </td>
-                                          <td> {{ $bpeng->harga }} </td>
-                                          <td> {{ $bpeng->keterangan }} </td>
-                                        </tr>
-                                    @endforeach
+                                <tbody id="data">
                                 </tbody>
                             </table>
                         </div>
@@ -178,7 +168,6 @@ Edit Penggunaan
 @endsection
 
 @push('js')
-
 <!-- Bootstrap 4 -->
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
@@ -202,10 +191,51 @@ Edit Penggunaan
     $("input[data-bootstrap-switch]").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
-
   })
+
+      let id = $('#id_penerimaan').val();
+      $.ajax({
+          type: 'GET',
+          url: '/penggunaan/detailPenerimaan/'+id,
+          success: function (response){
+            console.log(response);
+              $('#data').empty();
+              let count = 0;
+              let total_harga = 0;
+              response.forEach(element => {
+                count = count + 1;
+                total_harga = total_harga + element['harga'];
+                  $('#data').append('<tr><td class="text-center">'+count+'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
+              });
+              $('#total_harga').text(total_harga);
+              total_harga = 0;
+              count = 0;
+          }
+      });
+
+  $('#id_penerimaan').change(function() {
+      if($('#id_penerimaan').val() != ""){ 
+          let id = $(this).val();
+          $.ajax({
+              type: 'GET',
+              url: '/penggunaan/detailPenerimaan/'+id,
+              success: function (response){
+                console.log(response);
+                  $('#data').empty();
+                  let count = 0;
+                  let total_harga = 0;
+                  response.forEach(element => {
+                    count = count + 1;
+                    total_harga = total_harga + element['harga'];
+                      $('#data').append('<tr><td class="text-center">'+count+'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
+                  });
+                  $('#total_harga').text(total_harga);
+                  total_harga = 0;
+                  count = 0;
+              }
+          });
+      } 
+  });
   
 </script>
-
-
 @endpush
