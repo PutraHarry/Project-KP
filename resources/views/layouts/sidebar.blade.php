@@ -175,6 +175,23 @@
               </p>
             </a>
           </li>-->
+          <li class="nav-header">Admin</li>
+          <li class="nav-item">
+            <a href="/tambah-user" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Tambah User
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/master-barang" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Master Barang
+              </p>
+            </a>
+          </li>
           <li class="nav-header">PELAPORAN</li>
           <li class="nav-item">
             <a href="/laporan" class="nav-link">

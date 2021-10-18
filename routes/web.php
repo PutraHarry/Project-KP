@@ -97,6 +97,23 @@ Route::get('/laporan', function () {
     return view('/Admin/Laporan/show');
 });*/
 
+Route::get('/tambah-user', function () {
+    return view('/Admin/Tambah-User/show');
+});
+Route::get('/tambah-user/create', function () {
+    return view('/Admin/Tambah-User/create');
+});
+Route::get('/tambah-user/edit', function () {
+    return view('/Admin/Tambah-User/edit');
+});
+
+Route::get('/master-barang', function () {
+    return view('/Admin/Master-Barang/show');
+});
+Route::get('/master-barang/create', function () {
+    return view('/Admin/Master-Barang/create');
+});
+
 
 Route::get('/tabel', 'TestController@datatest');
 Route::get('tabel/create', 'TestController@createdata');
