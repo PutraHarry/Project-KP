@@ -296,12 +296,16 @@ Edit Penggunaan
 
 <script>
   function statusFinal(idEdit) {
-    console.log(idEdit);
+    var idPenerimaan = $('#id_penerimaan').val();
+    var penerimaan = {!! json_encode($tpenerimaan->toArray()) !!}
+    penerimaan.forEach(element => {
+      if(element.id == idPenerimaan){
+        $('#kodePenerimaan').text(element.kode_penerimaan);
+      }
+    });
+    //console.log(idEdit);
     //$("#finalPenggunaan").attr("action", "/penggunaan/final" + idEdit + "/detail/");
-    //$(#id form di modal).val($(idselect).val())
-    $('#kodePenggunaan').text(idEdit);
-    //$('#kodePenggunaan').val(idEdit);
-    $('#kodePenerimaan').text($('#id_penerimaan').val());
+    $('#kodePenggunaan').text($('#kode_penggunaan').val());
     $('#modal-sfinal').modal('show');
   }
 </script>
