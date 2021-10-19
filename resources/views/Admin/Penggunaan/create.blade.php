@@ -79,9 +79,9 @@ Create Penggunaan Baru
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Tanggal Penggunaan Barang:</label>
+                                <label>Kode Penggunaan Barang:</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input">
+                                    <input type="text" class="form-control" name="kode_penggunaan" id="kode_penggunaan" placeholder="Input Kode Penggunaan">
                                 </div>  
                             </div>
                         </div>
@@ -103,7 +103,7 @@ Create Penggunaan Baru
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label>Kode Penerimaan</label>
                                 <select class="select2" name="id_penerimaan" id="id_penerimaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
@@ -111,6 +111,14 @@ Create Penggunaan Baru
                                     <option value={{ $tp->id }}>{{ $tp->kode_penerimaan }}</option>
                                   @endforeach
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Tanggal Penggunaan Barang:</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input">
+                                </div>  
                             </div>
                         </div>
                         <div class="col-3">
