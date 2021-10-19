@@ -27,36 +27,36 @@ Edit Penggunaan
     <link rel="stylesheet" href="/adminlte/plugins/dropzone/min/dropzone.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endpush
 
 @section('content')
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Persediaan Kab Badung</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/penggunaan">Penggunaan</a></li>
-              <li class="breadcrumb-item active">Edit Penggunaan</li>
-            </ol>
-          </div>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Persediaan Kab Badung</h1>
         </div>
-        <div>
-          <a href="/penggunaan" class="btn btn-default btn-icon-split">
-              <span class="icon">
-                  <i class="fas fa-arrow-left"></i>
-              </span>
-              <span class="text">Kembali</span>
-          </a>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/penggunaan">Penggunaan</a></li>
+            <li class="breadcrumb-item active">Edit Penggunaan</li>
+          </ol>
         </div>
       </div>
-    </section>
-      
-    <!-- Main content -->
+      <div>
+        <a href="/penggunaan" class="btn btn-default btn-icon-split">
+            <span class="icon">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span class="text">Kembali</span>
+        </a>
+      </div>
+    </div>
+  </section>
+    
+  <!-- Main content -->
+  <section>
     <form action="#" method="POST">
       @csrf
       <section class="content">
@@ -73,12 +73,12 @@ Edit Penggunaan
                       </span>
                       <span class="text">Draft</span>
                     </button>
-                    <button type="submit" class="btn btn-success btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        <span class="text">Final</span>
-                      </button>
+                    <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                      <span class="icon text-white-50">
+                          <i class="fas fa-check"></i>
+                      </span>
+                      <span class="text">Final</span>
+                    </button>
                   </div>
                 </div>
 
@@ -169,9 +169,45 @@ Edit Penggunaan
         </div>
       </section>
     </form>
+  </section>
+  
+  <div class="modal fade" id="modal-sfinal">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <form action="" id="finalPenggunaan" method="POST">
+                  <div class="modal-header">
+                      <h4 class="modal-title">Edit Detail Penerimaan</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <div>
+                      <span>Yakin akan merubah status menjadi final?</span>
+                    </div>
+                    <div>
+                      <span>Kode Penggunaan : </span>
+                      <span id="kodePenggunaan"></span>
+                    </div>
+                    <div>
+                      <span>Kode Penerimaan : </span>
+                      <span id="kodePenerimaan"></span>
+                    </div>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success">Simpan</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
 @endsection
 
 @push('js')
+<!-- jQuery -->
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
@@ -197,25 +233,25 @@ Edit Penggunaan
     })
   })
 
-      let id = $('#id_penerimaan').val();
-      $.ajax({
-          type: 'GET',
-          url: '/penggunaan/detailPenerimaan/'+id,
-          success: function (response){
-            console.log(response);
-              $('#data').empty();
-              let count = 0;
-              let total_harga = 0;
-              response.forEach(element => {
-                count = count + 1;
-                total_harga = total_harga + element['harga'];
-                  $('#data').append('<tr><td class="text-center">'+count+'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
-              });
-              $('#total_harga').text(total_harga);
-              total_harga = 0;
-              count = 0;
-          }
-      });
+  let id = $('#id_penerimaan').val();
+  $.ajax({
+      type: 'GET',
+      url: '/penggunaan/detailPenerimaan/'+id,
+      success: function (response){
+        //console.log(response);
+          $('#data').empty();
+          let count = 0;
+          let total_harga = 0;
+          response.forEach(element => {
+            count = count + 1;
+            total_harga = total_harga + element['harga'];
+              $('#data').append('<tr><td class="text-center">'+count+'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
+          });
+          $('#total_harga').text(total_harga);
+          total_harga = 0;
+          count = 0;
+      }
+  });
 
   $('#id_penerimaan').change(function() {
       if($('#id_penerimaan').val() != ""){ 
@@ -231,7 +267,7 @@ Edit Penggunaan
                   response.forEach(element => {
                     count = count + 1;
                     total_harga = total_harga + element['harga'];
-                      $('#data').append('<tr><td class="text-center">'+count+'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
+                      $('#data').append('<tr><td class="text-center">' + count + '</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
                   });
                   $('#total_harga').text(total_harga);
                   total_harga = 0;
@@ -240,6 +276,33 @@ Edit Penggunaan
           });
       } 
   });
-  
+
+  //ambil idPenerimaan untuk proses final
+</script>
+
+<script>
+  $(function () {
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
+<script>
+  function statusFinal(idEdit) {
+    console.log(idEdit);
+    //$("#finalPenggunaan").attr("action", "/penggunaan/final" + idEdit + "/detail/");
+    //$(#id form di modal).val($(idselect).val())
+    $('#kodePenggunaan').text(idEdit);
+    //$('#kodePenggunaan').val(idEdit);
+    $('#kodePenerimaan').text($('#id_penerimaan').val());
+    $('#modal-sfinal').modal('show');
+  }
 </script>
 @endpush
