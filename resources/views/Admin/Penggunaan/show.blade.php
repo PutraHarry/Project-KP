@@ -69,6 +69,7 @@
                       <thead>
                           <tr class="text-center">
                             <th>No.</th>
+                            <th>Kode Penggunaan</th>
                             <th>Lokasi Gudang</th>
                             <th>Lokasi Tujuan</th>
                             <th>Tanggal</th>
@@ -80,6 +81,7 @@
                         @foreach ($tpenggunaan as $tp)
                           <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $tp->kode_penggunaan}}</td>
                             <td>{{ $tp->gudang_asal }}</td>
                             <td>{{ $tp->gudang_tujuan }}</td>
                             <td>{{ $tp->tgl_penggunaan }}</td>
