@@ -54,8 +54,10 @@ class PenggunaanController extends Controller
     {
         //dd($request);
         $validator = Validator::make($request->all(), [
+            'kode_penggunaan' => 'required',
             'tgl_input' => 'required',
-            'id_penerimaan' => 'required'
+            'id_penerimaan' => 'required',
+            'status_saldo' => 'required'
         ]);
 
         if($validator->fails()){
@@ -63,11 +65,12 @@ class PenggunaanController extends Controller
         }
 
         $penggunaan = new PenggunaanModel();
+        $penggunaan->kode_penggunaan = $request->kode_penggunaan;
         $penggunaan->tgl_penggunaan = $request->tgl_input;
         $penggunaan->id_penerimaan = $request->id_penerimaan;
         $penggunaan->gudang_asal = Auth::user()->unit->opd->nama_opd;
         $penggunaan->gudang_tujuan = Auth::user()->unit->unit;
-        $penggunaan->status_penggunaan = "draft";
+        $penggunaan->status_penggunaan = $request->status_saldo;
         //dd($penggunaan);
         $penggunaan->save();
 
@@ -108,6 +111,28 @@ class PenggunaanController extends Controller
         return view("Admin.Penggunaan.edit", compact('periodeAktif', 'tpenggunaan', 'idEdit', 'tpenerimaan', 'barangPenggunaan'));
     }
 
+    public function updatePenggunaan($id, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'kode_penggunaan' => 'required',
+            'tgl_input' => 'required',
+            'id_penerimaan' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $penggunaan = PenggunaanModel::find($id);
+        $penggunaan->kode_penggunaan = $request->kode_penggunaan;
+        $penggunaan->tgl_penggunaan = $request->tgl_input;
+        $penggunaan->id_penerimaan = $request->id_penerimaan;
+        //dd($penggunaan);
+        $penggunaan->update();
+
+        return redirect()->route('penggunaan')->with('statusInput', 'Update Success');
+    }
+
     public function getDataDetailPenerimaan($id)
     {
         $detailPenerimaan = DetailPenerimaanModel::with('barang')->where('id_penerimaan',$id)->get();
@@ -115,8 +140,42 @@ class PenggunaanController extends Controller
         return response()->json($detailPenerimaan);
     }
 
-    public function finalPenggunaan($idPenggunaan, $idPenerimaan)
+    public function finalPenggunaan($idPenggunaan, $idPenerimaan, Request $request)
     {
-        
+        $validator = Validator::make($request->all(), [
+            'tglPenggunaan' => 'required',
+            'kodePenggunaan' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $penerimaanData = PenerimaanModel::find($idPenerimaan);
+        //dd($Penerimaandata);
+
+        $penggunaan = PenggunaanModel::find($idPenggunaan);
+        $penggunaan->kode_penggunaan = $request->kodePenggunaan;
+        $penggunaan->tgl_penggunaan = $request->tglPenggunaan;
+        $penggunaan->id_penerimaan = $idPenerimaan;
+        $penggunaan->status_penggunaan = 'final';
+        $penggunaan->total = $penerimaanData->total;
+        $penggunaan->update();
+
+        $penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
+        //dd($penerimaan);
+
+        foreach ($penerimaan as $dataPenerimaan) {
+            $detailPenggunaan = new DetailPenggunaanModel();
+            $detailPenggunaan->id_penggunaan = $idPenggunaan;
+            $detailPenggunaan->id_barang = $dataPenerimaan->id_barang;
+            $detailPenggunaan->qty = $dataPenerimaan->qty;
+            $detailPenggunaan->harga = $dataPenerimaan->harga;
+            $detailPenggunaan->keterangan = $dataPenerimaan->keterangan;
+            //dd($detailPenggunaan);
+            $detailPenggunaan->save();
+        }
+
+        return redirect()->route('penggunaan')->with('statusInput', 'Status Final Success');
     }
 }
