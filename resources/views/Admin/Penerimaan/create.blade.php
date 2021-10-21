@@ -108,6 +108,10 @@ Create Penerimaan Baru
                                 <label>Pengirim</label>
                                 <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim">
                             </div>
+                            <div class="form-group">
+                              <label>Keterangan</label>
+                              <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
+                            </div>
                             </div>
                             <div class="col-6">
                             <div class="text-center">
