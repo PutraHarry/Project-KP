@@ -112,6 +112,10 @@ Create Penggunaan Baru
                                   @endforeach
                                 </select>
                             </div>
+                            <div class="form-group">
+                              <label>Keterangan</label>
+                              <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..."></textarea>
+                            </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
