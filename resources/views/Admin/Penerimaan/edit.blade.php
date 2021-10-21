@@ -94,8 +94,8 @@ Edit Penerimaan Baru
                           </select>
                         </div>
                         <div class="form-group">
-                          <label for="penerimaan">Nama Penerimaan</label>
-                          <input type="text" class="form-control" name="namaPenerimaan" id="namaPenerimaan" placeholder="Kode Saldo" value="{{ $tpenerimaan->kode_penerimaan }}">
+                          <label for="penerimaan">Kode Penerimaan</label>
+                          <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penerimaan" value="{{ $tpenerimaan->kode_penerimaan }}">
                         </div>
                         <div class="form-group">
                           <label>Tanggal Penerimaan:</label>

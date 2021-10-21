@@ -90,7 +90,7 @@ Create Penerimaan Baru
                             </div>
                             <div class="form-group">
                                 <label for="penerimaan">Kode Penerimaan</label>
-                                <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penerimaan">
+                                <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Input Kode Penerimaan">
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Penerimaan:</label>
