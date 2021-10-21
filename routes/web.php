@@ -107,12 +107,12 @@ Route::get('/tambah-user/edit', function () {
     return view('/Admin/Tambah-User/edit');
 });
 
-Route::get('/master-barang', function () {
+/*Route::get('/master-barang', function () {
     return view('/Admin/Master-Barang/show');
 });
 Route::get('/master-barang/create', function () {
     return view('/Admin/Master-Barang/create');
-});
+});*/
 
 
 Route::get('/tabel', 'TestController@datatest');
@@ -172,8 +172,13 @@ Route::get('/pengeluaran', 'PengeluaranController@dataPengeluaran')->name('penge
 Route::get('/pengeluaran/create', 'PengeluaranController@createPengeluaran')->name('createPengeluaran');
 Route::get('/pengeluaran/edit', 'PengeluaranController@editPengeluaran')->name('editPengeluaran');
 
+//MASTER BARANG
+Route::get('/barang', 'BarangController@dataBarang')->name('barang');
+Route::get('/barang/create', 'BarangController@createBarang')->name('createBarang');
+Route::get('/barang/edit', 'BarangController@editBarang')->name('editBarang');
+
 //BUKTI UMUM
-Route::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');
-Route::get('/buktiumum/create', 'BuktiUmumController@addBuktiUmum');
-Route::post('/buktiumum/insert','BuktiUmumController@insertBuktiUmum');
-Route::get('/buktiumum/edit/{id}', 'BuktiUmumController@editBuktiUmum');
+//Rsoute::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');
+//Route::get('/buktiumum/create', 'BuktiUmumController@addBuktiUmum');
+//Route::post('/buktiumum/insert','BuktiUmumController@insertBuktiUmum');
+//Route::get('/buktiumum/edit/{id}', 'BuktiUmumController@editBuktiUmum');

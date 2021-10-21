@@ -56,7 +56,7 @@
                       <h3 class="card-title">List Data Barang</h3>
                       <div class="card-tools">                          
                           <div class="col-md-12">
-                              <a href="/master-barang/create" class="btn btn-primary">
+                              <a href="/barang/create" class="btn btn-primary">
                                   <i class="fa fa-plus"></i> 
                                   Barang Baru
                               </a>
@@ -95,7 +95,7 @@
                                         <td>test</td>
                                         <td>test</td>
                                         <td class="text-center">
-                                          <a href="/master-barang/edit/#" class="btn btn-warning btn-icon-split">
+                                          <a href="/barang/edit" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
                                                 <i class="fas fa-edit"></i>
                                             </span>
