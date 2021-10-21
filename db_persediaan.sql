@@ -84,54 +84,6 @@ CREATE TABLE `tb_barang_unit` (
 
 /*Data for the table `tb_barang_unit` */
 
-/*Table structure for table `tb_bu` */
-
-DROP TABLE IF EXISTS `tb_bu`;
-
-CREATE TABLE `tb_bu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `no_BU` varchar(255) DEFAULT NULL,
-  `tgl_BU` date DEFAULT NULL,
-  `ket_BU` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_bu` */
-
-insert  into `tb_bu`(`id`,`no_BU`,`tgl_BU`,`ket_BU`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'BPKAD/12/A','2021-07-31','Penerimaan Tinta dari Kominfo\r\n',NULL,NULL,NULL),
-(2,'BPKAD/11/B','2021-07-30','Penerimaan Obat',NULL,NULL,NULL),
-(3,'BPKAD/11/D','2021-07-31','Penggunaan Kertas',NULL,NULL,NULL);
-
-/*Table structure for table `tb_d_bu` */
-
-DROP TABLE IF EXISTS `tb_d_bu`;
-
-CREATE TABLE `tb_d_bu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_BU` int(11) DEFAULT NULL,
-  `id_barang` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
-  `harga` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_BU` (`id_BU`),
-  KEY `id_barang` (`id_barang`),
-  CONSTRAINT `tb_d_bu_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`),
-  CONSTRAINT `tb_d_bu_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `tb_master_barang` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_d_bu` */
-
-insert  into `tb_d_bu`(`id`,`id_BU`,`id_barang`,`qty`,`harga`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,2,2,40000,NULL,NULL,NULL),
-(2,3,1,1,34000,NULL,NULL,NULL);
-
 /*Table structure for table `tb_d_opname` */
 
 DROP TABLE IF EXISTS `tb_d_opname`;
@@ -456,7 +408,6 @@ DROP TABLE IF EXISTS `tb_pengeluaran`;
 CREATE TABLE `tb_pengeluaran` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode_pengeluaran` varchar(255) DEFAULT NULL,
-  `id_BU` int(11) DEFAULT NULL,
   `tgl_keluar` date DEFAULT NULL,
   `ket_pengeluaran` text DEFAULT NULL,
   `status_pengeluaran` enum('draft','final') DEFAULT NULL,
@@ -466,18 +417,16 @@ CREATE TABLE `tb_pengeluaran` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_BU` (`id_BU`),
   KEY `id_periode` (`id_periode`),
   KEY `id_penggunaan` (`id_penggunaan`),
-  CONSTRAINT `tb_pengeluaran_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`),
   CONSTRAINT `tb_pengeluaran_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`),
   CONSTRAINT `tb_pengeluaran_ibfk_3` FOREIGN KEY (`id_penggunaan`) REFERENCES `tb_penggunaan` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_pengeluaran` */
 
-insert  into `tb_pengeluaran`(`id`,`kode_pengeluaran`,`id_BU`,`tgl_keluar`,`ket_pengeluaran`,`status_pengeluaran`,`id_periode`,`id_penggunaan`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'BPKAD/123/A',3,'2021-07-31','Kertas\r\n','final',NULL,NULL,NULL,NULL,NULL);
+insert  into `tb_pengeluaran`(`id`,`kode_pengeluaran`,`tgl_keluar`,`ket_pengeluaran`,`status_pengeluaran`,`id_periode`,`id_penggunaan`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'BPKAD/123/A','2021-07-31','Kertas\r\n','final',NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `tb_penggunaan` */
 
@@ -498,7 +447,7 @@ CREATE TABLE `tb_penggunaan` (
   PRIMARY KEY (`id`),
   KEY `id_BU` (`id_penerimaan`),
   KEY `id_periode` (`id_periode`),
-  CONSTRAINT `tb_penggunaan_ibfk_1` FOREIGN KEY (`id_penerimaan`) REFERENCES `tb_bu` (`id`),
+  CONSTRAINT `tb_penggunaan_ibfk_1` FOREIGN KEY (`id_penerimaan`) REFERENCES `tb_penerimaan` (`id`),
   CONSTRAINT `tb_penggunaan_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 
