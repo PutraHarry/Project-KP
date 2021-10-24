@@ -101,7 +101,11 @@
                                   <span class="icon">
                                       <i class="fas fa-edit"></i>
                                   </span>
-                                  <span class="text">Edit</span>
+                                </a>
+                                <a href="#" class="btn btn-danger btn-icon-split">
+                                  <span class="icon">
+                                      <i class="fas fa-trash"></i>
+                                  </span>
                                 </a>
                             </td>
                           </tr>
