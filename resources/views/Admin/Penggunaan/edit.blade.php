@@ -121,7 +121,7 @@ Edit Penggunaan
                             </div>
                             <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..."></textarea>
+                              <textarea class="form-control" rows="3" name="ket_penggunaan" id="ket_penggunaan" placeholder="Input Keterangan...">{{ $tpenggunaan->ket_penggunaan }}</textarea>
                             </div>
                         </div>
                         <div class="col-3">
@@ -200,6 +200,10 @@ Edit Penggunaan
                     <div class="form-group">
                       <label>Tanggal Penggunaan</label>
                       <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label>Keterangan</label>
+                      <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
                     </div>
                   </div>
                   <div class="modal-footer justify-content-between">
@@ -314,6 +318,7 @@ Edit Penggunaan
     $("#finalPenggunaan").attr("action", "/penggunaan/final/" + idEdit + "/detail/" + idPenerimaan);
     $('#kodePenggunaan').val($('#kode_penggunaan').val());
     $('#tglPenggunaan').val($('#tgl_input').val());
+    $('#ketPenggunaan').val($('#ket_penggunaan').val());
     $('#modal-sfinal').modal('show');
   }
 </script>

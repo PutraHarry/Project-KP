@@ -55,7 +55,7 @@
               <div class="card-header">
                 <h3 class="card-title">List Data User</h3>
                   <div class="card-tools">
-                      <a href="/tambah-user/create" class="btn btn-primary btn-icon-split">
+                      <a href="/user/create" class="btn btn-primary btn-icon-split">
                           <span class="icon">
                               <i class="fas fa-plus"></i>
                           </span>
@@ -76,26 +76,28 @@
                     </tr>
                   </thead>
                   <tbody>                
-                    <tr>
-                      <td class="text-center">1</td>
-                      <td>super_admin</td>
-                      <td>Super Admin</td>
-                      <td>Super Admin</td>
-                      <td>Unit Testing</td>
+                    @foreach ($tuser as $tu)
+                      <tr>
+                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td>{{ $tu->username }}</td>
+                        <td>{{ $tu->nama_user }}</td>
+                        <td>{{ $tu->jabatan->jabatan ?? '-'}}</td>
+                        <td>{{ $tu->unit->unit ?? '-'}}</td>
 
-                      <td class="text-center">
-                        <a href="/tambah-user/edit" class="btn btn-warning btn-icon-split">
-                          <span class="icon">
-                              <i class="fas fa-edit"></i>
-                          </span>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-icon-split">
+                        <td class="text-center">
+                          <a href="/user/edit" class="btn btn-warning btn-icon-split">
                             <span class="icon">
-                                <i class="fas fa-trash"></i>
+                                <i class="fas fa-edit"></i>
                             </span>
-                        </a>
-                      </td>
-                    </tr>
+                          </a>
+                          <a href="#" class="btn btn-danger btn-icon-split">
+                              <span class="icon">
+                                  <i class="fas fa-trash"></i>
+                              </span>
+                          </a>
+                        </td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

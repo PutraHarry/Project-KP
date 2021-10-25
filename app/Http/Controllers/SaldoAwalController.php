@@ -150,9 +150,11 @@ class SaldoAwalController extends Controller
         return redirect()->back();
     }
 
-    public function prosesFinal($id)
+    public function finalSaldoAwal($id, Request $request)
     {
         $saldoawal = SaldoAwalModel::find($id);
+        $saldoawal->tgl_input = $request->tglSaldoAwal;
+        $saldoawal->ket_saldo = $request->ketSaldoAwal;
         $saldoawal->status_saldo = 'final';
         $saldoawal->update();
         
