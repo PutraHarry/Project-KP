@@ -101,14 +101,6 @@
                                         <i class="fas fa-trash"></i>
                                     </span>
                                   </a>
-                                  @if ($ts->status_saldo == 'draft')
-                                  <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <span class="text">Final</span>
-                                  </button>
-                                  @endif
                               </td>
                           </tr>
                         @endforeach

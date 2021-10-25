@@ -57,7 +57,8 @@ class PenggunaanController extends Controller
             'kode_penggunaan' => 'required',
             'tgl_input' => 'required',
             'id_penerimaan' => 'required',
-            'status_saldo' => 'required'
+            'status_saldo' => 'required',
+            'ket_penggunaan' => 'required'
         ]);
 
         if($validator->fails()){
@@ -71,6 +72,7 @@ class PenggunaanController extends Controller
         $penggunaan->gudang_asal = Auth::user()->unit->opd->nama_opd;
         $penggunaan->gudang_tujuan = Auth::user()->unit->unit;
         $penggunaan->status_penggunaan = $request->status_saldo;
+        $penggunaan->ket_penggunaan = $request->ket_penggunaan;
         //dd($penggunaan);
         $penggunaan->save();
 
@@ -105,10 +107,10 @@ class PenggunaanController extends Controller
 
         $tpenggunaan = PenggunaanModel::find($id);
         $tpenerimaan = PenerimaanModel::get();
-        $barangPenggunaan = DetailPenggunaanModel::with('barang')->where('id_penggunaan', $id)->get();
+        //$barangPenggunaan = DetailPenggunaanModel::with('barang')->where('id_penggunaan', $id)->get();
         $idEdit = $id;
 
-        return view("Admin.Penggunaan.edit", compact('periodeAktif', 'tpenggunaan', 'idEdit', 'tpenerimaan', 'barangPenggunaan'));
+        return view("Admin.Penggunaan.edit", compact('periodeAktif', 'tpenggunaan', 'idEdit', 'tpenerimaan'));
     }
 
     public function updatePenggunaan($id, Request $request)
@@ -116,7 +118,8 @@ class PenggunaanController extends Controller
         $validator = Validator::make($request->all(), [
             'kode_penggunaan' => 'required',
             'tgl_input' => 'required',
-            'id_penerimaan' => 'required'
+            'id_penerimaan' => 'required',
+            'ket_penggunaan' => 'required'
         ]);
 
         if($validator->fails()){
@@ -127,6 +130,7 @@ class PenggunaanController extends Controller
         $penggunaan->kode_penggunaan = $request->kode_penggunaan;
         $penggunaan->tgl_penggunaan = $request->tgl_input;
         $penggunaan->id_penerimaan = $request->id_penerimaan;
+        $penggunaan->ket_penggunaan = $request->ket_penggunaan;
         //dd($penggunaan);
         $penggunaan->update();
 
@@ -144,6 +148,7 @@ class PenggunaanController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'tglPenggunaan' => 'required',
+            'kodePenerimaan' => 'required',
             'kodePenggunaan' => 'required'
         ]);
 
@@ -160,6 +165,7 @@ class PenggunaanController extends Controller
         $penggunaan->id_penerimaan = $idPenerimaan;
         $penggunaan->status_penggunaan = 'final';
         $penggunaan->total = $penerimaanData->total;
+        $penggunaan->ket_penggunaan = $request->ketPenggunaan;
         $penggunaan->update();
 
         $penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();

@@ -144,10 +144,9 @@ Route::get('/saldoawal/create', 'SaldoAwalController@addSaldoAwal');
 Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal');
 Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal')->name('saldoawaledit');
 Route::post('/saldoawal/update/{id}', 'SaldoAwalController@updateSaldoAwal');
-Route::get('/saldoawal/statusfinal/{id}', 'SaldoAwalController@prosesFinal');
 Route::post('/saldoawal/updateDetail/{id}', 'SaldoAwalController@insertDetailSaldoBarang');
 Route::post('/saldoawal/editDetail/{id}', 'SaldoAwalController@editDetailSaldoBarang');
-
+Route::post('/saldoawal/final/{id}', 'SaldoAwalController@finalSaldoAwal')->name('finalSaldoAwal');
 
 //PENERIMAAN
 Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan')->name('penerimaan');
@@ -157,6 +156,7 @@ Route::get('/penerimaan/edit/{id}', 'PenerimaanController@editPenerimaan')->name
 Route::post('/penerimaan/update/{id}', 'PenerimaanController@updatePenerimaan')->name('updatePenerimaan');
 Route::post('/penerimaan/updateDetail/{id}', 'PenerimaanController@insertDetailPenerimaan')->name('updateDetailPenerimaan');
 Route::post('/penerimaan/editDetail/{id}', 'PenerimaanController@editDetailPenerimaan')->name('editDetailPenerimaan');
+Route::post('/penerimaan/final/{id}', 'PenerimaanController@finalPenerimaan')->name('finalPenerimaan');
 
 //PENGGUNAAN
 Route::get('/penggunaan', 'PenggunaanController@dataPenggunaan')->name('penggunaan');
@@ -164,18 +164,29 @@ Route::get('/penggunaan/create', 'PenggunaanController@createPenggunaan')->name(
 Route::post('/penggunaan/insert', 'PenggunaanController@insertPenggunaan')->name('insertPenggunaan');
 Route::get('/penggunaan/edit/{id}', 'PenggunaanController@editPenggunaan')->name('editPenggunaan');
 Route::post('/penggunaan/update/{id}', 'PenggunaanController@updatePenggunaan')->name('updatePenggunaan');
-Route::get('/penggunaan/detailPenerimaan/{id}', 'PenggunaanController@getDataDetailPenerimaan')->name('getDataDetail');
+Route::get('/penggunaan/detailPenerimaan/{id}', 'PenggunaanController@getDataDetailPenerimaan')->name('getDataDetailPenerimaan');
 Route::post('/penggunaan/final/{idPenggunaan}/detail/{idPenerimaan}', 'PenggunaanController@finalPenggunaan')->name('finalPenggunaan');
 
 //PENGELUARAN
 Route::get('/pengeluaran', 'PengeluaranController@dataPengeluaran')->name('pengeluaran');
 Route::get('/pengeluaran/create', 'PengeluaranController@createPengeluaran')->name('createPengeluaran');
-Route::get('/pengeluaran/edit', 'PengeluaranController@editPengeluaran')->name('editPengeluaran');
+Route::post('/pengeluaran/insert', 'PengeluaranController@insertPengeluaran')->name('insertPengeluaran');
+Route::get('/pengeluaran/edit/{id}', 'PengeluaranController@editPengeluaran')->name('editPengeluaran');
+Route::post('/pengeluaran/update/{id}', 'PengeluaranController@updatePengeluaran')->name('updatePengeluaran');
+Route::get('/pengeluaran/detailPenggunaan/{id}', 'PengeluaranController@getDataDetailPenggunaan')->name('getDataDetailPenggunaan');
+Route::post('/pengeluaran/final/{idPengeluaran}/detail/{idPenggunaan}', 'PengeluaranController@finalPengeluaran')->name('finalPengeluaran');
 
 //MASTER BARANG
 Route::get('/barang', 'BarangController@dataBarang')->name('barang');
 Route::get('/barang/create', 'BarangController@createBarang')->name('createBarang');
-Route::get('/barang/edit', 'BarangController@editBarang')->name('editBarang');
+Route::post('/barang/insert', 'BarangController@insertBarang')->name('insertBarang');
+Route::get('/barang/edit/{id}', 'BarangController@editBarang')->name('editBarang');
+Route::post('/barang/update/{id}', 'BarangController@updateBarang')->name('updateBarang');
+
+//TAMBAH USER
+Route::get('/user', 'AdminController@dataUser')->name('user');
+Route::get('/user/create', 'AdminController@createUser')->name('createUser');
+Route::get('/user/edit', 'AdminController@editUser')->name('editUser');
 
 //BUKTI UMUM
 //Rsoute::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');

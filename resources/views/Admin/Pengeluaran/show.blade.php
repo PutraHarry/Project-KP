@@ -85,7 +85,7 @@
                             <td>{{ $tp->status_pengeluaran }}</td>
                             <td>{{ $tp->ket_pengeluaran }}</td>
                             <td class="text-center">
-                                <a href="/pengeluaran/edit" class="btn btn-warning btn-icon-split">
+                                <a href="/pengeluaran/edit/{{ $tp->id }}" class="btn btn-warning btn-icon-split">
                                   <span class="icon">
                                       <i class="fas fa-edit"></i>
                                   </span>

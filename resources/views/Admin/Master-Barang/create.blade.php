@@ -56,7 +56,7 @@ Create Barang Baru
     </section>
       
     <!-- Main content -->
-    <form action="#" method="POST">
+    <form action="/barang/insert" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -76,9 +76,9 @@ Create Barang Baru
                     <div class="form-group">
                         <label>Jenis Barang</label>
                         <select class="select2" name="jenis_barang" id="jenis_barang" data-placeholder="Pilih Unit Perangkat Daeerah" style="width: 100%;">
-                        <option>KIB A</option>
-                        <option>KIB B</option>
-                        <option>KIB C</option>
+                        @foreach ($jenisBarang as $jb)
+                          <option value="{{ $jb }}">{{ $jb }}</option>
+                        @endforeach
                         </select>
                     </div>
                     
@@ -97,7 +97,7 @@ Create Barang Baru
                         </div>
                     </div>
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-warning">Reset</button>
+                    <button type="button" class="btn btn-warning">Reset</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
                 </form>
