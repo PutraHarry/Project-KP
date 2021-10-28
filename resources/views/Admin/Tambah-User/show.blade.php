@@ -71,6 +71,7 @@
                       <th width="100px">Username</th>
                       <th>Nama</th>
                       <th>Jabatan</th>
+                      <th>OPD</th>
                       <th>Unit</th>
                       <th>Aksi</th>
                     </tr>
@@ -81,6 +82,7 @@
                       <td>super_admin</td>
                       <td>Super Admin</td>
                       <td>Super Admin</td>
+                      <td>OPD Testing</td>
                       <td>Unit Testing</td>
 
                       <td class="text-center">
