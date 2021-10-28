@@ -57,7 +57,7 @@ Edit Penggunaan
     
   <!-- Main content -->
   <section>
-    <form action="#" method="POST">
+    <form action="/penggunaan/update/{{ $idEdit }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -81,7 +81,6 @@ Edit Penggunaan
                     </button>
                   </div>
                 </div>
-
                 <form id="quickForm">
                   <div class="card-body">
                     <div class="row">
@@ -122,7 +121,7 @@ Edit Penggunaan
                             </div>
                             <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..."></textarea>
+                              <textarea class="form-control" rows="3" name="ket_penggunaan" id="ket_penggunaan" placeholder="Input Keterangan...">{{ $tpenggunaan->ket_penggunaan }}</textarea>
                             </div>
                         </div>
                         <div class="col-3">
@@ -179,8 +178,9 @@ Edit Penggunaan
       <div class="modal-dialog modal-lg">
           <div class="modal-content">
               <form action="" id="finalPenggunaan" method="POST">
+                @csrf
                   <div class="modal-header">
-                      <h4 class="modal-title">Edit Detail Penerimaan</h4>
+                      <h4 class="modal-title">Final Penggunaan</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -189,13 +189,21 @@ Edit Penggunaan
                     <div>
                       <span>Yakin akan merubah status menjadi final?</span>
                     </div>
-                    <div>
-                      <span>Kode Penggunaan : </span>
-                      <span id="kodePenggunaan"></span>
+                    <div class="form-group">
+                      <label>Kode Penggunaan</label>
+                      <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penggunaan" value="" readonly>
                     </div>
-                    <div>
-                      <span>Kode Penerimaan : </span>
-                      <span id="kodePenerimaan"></span>
+                    <div class="form-group">
+                      <label>Kode Penerimaan</label>
+                      <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penerimaan" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label>Tanggal Penggunaan</label>
+                      <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label>Keterangan</label>
+                      <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
                     </div>
                   </div>
                   <div class="modal-footer justify-content-between">
@@ -281,7 +289,6 @@ Edit Penggunaan
       } 
   });
 
-  //ambil idPenerimaan untuk proses final
 </script>
 
 <script>
@@ -300,12 +307,18 @@ Edit Penggunaan
 
 <script>
   function statusFinal(idEdit) {
-    console.log(idEdit);
-    //$("#finalPenggunaan").attr("action", "/penggunaan/final" + idEdit + "/detail/");
-    //$(#id form di modal).val($(idselect).val())
-    $('#kodePenggunaan').text(idEdit);
-    //$('#kodePenggunaan').val(idEdit);
-    $('#kodePenerimaan').text($('#id_penerimaan').val());
+    var idPenerimaan = $('#id_penerimaan').val();
+    var penerimaan = {!! json_encode($tpenerimaan->toArray()) !!}
+    penerimaan.forEach(element => {
+      if(element.id == idPenerimaan){
+        $('#kodePenerimaan').val(element.kode_penerimaan);
+      }
+    });
+    //console.log(idEdit);
+    $("#finalPenggunaan").attr("action", "/penggunaan/final/" + idEdit + "/detail/" + idPenerimaan);
+    $('#kodePenggunaan').val($('#kode_penggunaan').val());
+    $('#tglPenggunaan').val($('#tgl_input').val());
+    $('#ketPenggunaan').val($('#ket_penggunaan').val());
     $('#modal-sfinal').modal('show');
   }
 </script>
