@@ -39,13 +39,13 @@ Create User Baru
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/tambah-user">Kelola User</a></li>
+              <li class="breadcrumb-item"><a href="/user">Kelola User</a></li>
               <li class="breadcrumb-item active">Tambah User Baru</li>
             </ol>
           </div>
         </div>
         <div>
-            <a href="/tambah-user" class="btn btn-default btn-icon-split">
+            <a href="/user" class="btn btn-default btn-icon-split">
                 <span class="icon">
                     <i class="fas fa-arrow-left"></i>
                 </span>
@@ -94,6 +94,17 @@ Create User Baru
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama User</label>
                         <input type="text" class="form-control" name="nama_periode" id="nama_periode" placeholder="Input Nama User">
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>Tanggal Lahir:</label>
+      
+                          <div class="input-group">
+                          <input type="date" class="form-control" name="dob" id="dob">
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label>OPD</label>
