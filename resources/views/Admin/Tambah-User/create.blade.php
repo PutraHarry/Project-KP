@@ -104,7 +104,6 @@ Create User Baru
                           </div>
                         </div>
                       </div>
-                    </div>
                     <div class="form-group">
                       <label>OPD</label>
                       <select class="select2" name="id_opd" id="id_opd" data-placeholder="Pilih OPD" style="width: 100%;">
