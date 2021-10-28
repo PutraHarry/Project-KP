@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use App\AdminModel;
 use App\PeriodeModel;
 use App\JabatanModel;
 use App\OPDModel;
+use App\UnitModel;
 
 class AdminController extends Controller
 {
@@ -61,11 +64,45 @@ class AdminController extends Controller
             $periodeAktif = "-";
         }
         
+        $dataOPD = OPDModel::get();
+        $jabatan = JabatanModel::get();
         
-        return view("Admin.Tambah-User.create", compact("periodeAktif"));
+        return view("Admin.Tambah-User.create", compact("periodeAktif", 'dataOPD', 'jabatan'));
     }
 
-    public function editUser()
+    public function insertUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required',
+            'nama_user' => 'required',
+            'dob' => 'required',
+            'id_opd' => 'required',
+            'id_unit' => 'required',
+            'id_jabatan' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $password = Hash::make($request->password);
+
+        $user = new AdminModel();
+        $user->username = $request->username;
+        $user->password = $password;
+        $user->nama_user = $request->nama_user;
+        $user->dob = $request->dob;
+        $user->id_opd = $request->id_opd;
+        $user->id_unit = $request->id_unit;
+        $user->id_jabatan = $request->id_jabatan;
+        $user->save();
+        
+        
+        return redirect()->route('user')->with('statusInput', 'Insert Success');
+    }
+
+    public function editUser($id)
     {
         $open = ['open'];
         
@@ -76,8 +113,58 @@ class AdminController extends Controller
         } else{
             $periodeAktif = "-";
         }
+
+        $user = AdminModel::find($id);
+        $dataOPD = OPDModel::get();
+        $jabatan = JabatanModel::get();
+        
+        return view("Admin.Tambah-User.edit", compact("periodeAktif", 'user', 'dataOPD', 'jabatan'));
+    }
+
+    public function updateUser($id, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required',
+            'nama_user' => 'required',
+            'dob' => 'required',
+            'id_opd' => 'required',
+            'id_unit' => 'required',
+            'id_jabatan' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $password = Hash::make($request->password);
+
+        $user = AdminModel::find($id);
+        $user->username = $request->username;
+        $user->password = $password;
+        $user->nama_user = $request->nama_user;
+        $user->dob = $request->dob;
+        $user->id_opd = $request->id_opd;
+        $user->id_unit = $request->id_unit;
+        $user->id_jabatan = $request->id_jabatan;
+        $user->update();
         
         
-        return view("Admin.Tambah-User.edit", compact("periodeAktif"));
+        return redirect()->route('user')->with('statusInput', 'Update Success');
+    }
+
+    public function deleteUser($id)
+    {
+        $user = AdminModel::find($id);
+        $user->delete();
+        
+        return redirect('/user')->with('statusInput', 'Delete Success');
+    }
+
+    public function getDataUnit($id)
+    {
+        $dataUnit = UnitModel::where('id_opd',$id)->get();
+
+        return response()->json($dataUnit);
     }
 }

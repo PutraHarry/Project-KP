@@ -121,4 +121,12 @@ class BarangController extends Controller
         
         return redirect()->route('barang')->with('statusInput', 'update Success');
     }
+
+    public function deleteBarang($id)
+    {
+        $barang = BarangModel::find($id);
+        $barang->delete();
+        
+        return redirect('/barang')->with('statusInput', 'Delete Success');
+    }
 }
