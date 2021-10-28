@@ -71,6 +71,7 @@
                       <th width="100px">Username</th>
                       <th>Nama</th>
                       <th>Jabatan</th>
+                      <th>OPD</th>
                       <th>Unit</th>
                       <th>Aksi</th>
                     </tr>
@@ -82,8 +83,8 @@
                         <td>{{ $tu->username }}</td>
                         <td>{{ $tu->nama_user }}</td>
                         <td>{{ $tu->jabatan->jabatan ?? '-'}}</td>
+                        <td>{{ $tu->unit->opd->opd}}</td>
                         <td>{{ $tu->unit->unit ?? '-'}}</td>
-
                         <td class="text-center">
                           <a href="/user/edit" class="btn btn-warning btn-icon-split">
                             <span class="icon">

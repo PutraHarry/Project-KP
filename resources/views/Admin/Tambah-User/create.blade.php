@@ -78,13 +78,13 @@ Create User Baru
                         <input type="text" class="form-control" name="username" id="username" placeholder="Input Username">
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword">Password</label>
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword">Masukkan Ulang Password</label>
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
@@ -94,6 +94,14 @@ Create User Baru
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama User</label>
                         <input type="text" class="form-control" name="nama_periode" id="nama_periode" placeholder="Input Nama User">
+                    </div>
+                    <div class="form-group">
+                      <label>OPD</label>
+                      <select class="select2" name="#" id="#" data-placeholder="Pilih OPD" style="width: 100%;">
+                      <option>OPD 1</option>
+                      <option>OPD 2</option>
+                      <option>OPD 3</option>
+                      </select>
                     </div>
                     <div class="form-group">
                         <label>Unit Perangkat Daerah</label>
@@ -114,7 +122,6 @@ Create User Baru
                             </select>
                         </div>
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-warning">Reset</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
                 </form>
