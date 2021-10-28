@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\AdminModel;
 use App\PeriodeModel;
 use App\JabatanModel;
+use App\OPDModel;
 
 class AdminController extends Controller
 {
@@ -42,7 +43,7 @@ class AdminController extends Controller
             $periodeAktif = "-";
         }
         
-        $tuser = AdminModel::with('jabatan', 'unit')->get();
+        $tuser = AdminModel::with('jabatan', 'unit', 'opd')->get();
         //dd($tuser);
 
         return view("Admin.Tambah-User.show", compact("periodeAktif", "tuser"));

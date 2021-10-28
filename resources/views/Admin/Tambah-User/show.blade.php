@@ -83,7 +83,7 @@
                         <td>{{ $tu->username }}</td>
                         <td>{{ $tu->nama_user }}</td>
                         <td>{{ $tu->jabatan->jabatan ?? '-'}}</td>
-                        <td>{{ $tu->unit->opd->opd}}</td>
+                        <td>{{ $tu->opd->nama_opd}}</td>
                         <td>{{ $tu->unit->unit ?? '-'}}</td>
                         <td class="text-center">
                           <a href="/user/edit" class="btn btn-warning btn-icon-split">
