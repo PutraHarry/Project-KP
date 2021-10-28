@@ -95,15 +95,11 @@ Create User Baru
                         <label for="exampleInputEmail1">Nama User</label>
                         <input type="text" class="form-control" name="nama_periode" id="nama_periode" placeholder="Input Nama User">
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label>Tanggal Lahir:</label>
-        
-                            <div class="input-group">
-                            <input type="date" class="form-control" name="dob" id="dob">
-                            </div>
-                          </div>
+                    <div class="form-group">
+                        <label>Tanggal Lahir:</label>
+    
+                        <div class="input-group">
+                        <input type="date" class="form-control" name="dob" id="dob">
                         </div>
                       </div>
                     <div class="form-group">
