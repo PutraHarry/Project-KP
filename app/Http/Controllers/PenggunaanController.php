@@ -144,6 +144,16 @@ class PenggunaanController extends Controller
         return response()->json($detailPenerimaan);
     }
 
+    public function deletePenggunaan($id)
+    {
+        $detailPenggunaan = DetailPenggunaanModel::where('id_penggunaan', $id)->delete();
+
+        $penggunaan = PenggunaanModel::find($id);
+        $penggunaan->delete();
+        
+        return redirect('/penggunaan')->with('statusInput', 'Delete Success');
+    }
+
     public function finalPenggunaan($idPenggunaan, $idPenerimaan, Request $request)
     {
         $validator = Validator::make($request->all(), [

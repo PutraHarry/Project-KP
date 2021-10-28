@@ -150,6 +150,14 @@ class SaldoAwalController extends Controller
         return redirect()->back();
     }
 
+    public function deleteSaldoAwal($id)
+    {
+        $saldoawal = SaldoAwalModel::find($id);
+        $saldoawal->delete();
+        
+        return redirect('/saldoawal')->with('statusInput', 'Delete Success');
+    }
+
     public function finalSaldoAwal($id, Request $request)
     {
         $saldoawal = SaldoAwalModel::find($id);
