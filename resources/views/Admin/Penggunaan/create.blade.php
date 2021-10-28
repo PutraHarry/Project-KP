@@ -97,7 +97,7 @@ Create Penggunaan Baru
                               <label>Total Harga:</label>
                               <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold">10,000.000.000.000</span>
+                                <span class="text-bold">0</span>
                               </h1>
                           </div>    
                         </div>
@@ -114,7 +114,7 @@ Create Penggunaan Baru
                             </div>
                             <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..."></textarea>
+                              <textarea class="form-control" rows="3" name="ket_penggunaan" id="ket_penggunaan" placeholder="Input Keterangan..."></textarea>
                             </div>
                         </div>
                         <div class="col-3">

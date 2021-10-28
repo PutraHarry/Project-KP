@@ -156,7 +156,7 @@ class PeriodeController extends Controller
             //Nama Periode
             $nama_bulan = $tanggal_mulai_baru->locale('id')->monthName;
             $nama_tahun = $tanggal_mulai_baru->locale('id')->year;
-            $nama_periode = "Periode ".$nama_bulan." ".$nama_tahun;
+            $nama_periode = $nama_bulan." ".$nama_tahun;
 
             //Get Opd Id
             // $user = Auth::user()->id;

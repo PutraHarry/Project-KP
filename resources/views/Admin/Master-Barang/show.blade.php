@@ -56,7 +56,7 @@
                       <h3 class="card-title">List Data Barang</h3>
                       <div class="card-tools">                          
                           <div class="col-md-12">
-                              <a href="/master-barang/create" class="btn btn-primary">
+                              <a href="/barang/create" class="btn btn-primary">
                                   <i class="fa fa-plus"></i> 
                                   Barang Baru
                               </a>
@@ -89,24 +89,26 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <tr>
-                                        <td class="text-center">1</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td class="text-center">
-                                          <a href="/master-barang/edit/#" class="btn btn-warning btn-icon-split">
-                                            <span class="icon">
-                                                <i class="fas fa-edit"></i>
-                                            </span>
-                                          </a>
-                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                      @foreach ($barangKIBA as $kiba)
+                                        <tr>
+                                          <td class="text-center">{{ $loop->iteration }}</td>
+                                          <td>{{ $kiba->nama_m_barang }}</td>
+                                          <td>{{ $kiba->harga_m_barang }}</td>
+                                          <td>{{ $kiba->satuan_m_barang }}</td>
+                                          <td class="text-center">
+                                            <a href="barang/edit/{{ $kiba->id }}" class="btn btn-warning btn-icon-split">
                                               <span class="icon">
-                                                  <i class="fas fa-trash"></i>
+                                                  <i class="fas fa-edit"></i>
                                               </span>
                                             </a>
-                                        </td>
-                                      </tr>
+                                            <a href="#" class="btn btn-danger btn-icon-split">
+                                                <span class="icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                              </a>
+                                          </td>
+                                        </tr>
+                                      @endforeach
                                   </tbody>
                               </table>
                           </div>
@@ -122,13 +124,14 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
+                                    @foreach ($barangKIBB as $kibb)
+                                      <tr>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $kibb->nama_m_barang }}</td>
+                                        <td>{{ $kibb->harga_m_barang }}</td>
+                                        <td>{{ $kibb->satuan_m_barang }}</td>
                                         <td class="text-center">
-                                          <a href="/master-barang/edit/#" class="btn btn-warning btn-icon-split">
+                                          <a href="barang/edit/{{ $kibb->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
                                                 <i class="fas fa-edit"></i>
                                             </span>
@@ -140,6 +143,7 @@
                                             </a>
                                         </td>
                                       </tr>
+                                    @endforeach
                                   </tbody>
                               </table>
                           </div>
@@ -155,13 +159,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                      <td class="text-center">1</td>
-                                      <td>test</td>
-                                      <td>test</td>
-                                      <td>test</td>
+                                  @foreach ($barangKIBC as $kibc)
+                                    <tr>
+                                      <td class="text-center">{{ $loop->iteration }}</td>
+                                      <td>{{ $kibc->nama_m_barang }}</td>
+                                      <td>{{ $kibc->harga_m_barang }}</td>
+                                      <td>{{ $kibc->satuan_m_barang }}</td>
                                       <td class="text-center">
-                                        <a href="/master-barang/edit/#" class="btn btn-warning btn-icon-split">
+                                        <a href="barang/edit/{{ $kibc->id }}" class="btn btn-warning btn-icon-split">
                                           <span class="icon">
                                               <i class="fas fa-edit"></i>
                                           </span>
@@ -173,6 +178,7 @@
                                           </a>
                                       </td>
                                     </tr>
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -188,13 +194,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                      <td class="text-center">1</td>
-                                      <td>test</td>
-                                      <td>test</td>
-                                      <td>test</td>
+                                  @foreach ($barangKIBD as $kibd)
+                                    <tr>
+                                      <td class="text-center">{{ $loop->iteration }}</td>
+                                      <td>{{ $kibd->nama_m_barang }}</td>
+                                      <td>{{ $kibd->harga_m_barang }}</td>
+                                      <td>{{ $kibd->satuan_m_barang }}</td>
                                       <td class="text-center">
-                                        <a href="/master-barang/edit/#" class="btn btn-warning btn-icon-split">
+                                        <a href="barang/edit/{{ $kibd->id }}" class="btn btn-warning btn-icon-split">
                                           <span class="icon">
                                               <i class="fas fa-edit"></i>
                                           </span>
@@ -206,6 +213,7 @@
                                           </a>
                                       </td>
                                     </tr>
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -221,13 +229,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                      <td class="text-center">1</td>
-                                      <td>test</td>
-                                      <td>test</td>
-                                      <td>test</td>
+                                  @foreach ($barangKIBE as $kibe)
+                                    <tr>
+                                      <td class="text-center">{{ $loop->iteration }}</td>
+                                      <td>{{ $kibe->nama_m_barang }}</td>
+                                      <td>{{ $kibe->harga_m_barang }}</td>
+                                      <td>{{ $kibe->satuan_m_barang }}</td>
                                       <td class="text-center">
-                                        <a href="/master-barang/edit/#" class="btn btn-warning btn-icon-split">
+                                        <a href="barang/edit/{{ $kibe->id }}" class="btn btn-warning btn-icon-split">
                                           <span class="icon">
                                               <i class="fas fa-edit"></i>
                                           </span>
@@ -239,6 +248,7 @@
                                           </a>
                                       </td>
                                     </tr>
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -254,13 +264,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                      <td class="text-center">1</td>
-                                      <td>test</td>
-                                      <td>test</td>
-                                      <td>test</td>
+                                  @foreach ($barangKIBF as $kibf)
+                                    <tr>
+                                      <td class="text-center">{{ $loop->iteration }}</td>
+                                      <td>{{ $kibf->nama_m_barang }}</td>
+                                      <td>{{ $kibf->harga_m_barang }}</td>
+                                      <td>{{ $kibf->satuan_m_barang }}</td>
                                       <td class="text-center">
-                                        <a href="/master-barang/edit/#" class="btn btn-warning btn-icon-split">
+                                        <a href="barang/edit/{{ $kibf->id }}" class="btn btn-warning btn-icon-split">
                                           <span class="icon">
                                               <i class="fas fa-edit"></i>
                                           </span>
@@ -272,6 +283,7 @@
                                           </a>
                                       </td>
                                     </tr>
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>

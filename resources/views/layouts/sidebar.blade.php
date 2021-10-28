@@ -177,7 +177,7 @@
           </li>-->
           <li class="nav-header">Admin</li>
           <li class="nav-item">
-            <a href="/tambah-user" class="nav-link">
+            <a href="/user" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Tambah User
@@ -185,7 +185,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/master-barang" class="nav-link">
+            <a href="/barang" class="nav-link">
               <i class="nav-icon fas fa-box"></i>
               <p>
                 Master Barang

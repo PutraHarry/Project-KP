@@ -110,7 +110,7 @@ Create Penerimaan Baru
                             </div>
                             <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
+                              <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..."></textarea>
                             </div>
                             </div>
                             <div class="col-6">

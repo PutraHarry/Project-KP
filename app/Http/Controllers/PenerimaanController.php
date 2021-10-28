@@ -55,10 +55,11 @@ class PenerimaanController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'jenis_penerimaan' => 'required',
-            'namaPenerimaan' => 'required',
+            'kode_penerimaan' => 'required',
             'tgl_input' => 'required',
             'status_penerimaan' => 'required',
             'pengirim' => 'required',
+            'ket_penerimaan' => 'required'
         ]);
 
         if($validator->fails()){
@@ -66,11 +67,12 @@ class PenerimaanController extends Controller
         }
 
         $penerimaan = new PenerimaanModel();
-        $penerimaan->kode_penerimaan = $request->namaPenerimaan;
+        $penerimaan->kode_penerimaan = $request->kode_penerimaan;
         $penerimaan->jenis_penerimaan = $request->jenis_penerimaan;
         $penerimaan->tgl_terima = $request->tgl_input;
         $penerimaan->pengirim = $request->pengirim;
         $penerimaan->status_penerimaan = $request->status_penerimaan;
+        $penerimaan->ket_penerimaan = $request->ket_penerimaan;
         $penerimaan->save();
         
         
@@ -104,9 +106,10 @@ class PenerimaanController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'jenis_penerimaan' => 'required',
-            'namaPenerimaan' => 'required',
+            'kode_penerimaan' => 'required',
             'tgl_input' => 'required',
             'pengirim' => 'required',
+            'ket_penerimaan' => 'required'
         ]);
 
         if($validator->fails()){
@@ -114,10 +117,11 @@ class PenerimaanController extends Controller
         }
 
         $penerimaan = PenerimaanModel::find($id);
-        $penerimaan->kode_penerimaan = $request->namaPenerimaan;
+        $penerimaan->kode_penerimaan = $request->kode_penerimaan;
         $penerimaan->jenis_penerimaan = $request->jenis_penerimaan;
         $penerimaan->tgl_terima = $request->tgl_input;
         $penerimaan->pengirim = $request->pengirim;
+        $penerimaan->ket_penerimaan = $request->ket_penerimaan;
         $penerimaan->update();
         
         return redirect()->route('penerimaan')->with('statusInput', 'Update Success');
@@ -161,5 +165,18 @@ class PenerimaanController extends Controller
         $mpenerimaan->total = $mpenerimaan->total + $gapTotal;
         $mpenerimaan->update();
         return redirect()->back();
+    }
+
+    public function finalPenerimaan($id, Request $request)
+    {
+        $penerimaan = PenerimaanModel::find($id);
+        $penerimaan->kode_penerimaan = $request->kodePenerimaan;
+        $penerimaan->jenis_penerimaan = $request->jenisPenerimaan;
+        $penerimaan->tgl_terima = $request->tglPenerimaan;
+        $penerimaan->ket_penerimaan = $request->ketPenerimaan;
+        $penerimaan->status_penerimaan = 'final';
+        $penerimaan->update();
+        
+        return redirect('/penerimaan')->with('statusInput', 'Status Final Berhasil');
     }
 }

@@ -23,4 +23,9 @@ class AdminModel extends Authenticatable
     {
         return $this->belongsTo(UnitModel::class, 'id_unit', 'id');
     }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(JabatanModel::class, 'id_jabatan', 'id');
+    }
 }

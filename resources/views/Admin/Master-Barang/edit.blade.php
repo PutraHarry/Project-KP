@@ -56,7 +56,7 @@ Edit Barang
     </section>
       
     <!-- Main content -->
-    <form action="#" method="POST">
+    <form action="/barang/update/{{ $idEdit }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -71,14 +71,14 @@ Edit Barang
                   <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama Barang</label>
-                        <input type="text" class="form-control" name="nama_barang" id="nama_barang" placeholder="Input Nama Barang">
+                        <input type="text" class="form-control" name="nama_barang" id="nama_barang" placeholder="Input Nama Barang" value="{{ $dataBarang->nama_m_barang }}">
                     </div>
                     <div class="form-group">
                         <label>Jenis Barang</label>
                         <select class="select2" name="jenis_barang" id="jenis_barang" data-placeholder="Pilih Unit Perangkat Daeerah" style="width: 100%;">
-                        <option>KIB A</option>
-                        <option>KIB B</option>
-                        <option>KIB C</option>
+                          @foreach ($jenisBarang as $jb)
+                          <option value="{{ $jb }}" @if($dataBarang->jenis_m_barang == $jb) selected @endif>{{ $jb }}</option>
+                          @endforeach
                         </select>
                     </div>
                     
@@ -86,18 +86,18 @@ Edit Barang
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="exampleInputSatuan">Satuan</label>
-                                <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan" >
+                                <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan" value="{{ $dataBarang->satuan_m_barang }}">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="exampleInputHarga">Harga Barang</label>
-                                <input type="text" class="form-control" name="harga" id="harga" placeholder="Input Harga" >
+                                <input type="text" class="form-control" name="harga" id="harga" placeholder="Input Harga" value="{{ $dataBarang->harga_m_barang }}">
                             </div>
                         </div>
                     </div>
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-warning">Reset</button>
+                    <button type="button" class="btn btn-warning">Reset</button>
                     <button type="submit" class="btn btn-primary">Update</button>
                   </div>
                 </form>
