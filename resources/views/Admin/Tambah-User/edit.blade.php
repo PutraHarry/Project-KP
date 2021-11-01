@@ -127,7 +127,6 @@ Create User Baru
                         </select>
                       </div>
                   <div class="card-footer">
-                    <button type="button" class="btn btn-warning">Reset</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
                 </form>

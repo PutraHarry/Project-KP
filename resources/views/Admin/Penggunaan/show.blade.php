@@ -92,8 +92,10 @@
                                 <span class="badge badge-primary">Final</span>
                               @elseif($tp->status_penggunaan == "approved")
                                 <span class="badge badge-success">Approved</span>
-                              @elseif($tp->status_penggunaan == "disetujui")
-                                <span class="badge badge-info">Disetujui</span>
+                              @elseif($tp->status_penggunaan == "disetujui_ppbp")
+                                <span class="badge badge-info">Disetujui PPBP</span>
+                              @elseif($tp->status_penggunaan == "disetujui_atasanLangsung")
+                                <span class="badge badge-secondary">Disetujui Atasan Langsung</span>
                               @endif
                             </td>
                             <td class="text-center">
