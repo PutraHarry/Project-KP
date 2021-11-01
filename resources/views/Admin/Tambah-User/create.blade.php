@@ -73,10 +73,6 @@ Create User Baru
                         <label for="exampleInputEmail1">Username</label>
                         <input type="text" class="form-control" name="username" id="username" placeholder="Input Username">
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Input Username">
-                    </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
