@@ -122,7 +122,17 @@ class PengeluaranController extends Controller
         //dd($penggunaan);
         $pengeluaran->update();
 
-        return redirect()->route('penggunaan')->with('statusInput', 'Update Success');
+        return redirect()->route('pengeluaran')->with('statusInput', 'Update Success');
+    }
+
+    public function deletePengeluaran($id)
+    {
+        $detailPengeluaran = DetailPengeluaranModel::where('id_pengeluaran', $id)->delete();
+
+        $pengeluaran = PengeluaranModel::find($id);
+        $pengeluaran->delete();
+        
+        return redirect('/pengeluaran')->with('statusInput', 'Delete Success');
     }
 
     public function finalPengeluaran($idPengeluaran, $idPenggunaan, Request $request)

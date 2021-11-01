@@ -167,6 +167,16 @@ class PenerimaanController extends Controller
         return redirect()->back();
     }
 
+    public function deletePenerimaan($id)
+    {
+        $detailPenerimaan = DetailPenerimaanModel::where('id_penerimaan', $id)->delete();
+
+        $penerimaan = PenerimaanModel::find($id);
+        $penerimaan->delete();
+        
+        return redirect('/penerimaan')->with('statusInput', 'Delete Success');
+    }
+
     public function finalPenerimaan($id, Request $request)
     {
         $penerimaan = PenerimaanModel::find($id);

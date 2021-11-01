@@ -12,4 +12,9 @@ class OPDModel extends Model
     {
         return $this->hasMany(UnitModel::class, 'id_opd', 'id_opd');
     }
+    
+    public function admin()
+    {
+        return $this->hasMany(AdminModel::class, 'id_opd', 'id');
+    }
 }

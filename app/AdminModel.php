@@ -28,4 +28,9 @@ class AdminModel extends Authenticatable
     {
         return $this->belongsTo(JabatanModel::class, 'id_jabatan', 'id');
     }
+
+    public function opd()
+    {
+        return $this->belongsTo(OPDModel::class, 'id_opd', 'id_opd');
+    }
 }

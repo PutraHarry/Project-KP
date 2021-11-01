@@ -56,7 +56,7 @@ Create User Baru
     </section>
       
     <!-- Main content -->
-    <form action="#" method="POST">
+    <form action="/user/update/{{ $user->id }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -71,61 +71,58 @@ Create User Baru
                   <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Username</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Input Username">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Input Username" value="{{ $user->username }}"> 
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="{{ $user->password }}">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword">Masukkan Ulang Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
+                                <input type="password" class="form-control" name="konfirmasi_password" id="konfirmasi_password" placeholder="Password" value="{{ $user->password }}">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama User</label>
-                        <input type="text" class="form-control" name="nama_periode" id="nama_periode" placeholder="Input Nama User">
+                        <input type="text" class="form-control" name="nama_user" id="nama_user" placeholder="Input Nama User" value="{{ $user->nama_user }}">
                     </div>
-                    <div class="form-group">
-                        <label>Tanggal Lahir:</label>
-    
-                        <div class="input-group">
-                        <input type="date" class="form-control" name="dob" id="dob">
+                    <div class="row">
+                        <div class="col-6">
+                          <div class="form-group">
+                            <label>Tanggal Lahir:</label>
+                            <div class="input-group">
+                            <input type="date" class="form-control" name="dob" id="dob" value="{{ $user->dob }}">
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    <div class="form-group">
-                      <label>OPD</label>
-                      <select class="select2" name="#" id="#" data-placeholder="Pilih Unit Perangkat Daeerah" style="width: 100%;">
-                      <option>OPD 1</option>
-                      <option>OPD 2</option>
-                      <option>OPD 3</option>
-                      </select>
-                  </div>
-                    <div class="form-group">
-                        <label>Unit Perangkat Daerah</label>
-                        <select class="select2" name="id_opd" id="id_opd" data-placeholder="Pilih Unit Perangkat Daeerah" style="width: 100%;">
-                        <option>Unit 1</option>
-                        <option>Unit 2</option>
-                        <option>Unit 3</option>
+                      <div class="form-group">
+                        <label>OPD</label>
+                        <select class="select2" name="id_opd" id="id_opd" data-placeholder="Pilih OPD" style="width: 100%;">
+                        @foreach ($dataOPD as $do)
+                          <option value={{ $do->id_opd }} @if($user->id_opd == $do->id_opd) selected @endif>{{ $do->nama_opd }}</option>
+                        @endforeach
                         </select>
-                    </div>
-                    <div class="form-group">
-                            <label>Jabatan</label>
-                            <select class="select2" name="id_jabatan" id="id_jabatan" data-placeholder="Pilih Jabatan" style="width: 100%;">
-                            
-                            <option>super admin</option>
-                            <option>admin</option>
-                            <option>Pembantu Pengelola Barang Persediaan</option>
-                            
-                            </select>
-                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Unit Perangkat Daerah</label>
+                        <select class="select2" name="id_unit" id="id_unit" data-placeholder="Pilih Unit Perangkat Daeerah" style="width: 100%;">
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Jabatan</label>
+                        <select class="select2" name="id_jabatan" id="id_jabatan" data-placeholder="Pilih Jabatan" style="width: 100%;">
+                        @foreach ($jabatan as $jabatan)
+                          <option value={{ $jabatan->id }} @if($user->id_jabatan == $jabatan->id) selected @endif>{{ $jabatan->jabatan }}</option>
+                        @endforeach
+                        </select>
+                      </div>
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-warning">Reset</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
                 </form>
@@ -167,6 +164,42 @@ Create User Baru
     })
 
   })
+
+  let id = $('#id_opd').val();
+  var user = {!! json_encode($user->toArray()) !!}
+  console.log(user);
+  $.ajax({
+      type: 'GET',
+      url: '/user/dataUnit/'+id,
+      success: function (response){
+        console.log(response);
+          $('#id_unit').empty();
+          response.forEach(element => {
+            var selected = '';
+            if (user.id_unit == element.id){
+              selected = 'selected';
+            }
+              $('#id_unit').append('<option value='+element.id+' '+selected+'>'+element.unit+'</option>');
+          });
+      }
+  });
+
+  $('#id_opd').change(function() {
+      if($('#id_opd').val() != ""){ 
+          let id = $(this).val();
+          $.ajax({
+              type: 'GET',
+              url: '/user/dataUnit/'+id,
+              success: function (response){
+                //console.log(response);
+                  $('#id_unit').empty();
+                  response.forEach(element => {
+                      $('#id_unit').append('<option value='+element.id+'>'+element.unit+'</option>');
+                  });
+              }
+          });
+      } 
+  });
   
 </script>
 
