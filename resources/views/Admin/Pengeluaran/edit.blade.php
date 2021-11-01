@@ -94,7 +94,7 @@ Edit Pengeluaran Baru
                           </div>
                           <div class="form-group">
                             <label>Kode Penerimaan</label>
-                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
+                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;" @if($tpengeluaran->status_pengeluaran == 'final') disabled @endif>
                               @foreach($tpenggunaan as $tp)  
                                 <option value={{ $tp->id }} @if($tp->id == $tpengeluaran->id_penggunaan) selected @endif>{{ $tp->kode_penggunaan }}</option>
                               @endforeach
@@ -103,7 +103,7 @@ Edit Pengeluaran Baru
                           <div class="form-group">
                               <label>Tanggal Pengeluaran:</label>
                               <div class="input-group">
-                                <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpengeluaran->tgl_keluar }}">
+                                <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpengeluaran->tgl_keluar }}" @if($tpengeluaran->status_pengeluaran == 'final') readonly @endif>
                               </div>  
                           </div>  
                         </div>
@@ -114,7 +114,7 @@ Edit Pengeluaran Baru
                           </div>
                           <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="5" name="ket_pengeluaran" id="ket_pengeluaran" placeholder="Input Keterangan...">{{ $tpengeluaran->ket_pengeluaran }}</textarea>
+                              <textarea class="form-control" rows="5" name="ket_pengeluaran" id="ket_pengeluaran" placeholder="Input Keterangan..." @if($tpengeluaran->status_pengeluaran == 'final') readonly @endif>{{ $tpengeluaran->ket_pengeluaran }}</textarea>
                           </div>
                         </div>
                         <div class="col-6">

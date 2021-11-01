@@ -56,10 +56,12 @@
                       <h3 class="card-title">List Data Penerimaan</h3>
                       <div class="card-tools">                          
                           <div class="col-md-12">
+                            @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBP']))
                               <a href="/penerimaan/create" class="btn btn-primary">
                                   <i class="fa fa-plus"></i> 
                                   Penerimaan Baru
                               </a>
+                            @endif
                           </div>
                       </div>
                   </div>

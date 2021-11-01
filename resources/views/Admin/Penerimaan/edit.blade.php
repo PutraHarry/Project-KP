@@ -89,7 +89,7 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div class="form-group">
                           <label>Jenis Penerimaan</label>
-                          <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan">
+                          <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
                             @foreach ($jenisPenerimaan as $jp)
                               <option value="{{ $jp }}" @if($tpenerimaan->jenis_penerimaan == $jp) selected @endif>{{ $jp }}</option>
                             @endforeach
@@ -97,12 +97,12 @@ Edit Penerimaan Baru
                         </div>
                         <div class="form-group">
                           <label for="penerimaan">Kode Penerimaan</label>
-                          <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Kode Penerimaan" value="{{ $tpenerimaan->kode_penerimaan }}">
+                          <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Kode Penerimaan" value="{{ $tpenerimaan->kode_penerimaan }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
                         </div>
                         <div class="form-group">
                           <label>Tanggal Penerimaan:</label>
                           <div class="input-group">
-                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenerimaan->tgl_terima }}">
+                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenerimaan->tgl_terima }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
                           </div>  
                         </div>  
                       </div>
@@ -113,11 +113,11 @@ Edit Penerimaan Baru
                         </div>
                         <div class="form-group">
                             <label>Pengirim</label>
-                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}">
+                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
                         </div>
                         <div class="form-group">
                           <label>Keterangan</label>
-                          <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan...">{{ $tpenerimaan->ket_penerimaan }}</textarea>
+                          <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..." @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>{{ $tpenerimaan->ket_penerimaan }}</textarea>
                         </div>
                       </div>
                       <div class="col-6">
