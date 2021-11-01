@@ -67,18 +67,20 @@ Edit Pengeluaran Baru
                 <div class="card-header">
                   <h3 class="card-title">Edit Data Pengeluaran</h3>
                   <div class="card-tools">
-                    <button type="submit" class="btn btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-edit"></i>
-                      </span>
-                      <span class="text">Draft</span>
-                    </button>
-                    <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-check"></i>
-                      </span>
-                      <span class="text">Final</span>
-                    </button>
+                    @if ($tpengeluaran->status_pengeluaran == 'draft')
+                      <button type="submit" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Draft</span>
+                      </button>
+                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Final</span>
+                      </button>
+                    @endif
                   </div>
                 </div>
 

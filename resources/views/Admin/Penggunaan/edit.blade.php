@@ -68,32 +68,38 @@ Edit Penggunaan
                   <h3 class="card-title">Edit Data Penggunaan Barang Baru</h3>
                   <div class="card-tools">
                     @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB']))
-                      <button type="submit" class="btn btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-edit"></i>
-                        </span>
-                        <span class="text">Draft</span>
-                      </button>
-                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        <span class="text">Final</span>
-                      </button>
+                      @if ($tpenggunaan->status_penggunaan == 'draft')
+                        <button type="submit" class="btn btn-danger btn-icon-split">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-edit"></i>
+                          </span>
+                          <span class="text">Draft</span>
+                        </button>
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                          </span>
+                          <span class="text">Final</span>
+                        </button>
+                      @endif
                     @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['KASI']))
-                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        <span class="text">Approved</span>
-                      </button>
+                      @if ($tpenggunaan->status_penggunaan == 'final')
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                          </span>
+                          <span class="text">Approved</span>
+                        </button>
+                      @endif
                     @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBP']))
-                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        <span class="text">Disetujui PPBP</span>
-                      </button>
+                      @if ($tpenggunaan->status_penggunaan == 'approved')
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                          </span>
+                          <span class="text">Disetujui PPBP</span>
+                        </button>
+                      @endif
                     @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['KASUBAG']))
                       @if ($tpenggunaan->status_penggunaan == 'disetujui_ppbp')
                         <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
