@@ -21,24 +21,32 @@ class PenggunaanController extends Controller
 
     public function dataPenggunaan()
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
 
-        $tpenggunaan = PenggunaanModel::get();
+        if (Auth::user()->jabatan->jabatan == 'PPBPB') {
+            $tpenggunaan = PenggunaanModel::get();
+        } elseif (Auth::user()->jabatan->jabatan == 'KASI') {
+            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['final', 'approved'])->get();
+        } elseif (Auth::user()->jabatan->jabatan == 'PPBP') {
+            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['approved', 'disetujui_ppbp'])->get();
+        } elseif (Auth::user()->jabatan->jabatan == 'kasubag') {
+            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['disetujui_ppbp', 'disetujui_atasanLangsung'])->get();
+        } else {
+            $tpenggunaan = PenggunaanModel::get();
+        }
+
+        //dd($tpenggunaan);
         return view("Admin.Penggunaan.show", compact('periodeAktif', 'tpenggunaan'));
     }
 
     public function createPenggunaan()
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -96,9 +104,7 @@ class PenggunaanController extends Controller
 
     public function editPenggunaan($id)
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -193,5 +199,32 @@ class PenggunaanController extends Controller
         }
 
         return redirect()->route('penggunaan')->with('statusInput', 'Status Final Success');
+    }
+
+    public function approvedPenggunaan($id)
+    {
+        $penggunaan = PenggunaanModel::find($id);
+        $penggunaan->status_penggunaan = 'approved';
+        $penggunaan->update();
+        
+        return redirect('/penggunaan')->with('statusInput', 'Approved Success');
+    }
+    
+    public function disetujui_ppbpPenggunaan($id)
+    {
+        $penggunaan = PenggunaanModel::find($id);
+        $penggunaan->status_penggunaan = 'disetujui_ppbp';
+        $penggunaan->update();
+        
+        return redirect('/penggunaan')->with('statusInput', 'Disetujui PPBP Success');
+    }
+    
+    public function disetujui_atasanLangsungPenggunaan($id)
+    {
+        $penggunaan = PenggunaanModel::find($id);
+        $penggunaan->status_penggunaan = 'disetujui_atasanLangsung';
+        $penggunaan->update();
+        
+        return redirect('/penggunaan')->with('statusInput', 'Disetujui Atasan Langsung Success');
     }
 }

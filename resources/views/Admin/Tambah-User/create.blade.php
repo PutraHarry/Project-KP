@@ -89,6 +89,7 @@ Create User Baru
                                 <label for="exampleInputPassword">Masukkan Ulang Password</label>
                                 <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Password" >
                             </div>
+                            <div id="status_password"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -164,10 +165,8 @@ Create User Baru
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
 
-  })
-
-  let id = $('#id_opd').val();
-  $.ajax({
+    let id = $('#id_opd').val();
+    $.ajax({
       type: 'GET',
       url: '/user/dataUnit/'+id,
       success: function (response){
@@ -177,9 +176,9 @@ Create User Baru
               $('#id_unit').append('<option value='+element.id+'>'+element.unit+'</option>');
           });
       }
-  });
+    });
 
-  $('#id_opd').change(function() {
+    $('#id_opd').change(function() {
       if($('#id_opd').val() != ""){ 
           let id = $(this).val();
           $.ajax({
@@ -194,8 +193,23 @@ Create User Baru
               }
           });
       } 
-  });
-  
+    });
+
+    
+    $('#confirm_password').keyup(function(){
+      let password = $('#password').val();
+      let konfirm_password = $('#confirm_password').val();
+      $('#status_password').empty();
+      if(konfirm_password == password){
+        $('#status_password').append('<a class="text-success">Password sama</a>');
+      }
+      if(konfirm_password != password){
+        $('#status_password').append('<a class="text-danger">Password tidak sama</a>');
+      }
+    })
+
+  })
+
 </script>
 
 

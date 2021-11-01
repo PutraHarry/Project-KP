@@ -13,115 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('layouts.master');
-});
-
-Route::get('/periode', function () {
-    return view('/Admin/Periode/show');
-});
-Route::get('/periode/create', function () {
-    return view('/Admin/Periode/create');
-});
-
-Route::get('/periode/tutup', function () {
-    return view('/Admin/Periode/tutupperiode');
-});
-Route::get('/periode/buka', function () {
-    return view('/Admin/Periode/bukaperiode');
-});
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::get('/tabel', function () {
-    return view('tabel');
-});
-
-Route::get('/saldoawal', function () {
-    return view('/Admin/Saldo/show');
-});
-Route::get('/saldoawal/create', function () {
-    return view('/Admin/Saldo/create');
-});
-Route::get('/saldoawal/edit', function () {
-    return view('/Admin/Saldo/edit');
-});
-
-Route::get('/buktiumum', function () {
-    return view('/Admin/Bukti-umum/show');
-});
-Route::get('/buktiumum/create', function () {
-    return view('/Admin/Bukti-umum/create');
-});
-Route::get('/buktiumum/edit', function () {
-    return view('/Admin/Bukti-umum/edit');
-});
-
-Route::get('/penerimaan', function () {
-    return view('/Admin/Penerimaan/show');
-});
-
-Route::get('/penerimaan/create', function () {
-    return view('/Admin/Penerimaan/create');
-});
-Route::get('/penerimaan/edit', function () {
-    return view('/Admin/Penerimaan/edit');
-});
-Route::get('/penggunaan', function () {
-    return view('/Admin/Penggunaan/show');
-});
-Route::get('/penggunaan/create', function () {
-    return view('/Admin/Penggunaan/create');
-});
-Route::get('/penggunaan/edit', function () {
-    return view('/Admin/Penggunaan/edit');
-});
-Route::get('/penggunaan/show-detail', function () {
-    return view('/Admin/Penggunaan/show-detail');
-});
-
-
-Route::get('/pengeluaran', function () {
-    return view('/Admin/Pengeluaran/show');
-});
-Route::get('/pengeluaran/create', function () {
-    return view('/Admin/Pengeluaran/create');
-});
-Route::get('/pengeluaran/edit', function () {
-    return view('/Admin/Pengeluaran/edit');
-});
-Route::get('/laporan', function () {
-    return view('/Admin/Laporan/show');
-});*/
-
-Route::get('/tambah-user', function () {
-    return view('/Admin/Tambah-User/show');
-});
-Route::get('/tambah-user/create', function () {
-    return view('/Admin/Tambah-User/create');
-});
-Route::get('/tambah-user/edit', function () {
-    return view('/Admin/Tambah-User/edit');
-});
-
-/*Route::get('/master-barang', function () {
-    return view('/Admin/Master-Barang/show');
-});
-Route::get('/master-barang/create', function () {
-    return view('/Admin/Master-Barang/create');
-});*/
-
-
-Route::get('/tabel', 'TestController@datatest');
-Route::get('tabel/create', 'TestController@createdata');
-Route::post('tabel/insert', 'TestController@insert');
-Route::get('/tabel/delete/{id}', 'TestController@delete');
-Route::get('/tabel/edit/{id}', 'TestController@editdata');
-Route::post('/tabel/update/{id}', 'TestController@update');
-
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
  
 //CONTROLLER FIX
@@ -169,6 +60,9 @@ Route::post('/penggunaan/update/{id}', 'PenggunaanController@updatePenggunaan')-
 Route::get('/penggunaan/detailPenerimaan/{id}', 'PenggunaanController@getDataDetailPenerimaan')->name('getDataDetailPenerimaan');
 Route::post('/penggunaan/delete/{id}','PenggunaanController@deletePenggunaan')->name('deletePenggunaan');
 Route::post('/penggunaan/final/{idPenggunaan}/detail/{idPenerimaan}', 'PenggunaanController@finalPenggunaan')->name('finalPenggunaan');
+Route::post('/penggunaan/approved/{idPenggunaan}', 'PenggunaanController@approvedPenggunaan')->name('approvedPenggunaan');
+Route::post('/penggunaan/disetujui_ppbp/{idPenggunaan}', 'PenggunaanController@disetujui_ppbpPenggunaan')->name('disetujui_ppbpPenggunaan');
+Route::post('/penggunaan/disetujui_atasanLangsung/{idPenggunaan}', 'PenggunaanController@disetujui_atasanLangsungPenggunaan')->name('disetujui_atasanLangsungPenggunaan');
 
 //PENGELUARAN
 Route::get('/pengeluaran', 'PengeluaranController@dataPengeluaran')->name('pengeluaran');

@@ -43,9 +43,6 @@ class SaldoAwalController extends Controller
         } else{
             $periodeAktif = "-";
         }
-
-
-
         return view("Admin.Saldo.create", compact("periodeAktif"));
     }
 
