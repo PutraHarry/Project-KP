@@ -55,12 +55,14 @@
               <div class="card-header">
                 <h3 class="card-title">List Data Periode</h3>
                   <div class="card-tools">
+                    @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBP']))
                       <a href="/periode/create" class="btn btn-primary btn-icon-split">
                           <span class="icon">
                               <i class="fas fa-plus"></i>
                           </span>
                           <span class="text">Periode Baru</span>
                       </a>
+                    @endif
                       <a href="#" class="btn btn-success btn-icon-split">
                           <span class="icon text-white-50">
                               <i class="fas fa-download"></i>
@@ -99,7 +101,6 @@
                         @endif  
                       </td>
                       <td>{{ $tp->ket_periode }}</td>
-
                       <td class="text-center">
                         <a href="#" class="btn btn-warning btn-icon-split">
                           <span class="icon">

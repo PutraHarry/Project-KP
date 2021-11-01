@@ -89,24 +89,24 @@ Edit Saldo Awal
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="kode_saldo">Kode Saldo</label>
-                                                    <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" value="{{ $saldoawal->kode_saldo }}" placeholder="Kode Saldo" disabled>
+                                                    <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" value="{{ $saldoawal->kode_saldo }}" placeholder="Kode Saldo" @if($saldoawal->status_saldo == 'final') readonly @endif>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tanggal Saldo:</label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}">
+                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}" @if($saldoawal->status_saldo == 'final') readonly @endif>
                                                     </div>  
                                                 </div>  
                                             </div>
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label>Status</label>
-                                                    <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
+                                                    <input class="form-control" name="status_saldo" id="status_saldo" @if($saldoawal->status_saldo == 'draft') value="draft" @elseif($saldoawal->status_saldo == 'final') value="final" @endif @if($saldoawal->status_saldo == 'final') readonly @endif>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Keterangan</label>
-                                                    <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan...">{{ $saldoawal->ket_saldo }}</textarea>
+                                                    <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..." @if($saldoawal->status_saldo == 'final') readonly @endif>{{ $saldoawal->ket_saldo }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-6">

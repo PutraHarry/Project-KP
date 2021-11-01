@@ -55,12 +55,14 @@
                 <div class="card-header">
                   <h3 class="card-title">List Data Saldo</h3>
                     <div class="card-tools">
+                      @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB', 'PPBP']))
                         <a href="/saldoawal/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>
                             </span>
                             <span class="text">Saldo Baru</span>
                         </a>
+                      @endif
                     </div>
                 </div>
                 <!-- /.card-header -->
