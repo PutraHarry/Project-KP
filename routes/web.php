@@ -26,8 +26,8 @@ Route::get('/periode/create', 'PeriodeController@addPeriode')->name('createPerio
 Route::post('/periode/insert','PeriodeController@insertPeriode')->name('insertPeriode');
 Route::get('/periode/tutupperiode', 'PeriodeController@tutupPeriode')->name('tutupPeriode');
 Route::get('/periode/bukaperiode', 'PeriodeController@bukaPeriode')->name('bukaPeriode');
-Route::post('/periode/bukaperiode/{id}','PeriodeController@prosesBuka')->name('prosesBuka');
-Route::post('/periode/tutupperiode/{id}','PeriodeController@prosesTutup')->name('prosesTutup');
+Route::post('/periode/prosesbukaperiode/{id}','PeriodeController@prosesBuka')->name('prosesBuka');
+Route::post('/periode/prosestutupperiode/{id}','PeriodeController@prosesTutup')->name('prosesTutup');
 
 //SALDO AWAL
 Route::get('/saldoawal', 'SaldoAwalController@dataSaldoAwal')->name('saldoawal');

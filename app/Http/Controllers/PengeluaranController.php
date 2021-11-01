@@ -30,7 +30,7 @@ class PengeluaranController extends Controller
         }
 
 
-        $tpengeluaran = PengeluaranModel::get();
+        $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->get();
 
         return view("Admin.Pengeluaran.show", compact('periodeAktif', 'tpengeluaran'));
     }
@@ -53,6 +53,8 @@ class PengeluaranController extends Controller
 
     public function insertPengeluaran(Request $request)
     {
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
+
         $validator = Validator::make($request->all(), [
             'kode_pengeluaran' => 'required',
             'tgl_input' => 'required',
@@ -71,6 +73,7 @@ class PengeluaranController extends Controller
         $pengeluaran->id_penggunaan = $request->id_penggunaan;
         $pengeluaran->status_pengeluaran = $request->status_pengeluaran;
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
+        $pengeluaran->id_periode = $dataPeriodeAktif->id;
         $pengeluaran->save();
 
         return redirect()->route('editPengeluaran', ['id' => $pengeluaran->id]);

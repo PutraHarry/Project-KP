@@ -104,11 +104,13 @@
                                       <i class="fas fa-edit"></i>
                                   </span>
                                 </a>
-                                <a onclick="statusdelete({{ $tp->id }})" class="btn btn-danger btn-icon-split">
-                                  <span class="icon">
-                                      <i class="fas fa-trash"></i>
-                                  </span>
-                                </a>
+                                @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB']))
+                                  <a onclick="statusdelete({{ $tp->id }})" class="btn btn-danger btn-icon-split">
+                                    <span class="icon">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                  </a>
+                                @endif
                             </td>
                           </tr>
                         @endforeach
