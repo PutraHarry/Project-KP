@@ -81,8 +81,8 @@ Create User Baru
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
-                            </div>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" >                              
+                            </div> 
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -208,7 +208,6 @@ Create User Baru
     })
 
   })
-
 </script>
 
 
