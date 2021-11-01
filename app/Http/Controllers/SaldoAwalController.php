@@ -43,9 +43,6 @@ class SaldoAwalController extends Controller
         } else{
             $periodeAktif = "-";
         }
-
-
-
         return view("Admin.Saldo.create", compact("periodeAktif"));
     }
 
@@ -148,6 +145,14 @@ class SaldoAwalController extends Controller
         $msaldoawal->total = $msaldoawal->total + $gapTotal;
         $msaldoawal->update();
         return redirect()->back();
+    }
+
+    public function deleteSaldoAwal($id)
+    {
+        $saldoawal = SaldoAwalModel::find($id);
+        $saldoawal->delete();
+        
+        return redirect('/saldoawal')->with('statusInput', 'Delete Success');
     }
 
     public function finalSaldoAwal($id, Request $request)

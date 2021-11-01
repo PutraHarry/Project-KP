@@ -108,7 +108,7 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                          <a onclick="statusdelete({{ $tpo->id }})" class="btn btn-danger btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-trash"></i>
                                               </span>
@@ -151,7 +151,7 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                          <a onclick="statusdelete({{ $tpno->id }})" class="btn btn-danger btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-trash"></i>
                                               </span>
@@ -194,7 +194,7 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                          <a onclick="statusdelete({{ $tph->id }})" class="btn btn-danger btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-trash"></i>
                                               </span>
@@ -237,7 +237,7 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                          <a onclick="statusdelete({{ $tpnh->id }})" class="btn btn-danger btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-trash"></i>
                                               </span>
@@ -280,7 +280,7 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a href="#" class="btn btn-danger btn-icon-split">
+                                          <a onclick="statusdelete({{ $tpna->id }})" class="btn btn-danger btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-trash"></i>
                                               </span>
@@ -296,7 +296,29 @@
               </div>
           </div>
       </div>
-  </div>                  
+  </div>  
+  <div class="modal fade" id="modal-sdelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <form action="" id="sdelete" method="POST">
+          @csrf
+            <div class="modal-header">
+                <h4 class="modal-title">Final Saldo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <p>Yakin akan menghapus data?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="sdelete" type="submit" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>                
 @endsection
 
 @push('js')
@@ -371,8 +393,10 @@
   });
 </script>
 
-    
-                    
-
-    
+<script>
+  function statusdelete(id) {
+  $("#sdelete").attr("action", "/penerimaan/delete/"+id);
+  $('#modal-sdelete').modal('show');
+  }
+</script>    
 @endpush

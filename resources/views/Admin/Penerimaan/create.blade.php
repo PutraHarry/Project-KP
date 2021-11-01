@@ -90,7 +90,7 @@ Create Penerimaan Baru
                             </div>
                             <div class="form-group">
                                 <label for="penerimaan">Kode Penerimaan</label>
-                                <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Input Kode Penerimaan">
+                                <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Input Kode Penerimaan">
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Penerimaan:</label>
@@ -102,7 +102,7 @@ Create Penerimaan Baru
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Status</label>
-                                <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
+                                <input class="form-control" name="status_penerimaan" id="status_penerimaan" value="draft" readonly>
                             </div>
                             <div class="form-group">
                                 <label>Pengirim</label>
