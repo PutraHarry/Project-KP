@@ -86,6 +86,10 @@ class AdminController extends Controller
             return back()->withErrors($validator);
         }
 
+        if($request->password != $request->confirm_password) {
+            return back()->withErrors('ga sama');
+        }
+
         $password = Hash::make($request->password);
 
         $user = new AdminModel();
@@ -135,6 +139,10 @@ class AdminController extends Controller
 
         if($validator->fails()){
             return back()->withErrors($validator);
+        }
+
+        if($request->password != $request->confirm_password) {
+            return back()->withErrors('ga sama');
         }
 
         $password = Hash::make($request->password);

@@ -19,16 +19,14 @@ class SaldoAwalController extends Controller
 
     public function dataSaldoAwal()
     {
-        $tsaldo = SaldoAwalModel::get();
-
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
+
+        $tsaldo = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->get();
 
         return view("Admin.Saldo.show", compact("tsaldo", "periodeAktif"));
     }
@@ -37,7 +35,7 @@ class SaldoAwalController extends Controller
     {
         $open = ['open'];
 
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -48,6 +46,8 @@ class SaldoAwalController extends Controller
 
     public function insertSaldoAwal(Request $request)
     {
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
+
         $validator = Validator::make($request->all(), [
             'kode_saldo' => 'required',
             'tgl_input' => 'required',
@@ -63,6 +63,7 @@ class SaldoAwalController extends Controller
         $saldoawal->tgl_input = $request->tgl_input;
         $saldoawal->status_saldo = 'draft';
         $saldoawal->ket_saldo = $request->ket_saldo;
+        $saldoawal->id_periode = $dataPeriodeAktif->id;
         $saldoawal->save();
         
         
@@ -75,9 +76,7 @@ class SaldoAwalController extends Controller
         $tbarang = BarangModel::get();
         $idEdit = $id;
 
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{

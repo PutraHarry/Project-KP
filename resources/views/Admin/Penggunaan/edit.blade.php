@@ -67,18 +67,43 @@ Edit Penggunaan
                 <div class="card-header">
                   <h3 class="card-title">Edit Data Penggunaan Barang Baru</h3>
                   <div class="card-tools">
-                    <button type="submit" class="btn btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-edit"></i>
-                      </span>
-                      <span class="text">Draft</span>
-                    </button>
-                    <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-check"></i>
-                      </span>
-                      <span class="text">Final</span>
-                    </button>
+                    @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB']))
+                      <button type="submit" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Draft</span>
+                      </button>
+                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Final</span>
+                      </button>
+                    @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['KASI']))
+                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Approved</span>
+                      </button>
+                    @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBP']))
+                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Disetujui PPBP</span>
+                      </button>
+                    @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['KASUBAG']))
+                      @if ($tpenggunaan->status_penggunaan == 'disetujui_ppbp')
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                          </span>
+                          <span class="text">Disetujui Atassan Langsung</span>
+                        </button>
+                      @endif
+                    @endif
                   </div>
                 </div>
                 <form id="quickForm">
@@ -95,8 +120,7 @@ Edit Penggunaan
                         <div class="col-3">
                           <div class="form-group">
                             <label>Status</label>
-                            <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
-                            </select>
+                              <input class="form-control" name="status_saldo" id="status_saldo" @if($tpenggunaan->status_penggunaan == 'draft') value="draft" @elseif($tpenggunaan->status_penggunaan == 'final') value="final" @elseif($tpenggunaan->status_penggunaan == 'approved') value="approved" @elseif($tpenggunaan->status_penggunaan == 'disetujui_ppbp') value="disetujui_ppbp" @elseif($tpenggunaan->status_penggunaan == 'disetujui_atasanLangsung') value="disetujui_atasanLangsung" @endif readonly>
                           </div>
                         </div>
                         <div class="col-6">

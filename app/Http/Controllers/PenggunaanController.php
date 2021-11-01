@@ -29,18 +29,19 @@ class PenggunaanController extends Controller
         }
 
         if (Auth::user()->jabatan->jabatan == 'PPBPB') {
-            $tpenggunaan = PenggunaanModel::get();
+            $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->get();
         } elseif (Auth::user()->jabatan->jabatan == 'KASI') {
-            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['final', 'approved'])->get();
+            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['final', 'approved'])->where('id_periode', $dataPeriodeAktif->id)->get();
         } elseif (Auth::user()->jabatan->jabatan == 'PPBP') {
-            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['approved', 'disetujui_ppbp'])->get();
-        } elseif (Auth::user()->jabatan->jabatan == 'kasubag') {
-            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['disetujui_ppbp', 'disetujui_atasanLangsung'])->get();
+            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['approved', 'disetujui_ppbp'])->where('id_periode', $dataPeriodeAktif->id)->get();
+        } elseif (Auth::user()->jabatan->jabatan == 'KASUBAG') {
+            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['disetujui_ppbp', 'disetujui_atasanLangsung'])->where('id_periode', $dataPeriodeAktif->id)->get();
         } else {
-            $tpenggunaan = PenggunaanModel::get();
+            $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->get();
         }
 
-        //dd($tpenggunaan);
+
+        ($tpenggunaan);
         return view("Admin.Penggunaan.show", compact('periodeAktif', 'tpenggunaan'));
     }
 
@@ -61,12 +62,14 @@ class PenggunaanController extends Controller
     public function insertPenggunaan(Request $request)
     {
         //dd($request);
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
+
         $validator = Validator::make($request->all(), [
             'kode_penggunaan' => 'required',
             'tgl_input' => 'required',
             'id_penerimaan' => 'required',
             'status_saldo' => 'required',
-            'ket_penggunaan' => 'required'
+            'ket_penggunaan' => 'required',
         ]);
 
         if($validator->fails()){
@@ -81,6 +84,7 @@ class PenggunaanController extends Controller
         $penggunaan->gudang_tujuan = Auth::user()->unit->unit;
         $penggunaan->status_penggunaan = $request->status_saldo;
         $penggunaan->ket_penggunaan = $request->ket_penggunaan;
+        $penggunaan->id_periode = $dataPeriodeAktif->id;
         //dd($penggunaan);
         $penggunaan->save();
 
