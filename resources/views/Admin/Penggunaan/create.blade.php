@@ -79,9 +79,9 @@ Create Penggunaan Baru
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Tanggal Penggunaan Barang:</label>
+                                <label>Kode Penggunaan Barang:</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input">
+                                    <input type="text" class="form-control" name="kode_penggunaan" id="kode_penggunaan" placeholder="Input Kode Penggunaan">
                                 </div>  
                             </div>
                         </div>
@@ -97,13 +97,13 @@ Create Penggunaan Baru
                               <label>Total Harga:</label>
                               <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold">10,000.000.000.000</span>
+                                <span class="text-bold">0</span>
                               </h1>
                           </div>    
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label>Kode Penerimaan</label>
                                 <select class="select2" name="id_penerimaan" id="id_penerimaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
@@ -111,6 +111,18 @@ Create Penggunaan Baru
                                     <option value={{ $tp->id }}>{{ $tp->kode_penerimaan }}</option>
                                   @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group">
+                              <label>Keterangan</label>
+                              <textarea class="form-control" rows="3" name="ket_penggunaan" id="ket_penggunaan" placeholder="Input Keterangan..."></textarea>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Tanggal Penggunaan Barang:</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input">
+                                </div>  
                             </div>
                         </div>
                         <div class="col-3">

@@ -55,12 +55,14 @@
                 <div class="card-header">
                   <h3 class="card-title">List Data Penggunaan Barang</h3>
                     <div class="card-tools">
+                      @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB']))
                         <a href="/penggunaan/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>
                             </span>
                             <span class="text">Buat Baru</span>
                         </a>
+                      @endif
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -69,6 +71,7 @@
                       <thead>
                           <tr class="text-center">
                             <th>No.</th>
+                            <th>Kode Penggunaan</th>
                             <th>Lokasi Gudang</th>
                             <th>Lokasi Tujuan</th>
                             <th>Tanggal</th>
@@ -80,6 +83,7 @@
                         @foreach ($tpenggunaan as $tp)
                           <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $tp->kode_penggunaan}}</td>
                             <td>{{ $tp->gudang_asal }}</td>
                             <td>{{ $tp->gudang_tujuan }}</td>
                             <td>{{ $tp->tgl_penggunaan }}</td>
@@ -90,8 +94,10 @@
                                 <span class="badge badge-primary">Final</span>
                               @elseif($tp->status_penggunaan == "approved")
                                 <span class="badge badge-success">Approved</span>
-                              @elseif($tp->status_penggunaan == "disetujui")
-                                <span class="badge badge-info">Disetujui</span>
+                              @elseif($tp->status_penggunaan == "disetujui_ppbp")
+                                <span class="badge badge-info">Disetujui PPBP</span>
+                              @elseif($tp->status_penggunaan == "disetujui_atasanLangsung")
+                                <span class="badge badge-secondary">Disetujui Atasan Langsung</span>
                               @endif
                             </td>
                             <td class="text-center">
@@ -99,8 +105,14 @@
                                   <span class="icon">
                                       <i class="fas fa-edit"></i>
                                   </span>
-                                  <span class="text">Edit</span>
                                 </a>
+                                @if ($tp->status_penggunaan == 'draft')
+                                  <a onclick="statusdelete({{ $tp->id }})" class="btn btn-danger btn-icon-split">
+                                    <span class="icon">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                  </a>
+                                @endif
                             </td>
                           </tr>
                         @endforeach
@@ -112,25 +124,28 @@
           </div>
         </div>
       </section>
-    <div class="modal fade" id="modal-sfinal">
-      <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Final Penggunaan</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+      <div class="modal fade" id="modal-sdelete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <form action="" id="sdelete" method="POST">
+              @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Final Saldo</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <p>Yakin akan menghapus data?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="sdelete" type="submit" class="btn btn-danger">Delete</button>
+                </div>
             </div>
-            <div class="modal-body">
-            <p>Yakin akan merubah status menjadi final?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a href="/penggunaan/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
-            </div>
-          </div>
+          </form>
+        </div>
       </div>
-    </div>
 @endsection
 
 @push('js')
@@ -166,9 +181,9 @@
 </script>
 
 <script>
-  function statusfinal(id) {
-  $("#sfinal").attr("href", "/penggunaan/statusfinal/"+id);
-  $('#modal-sfinal').modal('show');
+  function statusdelete(id) {
+  $("#sdelete").attr("action", "/penggunaan/delete/"+id);
+  $('#modal-sdelete').modal('show');
   }
 </script>
 @endpush

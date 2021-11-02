@@ -55,12 +55,14 @@
                 <div class="card-header">
                   <h3 class="card-title">List Data Saldo</h3>
                     <div class="card-tools">
+                      @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB', 'PPBP']))
                         <a href="/saldoawal/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>
                             </span>
                             <span class="text">Saldo Baru</span>
                         </a>
+                      @endif
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -95,15 +97,13 @@
                                     <span class="icon">
                                         <i class="fas fa-edit"></i>
                                     </span>
-                                    <span class="text">Edit</span>
                                   </a>
                                   @if ($ts->status_saldo == 'draft')
-                                  <button class="btn btn-success btn-icon-split" onclick="statusfinal({{ $ts->id }})">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <span class="text">Final</span>
-                                  </button>
+                                    <a onclick="statusdelete({{ $ts->id }})" class="btn btn-danger btn-icon-split">
+                                      <span class="icon">
+                                          <i class="fas fa-trash"></i>
+                                      </span>
+                                    </a>
                                   @endif
                               </td>
                           </tr>
@@ -116,23 +116,26 @@
           </div>
         </div>
       </section>
-    <div class="modal fade" id="modal-sfinal">
+    <div class="modal fade" id="modal-sdelete">
       <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Final Saldo</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            <p>Yakin akan merubah status menjadi final?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a href="/saldoawal/statusfinal/id" id="sfinal" type="button" class="btn btn-success">Final</a>
-            </div>
+            <form action="" id="sdelete" method="POST">
+            @csrf
+              <div class="modal-header">
+                  <h4 class="modal-title">Final Saldo</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+              <p>Yakin akan menghapus data?</p>
+              </div>
+              <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button id="sdelete" type="submit" class="btn btn-danger">Delete</button>
+              </div>
           </div>
+        </form>
       </div>
     </div>
 @endsection
@@ -170,9 +173,9 @@
 </script>
 
 <script>
-  function statusfinal(id) {
-  $("#sfinal").attr("href", "/saldoawal/statusfinal/"+id);
-  $('#modal-sfinal').modal('show');
+  function statusdelete(id) {
+  $("#sdelete").attr("action", "/saldoawal/delete/"+id);
+  $('#modal-sdelete').modal('show');
   }
 </script>
 @endpush

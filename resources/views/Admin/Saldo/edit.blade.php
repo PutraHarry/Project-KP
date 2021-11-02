@@ -67,18 +67,20 @@ Edit Saldo Awal
                                 <div class="card-header">
                                     <h3 class="card-title">Edit Data Saldo </h3>
                                     <div class="card-tools">
-                                        <button type="submit" class="btn btn-danger btn-icon-split">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-edit"></i>
-                                            </span>
-                                            <span class="text">Draft</span>
-                                        </button>
-                                        <button type="submit" class="btn btn-success btn-icon-split">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-check"></i>
-                                            </span>
-                                            <span class="text">Final</span>
-                                        </button>
+                                        @if ($saldoawal->status_saldo == 'draft')
+                                            <button type="submit" class="btn btn-danger btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="text">Draft</span>
+                                            </button>
+                                            <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $saldoawal->total }})">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                                <span class="text">Final</span>
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                                 <form id="quickForm">
@@ -87,24 +89,24 @@ Edit Saldo Awal
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="kode_saldo">Kode Saldo</label>
-                                                    <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" value="{{ $saldoawal->kode_saldo }}" placeholder="Kode Saldo" disabled>
+                                                    <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" value="{{ $saldoawal->kode_saldo }}" placeholder="Kode Saldo" @if($saldoawal->status_saldo == 'final') readonly @endif>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tanggal Saldo:</label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}">
+                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}" @if($saldoawal->status_saldo == 'final') readonly @endif>
                                                     </div>  
                                                 </div>  
                                             </div>
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label>Status</label>
-                                                    <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
+                                                    <input class="form-control" name="status_saldo" id="status_saldo" @if($saldoawal->status_saldo == 'draft') value="draft" @elseif($saldoawal->status_saldo == 'final') value="final" @endif @if($saldoawal->status_saldo == 'final') readonly @endif>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Keterangan</label>
-                                                    <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan...">{{ $saldoawal->ket_saldo }}</textarea>
+                                                    <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..." @if($saldoawal->status_saldo == 'final') readonly @endif>{{ $saldoawal->ket_saldo }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -112,7 +114,7 @@ Edit Saldo Awal
                                                     <label>Total Harga:</label>
                                                     <h1>
                                                         <span class="text-bold">Rp.</span>
-                                                        <span class="text-bold">{{ $saldoawal->total }}</span>
+                                                        <span class="text-bold" id="totalHargaSaldoAwal">{{ $saldoawal->total }}</span>
                                                     </h1>
                                                 </div>
                                                 <div class="row">
@@ -239,7 +241,7 @@ Edit Saldo Awal
         </form>
     </section>
     
-    <div class="modal fade" id="modal-sfinal">
+    <div class="modal fade" id="modal-sedit">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form action="" id="edit_form" method="POST">
@@ -283,10 +285,53 @@ Edit Saldo Awal
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal-sfinal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="" id="finalSaldoAwal" method="POST">
+                  @csrf
+                    <div class="modal-header">
+                        <h4 class="modal-title">Final Pengeluaran</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      <div>
+                        <span>Yakin akan merubah status menjadi final?</span>
+                      </div>
+                      <div class="form-group">
+                        <label>Kode Saldo Awal</label>
+                        <input type="text" class="form-control" name="kodeSaldoAwal" id="kodeSaldoAwal" placeholder="Kode Penggunaan" value="" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label>Tanggal Saldo Awal</label>
+                        <input type="text" class="form-control" name="tglSaldoAwal" id="tglSaldoAwal" placeholder="Tanggal Penggunaan" value="" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label>Total Saldo Awal</label>
+                        <input type="text" class="form-control" name="totalSaldoAwal" id="totalSaldoAwal" placeholder="Total Saldo Awal" value="" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label>Keterangan Saldo Awal</label>
+                        <input type="text" class="form-control" name="ketSaldoAwal" id="ketSaldoAwal" placeholder="Tanggal Penggunaan" value="" readonly>
+                      </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('js')
-
+<!-- jQuery -->
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
@@ -365,7 +410,7 @@ Edit Saldo Awal
         $('#edit_harga').val(harga);
         $('#edit_keterangan').val(keterangan);
         $('#edit_total').val($('#edit_qty').val() * $('#edit_harga').val());
-        $('#modal-sfinal').modal('show');
+        $('#modal-sedit').modal('show');
     }
 
     $('#edit_id_barang').change(function(){
@@ -383,5 +428,18 @@ Edit Saldo Awal
     $('#edit_qty').keyup(function(){
         $('#edit_total').val($('#edit_qty').val() * $('#edit_harga').val());
     })
+</script>
+
+<script>
+    function statusFinal(idEdit, total) {
+      //var totalSaldoAwal = $('#totalHargaSaldoAwal').val();
+      $("#finalSaldoAwal").attr("action", "/saldoawal/final/" + idEdit);
+      $('#kodeSaldoAwal').val($('#kode_saldo').val());
+      $('#tglSaldoAwal').val($('#tgl_input').val());
+      $('#totalSaldoAwal').val(total);
+      $('#ketSaldoAwal').val($('#ket_saldo').val());
+      //console.log(total);
+      $('#modal-sfinal').modal('show');
+    }
 </script>
 @endpush

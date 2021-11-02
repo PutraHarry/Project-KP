@@ -84,6 +84,14 @@ Create Pengeluaran Baru
                               <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran">
                           </div>
                           <div class="form-group">
+                            <label>Kode Penggunaan</label>
+                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
+                              @foreach ($tpenggunaan as $tp)
+                                <option value={{ $tp->id }}>{{ $tp->kode_penggunaan }}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                          <div class="form-group">
                               <label>Tanggal Pengeluaran:</label>
                               <div class="input-group">
                                 <input type="date" class="form-control" name="tgl_input" id="tgl_input">
@@ -93,11 +101,11 @@ Create Pengeluaran Baru
                         <div class="col-3">
                           <div class="form-group">
                             <label>Status</label>
-                            <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
+                            <input class="form-control" name="status_pengeluaran" id="status_pengeluaran" value="draft" readonly>
                           </div>
                           <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..."></textarea>
+                              <textarea class="form-control" rows="5" name="ket_pengeluaran" id="ket_pengeluaran" placeholder="Input Keterangan..."></textarea>
                           </div>
                         </div>
                         <div class="col-6">
@@ -105,21 +113,21 @@ Create Pengeluaran Baru
                               <label>Total Harga:</label>
                               <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold">10,000.000.000.000</span>
+                                <span class="text-bold">0</span>
                               </h1>
                           </div>
                             <div class="row">
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama OPD:</label>
-                                        <p>Badan Pengelola Keuangan dan Aset Daerah</p>
+                                      <p id="nama_opd">{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
                                     </select>
                                 </div> 
                               </div>
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama Unit Kerja:</label>
-                                        <p>Persediaan</p>
+                                      <p id="nama_unit">{{ Auth::guard('admin')->user()->unit->unit }}</p>
                                     </select>
                                 </div> 
                               </div>

@@ -13,7 +13,7 @@
           <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::guard('admin')->user()->username}}</a>
+          <a href="#" class="d-block">{{Auth::guard('admin')->user()->nama_user}}</a>
         </div>
       </div>
 
@@ -44,7 +44,7 @@
           </li>
     
           <li class="nav-header">MENU</li>
-          @if (auth()->guard('admin')->user()->id_jabatan == '1')
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBP', 'Admin_BPKAD']))
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-calendar-alt"></i>
@@ -75,81 +75,47 @@
               </ul>
             </li>
           @endif
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBPB', 'PPBP', 'Admin_BPKAD']))
+            <li class="nav-item">
+              <a href="/saldoawal" class="nav-link">
+                <i class="nav-icon fas fa-bars"></i>
+                <p>
+                  Saldo Awal
+                </p>
+              </a>
+            </li>
+          @endif
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBP', 'Admin_BPKAD']))
+            <li class="nav-item">
+              <a href="/penerimaan" class="nav-link">
+                <i class="nav-icon fas fa-chart-bar"></i>
+                <p>
+                  Penerimaan
+                </p>
+              </a>
+            </li>
+          @endif
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBPB', 'PPBP', 'KASI', 'KASUBAG', 'Admin_BPKAD']))
+            <li class="nav-item">
+              <a href="/penggunaan" class="nav-link">
+                <i class="nav-icon fas fa-sitemap"></i>
+                <p>
+                  Penggunaan
+                </p>
+              </a>
+            </li>
+          @endif
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBPB', 'PPBP', 'KASUBAG', 'Admin_BPKAD']))
+            <li class="nav-item">
+              <a href="/pengeluaran" class="nav-link">
+                <i class="nav-icon fas fa-money-check"></i>
+                <p>
+                  Pengeluaran
+                </p>
+              </a>
+            </li>
+          @endif
 
-          <li class="nav-item">
-            <a href="/saldoawal" class="nav-link">
-              <i class="nav-icon fas fa-bars"></i>
-              <p>
-                Saldo Awal
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/penerimaan" class="nav-link">
-              <i class="nav-icon fas fa-chart-bar"></i>
-              <p>
-                Penerimaan
-              </p>
-            </a>
-          </li>
-
-          <!--<li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-bar"></i>
-              <p>
-                Penerimaan
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Non Obat</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Obat</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Hibah Non Obat</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Hibah Obat</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Non APBD</p>
-                </a>
-              </li>
-            </ul>
-          </li> -->
-          <li class="nav-item">
-            <a href="/penggunaan" class="nav-link">
-              <i class="nav-icon fas fa-sitemap"></i>
-              <p>
-                Penggunaan
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/pengeluaran" class="nav-link">
-              <i class="nav-icon fas fa-money-check"></i>
-              <p>
-                Pengeluaran
-              </p>
-            </a>
-          </li>
           <!--<li class="nav-item">
             <a href="/opname" class="nav-link">
               <i class="nav-icon fas fa-warehouse"></i>
@@ -158,6 +124,8 @@
               </p>
             </a>
           </li>
+
+
           <li class="nav-item">
             <a href="/pemusnahan" class="nav-link">
               <i class="nav-icon fas fa-fire"></i>
@@ -165,19 +133,12 @@
                 Pemusnahan
               </p>
             </a>
-          </li>
-          <li class="nav-header">SIMDA</li>
-          <li class="nav-item">
-            <a href="/buktiumum" class="nav-link">
-              <i class="nav-icon fas fa-file-alt "></i>
-              <p>
-                Bukti Umum
-              </p>
-            </a>
           </li>-->
+
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'Admin_BPKAD']))
           <li class="nav-header">Admin</li>
           <li class="nav-item">
-            <a href="/tambah-user" class="nav-link">
+            <a href="/user" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Tambah User
@@ -185,13 +146,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/master-barang" class="nav-link">
+            <a href="/barang" class="nav-link">
               <i class="nav-icon fas fa-box"></i>
               <p>
                 Master Barang
               </p>
             </a>
           </li>
+          @endif
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBPB', 'KASI', 'KASUBAG', 'PPBP', 'Admin_BPKAD']))
           <li class="nav-header">PELAPORAN</li>
           <li class="nav-item">
             <a href="/laporan" class="nav-link">
@@ -201,6 +164,7 @@
               </p>
             </a>
           </li>
+          @endif
           <li class="nav-header">USER</li>
           <li class="nav-item">
             <a href="/logout" class="nav-link">

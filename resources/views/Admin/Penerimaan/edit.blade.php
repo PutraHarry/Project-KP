@@ -67,18 +67,20 @@ Edit Penerimaan Baru
                 <div class="card-header">
                   <h3 class="card-title">Edit Data Penerimaan</h3>
                   <div class="card-tools">
-                    <button type="submit" class="btn btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-edit"></i>
-                      </span>
-                      <span class="text">Draft</span>
-                    </button>
-                    <button type="submit" class="btn btn-success btn-icon-split">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-check"></i>
-                      </span>
-                      <span class="text">Final</span>
-                  </button>
+                    @if ($tpenerimaan->status_penerimaan == 'draft')
+                      <button type="submit" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Draft</span>
+                      </button>
+                      <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $tpenerimaan->total }})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Final</span>
+                      </button>
+                    @endif
                   </div>
                 </div>
                 <form id="quickForm">
@@ -87,20 +89,20 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div class="form-group">
                           <label>Jenis Penerimaan</label>
-                          <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan">
+                          <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
                             @foreach ($jenisPenerimaan as $jp)
                               <option value="{{ $jp }}" @if($tpenerimaan->jenis_penerimaan == $jp) selected @endif>{{ $jp }}</option>
                             @endforeach
                           </select>
                         </div>
                         <div class="form-group">
-                          <label for="penerimaan">Nama Penerimaan</label>
-                          <input type="text" class="form-control" name="namaPenerimaan" id="namaPenerimaan" placeholder="Kode Saldo" value="{{ $tpenerimaan->kode_penerimaan }}">
+                          <label for="penerimaan">Kode Penerimaan</label>
+                          <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Kode Penerimaan" value="{{ $tpenerimaan->kode_penerimaan }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
                         </div>
                         <div class="form-group">
                           <label>Tanggal Penerimaan:</label>
                           <div class="input-group">
-                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenerimaan->tgl_terima }}">
+                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenerimaan->tgl_terima }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
                           </div>  
                         </div>  
                       </div>
@@ -111,7 +113,11 @@ Edit Penerimaan Baru
                         </div>
                         <div class="form-group">
                             <label>Pengirim</label>
-                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}">
+                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
+                        </div>
+                        <div class="form-group">
+                          <label>Keterangan</label>
+                          <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..." @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>{{ $tpenerimaan->ket_penerimaan }}</textarea>
                         </div>
                       </div>
                       <div class="col-6">
@@ -246,7 +252,7 @@ Edit Penerimaan Baru
     </form>
   </section>
 
-  <div class="modal fade" id="modal-sfinal">
+  <div class="modal fade" id="modal-sedit">
       <div class="modal-dialog modal-lg">
           <div class="modal-content">
               <form action="" id="edit_form" method="POST">
@@ -290,10 +296,57 @@ Edit Penerimaan Baru
           </div>
       </div>
   </div>
+
+  <div class="modal fade" id="modal-sfinal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="" id="finalPenerimaan" method="POST">
+              @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Final Pengeluaran</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <span>Yakin akan merubah status menjadi final?</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Penerimaan</label>
+                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Jenis Penerimaan</label>
+                    <input type="text" class="form-control" name="jenisPenerimaan" id="jenisPenerimaan" placeholder="Kode Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Penerimaan</label>
+                    <input type="text" class="form-control" name="tglPenerimaan" id="tglPenerimaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Total Penerimaan</label>
+                    <input type="text" class="form-control" name="totalPenerimaan" id="totalPenerimaan" placeholder="Total Saldo Awal" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan Penerimaan</label>
+                    <input type="text" class="form-control" name="ketPenerimaan" id="ketPenerimaan" placeholder="Keterangan Penerimaan" value="" readonly>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
 @endsection
 
 @push('js')
-
+<!-- jQuery -->
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
@@ -369,7 +422,7 @@ Edit Penerimaan Baru
       $('#edit_harga').val(harga);
       $('#edit_keterangan').val(keterangan);
       $('#edit_total').val($('#edit_qty').val() * $('#edit_harga').val());
-      $('#modal-sfinal').modal('show');
+      $('#modal-sedit').modal('show');
   }
 
   $('#edit_id_barang').change(function(){
@@ -387,5 +440,17 @@ Edit Penerimaan Baru
   $('#edit_qty').keyup(function(){
       $('#edit_total').val($('#edit_qty').val() * $('#edit_harga').val());
   })
+</script>
+
+<script>
+  function statusFinal(idEdit, total) {
+    $("#finalPenerimaan").attr("action", "/penerimaan/final/" + idEdit);
+    $('#kodePenerimaan').val($('#kode_penerimaan').val());
+    $('#jenisPenerimaan').val($('#jenis_penerimaan').val());
+    $('#tglPenerimaan').val($('#tgl_input').val());
+    $('#totalPenerimaan').val(total);
+    $('#ketPenerimaan').val($('#ket_penerimaan').val());
+    $('#modal-sfinal').modal('show');
+  }
 </script>
 @endpush

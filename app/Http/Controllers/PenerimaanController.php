@@ -19,20 +19,18 @@ class PenerimaanController extends Controller
 
     public function dataPenerimaan()
     {
-        $tpenerimaanObat = PenerimaanModel::where('jenis_penerimaan', 'APBD Obat')->get();
-        $tpenerimaanNonObat = PenerimaanModel::where('jenis_penerimaan', 'APBD Non Obat')->get();
-        $tpenerimaanHibah = PenerimaanModel::where('jenis_penerimaan', 'Hibah Obat')->get();
-        $tpenerimaanNonHibah = PenerimaanModel::where('jenis_penerimaan', 'Hibah Non Obat')->get();
-        $tpenerimaanNonAPBD = PenerimaanModel::where('jenis_penerimaan', 'Non APBD')->get();
-        
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
+
+        $tpenerimaanObat = PenerimaanModel::where('jenis_penerimaan', 'APBD Obat')->where('id_periode', $dataPeriodeAktif->id)->get();
+        $tpenerimaanNonObat = PenerimaanModel::where('jenis_penerimaan', 'APBD Non Obat')->where('id_periode', $dataPeriodeAktif->id)->get();
+        $tpenerimaanHibah = PenerimaanModel::where('jenis_penerimaan', 'Hibah Obat')->where('id_periode', $dataPeriodeAktif->id)->get();
+        $tpenerimaanNonHibah = PenerimaanModel::where('jenis_penerimaan', 'Hibah Non Obat')->where('id_periode', $dataPeriodeAktif->id)->get();
+        $tpenerimaanNonAPBD = PenerimaanModel::where('jenis_penerimaan', 'Non APBD')->where('id_periode', $dataPeriodeAktif->id)->get();
 
         return view("Admin.Penerimaan.show", compact("tpenerimaanObat","tpenerimaanNonObat","tpenerimaanHibah","tpenerimaanNonHibah","tpenerimaanNonAPBD", "periodeAktif"));
     }
@@ -53,12 +51,15 @@ class PenerimaanController extends Controller
 
     public function insertPenerimaan(Request $request)
     {
+        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
+
         $validator = Validator::make($request->all(), [
             'jenis_penerimaan' => 'required',
-            'namaPenerimaan' => 'required',
+            'kode_penerimaan' => 'required',
             'tgl_input' => 'required',
             'status_penerimaan' => 'required',
             'pengirim' => 'required',
+            'ket_penerimaan' => 'required'
         ]);
 
         if($validator->fails()){
@@ -66,11 +67,13 @@ class PenerimaanController extends Controller
         }
 
         $penerimaan = new PenerimaanModel();
-        $penerimaan->kode_penerimaan = $request->namaPenerimaan;
+        $penerimaan->kode_penerimaan = $request->kode_penerimaan;
         $penerimaan->jenis_penerimaan = $request->jenis_penerimaan;
         $penerimaan->tgl_terima = $request->tgl_input;
         $penerimaan->pengirim = $request->pengirim;
         $penerimaan->status_penerimaan = $request->status_penerimaan;
+        $penerimaan->ket_penerimaan = $request->ket_penerimaan;
+        $penerimaan->id_periode = $dataPeriodeAktif->id;
         $penerimaan->save();
         
         
@@ -104,9 +107,10 @@ class PenerimaanController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'jenis_penerimaan' => 'required',
-            'namaPenerimaan' => 'required',
+            'kode_penerimaan' => 'required',
             'tgl_input' => 'required',
             'pengirim' => 'required',
+            'ket_penerimaan' => 'required'
         ]);
 
         if($validator->fails()){
@@ -114,10 +118,11 @@ class PenerimaanController extends Controller
         }
 
         $penerimaan = PenerimaanModel::find($id);
-        $penerimaan->kode_penerimaan = $request->namaPenerimaan;
+        $penerimaan->kode_penerimaan = $request->kode_penerimaan;
         $penerimaan->jenis_penerimaan = $request->jenis_penerimaan;
         $penerimaan->tgl_terima = $request->tgl_input;
         $penerimaan->pengirim = $request->pengirim;
+        $penerimaan->ket_penerimaan = $request->ket_penerimaan;
         $penerimaan->update();
         
         return redirect()->route('penerimaan')->with('statusInput', 'Update Success');
@@ -161,5 +166,28 @@ class PenerimaanController extends Controller
         $mpenerimaan->total = $mpenerimaan->total + $gapTotal;
         $mpenerimaan->update();
         return redirect()->back();
+    }
+
+    public function deletePenerimaan($id)
+    {
+        $detailPenerimaan = DetailPenerimaanModel::where('id_penerimaan', $id)->delete();
+
+        $penerimaan = PenerimaanModel::find($id);
+        $penerimaan->delete();
+        
+        return redirect('/penerimaan')->with('statusInput', 'Delete Success');
+    }
+
+    public function finalPenerimaan($id, Request $request)
+    {
+        $penerimaan = PenerimaanModel::find($id);
+        $penerimaan->kode_penerimaan = $request->kodePenerimaan;
+        $penerimaan->jenis_penerimaan = $request->jenisPenerimaan;
+        $penerimaan->tgl_terima = $request->tglPenerimaan;
+        $penerimaan->ket_penerimaan = $request->ketPenerimaan;
+        $penerimaan->status_penerimaan = 'final';
+        $penerimaan->update();
+        
+        return redirect('/penerimaan')->with('statusInput', 'Status Final Berhasil');
     }
 }
