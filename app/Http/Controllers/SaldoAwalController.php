@@ -8,6 +8,7 @@ use App\BarangModel;
 use App\DetailSaldoAwalModel;
 use App\PeriodeModel;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class SaldoAwalController extends Controller
@@ -27,7 +28,7 @@ class SaldoAwalController extends Controller
         }
 
         $tsaldo = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->get();
-
+        
         return view("Admin.Saldo.show", compact("tsaldo", "periodeAktif"));
     }
 
@@ -41,6 +42,7 @@ class SaldoAwalController extends Controller
         } else{
             $periodeAktif = "-";
         }
+
         return view("Admin.Saldo.create", compact("periodeAktif"));
     }
 
@@ -49,7 +51,6 @@ class SaldoAwalController extends Controller
         $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
-            'kode_saldo' => 'required',
             'tgl_input' => 'required',
             'ket_saldo' => 'required',
         ]);
@@ -58,8 +59,23 @@ class SaldoAwalController extends Controller
             return back()->withErrors($validator);
         }
 
+        $getOPD = Auth::user()->opd->nama_opd;
+        $lastestidSaldoAwal = SaldoAwalModel::max('id');
+        $getLastestSaldoAwal = SaldoAwalModel::find($lastestidSaldoAwal);
+        $lastestKodeSaldoAwal = $getLastestSaldoAwal->kode_saldo;
+        if ($lastestKodeSaldoAwal) {
+            $getKodeSaldoAwal = explode("/", $lastestKodeSaldoAwal);
+            for ($i=0; $i < count($getKodeSaldoAwal); $i++) { 
+                echo $getKodeSaldoAwal[$i];
+            }
+        }else {
+            $getKodeSaldoAwal[2] = "0";
+        }
+        $newKodeSaldoAwal = $getKodeSaldoAwal[2] + 1;
+        $saldoAwalKode = $getOPD."/SDA/".$newKodeSaldoAwal;
+
         $saldoawal = new SaldoAwalModel();
-        $saldoawal->kode_saldo = $request->kode_saldo;
+        $saldoawal->kode_saldo = $saldoAwalKode;
         $saldoawal->tgl_input = $request->tgl_input;
         $saldoawal->status_saldo = 'draft';
         $saldoawal->ket_saldo = $request->ket_saldo;
@@ -67,7 +83,7 @@ class SaldoAwalController extends Controller
         $saldoawal->save();
         
         
-        return redirect()->route('saldoawaledit', ['id' => $saldoawal->id]);
+        return redirect()->route('editSaldoAwal', ['id' => $saldoawal->id]);
     }
 
     public function editSaldoAwal($id)

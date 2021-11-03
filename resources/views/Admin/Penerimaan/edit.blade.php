@@ -97,7 +97,7 @@ Edit Penerimaan Baru
                         </div>
                         <div class="form-group">
                           <label for="penerimaan">Kode Penerimaan</label>
-                          <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Kode Penerimaan" value="{{ $tpenerimaan->kode_penerimaan }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
+                          <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Kode Penerimaan" value="{{ $tpenerimaan->kode_penerimaan }}" readonly>
                         </div>
                         <div class="form-group">
                           <label>Tanggal Penerimaan:</label>

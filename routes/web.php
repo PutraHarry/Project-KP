@@ -44,7 +44,7 @@ Route::post('/saldoawal/final/{id}', 'SaldoAwalController@finalSaldoAwal')->name
 Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan')->name('penerimaan');
 Route::get('/penerimaan/create', 'PenerimaanController@addPenerimaan')->name('createPenerimaan');
 Route::post('/penerimaan/insert', 'PenerimaanController@insertPenerimaan')->name('insertPenerimaan');
-Route::get('/penerimaan/edit/{id}', 'PenerimaanController@editPenerimaan')->name('penerimaanEdit');
+Route::get('/penerimaan/edit/{id}', 'PenerimaanController@editPenerimaan')->name('EditPenerimaan');
 Route::post('/penerimaan/update/{id}', 'PenerimaanController@updatePenerimaan')->name('updatePenerimaan');
 Route::post('/penerimaan/updateDetail/{id}', 'PenerimaanController@insertDetailPenerimaan')->name('updateDetailPenerimaan');
 Route::post('/penerimaan/editDetail/{id}', 'PenerimaanController@editDetailPenerimaan')->name('editDetailPenerimaan');
@@ -90,9 +90,3 @@ Route::get('/user/edit/{id}', 'AdminController@editUser')->name('editUser');
 Route::post('/user/update/{id}', 'AdminController@updateUser')->name('updateUser');
 Route::get('/user/dataUnit/{id}', 'AdminController@getDataUnit')->name('getDataUnit');
 Route::post('/user/delete/{id}', 'AdminController@deleteUser')->name('deleteUser');
-
-//BUKTI UMUM
-//Rsoute::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');
-//Route::get('/buktiumum/create', 'BuktiUmumController@addBuktiUmum');
-//Route::post('/buktiumum/insert','BuktiUmumController@insertBuktiUmum');
-//Route::get('/buktiumum/edit/{id}', 'BuktiUmumController@editBuktiUmum');

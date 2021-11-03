@@ -56,7 +56,6 @@ class PengeluaranController extends Controller
         $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
-            'kode_pengeluaran' => 'required',
             'tgl_input' => 'required',
             'id_penggunaan' => 'required',
             'status_pengeluaran' => 'required',
@@ -67,8 +66,23 @@ class PengeluaranController extends Controller
             return back()->withErrors($validator);
         }
 
+        $getOPD = Auth::user()->opd->nama_opd;
+        $lastestidPengeluaran = PengeluaranModel::max('id');
+        $getLastestPengeluaran = PengeluaranModel::find($lastestidPengeluaran);
+        $lastestKodePengeluaran = $getLastestPengeluaran->kode_pengeluaran;
+        if ($lastestKodePengeluaran) {
+            $getKodePengeluaran = explode("/", $lastestKodePengeluaran);
+            for ($i=0; $i < count($getKodePengeluaran); $i++) { 
+                echo $getKodePengeluaran[$i];
+            }
+        }else {
+            $getKodePengeluaran[2] = "0";
+        }
+        $newKodePengeluaran = $getKodePengeluaran[2] + 1;
+        $pengeluaranKode = $getOPD."/PGL/".$newKodePengeluaran;
+
         $pengeluaran = new PengeluaranModel();
-        $pengeluaran->kode_pengeluaran = $request->kode_pengeluaran;
+        $pengeluaran->kode_pengeluaran = $pengeluaranKode;
         $pengeluaran->tgl_keluar = $request->tgl_input;
         $pengeluaran->id_penggunaan = $request->id_penggunaan;
         $pengeluaran->status_pengeluaran = $request->status_pengeluaran;
