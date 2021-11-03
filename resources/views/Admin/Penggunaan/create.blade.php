@@ -81,7 +81,7 @@ Create Penggunaan Baru
                             <div class="form-group">
                                 <label>Kode Penggunaan Barang:</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="kode_penggunaan" id="kode_penggunaan" placeholder="Input Kode Penggunaan">
+                                    <input type="text" class="form-control" name="kode_penggunaan" id="kode_penggunaan" placeholder="Input Kode Penggunaan" readonly>
                                 </div>  
                             </div>
                         </div>

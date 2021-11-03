@@ -90,7 +90,7 @@ Edit Pengeluaran Baru
                         <div class="col-3">
                           <div class="form-group">
                               <label for="kode_pengeluaran">Kode Pengeluaran</label>
-                              <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran" value="{{ $tpengeluaran->kode_pengeluaran }}">
+                              <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran" value="{{ $tpengeluaran->kode_pengeluaran }}" readonly>
                           </div>
                           <div class="form-group">
                             <label>Kode Penerimaan</label>

@@ -65,7 +65,6 @@ class PenggunaanController extends Controller
         $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
-            'kode_penggunaan' => 'required',
             'tgl_input' => 'required',
             'id_penerimaan' => 'required',
             'status_saldo' => 'required',
@@ -76,8 +75,23 @@ class PenggunaanController extends Controller
             return back()->withErrors($validator);
         }
 
+        $getOPD = Auth::user()->opd->nama_opd;
+        $lastestidPenggunaan = PenggunaanModel::max('id');
+        $getLastestPenggunaan = PenggunaanModel::find($lastestidPenggunaan);
+        $lastestKodePenggunaan = $getLastestPenggunaan->kode_penggunaan;
+        if ($lastestKodePenggunaan) {
+            $getKodePenggunaan = explode("/", $lastestKodePenggunaan);
+            for ($i=0; $i < count($getKodePenggunaan); $i++) { 
+                echo $getKodePenggunaan[$i];
+            }
+        }else {
+            $getKodePenggunaan[2] = "0";
+        }
+        $newKodePenggunaan = $getKodePenggunaan[2] + 1;
+        $penggunaanKode = $getOPD."/PGN/".$newKodePenggunaan;
+
         $penggunaan = new PenggunaanModel();
-        $penggunaan->kode_penggunaan = $request->kode_penggunaan;
+        $penggunaan->kode_penggunaan = $penggunaanKode;
         $penggunaan->tgl_penggunaan = $request->tgl_input;
         $penggunaan->id_penerimaan = $request->id_penerimaan;
         $penggunaan->gudang_asal = Auth::user()->unit->opd->nama_opd;
