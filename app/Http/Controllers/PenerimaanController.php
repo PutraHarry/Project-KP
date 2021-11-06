@@ -90,7 +90,7 @@ class PenerimaanController extends Controller
         $penerimaan->status_penerimaan = $request->status_penerimaan;
         $penerimaan->ket_penerimaan = $request->ket_penerimaan;
         $penerimaan->id_periode = $dataPeriodeAktif->id;
-        $penerimaan->id_opd = Auth::user()->unit->opd->nama_opd;
+        $penerimaan->id_opd = Auth::user()->unit->opd->id;
         $penerimaan->save();
         
         

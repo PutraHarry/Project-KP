@@ -102,7 +102,7 @@ class PenggunaanController extends Controller
         $penggunaan->status_penggunaan = $request->status_saldo;
         $penggunaan->ket_penggunaan = $request->ket_penggunaan;
         $penggunaan->id_periode = $dataPeriodeAktif->id;
-        $penggunaan->id_opd = Auth::user()->unit->opd->nama_opd;
+        $penggunaan->id_opd = Auth::user()->unit->opd->id;
         //dd($penggunaan);
         $penggunaan->save();
 
