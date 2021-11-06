@@ -31,6 +31,6 @@ class AdminModel extends Authenticatable
 
     public function opd()
     {
-        return $this->belongsTo(OPDModel::class, 'id_opd', 'id_opd');
+        return $this->belongsTo(OPDModel::class, 'id_opd', 'id');
     }
 }

@@ -18,11 +18,9 @@ class PengeluaranController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function datapengeluaran()
+    public function dataPengeluaran()
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -37,9 +35,7 @@ class PengeluaranController extends Controller
 
     public function createPengeluaran()
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -53,8 +49,7 @@ class PengeluaranController extends Controller
 
     public function insertPengeluaran(Request $request)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
-
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         $validator = Validator::make($request->all(), [
             'tgl_input' => 'required',
             'id_penggunaan' => 'required',
@@ -68,16 +63,21 @@ class PengeluaranController extends Controller
 
         $getOPD = Auth::user()->opd->nama_opd;
         $lastestidPengeluaran = PengeluaranModel::max('id');
-        $getLastestPengeluaran = PengeluaranModel::find($lastestidPengeluaran);
-        $lastestKodePengeluaran = $getLastestPengeluaran->kode_pengeluaran;
-        if ($lastestKodePengeluaran) {
-            $getKodePengeluaran = explode("/", $lastestKodePengeluaran);
-            for ($i=0; $i < count($getKodePengeluaran); $i++) { 
-                echo $getKodePengeluaran[$i];
+        if ($lastestidPengeluaran) {
+            $getLastestPengeluaran = PengeluaranModel::find($lastestidPengeluaran);
+            $lastestKodePengeluaran = $getLastestPengeluaran->kode_pengeluaran;
+            if ($lastestKodePengeluaran) {
+                $getKodePengeluaran = explode("/", $lastestKodePengeluaran);
+                for ($i=0; $i < count($getKodePengeluaran); $i++) { 
+                    echo $getKodePengeluaran[$i];
+                }
+            }else {
+                $getKodePengeluaran[2] = "0";
             }
-        }else {
+        } else {
             $getKodePengeluaran[2] = "0";
         }
+        
         $newKodePengeluaran = $getKodePengeluaran[2] + 1;
         $pengeluaranKode = $getOPD."/PGL/".$newKodePengeluaran;
 
@@ -88,6 +88,7 @@ class PengeluaranController extends Controller
         $pengeluaran->status_pengeluaran = $request->status_pengeluaran;
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
         $pengeluaran->id_periode = $dataPeriodeAktif->id;
+        $pengeluaran->id_opd = Auth::user()->unit->opd->nama_opd;
         $pengeluaran->save();
 
         return redirect()->route('editPengeluaran', ['id' => $pengeluaran->id]);
@@ -95,9 +96,7 @@ class PengeluaranController extends Controller
 
     public function editPengeluaran($id)
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{

@@ -20,18 +20,14 @@ class PeriodeController extends Controller
 
     public function dataPeriode()
     {
-        $tperiode = DB::table('tb_periode')
-                    ->join('tb_opd', 'tb_opd.id_opd', '=', 'tb_periode.id_opd')
-                    ->get();
-
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
+
+        $tperiode = PeriodeModel::with('opd')->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
 
         return view("Admin.Periode.show", compact('tperiode', 'periodeAktif'));
     }
@@ -40,9 +36,7 @@ class PeriodeController extends Controller
     {
         $topd = OPDModel::get();
 
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -68,7 +62,7 @@ class PeriodeController extends Controller
         }
 
         $periode = new PeriodeModel();
-        $periode->id_opd = $request->id_opd;
+        $periode->id_opd = Auth::user()->unit->opd->nama_opd;
         $periode->nama_periode = $request->nama_periode;
         $periode->tgl_mulai = $request->tgl_mulai;
         $periode->tgl_selesai = $request->tgl_selesai;
@@ -82,14 +76,9 @@ class PeriodeController extends Controller
 
     public function bukaPeriode()
     {
-        $bukaperiode = DB::table('tb_periode')
-                       ->join('tb_opd', 'tb_opd.id_opd', '=', 'tb_periode.id_opd')
-                       ->where('status_periode', 'close')
-                       ->get();
+        $bukaperiode = PeriodeModel::with('opd')->where('status_periode', 'close')->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
 
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -101,9 +90,7 @@ class PeriodeController extends Controller
 
     public function prosesBuka($id)
     {
-        $open = ['open'];
-
-        $dataPeriode = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriode = PeriodeModel::whereIn('status_periode', ['open'])->whereIn('id_opd', [Auth::user()->unit->opd->id])->first();
         
         //dd($id_dataPeriode);
         if($dataPeriode){
@@ -124,14 +111,9 @@ class PeriodeController extends Controller
 
     public function tutupPeriode()
     {
-        $tutupperiode = DB::table('tb_periode')
-                        ->join('tb_opd', 'tb_opd.id_opd', '=', 'tb_periode.id_opd')
-                        ->where('status_periode', 'open')
-                        ->get();
+        $tutupperiode = PeriodeModel::with('opd')->where('status_periode', 'open')->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
 
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -143,7 +125,7 @@ class PeriodeController extends Controller
     
     public function prosesTutup($id)
     {
-        $lastest_id = PeriodeModel::max('id');
+        $lastest_id = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->max('id');
         $tutupperiode = PeriodeModel::find($id);
         $tutupperiode->status_periode = 'close';
         $tutupperiode->update();

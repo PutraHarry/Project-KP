@@ -44,7 +44,7 @@
           </li>
     
           <li class="nav-header">MENU</li>
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBP', 'Admin_BPKAD']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBP', 'Admin BPKAD']))
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-calendar-alt"></i>
@@ -75,7 +75,7 @@
               </ul>
             </li>
           @endif
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBPB', 'PPBP', 'Admin_BPKAD']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'PPBP', 'Admin BPKAD']))
             <li class="nav-item">
               <a href="/saldoawal" class="nav-link">
                 <i class="nav-icon fas fa-bars"></i>
@@ -85,7 +85,7 @@
               </a>
             </li>
           @endif
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBP', 'Admin_BPKAD']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBP', 'Admin BPKAD']))
             <li class="nav-item">
               <a href="/penerimaan" class="nav-link">
                 <i class="nav-icon fas fa-chart-bar"></i>
@@ -95,7 +95,7 @@
               </a>
             </li>
           @endif
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBPB', 'PPBP', 'KASI', 'KASUBAG', 'Admin_BPKAD']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'PPBP', 'KASI', 'KASUBAG', 'Admin BPKAD']))
             <li class="nav-item">
               <a href="/penggunaan" class="nav-link">
                 <i class="nav-icon fas fa-sitemap"></i>
@@ -105,7 +105,7 @@
               </a>
             </li>
           @endif
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBPB', 'PPBP', 'KASUBAG', 'Admin_BPKAD']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'PPBP', 'KASUBAG', 'Admin BPKAD']))
             <li class="nav-item">
               <a href="/pengeluaran" class="nav-link">
                 <i class="nav-icon fas fa-money-check"></i>
@@ -135,7 +135,7 @@
             </a>
           </li>-->
 
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'Admin_BPKAD']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD']))
           <li class="nav-header">Admin</li>
           <li class="nav-item">
             <a href="/user" class="nav-link">
@@ -154,7 +154,7 @@
             </a>
           </li>
           @endif
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Super_Admin', 'PPBPB', 'KASI', 'KASUBAG', 'PPBP', 'Admin_BPKAD']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'KASI', 'KASUBAG', 'PPBP', 'Admin BPKAD']))
           <li class="nav-header">PELAPORAN</li>
           <li class="nav-item">
             <a href="/laporan" class="nav-link">
