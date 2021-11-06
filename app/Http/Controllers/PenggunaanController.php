@@ -22,6 +22,7 @@ class PenggunaanController extends Controller
     public function dataPenggunaan()
     {
         $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        //dd($dataPeriodeAktif);
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -30,6 +31,7 @@ class PenggunaanController extends Controller
 
         if (Auth::user()->jabatan->jabatan == 'PPBPB') {
             $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
+            //dd($tpenggunaan);
         } elseif (Auth::user()->jabatan->jabatan == 'KASI') {
             $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['final', 'approved'])->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
         } elseif (Auth::user()->jabatan->jabatan == 'PPBP') {
@@ -60,7 +62,7 @@ class PenggunaanController extends Controller
     public function insertPenggunaan(Request $request)
     {
         //dd($request);
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
             'tgl_input' => 'required',
