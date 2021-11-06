@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\AdminModel;
 use App\PeriodeModel;
 use App\JabatanModel;
@@ -20,9 +21,7 @@ class AdminController extends Controller
     
     public function dashboard()
     {
-        $open = ['open'];
-        
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
 
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
@@ -36,10 +35,7 @@ class AdminController extends Controller
 
     public function dataUser()
     {
-        $open = ['open'];
-        
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
-
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -54,10 +50,7 @@ class AdminController extends Controller
 
     public function createUser()
     {
-        $open = ['open'];
-        
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
-
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -65,6 +58,8 @@ class AdminController extends Controller
         }
         
         $dataOPD = OPDModel::get();
+        //dd($dataOPD);
+
         $jabatan = JabatanModel::get();
         
         return view("Admin.Tambah-User.create", compact("periodeAktif", 'dataOPD', 'jabatan'));
@@ -108,10 +103,7 @@ class AdminController extends Controller
 
     public function editUser($id)
     {
-        $open = ['open'];
-        
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
-
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{

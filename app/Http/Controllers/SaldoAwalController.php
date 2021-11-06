@@ -9,7 +9,6 @@ use App\DetailSaldoAwalModel;
 use App\PeriodeModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use DB;
 
 class SaldoAwalController extends Controller
 {
@@ -20,23 +19,21 @@ class SaldoAwalController extends Controller
 
     public function dataSaldoAwal()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
 
-        $tsaldo = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->get();
+        $tsaldo = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
         
         return view("Admin.Saldo.show", compact("tsaldo", "periodeAktif"));
     }
 
     public function addSaldoAwal()
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -61,16 +58,21 @@ class SaldoAwalController extends Controller
 
         $getOPD = Auth::user()->opd->nama_opd;
         $lastestidSaldoAwal = SaldoAwalModel::max('id');
-        $getLastestSaldoAwal = SaldoAwalModel::find($lastestidSaldoAwal);
-        $lastestKodeSaldoAwal = $getLastestSaldoAwal->kode_saldo;
-        if ($lastestKodeSaldoAwal) {
-            $getKodeSaldoAwal = explode("/", $lastestKodeSaldoAwal);
-            for ($i=0; $i < count($getKodeSaldoAwal); $i++) { 
-                echo $getKodeSaldoAwal[$i];
+        if ($lastestidSaldoAwal) {
+            $getLastestSaldoAwal = SaldoAwalModel::find($lastestidSaldoAwal);
+            $lastestKodeSaldoAwal = $getLastestSaldoAwal->kode_saldo;
+            if ($lastestKodeSaldoAwal) {
+                $getKodeSaldoAwal = explode("/", $lastestKodeSaldoAwal);
+                for ($i=0; $i < count($getKodeSaldoAwal); $i++) { 
+                    echo $getKodeSaldoAwal[$i];
+                }
+            }else {
+                $getKodeSaldoAwal[2] = "0";
             }
-        }else {
+        } else {
             $getKodeSaldoAwal[2] = "0";
         }
+        
         $newKodeSaldoAwal = $getKodeSaldoAwal[2] + 1;
         $saldoAwalKode = $getOPD."/SDA/".$newKodeSaldoAwal;
 
@@ -79,6 +81,7 @@ class SaldoAwalController extends Controller
         $saldoawal->tgl_input = $request->tgl_input;
         $saldoawal->status_saldo = 'draft';
         $saldoawal->ket_saldo = $request->ket_saldo;
+        $saldoawal->id_opd = Auth::user()->unit->opd->id;
         $saldoawal->id_periode = $dataPeriodeAktif->id;
         $saldoawal->save();
         
@@ -92,7 +95,7 @@ class SaldoAwalController extends Controller
         $tbarang = BarangModel::get();
         $idEdit = $id;
 
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -177,6 +180,15 @@ class SaldoAwalController extends Controller
         $saldoawal->ket_saldo = $request->ketSaldoAwal;
         $saldoawal->status_saldo = 'final';
         $saldoawal->update();
+
+        /*$detailSaldoAwal = DetailSaldoAwalModel::where('id_saldo', $id)->get();
+        $barangGudang = BarangOPDModel::get();
+
+        if ($detailSaldoAwal == $barangGudang) {
+            
+        } else {
+            
+        }*/
         
         return redirect('/saldoawal')->with('statusInput', 'Status Final Berhasil');
     }

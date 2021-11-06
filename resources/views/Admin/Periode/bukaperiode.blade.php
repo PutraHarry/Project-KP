@@ -73,7 +73,7 @@
                     @foreach($bukaperiode as $bp)
                     <tr>
                       <td class="text-center">{{ $loop->iteration }}</td>
-                      <td>{{ $bp->nama_opd }}</td>
+                      <td>{{ $bp->opd->nama_opd }}</td>
                       <td>{{ $bp->nama_periode }}</td>
                       <td>{{ $bp->tgl_mulai }}</td>
                       <td>{{ $bp->tgl_selesai }}</td>

@@ -73,10 +73,6 @@ Create User Baru
                         <label for="exampleInputEmail1">Username</label>
                         <input type="text" class="form-control" name="username" id="username" placeholder="Input Username" value="{{ $user->username }}"> 
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email</label>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="Input Username" >
-                    </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -110,7 +106,7 @@ Create User Baru
                         <label>OPD</label>
                         <select class="select2" name="id_opd" id="id_opd" data-placeholder="Pilih OPD" style="width: 100%;">
                         @foreach ($dataOPD as $do)
-                          <option value={{ $do->id_opd }} @if($user->id_opd == $do->id_opd) selected @endif>{{ $do->nama_opd }}</option>
+                          <option value={{ $do->id }} @if($user->id == $do->id) selected @endif>{{ $do->nama_opd }}</option>
                         @endforeach
                         </select>
                       </div>
