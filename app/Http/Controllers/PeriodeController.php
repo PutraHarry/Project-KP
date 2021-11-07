@@ -62,7 +62,7 @@ class PeriodeController extends Controller
         }
 
         $periode = new PeriodeModel();
-        $periode->id_opd = Auth::user()->unit->opd->nama_opd;
+        $periode->id_opd = Auth::user()->unit->opd->id;
         $periode->nama_periode = $request->nama_periode;
         $periode->tgl_mulai = $request->tgl_mulai;
         $periode->tgl_selesai = $request->tgl_selesai;
@@ -153,6 +153,7 @@ class PeriodeController extends Controller
             $periode_baru->tgl_selesai = $tanggal_selesai_baru;
             $periode_baru->status_periode = "open";
             $periode_baru->ket_periode = $nama_periode;
+            $periode_baru->id_opd = Auth::user()->unit->opd->id;
             $periode_baru->save();
         }
 

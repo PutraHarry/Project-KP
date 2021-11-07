@@ -7,6 +7,7 @@ use App\SaldoAwalModel;
 use App\BarangModel;
 use App\DetailSaldoAwalModel;
 use App\PeriodeModel;
+use App\BarangOPDModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -180,15 +181,6 @@ class SaldoAwalController extends Controller
         $saldoawal->ket_saldo = $request->ketSaldoAwal;
         $saldoawal->status_saldo = 'final';
         $saldoawal->update();
-
-        /*$detailSaldoAwal = DetailSaldoAwalModel::where('id_saldo', $id)->get();
-        $barangGudang = BarangOPDModel::get();
-
-        if ($detailSaldoAwal == $barangGudang) {
-            
-        } else {
-            
-        }*/
         
         return redirect('/saldoawal')->with('statusInput', 'Status Final Berhasil');
     }

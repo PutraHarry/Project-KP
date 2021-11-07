@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class BarangGudangUnitModel extends Model
+class BarangUnitModel extends Model
 {
     protected $table = 'tb_barang_unit';
 
