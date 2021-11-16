@@ -8,6 +8,7 @@ use App\BarangModel;
 use App\DetailSaldoAwalModel;
 use App\PeriodeModel;
 use App\BarangOPDModel;
+use App\GudangOPDModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,7 +47,7 @@ class SaldoAwalController extends Controller
 
     public function insertSaldoAwal(Request $request)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
             'tgl_input' => 'required',
@@ -181,6 +182,18 @@ class SaldoAwalController extends Controller
         $saldoawal->ket_saldo = $request->ketSaldoAwal;
         $saldoawal->status_saldo = 'final';
         $saldoawal->update();
+
+        $dsaldoawal = DetailSaldoAwalModel::whereIn('id_saldo', [$id])->get();
+        
+        foreach ($dsaldoawal as $dsa) {
+            $finalsaldo = new BarangOPDModel();
+            $finalsaldo->id_gudang = Auth::user()->unit->opd->gudangOPD->id;
+            $finalsaldo->id_barang = $dsa->id_barang;
+            $finalsaldo->kode_transaksi = $saldoawal->kode_saldo;
+            $finalsaldo->jumlah = $dsa->qty;
+            $finalsaldo->status = 'Diterima';
+            $finalsaldo->save();
+        }
         
         return redirect('/saldoawal')->with('statusInput', 'Status Final Berhasil');
     }

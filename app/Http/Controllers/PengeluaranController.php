@@ -189,6 +189,10 @@ class PengeluaranController extends Controller
             $detailPengeluaran->save();
         }
 
+        $barangPengeluaran = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->updatee([
+            'status' => 'Digunakan'
+        ]);
+
         return redirect()->route('pengeluaran')->with('statusInput', 'Status Final Success');
     }
 }

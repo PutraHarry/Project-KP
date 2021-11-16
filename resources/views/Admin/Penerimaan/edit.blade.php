@@ -113,7 +113,7 @@ Edit Penerimaan Baru
                         </div>
                         <div class="form-group">
                             <label>Pengirim</label>
-                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
+                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}" readonly>
                         </div>
                         <div class="form-group">
                           <label>Keterangan</label>
@@ -195,51 +195,53 @@ Edit Penerimaan Baru
                             </td>
                         </tr>
                         @endforeach
-                        <tr>
-                          <td class="text-center"></td>
-                          <td>
-                            <div class="form-group">
-                              <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                              @foreach ($tbarang as $tb)
-                                <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
-                              @endforeach
+                        @if($tpenerimaan->status_penerimaan == 'draft')
+                          <tr>
+                            <td class="text-center"></td>
+                            <td>
+                              <div class="form-group">
+                                <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
+                                @foreach ($tbarang as $tb)
+                                  <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
+                                @endforeach
+                                </select>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" readonly>
+                              </div>
+                            </td>
+                            <td>
+                              <select class="form-control" name="keterangan">
+                                <option value="baik">Baik</option>
+                                <option value="rusak">Rusak</option>
                               </select>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="number" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga">
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" readonly>
-                            </div>
-                          </td>
-                          <td>
-                            <select class="form-control" name="keterangan">
-                              <option value="baik">Baik</option>
-                              <option value="rusak">Rusak</option>
-                            </select>
-                          </td>
-                          <td class="text-center">
-                            <div class="btn-group btn-group-sm">
-                              <button type="submit" class="btn btn-success">
-                                <i class="fas fa-check"></i>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
+                            </td>
+                            <td class="text-center">
+                              <div class="btn-group btn-group-sm">
+                                <button type="submit" class="btn btn-success">
+                                  <i class="fas fa-check"></i>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        @endif
                       </tbody>
                     </table>
                   </div>

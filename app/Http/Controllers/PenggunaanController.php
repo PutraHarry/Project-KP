@@ -10,6 +10,8 @@ use App\PeriodeModel;
 use App\PenerimaanModel;
 use App\DetailPenerimaanModel;
 use App\DetailPenggunaanModel;
+use App\BarangOPDModel;
+use App\barangUnitModel;
 
 
 class PenggunaanController extends Controller
@@ -41,6 +43,8 @@ class PenggunaanController extends Controller
         } else {
             $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
         }
+
+        
 
         return view("Admin.Penggunaan.show", compact('periodeAktif', 'tpenggunaan'));
     }
@@ -107,21 +111,6 @@ class PenggunaanController extends Controller
         $penggunaan->id_opd = Auth::user()->unit->opd->id;
         //dd($penggunaan);
         $penggunaan->save();
-
-        /*$penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$penggunaan->id_penerimaan])->get();
-        //dd($penerimaan);
-
-        foreach ($penerimaan as $dataPenerimaan) {
-            $detailPenggunaan = new DetailPenggunaanModel();
-            $detailPenggunaan->id_penggunaan = $penggunaan->id;
-            $detailPenggunaan->id_barang = $dataPenerimaan->id_barang;
-            $detailPenggunaan->qty = $dataPenerimaan->qty;
-            $detailPenggunaan->harga = $dataPenerimaan->harga;
-            $detailPenggunaan->keterangan = $dataPenerimaan->keterangan;
-            //dd($detailPenggunaan);
-            $detailPenggunaan->save();
-        }*/
-
         
         return redirect()->route('editPenggunaan', ['id' => $penggunaan->id]);
     }
@@ -248,6 +237,25 @@ class PenggunaanController extends Controller
         $penggunaan = PenggunaanModel::find($id);
         $penggunaan->status_penggunaan = 'disetujui_atasanLangsung';
         $penggunaan->update();
+
+        $idPenerimaan = $penggunaan->id_penerimaan;
+        $penerimaan = PenerimaanModel::find($idPenerimaan);
+
+        $dpenerimaan = BarangOPDModel::where('kode_transaksi', $penerimaan->kode_penerimaan)->update([
+            'status' => 'Digunakan'
+        ]);
+
+        $dpenggunaan = DetailPenggunaanModel::whereIn('id_penggunaan', [$id])->get();
+
+        foreach ($dpenggunaan as $dp) {
+            $finalPenggunaan = new BarangUnitModel();
+            $finalPenggunaan->id_gudang = Auth::user()->unit->gudangUnit->id;
+            $finalPenggunaan->id_barang = $dp->id_barang;
+            $finalPenggunaan->kode_transaksi = $penggunaan->kode_penggunaan;
+            $finalPenggunaan->jumlah = $dp->qty;
+            $finalPenggunaan->status = 'Diterima';
+            $finalPenggunaan->save();
+        }
         
         return redirect('/penggunaan')->with('statusInput', 'Disetujui Atasan Langsung Success');
     }
