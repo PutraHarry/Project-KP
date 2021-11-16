@@ -25,6 +25,6 @@ class OPDModel extends Model
 
     public function gudangOPD()
     {
-        return $this->hasOne(GudangOPDModel::class, 'id_gudang', 'id');
+        return $this->hasOne(GudangOPDModel::class, 'id_opd', 'id');
     }
 }

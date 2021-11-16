@@ -202,6 +202,18 @@ class PenerimaanController extends Controller
         $penerimaan->ket_penerimaan = $request->ketPenerimaan;
         $penerimaan->status_penerimaan = 'final';
         $penerimaan->update();
+
+        $dpenerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$id])->get();
+
+        foreach ($dpenerimaan as $dp) {
+            $finalPenerimaan = new BarangOPDModel();
+            $finalPenerimaan->id_gudang = Auth::user()->unit->opd->gudangOPD->id;
+            $finalPenerimaan->id_barang = $dp->id_barang;
+            $finalPenerimaan->kode_transaksi = $penerimaan->kode_penerimaan;
+            $finalPenerimaan->jumlah = $dp->qty;
+            $finalPenerimaan->status = 'Diterima';
+            $finalPenerimaan->save();
+        }
         
         return redirect('/penerimaan')->with('statusInput', 'Status Final Berhasil');
     }
