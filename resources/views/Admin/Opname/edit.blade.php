@@ -57,7 +57,7 @@ Edit Opname
       
     <!-- Main content -->
   <section>
-    <form action="/opname/update/{{ $idEdit }}" method="POST">
+    <form action="/opname/update" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -67,20 +67,7 @@ Edit Opname
                 <div class="card-header">
                   <h3 class="card-title">Edit Data Opname</h3>
                   <div class="card-tools">
-                    @if ($tpengeluaran->status_pengeluaran == 'draft')
-                      <button type="submit" class="btn btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-edit"></i>
-                        </span>
-                        <span class="text">Draft</span>
-                      </button>
-                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        <span class="text">Final</span>
-                      </button>
-                    @endif
+                    
                   </div>
                 </div>
 
@@ -95,7 +82,7 @@ Edit Opname
                           <div class="form-group">
                               <label>Tanggal Opname:</label>
                               <div class="input-group">
-                                <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpengeluaran->tgl_keluar }}" @if($tpengeluaran->status_pengeluaran == 'final') readonly @endif>
+                                <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="" >
                               </div>  
                           </div>  
                         </div>
@@ -106,7 +93,7 @@ Edit Opname
                           </div>
                           <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="5" name="ket_opname" id="ket_opname" placeholder="Input Keterangan..." @if($tpengeluaran->status_pengeluaran == 'final') readonly @endif>{{ $tpengeluaran->ket_pengeluaran }}</textarea>
+                              <textarea class="form-control" rows="5" name="ket_opname" id="ket_opname" placeholder="Input Keterangan..." ></textarea>
                           </div>
                         </div>
                         <div class="col-6">
@@ -296,8 +283,7 @@ Edit Opname
 
 <script>
   function statusFinal(idEdit) {
-    var idPenggunaan = $('#id_penggunaan').val();
-    var penggunaan = {!! json_encode($tpenggunaan->toArray()) !!}
+    }
     penggunaan.forEach(element => {
       if(element.id == idPenggunaan){
         $('#kodePenggunaan').val(element.kode_penggunaan);

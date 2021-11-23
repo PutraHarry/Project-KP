@@ -56,7 +56,7 @@
                   <h3 class="card-title">List Data Opname</h3>
                     <div class="card-tools">
                      
-                        <a href="#" class="btn btn-primary btn-icon-split">
+                        <a href="/opname/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>
                             </span>
@@ -79,6 +79,7 @@
                           </tr>
                       </thead>
                       <tbody>
+                        @foreach ($topname as $to)
                           <tr>
                             <td class="text-center"></td>
                             <td></td>
@@ -91,16 +92,14 @@
                                       <i class="fas fa-edit"></i>
                                   </span>
                                 </a>
-                                
-                                  <a onclick="statusdelete(#)" class="btn btn-danger btn-icon-split">
-                                    <span class="icon">
-                                        <i class="fas fa-trash"></i>
-                                    </span>
-                                  </a>
-                                
+                                <a onclick="statusdelete(#)" class="btn btn-danger btn-icon-split">
+                                  <span class="icon">
+                                      <i class="fas fa-trash"></i>
+                                  </span>
+                                </a>
                             </td>
                           </tr>
-                        
+                        @endforeach
                       </tbody>
                   </table>
                 </div>
