@@ -93,14 +93,6 @@ Edit Opname
                               <input type="text" class="form-control" name="kode_opname" id="kode_opname" placeholder="Kode Opname" value="#" readonly>
                           </div>
                           <div class="form-group">
-                            <label>Kode Penerimaan</label>
-                            <select class="select2" name="id_opname" id="id_opname" data-placeholder="Pilih Opname" style="width: 100%;" @if($tpengeluaran->status_pengeluaran == 'final') disabled @endif>
-                              @foreach($tpenggunaan as $tp)  
-                                <option value="testing1"></option>
-                              @endforeach
-                            </select>
-                          </div>
-                          <div class="form-group">
                               <label>Tanggal Opname:</label>
                               <div class="input-group">
                                 <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpengeluaran->tgl_keluar }}" @if($tpengeluaran->status_pengeluaran == 'final') readonly @endif>
