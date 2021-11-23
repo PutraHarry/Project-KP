@@ -90,3 +90,8 @@ Route::get('/user/edit/{id}', 'AdminController@editUser')->name('editUser');
 Route::post('/user/update/{id}', 'AdminController@updateUser')->name('updateUser');
 Route::get('/user/dataUnit/{id}', 'AdminController@getDataUnit')->name('getDataUnit');
 Route::post('/user/delete/{id}', 'AdminController@deleteUser')->name('deleteUser');
+
+//OPNAME
+Route::get('/opname', 'OpnameController@dataOpname')->name('opname');
+Route::get('/opname/create', 'OpnameController@createOpname')->name('createOpname');
+Route::get('/opname/edit', 'OpnameController@editOpname')->name('editOpname');
