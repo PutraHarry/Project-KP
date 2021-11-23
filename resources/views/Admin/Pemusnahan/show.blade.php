@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Pengeluaran
+    Pemusnahan
 @endsection
 @push('css')
 <!-- Google Font: Source Sans Pro -->
@@ -56,7 +56,7 @@
                   <h3 class="card-title">List Data Pemusnahan</h3>
                     <div class="card-tools">
                      
-                        <a href="#" class="btn btn-primary btn-icon-split">
+                        <a href="/pemusnahan/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>
                             </span>

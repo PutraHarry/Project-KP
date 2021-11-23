@@ -121,14 +121,14 @@ Create Pemusnahan Baru
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama OPD:</label>
-                                      <p id="nama_opd">{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
+                                      <p id="nama_opd"></p>
                                     </select>
                                 </div> 
                               </div>
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama Unit Kerja:</label>
-                                      <p id="nama_unit">{{ Auth::guard('admin')->user()->unit->unit }}</p>
+                                      <p id="nama_unit"></p>
                                     </select>
                                 </div> 
                               </div>
