@@ -84,15 +84,6 @@ Create Opname Baru
                               <input type="text" class="form-control" name="kode_opname" id="kode_opname" placeholder="Kode Opname" readonly>
                           </div>
                           <div class="form-group">
-                            <label>Kode Pengeluaran</label>
-                            <select class="select2" name="id_pengeluaran" id="id_pengeluaran" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
-                              
-                                <option value= "testing1"></option>
-                                <option value= "testing2"></option>
-                              
-                            </select>
-                          </div>
-                          <div class="form-group">
                               <label>Tanggal Opname:</label>
                               <div class="input-group">
                                 <input type="date" class="form-control" name="tgl_input" id="tgl_input">
