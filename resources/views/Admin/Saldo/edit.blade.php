@@ -67,18 +67,20 @@ Edit Saldo Awal
                                 <div class="card-header">
                                     <h3 class="card-title">Edit Data Saldo </h3>
                                     <div class="card-tools">
-                                        <button type="submit" class="btn btn-danger btn-icon-split">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-edit"></i>
-                                            </span>
-                                            <span class="text">Draft</span>
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $saldoawal->total }})">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-check"></i>
-                                            </span>
-                                            <span class="text">Final</span>
-                                        </button>
+                                        @if ($saldoawal->status_saldo == 'draft')
+                                            <button type="submit" class="btn btn-danger btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="text">Draft</span>
+                                            </button>
+                                            <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $saldoawal->total }})">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                                <span class="text">Final</span>
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                                 <form id="quickForm">
@@ -87,24 +89,24 @@ Edit Saldo Awal
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="kode_saldo">Kode Saldo</label>
-                                                    <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" value="{{ $saldoawal->kode_saldo }}" placeholder="Kode Saldo" disabled>
+                                                    <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" value="{{ $saldoawal->kode_saldo }}" placeholder="Kode Saldo" readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tanggal Saldo:</label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}">
+                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}" @if($saldoawal->status_saldo == 'final') readonly @endif>
                                                     </div>  
                                                 </div>  
                                             </div>
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label>Status</label>
-                                                    <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
+                                                    <input class="form-control" name="status_saldo" id="status_saldo" @if($saldoawal->status_saldo == 'draft') value="draft" @elseif($saldoawal->status_saldo == 'final') value="final" @endif @if($saldoawal->status_saldo == 'final') readonly @endif>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Keterangan</label>
-                                                    <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan...">{{ $saldoawal->ket_saldo }}</textarea>
+                                                    <textarea class="form-control" rows="3" name="ket_saldo" id="ket_saldo" placeholder="Input Keterangan..." @if($saldoawal->status_saldo == 'final') readonly @endif>{{ $saldoawal->ket_saldo }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -173,60 +175,66 @@ Edit Saldo Awal
                                                     <td> {{ $dsa->barang->harga_m_barang }} </td>
                                                     <td> {{ $dsa->harga }} </td>
                                                     <td> {{ $dsa->keterangan }} </td>
-                                                    <td class="text-center">
-                                                        <div class="btn-group btn-group-sm">
-                                                            <button class="btn btn-warning" type="button" onclick="editsaldoawal({{ $dsa->id }},{{ $dsa->barang->id }},{{ $dsa->qty }},'{{ $dsa->barang->satuan_m_barang }}',{{ $dsa->barang->harga_m_barang }},'{{ $dsa->keterangan }}')">
-                                                                <i class="fas fa-edit"></i>
-                                                              </button>
-                                                        </div>
-                                                    </td>
+                                                    @if ($saldoawal->status_saldo == 'draft')
+                                                        <td class="text-center">
+                                                            <div class="btn-group btn-group-sm">
+                                                                <button class="btn btn-warning" type="button" onclick="editsaldoawal({{ $dsa->id }},{{ $dsa->barang->id }},{{ $dsa->qty }},'{{ $dsa->barang->satuan_m_barang }}',{{ $dsa->barang->harga_m_barang }},'{{ $dsa->keterangan }}')">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    @else
+                                                    <td class="text-center"></td>
+                                                    @endif
                                                 </tr>
                                                 @endforeach
-                                                <tr>
-                                                    <td class="text-center">1</td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                                                            @foreach ($tbarang as $tb)
-                                                                <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
-                                                            @endforeach
+                                                @if ($saldoawal->status_saldo == 'draft')
+                                                    <tr>
+                                                        <td class="text-center">1</td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
+                                                                @foreach ($tbarang as $tb)
+                                                                    <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
+                                                                @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" readonly>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-control" name="keterangan">
+                                                                <option value="baik">Baik</option>
+                                                                <option value="rusak">Rusak</option>
                                                             </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <input type="number" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" readonly>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-control" name="keterangan">
-                                                            <option value="baik">Baik</option>
-                                                            <option value="rusak">Rusak</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="btn-group btn-group-sm">
-                                                            <button type="submit" class="btn btn-success">
-                                                                <i class="fas fa-check"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="btn-group btn-group-sm">
+                                                                <button type="submit" class="btn btn-success">
+                                                                    <i class="fas fa-check"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

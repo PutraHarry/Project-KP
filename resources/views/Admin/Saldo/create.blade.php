@@ -81,7 +81,7 @@ Create Saldo Awal Baru
                         <div class="col-3">
                           <div class="form-group">
                               <label for="kode_saldo">Kode Saldo</label>
-                              <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" placeholder="Kode Saldo">
+                              <input type="text" class="form-control" name="kode_saldo" id="kode_saldo" placeholder="Kode Saldo" readonly>
                           </div>
                           <div class="form-group">
                               <label>Tanggal Saldo:</label>

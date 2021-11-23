@@ -67,18 +67,20 @@ Edit Penerimaan Baru
                 <div class="card-header">
                   <h3 class="card-title">Edit Data Penerimaan</h3>
                   <div class="card-tools">
-                    <button type="submit" class="btn btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-edit"></i>
-                      </span>
-                      <span class="text">Draft</span>
-                    </button>
-                    <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $tpenerimaan->total }})">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-check"></i>
-                      </span>
-                      <span class="text">Final</span>
-                  </button>
+                    @if ($tpenerimaan->status_penerimaan == 'draft')
+                      <button type="submit" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Draft</span>
+                      </button>
+                      <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $tpenerimaan->total }})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Final</span>
+                      </button>
+                    @endif
                   </div>
                 </div>
                 <form id="quickForm">
@@ -87,7 +89,7 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div class="form-group">
                           <label>Jenis Penerimaan</label>
-                          <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan">
+                          <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
                             @foreach ($jenisPenerimaan as $jp)
                               <option value="{{ $jp }}" @if($tpenerimaan->jenis_penerimaan == $jp) selected @endif>{{ $jp }}</option>
                             @endforeach
@@ -95,12 +97,12 @@ Edit Penerimaan Baru
                         </div>
                         <div class="form-group">
                           <label for="penerimaan">Kode Penerimaan</label>
-                          <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Kode Penerimaan" value="{{ $tpenerimaan->kode_penerimaan }}">
+                          <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Kode Penerimaan" value="{{ $tpenerimaan->kode_penerimaan }}" readonly>
                         </div>
                         <div class="form-group">
                           <label>Tanggal Penerimaan:</label>
                           <div class="input-group">
-                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenerimaan->tgl_terima }}">
+                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenerimaan->tgl_terima }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
                           </div>  
                         </div>  
                       </div>
@@ -111,11 +113,11 @@ Edit Penerimaan Baru
                         </div>
                         <div class="form-group">
                             <label>Pengirim</label>
-                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}">
+                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}" readonly>
                         </div>
                         <div class="form-group">
                           <label>Keterangan</label>
-                          <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan...">{{ $tpenerimaan->ket_penerimaan }}</textarea>
+                          <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..." @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>{{ $tpenerimaan->ket_penerimaan }}</textarea>
                         </div>
                       </div>
                       <div class="col-6">
@@ -193,51 +195,53 @@ Edit Penerimaan Baru
                             </td>
                         </tr>
                         @endforeach
-                        <tr>
-                          <td class="text-center"></td>
-                          <td>
-                            <div class="form-group">
-                              <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                              @foreach ($tbarang as $tb)
-                                <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
-                              @endforeach
+                        @if($tpenerimaan->status_penerimaan == 'draft')
+                          <tr>
+                            <td class="text-center"></td>
+                            <td>
+                              <div class="form-group">
+                                <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
+                                @foreach ($tbarang as $tb)
+                                  <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
+                                @endforeach
+                                </select>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" readonly>
+                              </div>
+                            </td>
+                            <td>
+                              <select class="form-control" name="keterangan">
+                                <option value="baik">Baik</option>
+                                <option value="rusak">Rusak</option>
                               </select>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="number" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga">
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" readonly>
-                            </div>
-                          </td>
-                          <td>
-                            <select class="form-control" name="keterangan">
-                              <option value="baik">Baik</option>
-                              <option value="rusak">Rusak</option>
-                            </select>
-                          </td>
-                          <td class="text-center">
-                            <div class="btn-group btn-group-sm">
-                              <button type="submit" class="btn btn-success">
-                                <i class="fas fa-check"></i>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
+                            </td>
+                            <td class="text-center">
+                              <div class="btn-group btn-group-sm">
+                                <button type="submit" class="btn btn-success">
+                                  <i class="fas fa-check"></i>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        @endif
                       </tbody>
                     </table>
                   </div>

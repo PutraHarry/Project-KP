@@ -101,11 +101,12 @@ Create User Baru
                           </div>
                         </div>
                       </div>
+                    </div>
                     <div class="form-group">
                       <label>OPD</label>
                       <select class="select2" name="id_opd" id="id_opd" data-placeholder="Pilih OPD" style="width: 100%;">
                       @foreach ($dataOPD as $do)
-                        <option value={{ $do->id_opd }}>{{ $do->nama_opd }}</option>
+                        <option value={{ $do->id }}>{{ $do->nama_opd }}</option>
                       @endforeach
                       </select>
                     </div>

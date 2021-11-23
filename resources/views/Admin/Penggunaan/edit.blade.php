@@ -67,18 +67,49 @@ Edit Penggunaan
                 <div class="card-header">
                   <h3 class="card-title">Edit Data Penggunaan Barang Baru</h3>
                   <div class="card-tools">
-                    <button type="submit" class="btn btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-edit"></i>
-                      </span>
-                      <span class="text">Draft</span>
-                    </button>
-                    <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-check"></i>
-                      </span>
-                      <span class="text">Final</span>
-                    </button>
+                    @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB']))
+                      @if ($tpenggunaan->status_penggunaan == 'draft')
+                        <button type="submit" class="btn btn-danger btn-icon-split">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-edit"></i>
+                          </span>
+                          <span class="text">Draft</span>
+                        </button>
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                          </span>
+                          <span class="text">Final</span>
+                        </button>
+                      @endif
+                    @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['KASI']))
+                      @if ($tpenggunaan->status_penggunaan == 'final')
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                          </span>
+                          <span class="text">Approved</span>
+                        </button>
+                      @endif
+                    @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBP']))
+                      @if ($tpenggunaan->status_penggunaan == 'approved')
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                          </span>
+                          <span class="text">Disetujui PPBP</span>
+                        </button>
+                      @endif
+                    @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['KASUBAG']))
+                      @if ($tpenggunaan->status_penggunaan == 'disetujui_ppbp')
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                          <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                          </span>
+                          <span class="text">Disetujui Atassan Langsung</span>
+                        </button>
+                      @endif
+                    @endif
                   </div>
                 </div>
                 <form id="quickForm">
@@ -88,15 +119,14 @@ Edit Penggunaan
                             <div class="form-group">
                                 <label>Kode Penggunaan Barang:</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="kode_penggunaan" id="kode_penggunaan" value="{{ $tpenggunaan->kode_penggunaan }}">
+                                    <input type="text" class="form-control" name="kode_penggunaan" id="kode_penggunaan" value="{{ $tpenggunaan->kode_penggunaan }}" readonly>
                                 </div>  
                             </div>
                         </div>
                         <div class="col-3">
                           <div class="form-group">
                             <label>Status</label>
-                            <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
-                            </select>
+                              <input class="form-control" name="status_saldo" id="status_saldo" @if($tpenggunaan->status_penggunaan == 'draft') value="draft" @elseif($tpenggunaan->status_penggunaan == 'final') value="final" @elseif($tpenggunaan->status_penggunaan == 'approved') value="approved" @elseif($tpenggunaan->status_penggunaan == 'disetujui_ppbp') value="disetujui_ppbp" @elseif($tpenggunaan->status_penggunaan == 'disetujui_atasanLangsung') value="disetujui_atasanLangsung" @endif readonly>
                           </div>
                         </div>
                         <div class="col-6">
@@ -113,7 +143,7 @@ Edit Penggunaan
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Kode Penerimaan</label>
-                                <select class="select2" name="id_penerimaan" id="id_penerimaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
+                                <select class="select2" name="id_penerimaan" id="id_penerimaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;" @if($tpenggunaan->status_penggunaan != 'draft') disabled @endif>
                                   @foreach($tpenerimaan as $tp)  
                                     <option value={{ $tp->id }} @if($tp->id == $tpenggunaan->id_penerimaan) selected @endif>{{ $tp->kode_penerimaan }}</option>
                                   @endforeach
@@ -121,14 +151,14 @@ Edit Penggunaan
                             </div>
                             <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="3" name="ket_penggunaan" id="ket_penggunaan" placeholder="Input Keterangan...">{{ $tpenggunaan->ket_penggunaan }}</textarea>
+                              <textarea class="form-control" rows="3" name="ket_penggunaan" id="ket_penggunaan" placeholder="Input Keterangan..." @if($tpenggunaan->status_penggunaan != 'draft') readonly @endif>{{ $tpenggunaan->ket_penggunaan }}</textarea>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Tanggal Penggunaan Barang:</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenggunaan->tgl_penggunaan }}">
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenggunaan->tgl_penggunaan }}" @if($tpenggunaan->status_penggunaan != 'draft') readonly @endif>
                                 </div>  
                             </div>
                         </div>

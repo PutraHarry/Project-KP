@@ -55,12 +55,14 @@
                 <div class="card-header">
                   <h3 class="card-title">List Data Pengeluaran</h3>
                     <div class="card-tools">
+                      @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB', 'PPBP']))
                         <a href="/pengeluaran/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>
                             </span>
                             <span class="text">Buat Baru</span>
                         </a>
+                      @endif
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -90,11 +92,13 @@
                                       <i class="fas fa-edit"></i>
                                   </span>
                                 </a>
-                                <a onclick="statusdelete({{ $tp->id }})" class="btn btn-danger btn-icon-split">
-                                  <span class="icon">
-                                      <i class="fas fa-trash"></i>
-                                  </span>
-                                </a>
+                                @if ($tp->status_pengeluaran == 'draft')
+                                  <a onclick="statusdelete({{ $tp->id }})" class="btn btn-danger btn-icon-split">
+                                    <span class="icon">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                  </a>
+                                @endif
                             </td>
                           </tr>
                         @endforeach

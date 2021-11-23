@@ -81,7 +81,7 @@ Create Pengeluaran Baru
                         <div class="col-3">
                           <div class="form-group">
                               <label for="kode_pengeluaran">Kode Pengeluaran</label>
-                              <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran">
+                              <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran" readonly>
                           </div>
                           <div class="form-group">
                             <label>Kode Penggunaan</label>

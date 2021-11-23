@@ -16,10 +16,7 @@ class BarangController extends Controller
     
     public function dataBarang()
     {
-        $open = ['open'];
-        
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
-
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -38,10 +35,7 @@ class BarangController extends Controller
 
     public function createBarang()
     {
-        $open = ['open'];
-        
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
-
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -80,10 +74,7 @@ class BarangController extends Controller
 
     public function editBarang($id)
     {
-        $open = ['open'];
-        
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
-
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{

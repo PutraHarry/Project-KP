@@ -56,10 +56,12 @@
                       <h3 class="card-title">List Data Penerimaan</h3>
                       <div class="card-tools">                          
                           <div class="col-md-12">
+                            @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBP']))
                               <a href="/penerimaan/create" class="btn btn-primary">
                                   <i class="fa fa-plus"></i> 
                                   Penerimaan Baru
                               </a>
+                            @endif
                           </div>
                       </div>
                   </div>
@@ -108,11 +110,13 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a onclick="statusdelete({{ $tpo->id }})" class="btn btn-danger btn-icon-split">
-                                              <span class="icon">
-                                                  <i class="fas fa-trash"></i>
-                                              </span>
-                                            </a>
+                                          @if ($tpo->status_penerimaan == 'draft')
+                                            <a onclick="statusdelete({{ $tpo->id }})" class="btn btn-danger btn-icon-split">
+                                                <span class="icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                              </a>
+                                          @endif
                                         </td>
                                       </tr>
                                     @endforeach
@@ -151,11 +155,13 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a onclick="statusdelete({{ $tpno->id }})" class="btn btn-danger btn-icon-split">
+                                          @if ($tpno->status_penerimaan == 'draft')
+                                            <a onclick="statusdelete({{ $tpno->id }})" class="btn btn-danger btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-trash"></i>
                                               </span>
                                             </a>
+                                          @endif
                                         </td>
                                       </tr>
                                     @endforeach
@@ -194,11 +200,13 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a onclick="statusdelete({{ $tph->id }})" class="btn btn-danger btn-icon-split">
+                                          @if ($tph->status_penerimaan == 'draft')
+                                            <a onclick="statusdelete({{ $tph->id }})" class="btn btn-danger btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-trash"></i>
                                               </span>
                                             </a>
+                                          @endif
                                         </td>
                                       </tr>
                                     @endforeach
@@ -237,11 +245,13 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a onclick="statusdelete({{ $tpnh->id }})" class="btn btn-danger btn-icon-split">
+                                          @if ($tpnh->status_penerimaan == 'draft')
+                                            <a onclick="statusdelete({{ $tpnh->id }})" class="btn btn-danger btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-trash"></i>
                                               </span>
                                             </a>
+                                          @endif
                                         </td>
                                       </tr>
                                     @endforeach
@@ -280,11 +290,13 @@
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                           </a>
-                                          <a onclick="statusdelete({{ $tpna->id }})" class="btn btn-danger btn-icon-split">
+                                          @if ($tpna->status_penerimaan == 'draft')
+                                            <a onclick="statusdelete({{ $tpna->id }})" class="btn btn-danger btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-trash"></i>
                                               </span>
                                             </a>
+                                          @endif
                                         </td>
                                       </tr>
                                     @endforeach

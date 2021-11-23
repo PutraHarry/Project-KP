@@ -84,54 +84,6 @@ CREATE TABLE `tb_barang_unit` (
 
 /*Data for the table `tb_barang_unit` */
 
-/*Table structure for table `tb_bu` */
-
-DROP TABLE IF EXISTS `tb_bu`;
-
-CREATE TABLE `tb_bu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `no_BU` varchar(255) DEFAULT NULL,
-  `tgl_BU` date DEFAULT NULL,
-  `ket_BU` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_bu` */
-
-insert  into `tb_bu`(`id`,`no_BU`,`tgl_BU`,`ket_BU`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'BPKAD/12/A','2021-07-31','Penerimaan Tinta dari Kominfo\r\n',NULL,NULL,NULL),
-(2,'BPKAD/11/B','2021-07-30','Penerimaan Obat',NULL,NULL,NULL),
-(3,'BPKAD/11/D','2021-07-31','Penggunaan Kertas',NULL,NULL,NULL);
-
-/*Table structure for table `tb_d_bu` */
-
-DROP TABLE IF EXISTS `tb_d_bu`;
-
-CREATE TABLE `tb_d_bu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_BU` int(11) DEFAULT NULL,
-  `id_barang` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
-  `harga` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_BU` (`id_BU`),
-  KEY `id_barang` (`id_barang`),
-  CONSTRAINT `tb_d_bu_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`),
-  CONSTRAINT `tb_d_bu_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `tb_master_barang` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_d_bu` */
-
-insert  into `tb_d_bu`(`id`,`id_BU`,`id_barang`,`qty`,`harga`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,2,2,40000,NULL,NULL,NULL),
-(2,3,1,1,34000,NULL,NULL,NULL);
-
 /*Table structure for table `tb_d_opname` */
 
 DROP TABLE IF EXISTS `tb_d_opname`;
@@ -369,17 +321,17 @@ insert  into `tb_master_barang`(`id`,`nama_m_barang`,`harga_m_barang`,`satuan_m_
 DROP TABLE IF EXISTS `tb_opd`;
 
 CREATE TABLE `tb_opd` (
-  `id_opd` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama_opd` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id_opd`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_opd` */
 
-insert  into `tb_opd`(`id_opd`,`nama_opd`,`created_at`,`updated_at`,`deleted_at`) values 
+insert  into `tb_opd`(`id`,`nama_opd`,`created_at`,`updated_at`,`deleted_at`) values 
 (1,'BPKAD','2021-07-29 10:01:53','0000-00-00 00:00:00','0000-00-00 00:00:00'),
 (2,'Kominfo',NULL,NULL,NULL);
 
@@ -392,7 +344,7 @@ CREATE TABLE `tb_opd_gudang` (
   `id_opd` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_opd` (`id_opd`),
-  CONSTRAINT `tb_opd_gudang_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id_opd`)
+  CONSTRAINT `tb_opd_gudang_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_opd_gudang` */
@@ -406,16 +358,19 @@ CREATE TABLE `tb_opname` (
   `kode_opname` varchar(255) DEFAULT NULL,
   `status_opname` enum('draft','final') DEFAULT NULL,
   `tgl_opname` date DEFAULT NULL,
+  `id_periode` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `id_periode` (`id_periode`),
+  CONSTRAINT `tb_opname_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_opname` */
 
-insert  into `tb_opname`(`id`,`kode_opname`,`status_opname`,`tgl_opname`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'AAA/12/A','final','2021-07-31',NULL,NULL,NULL);
+insert  into `tb_opname`(`id`,`kode_opname`,`status_opname`,`tgl_opname`,`id_periode`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'AAA/12/A','final','2021-07-31',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `tb_penerimaan` */
 
@@ -429,18 +384,22 @@ CREATE TABLE `tb_penerimaan` (
   `pengirim` varchar(255) DEFAULT NULL,
   `status_penerimaan` enum('draft','final') DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
+  `id_periode` int(11) DEFAULT NULL,
+  `ket_penerimaan` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_jenis_penerimaan` (`jenis_penerimaan`)
+  KEY `id_jenis_penerimaan` (`jenis_penerimaan`),
+  KEY `id_periode` (`id_periode`),
+  CONSTRAINT `tb_penerimaan_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_penerimaan` */
 
-insert  into `tb_penerimaan`(`id`,`kode_penerimaan`,`jenis_penerimaan`,`tgl_terima`,`pengirim`,`status_penerimaan`,`total`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'BPKAD123','APBD Non Obat','0202-01-01','Orang A','draft',170000,'2021-09-13 18:06:49','2021-10-03 22:05:05',NULL),
-(2,'BPKAD312','APBD Obat','2021-01-01','Orang B','draft',34000,'2021-09-14 17:38:22','2021-09-25 05:58:40',NULL);
+insert  into `tb_penerimaan`(`id`,`kode_penerimaan`,`jenis_penerimaan`,`tgl_terima`,`pengirim`,`status_penerimaan`,`total`,`id_periode`,`ket_penerimaan`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'BPKAD123','APBD Non Obat','0202-01-01','Orang A','draft',170000,NULL,NULL,'2021-09-13 18:06:49','2021-10-03 22:05:05',NULL),
+(2,'BPKAD312','APBD Obat','2021-01-01','Orang B','draft',34000,NULL,NULL,'2021-09-14 17:38:22','2021-09-25 05:58:40',NULL);
 
 /*Table structure for table `tb_pengeluaran` */
 
@@ -449,22 +408,25 @@ DROP TABLE IF EXISTS `tb_pengeluaran`;
 CREATE TABLE `tb_pengeluaran` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode_pengeluaran` varchar(255) DEFAULT NULL,
-  `id_BU` int(11) DEFAULT NULL,
   `tgl_keluar` date DEFAULT NULL,
   `ket_pengeluaran` text DEFAULT NULL,
   `status_pengeluaran` enum('draft','final') DEFAULT NULL,
+  `id_periode` int(11) DEFAULT NULL,
+  `id_penggunaan` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_BU` (`id_BU`),
-  CONSTRAINT `tb_pengeluaran_ibfk_1` FOREIGN KEY (`id_BU`) REFERENCES `tb_bu` (`id`)
+  KEY `id_periode` (`id_periode`),
+  KEY `id_penggunaan` (`id_penggunaan`),
+  CONSTRAINT `tb_pengeluaran_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`),
+  CONSTRAINT `tb_pengeluaran_ibfk_3` FOREIGN KEY (`id_penggunaan`) REFERENCES `tb_penggunaan` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_pengeluaran` */
 
-insert  into `tb_pengeluaran`(`id`,`kode_pengeluaran`,`id_BU`,`tgl_keluar`,`ket_pengeluaran`,`status_pengeluaran`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'BPKAD/123/A',3,'2021-07-31','Kertas\r\n','final',NULL,NULL,NULL);
+insert  into `tb_pengeluaran`(`id`,`kode_pengeluaran`,`tgl_keluar`,`ket_pengeluaran`,`status_pengeluaran`,`id_periode`,`id_penggunaan`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'BPKAD/123/A','2021-07-31','Kertas\r\n','final',NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `tb_penggunaan` */
 
@@ -477,48 +439,52 @@ CREATE TABLE `tb_penggunaan` (
   `gudang_asal` varchar(255) DEFAULT NULL,
   `gudang_tujuan` varchar(255) DEFAULT NULL,
   `status_penggunaan` enum('draft','approved','final','disetujui') DEFAULT NULL,
+  `id_periode` int(11) DEFAULT NULL,
+  `ket_penggunaan` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_BU` (`id_penerimaan`),
-  CONSTRAINT `tb_penggunaan_ibfk_1` FOREIGN KEY (`id_penerimaan`) REFERENCES `tb_bu` (`id`)
+  KEY `id_periode` (`id_periode`),
+  CONSTRAINT `tb_penggunaan_ibfk_1` FOREIGN KEY (`id_penerimaan`) REFERENCES `tb_penerimaan` (`id`),
+  CONSTRAINT `tb_penggunaan_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_penggunaan` */
 
-insert  into `tb_penggunaan`(`id`,`id_penerimaan`,`tgl_penggunaan`,`gudang_asal`,`gudang_tujuan`,`status_penggunaan`,`created_at`,`updated_at`,`deleted_at`) values 
-(2,1,'2021-01-01',NULL,NULL,'draft','2021-10-01 03:06:34','2021-10-01 03:06:34',NULL),
-(3,1,'2021-02-01','BPKAD','Persediaan','draft','2021-10-01 03:20:32','2021-10-01 03:20:32',NULL),
-(4,2,'2021-03-01','BPKAD','Persediaan','draft','2021-10-01 04:05:26','2021-10-01 04:05:26',NULL),
-(5,1,'2021-05-01','BPKAD','Persediaan','draft','2021-10-01 15:32:35','2021-10-01 15:32:35',NULL),
-(6,1,'2021-05-01','BPKAD','Persediaan','draft','2021-10-01 16:22:07','2021-10-01 16:22:07',NULL),
-(7,1,'2021-05-01','BPKAD','Persediaan','draft','2021-10-01 16:22:54','2021-10-01 16:22:54',NULL),
-(8,1,'2021-05-01','BPKAD','Persediaan','draft','2021-10-01 16:54:41','2021-10-01 16:54:41',NULL),
-(9,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 16:56:38','2021-10-01 16:56:38',NULL),
-(10,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 16:57:11','2021-10-01 16:57:11',NULL),
-(11,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 16:57:31','2021-10-01 16:57:31',NULL),
-(12,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 16:57:52','2021-10-01 16:57:52',NULL),
-(13,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 16:58:34','2021-10-01 16:58:34',NULL),
-(14,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 16:59:46','2021-10-01 16:59:46',NULL),
-(15,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 17:30:00','2021-10-01 17:30:00',NULL),
-(16,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 17:31:19','2021-10-01 17:31:19',NULL),
-(17,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 17:32:14','2021-10-01 17:32:14',NULL),
-(18,1,'2000-04-01','BPKAD','Persediaan','draft','2021-10-01 17:32:55','2021-10-01 17:32:55',NULL),
-(19,2,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 17:40:46','2021-10-01 17:40:46',NULL),
-(20,1,'2021-04-01','BPKAD','Persediaan','draft','2021-10-01 17:44:30','2021-10-01 17:44:30',NULL),
-(21,2,'2021-10-01','BPKAD','Persediaan','draft','2021-10-02 05:58:16','2021-10-02 05:58:16',NULL),
-(22,1,'2021-11-01','BPKAD','Persediaan','draft','2021-10-02 05:59:14','2021-10-02 05:59:14',NULL),
-(23,1,'2021-12-01','BPKAD','Persediaan','draft','2021-10-02 05:59:51','2021-10-02 05:59:51',NULL),
-(24,2,'2021-12-01','BPKAD','Persediaan','draft','2021-10-02 06:00:12','2021-10-02 06:00:12',NULL),
-(25,1,'2021-01-02','BPKAD','Persediaan','draft','2021-10-02 06:01:22','2021-10-02 06:01:22',NULL),
-(26,2,'2021-01-02','BPKAD','Persediaan','draft','2021-10-02 06:01:30','2021-10-02 06:01:30',NULL),
-(27,2,'2021-02-02','BPKAD','Persediaan','draft','2021-10-02 06:01:45','2021-10-02 06:01:45',NULL),
-(28,2,'2021-03-01','BPKAD','Persediaan','draft','2021-10-02 06:02:31','2021-10-02 06:02:31',NULL),
-(29,1,'2021-04-02','BPKAD','Persediaan','draft','2021-10-02 06:03:18','2021-10-02 06:03:18',NULL),
-(30,1,'2021-06-01','BPKAD','Persediaan','draft','2021-10-03 06:03:12','2021-10-03 06:03:12',NULL),
-(31,2,'2021-07-02','BPKAD','Persediaan','draft','2021-10-03 06:03:54','2021-10-03 06:03:54',NULL),
-(32,2,'2021-07-02','BPKAD','Persediaan','draft','2021-10-03 06:04:32','2021-10-03 06:04:32',NULL);
+insert  into `tb_penggunaan`(`id`,`id_penerimaan`,`tgl_penggunaan`,`gudang_asal`,`gudang_tujuan`,`status_penggunaan`,`id_periode`,`ket_penggunaan`,`created_at`,`updated_at`,`deleted_at`) values 
+(2,1,'2021-01-01',NULL,NULL,'draft',NULL,NULL,'2021-10-01 03:06:34','2021-10-01 03:06:34',NULL),
+(3,1,'2021-02-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 03:20:32','2021-10-01 03:20:32',NULL),
+(4,2,'2021-03-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 04:05:26','2021-10-01 04:05:26',NULL),
+(5,1,'2021-05-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 15:32:35','2021-10-01 15:32:35',NULL),
+(6,1,'2021-05-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 16:22:07','2021-10-01 16:22:07',NULL),
+(7,1,'2021-05-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 16:22:54','2021-10-01 16:22:54',NULL),
+(8,1,'2021-05-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 16:54:41','2021-10-01 16:54:41',NULL),
+(9,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 16:56:38','2021-10-01 16:56:38',NULL),
+(10,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 16:57:11','2021-10-01 16:57:11',NULL),
+(11,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 16:57:31','2021-10-01 16:57:31',NULL),
+(12,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 16:57:52','2021-10-01 16:57:52',NULL),
+(13,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 16:58:34','2021-10-01 16:58:34',NULL),
+(14,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 16:59:46','2021-10-01 16:59:46',NULL),
+(15,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 17:30:00','2021-10-01 17:30:00',NULL),
+(16,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 17:31:19','2021-10-01 17:31:19',NULL),
+(17,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 17:32:14','2021-10-01 17:32:14',NULL),
+(18,1,'2000-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 17:32:55','2021-10-01 17:32:55',NULL),
+(19,2,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 17:40:46','2021-10-01 17:40:46',NULL),
+(20,1,'2021-04-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-01 17:44:30','2021-10-01 17:44:30',NULL),
+(21,2,'2021-10-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-02 05:58:16','2021-10-02 05:58:16',NULL),
+(22,1,'2021-11-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-02 05:59:14','2021-10-02 05:59:14',NULL),
+(23,1,'2021-12-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-02 05:59:51','2021-10-02 05:59:51',NULL),
+(24,2,'2021-12-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-02 06:00:12','2021-10-02 06:00:12',NULL),
+(25,1,'2021-01-02','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-02 06:01:22','2021-10-02 06:01:22',NULL),
+(26,2,'2021-01-02','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-02 06:01:30','2021-10-02 06:01:30',NULL),
+(27,2,'2021-02-02','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-02 06:01:45','2021-10-02 06:01:45',NULL),
+(28,2,'2021-03-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-02 06:02:31','2021-10-02 06:02:31',NULL),
+(29,1,'2021-04-02','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-02 06:03:18','2021-10-02 06:03:18',NULL),
+(30,1,'2021-06-01','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-03 06:03:12','2021-10-03 06:03:12',NULL),
+(31,2,'2021-07-02','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-03 06:03:54','2021-10-03 06:03:54',NULL),
+(32,2,'2021-07-02','BPKAD','Persediaan','draft',NULL,NULL,'2021-10-03 06:04:32','2021-10-03 06:04:32',NULL);
 
 /*Table structure for table `tb_periode` */
 
@@ -537,7 +503,7 @@ CREATE TABLE `tb_periode` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_opd` (`id_opd`),
-  CONSTRAINT `tb_periode_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id_opd`)
+  CONSTRAINT `tb_periode_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_periode` */
@@ -557,37 +523,40 @@ CREATE TABLE `tb_saldo_awal` (
   `status_saldo` enum('draft','final','closed') DEFAULT NULL,
   `ket_saldo` text DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
+  `id_periode` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `id_periode` (`id_periode`),
+  CONSTRAINT `tb_saldo_awal_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_saldo_awal` */
 
-insert  into `tb_saldo_awal`(`id`,`kode_saldo`,`tgl_input`,`status_saldo`,`ket_saldo`,`total`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'ABC/123/D','2021-07-29','final','Testing123',136000,'2021-07-30 00:53:13','2021-10-03 22:02:30',NULL),
-(2,'KP123BPKAD','2021-02-01','draft','test123321',626000,'2021-08-05 04:28:08','2021-10-03 21:59:53',NULL),
-(3,'KP123BPKAD',NULL,'draft','test',NULL,'2021-08-05 04:29:35','2021-09-07 05:13:14',NULL),
-(4,'KP123BPKAD',NULL,'draft','test',NULL,'2021-08-05 04:30:31','2021-09-07 05:13:47',NULL),
-(5,'KP123BPKAD','2121-01-01','draft','test',NULL,'2021-08-05 04:33:13','2021-08-05 04:33:13',NULL),
-(6,'KP123BPKAD','2021-01-01','draft','afsd',NULL,'2021-08-05 04:34:23','2021-08-05 04:34:23',NULL),
-(7,'KP123BPKAD','2021-01-01','draft','afsd',NULL,'2021-08-05 04:35:10','2021-08-05 04:35:10',NULL),
-(8,'KP123BPKAD','2021-01-01','draft','afsd',NULL,'2021-08-05 04:39:05','2021-08-05 04:39:05',NULL),
-(9,'KP123BPKAD','1234-01-01','draft','fsf',NULL,'2021-08-05 04:39:50','2021-08-05 04:39:50',NULL),
-(10,'KP123BPKAD','1234-01-01','draft','fsf',NULL,'2021-08-05 04:42:28','2021-08-05 04:42:28',NULL),
-(11,'KP123BPKAD','1234-01-01','draft','fsf',NULL,'2021-08-05 04:44:47','2021-08-05 04:44:47',NULL),
-(12,'KP123BPKAD','2021-01-01','draft','test',NULL,'2021-08-05 04:58:10','2021-08-05 04:58:10',NULL),
-(13,'KP123BPKAD','2021-01-01','draft','test',NULL,'2021-08-05 04:58:19','2021-08-05 04:58:19',NULL),
-(14,'KP123BPKAD','2021-01-01','draft','test',NULL,'2021-08-05 05:00:10','2021-08-05 05:00:10',NULL),
-(15,'KP123BPKAD','2021-01-01','draft','test',NULL,'2021-08-05 05:00:32','2021-08-05 05:00:32',NULL),
-(16,'KP123BPKAD','2021-01-01','draft','asjfkjas',NULL,'2021-08-05 05:01:45','2021-08-05 05:01:45',NULL),
-(17,'KP789BPKAD','2022-01-12','draft','test paling baru',NULL,'2021-08-05 05:02:39','2021-08-05 05:02:39',NULL),
-(18,'KP456BPKAD','2021-01-01','draft','input paling baru',NULL,'2021-08-05 05:05:43','2021-08-05 05:05:43',NULL),
-(19,'dsjij','2021-01-01','draft','sadjd',NULL,'2021-08-18 01:02:44','2021-08-18 01:02:44',NULL),
-(20,'123','2021-02-02','draft','afs',NULL,'2021-08-18 01:12:00','2021-08-18 01:12:00',NULL),
-(21,'321','2021-03-03','draft','asd',68000,'2021-08-18 01:25:31','2021-10-03 22:00:23',NULL),
-(22,'bpkad123456789','2023-01-01','final','saldo awal BPKAD tahun 2023',182000,'2021-09-08 14:07:53','2021-09-08 14:08:47',NULL);
+insert  into `tb_saldo_awal`(`id`,`kode_saldo`,`tgl_input`,`status_saldo`,`ket_saldo`,`total`,`id_periode`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'ABC/123/D','2021-07-29','final','Testing123',136000,NULL,'2021-07-30 00:53:13','2021-10-03 22:02:30',NULL),
+(2,'KP123BPKAD','2021-02-01','draft','test123321',626000,NULL,'2021-08-05 04:28:08','2021-10-03 21:59:53',NULL),
+(3,'KP123BPKAD',NULL,'draft','test',NULL,NULL,'2021-08-05 04:29:35','2021-09-07 05:13:14',NULL),
+(4,'KP123BPKAD',NULL,'draft','test',NULL,NULL,'2021-08-05 04:30:31','2021-09-07 05:13:47',NULL),
+(5,'KP123BPKAD','2121-01-01','draft','test',NULL,NULL,'2021-08-05 04:33:13','2021-08-05 04:33:13',NULL),
+(6,'KP123BPKAD','2021-01-01','draft','afsd',NULL,NULL,'2021-08-05 04:34:23','2021-08-05 04:34:23',NULL),
+(7,'KP123BPKAD','2021-01-01','draft','afsd',NULL,NULL,'2021-08-05 04:35:10','2021-08-05 04:35:10',NULL),
+(8,'KP123BPKAD','2021-01-01','draft','afsd',NULL,NULL,'2021-08-05 04:39:05','2021-08-05 04:39:05',NULL),
+(9,'KP123BPKAD','1234-01-01','draft','fsf',NULL,NULL,'2021-08-05 04:39:50','2021-08-05 04:39:50',NULL),
+(10,'KP123BPKAD','1234-01-01','draft','fsf',NULL,NULL,'2021-08-05 04:42:28','2021-08-05 04:42:28',NULL),
+(11,'KP123BPKAD','1234-01-01','draft','fsf',NULL,NULL,'2021-08-05 04:44:47','2021-08-05 04:44:47',NULL),
+(12,'KP123BPKAD','2021-01-01','draft','test',NULL,NULL,'2021-08-05 04:58:10','2021-08-05 04:58:10',NULL),
+(13,'KP123BPKAD','2021-01-01','draft','test',NULL,NULL,'2021-08-05 04:58:19','2021-08-05 04:58:19',NULL),
+(14,'KP123BPKAD','2021-01-01','draft','test',NULL,NULL,'2021-08-05 05:00:10','2021-08-05 05:00:10',NULL),
+(15,'KP123BPKAD','2021-01-01','draft','test',NULL,NULL,'2021-08-05 05:00:32','2021-08-05 05:00:32',NULL),
+(16,'KP123BPKAD','2021-01-01','draft','asjfkjas',NULL,NULL,'2021-08-05 05:01:45','2021-08-05 05:01:45',NULL),
+(17,'KP789BPKAD','2022-01-12','draft','test paling baru',NULL,NULL,'2021-08-05 05:02:39','2021-08-05 05:02:39',NULL),
+(18,'KP456BPKAD','2021-01-01','draft','input paling baru',NULL,NULL,'2021-08-05 05:05:43','2021-08-05 05:05:43',NULL),
+(19,'dsjij','2021-01-01','draft','sadjd',NULL,NULL,'2021-08-18 01:02:44','2021-08-18 01:02:44',NULL),
+(20,'123','2021-02-02','draft','afs',NULL,NULL,'2021-08-18 01:12:00','2021-08-18 01:12:00',NULL),
+(21,'321','2021-03-03','draft','asd',68000,NULL,'2021-08-18 01:25:31','2021-10-03 22:00:23',NULL),
+(22,'bpkad123456789','2023-01-01','final','saldo awal BPKAD tahun 2023',182000,NULL,'2021-09-08 14:07:53','2021-09-08 14:08:47',NULL);
 
 /*Table structure for table `tb_unit` */
 
@@ -602,15 +571,15 @@ CREATE TABLE `tb_unit` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_opd` (`id_opd`),
-  CONSTRAINT `tb_unit_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id_opd`)
+  CONSTRAINT `tb_unit_ibfk_1` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_unit` */
 
 insert  into `tb_unit`(`id`,`id_opd`,`unit`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,1,'Persediaan','2021-07-29 10:02:44','2021-07-29 10:02:46',NULL),
-(2,1,'Aset','2021-07-29 10:02:49','2021-07-29 10:02:51',NULL),
-(3,2,'Umum','2021-07-29 11:30:04','2021-07-29 11:30:07',NULL);
+(1,NULL,'Persediaan','2021-07-29 10:02:44','2021-07-29 10:02:46',NULL),
+(2,NULL,'Aset','2021-07-29 10:02:49','2021-07-29 10:02:51',NULL),
+(3,NULL,'Umum','2021-07-29 11:30:04','2021-07-29 11:30:07',NULL);
 
 /*Table structure for table `tb_unit_gudang` */
 
@@ -642,25 +611,28 @@ CREATE TABLE `tb_user` (
   `dob` date DEFAULT NULL,
   `id_jabatan` int(11) DEFAULT NULL,
   `id_unit` int(11) DEFAULT NULL,
+  `id_opd` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_jabatan` (`id_jabatan`),
   KEY `tb_user_ibfk_3` (`id_unit`),
+  KEY `id_opd` (`id_opd`),
   CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `tb_jabatan` (`id`),
-  CONSTRAINT `tb_user_ibfk_3` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`)
+  CONSTRAINT `tb_user_ibfk_3` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`),
+  CONSTRAINT `tb_user_ibfk_4` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_user` */
 
-insert  into `tb_user`(`id`,`username`,`password`,`nama_user`,`dob`,`id_jabatan`,`id_unit`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'super_admin','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','Super Admin','0000-00-00',1,1,NULL,NULL,NULL),
-(2,'staf_bidang','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','admin','2021-08-28',2,1,NULL,NULL,NULL),
-(3,'ppbp','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','PPBP',NULL,3,1,NULL,NULL,NULL),
-(4,'kabid','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','Kabid',NULL,4,1,NULL,NULL,NULL),
-(5,'kasubag','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','Kasubag',NULL,5,1,NULL,NULL,NULL),
-(9,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL);
+insert  into `tb_user`(`id`,`username`,`password`,`nama_user`,`dob`,`id_jabatan`,`id_unit`,`id_opd`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'super_admin','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','Super Admin','0000-00-00',1,1,NULL,NULL,NULL,NULL),
+(2,'staf_bidang','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','admin','2021-08-28',2,1,NULL,NULL,NULL,NULL),
+(3,'ppbp','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','PPBP',NULL,3,1,NULL,NULL,NULL,NULL),
+(4,'kabid','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','Kabid',NULL,4,1,NULL,NULL,NULL,NULL),
+(5,'kasubag','$2y$10$uRqgcA9x9kfY6USLkFqJxeUZbe4FdVGl3uXH3J0Aj9m6f99q.fk6S','Kasubag',NULL,5,1,NULL,NULL,NULL,NULL),
+(9,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
