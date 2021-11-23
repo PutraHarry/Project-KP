@@ -116,7 +116,7 @@
             </li>
           @endif
 
-          <!--<li class="nav-item">
+          <li class="nav-item">
             <a href="/opname" class="nav-link">
               <i class="nav-icon fas fa-warehouse"></i>
               <p>
@@ -133,7 +133,7 @@
                 Pemusnahan
               </p>
             </a>
-          </li>-->
+          </li>
 
           @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD']))
           <li class="nav-header">Admin</li>
