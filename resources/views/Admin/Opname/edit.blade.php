@@ -79,7 +79,6 @@ Edit Opname
                               <label for="kode_pengeluaran">Kode Opname</label>
                               <input type="text" class="form-control" name="kode_opname" id="kode_opname" placeholder="Kode Opname" value="#" readonly>
                           </div>
-                          
                           <div class="form-group">
                               <label>Tanggal Opname:</label>
                               <div class="input-group">
