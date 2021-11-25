@@ -94,4 +94,10 @@ Route::post('/user/delete/{id}', 'AdminController@deleteUser')->name('deleteUser
 //OPNAME
 Route::get('/opname', 'OpnameController@dataOpname')->name('opname');
 Route::get('/opname/create', 'OpnameController@createOpname')->name('createOpname');
-Route::get('/opname/edit', 'OpnameController@editOpname')->name('editOpname');
+Route::post('/opname/insert', 'OpnameController@insertOpname')->name('insertOpname');
+Route::get('/opname/edit/{id}', 'OpnameController@editOpname')->name('editOpname');
+Route::post('/opname/update/{id}', 'OpnameController@updateOpname')->name('updateOpname');
+Route::post('/opname/updateDetail/{id}', 'OpnameController@insertDetailOpname')->name('updateDetailOpname');
+Route::post('/opname/editDetail/{id}', 'OpnameController@editDetailOpname')->name('editDetailOpname');
+Route::post('/opname/delete/{id}','OpnameController@deleteOpname')->name('deleteOpname');
+Route::post('/opname/final/{id}', 'OpnameController@finalOpname')->name('finalOpname');
