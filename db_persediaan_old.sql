@@ -382,5 +382,28 @@ insert  into `tb_user`(`id`,`username`,`password`,`nama_user`,`dob`,`id_jabatan`
 (10,'ppbp_kominfo','$2y$10$jta3gXZcBDDFyjOQylnlpuuOGzyqTffKPQBPVjY0yoYGbx2g0i1/C','PPBP Kominfo','2021-01-01',4,3,2,NULL,NULL,NULL),
 (11,'ppbpb_kominfo','$2y$10$n/D.0.WtErs.bSokFzV2.uA.n7K2mmQoZUhE/rCix8eQTb507aE9K','PPBPB Kominfo','2021-01-01',1,3,2,NULL,NULL,NULL);
 
+
+/*Table structure for table `tb_pemusnahan` */
+
+DROP TABLE IF EXISTS `tb_pemusnahan`;
+
+CREATE TABLE `tb_pemusnahan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_opname` int(11) DEFAULT NULL,
+  `tgl_pemusnahan` date DEFAULT NULL,
+  `id_periode` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `id_opname` (`id_opname`),
+  CONSTRAINT `tb_pemusnahan_ibfk_1` FOREIGN KEY (`id_opname`) REFERENCES `tb_opname` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_pemusnahan` */
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+
+
