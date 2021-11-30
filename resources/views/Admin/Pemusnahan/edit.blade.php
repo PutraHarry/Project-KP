@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Edit Pengeluaran Baru
+Edit Pemusnahan Baru
 @endsection
 
 @push('css')
@@ -39,13 +39,13 @@ Edit Pengeluaran Baru
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/pengeluaran">Pengeluaran</a></li>
-              <li class="breadcrumb-item active">Edit Pengeluaran</li>
+              <li class="breadcrumb-item"><a href="/pemusnahan">Pemusnahan</a></li>
+              <li class="breadcrumb-item active">Edit Pemusnahan</li>
             </ol>
           </div>
         </div>
         <div>
-          <a href="/pengeluaran" class="btn btn-default btn-icon-split">
+          <a href="/pemusnahan" class="btn btn-default btn-icon-split">
               <span class="icon">
                   <i class="fas fa-arrow-left"></i>
               </span>
@@ -57,7 +57,7 @@ Edit Pengeluaran Baru
       
     <!-- Main content -->
   <section>
-    <form action="/pengeluaran/update/{{ $idEdit }}" method="POST">
+    <form action="/pengeluaran/update/#" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -65,22 +65,20 @@ Edit Pengeluaran Baru
             <div class="col-md-12">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Edit Data Pengeluaran</h3>
+                  <h3 class="card-title">Edit Data Pemusnahan</h3>
                   <div class="card-tools">
-                    @if ($tpengeluaran->status_pengeluaran == 'draft')
-                      <button type="submit" class="btn btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-edit"></i>
-                        </span>
-                        <span class="text">Draft</span>
-                      </button>
-                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        <span class="text">Final</span>
-                      </button>
-                    @endif
+                    <button type="submit" class="btn btn-danger btn-icon-split">
+                      <span class="icon text-white-50">
+                          <i class="fas fa-edit"></i>
+                      </span>
+                      <span class="text">Draft</span>
+                    </button>
+                    <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal()">
+                      <span class="icon text-white-50">
+                          <i class="fas fa-check"></i>
+                      </span>
+                      <span class="text">Final</span>
+                    </button>
                   </div>
                 </div>
 
@@ -89,32 +87,32 @@ Edit Pengeluaran Baru
                     <div class="row">
                         <div class="col-3">
                           <div class="form-group">
-                              <label for="kode_pengeluaran">Kode Pengeluaran</label>
-                              <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran" value="{{ $tpengeluaran->kode_pengeluaran }}" readonly>
+                              <label for="kode_pengeluaran">Kode Pemusnahan</label>
+                              <input type="text" class="form-control" name="kode_pemusnahan" id="kode_pemusnahan" placeholder="Kode Pemusnahan" value="">
                           </div>
                           <div class="form-group">
-                            <label>Kode Penerimaan</label>
-                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;" @if($tpengeluaran->status_pengeluaran == 'final') disabled @endif>
-                              @foreach($tpenggunaan as $tp)  
-                                <option value={{ $tp->id }} @if($tp->id == $tpengeluaran->id_penggunaan) selected @endif>{{ $tp->kode_penggunaan }}</option>
-                              @endforeach
+                            <label>Kode Opname</label>
+                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
+                               
+                                <option value=></option>
+                              
                             </select>
                           </div>
                           <div class="form-group">
                               <label>Tanggal Pengeluaran:</label>
                               <div class="input-group">
-                                <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpengeluaran->tgl_keluar }}" @if($tpengeluaran->status_pengeluaran == 'final') readonly @endif>
+                                <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="">
                               </div>  
                           </div>  
                         </div>
                         <div class="col-3">
                           <div class="form-group">
                             <label>Status</label>
-                            <input class="form-control" name="status_pengeluaran" id="status_pengeluaran" value="draft" readonly>
+                            <input class="form-control" name="status_pemusnahan" id="status_pemusnahan" value="draft" readonly>
                           </div>
                           <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="5" name="ket_pengeluaran" id="ket_pengeluaran" placeholder="Input Keterangan..." @if($tpengeluaran->status_pengeluaran == 'final') readonly @endif>{{ $tpengeluaran->ket_pengeluaran }}</textarea>
+                              <textarea class="form-control" rows="5" name="ket_pemusnahan" id="ket_pemusnahan" placeholder="Input Keterangan..."></textarea>
                           </div>
                         </div>
                         <div class="col-6">
@@ -129,14 +127,14 @@ Edit Pengeluaran Baru
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama OPD:</label>
-                                    <p>{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
+                                    <p></p>
                                     </select>
                                 </div> 
                               </div>
                               <div class="col-6">
                                 <div class="text">
                                     <label>Lokasi Unit Kerja:</label>
-                                    <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
+                                    <p></p>
                                     </select>
                                 </div> 
                               </div>
@@ -173,10 +171,10 @@ Edit Pengeluaran Baru
   <div class="modal fade" id="modal-sfinal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="" id="finalPengeluaran" method="POST">
+            <form action="" id="finalPemusnahan" method="POST">
               @csrf
                 <div class="modal-header">
-                    <h4 class="modal-title">Final Pengeluaran</h4>
+                    <h4 class="modal-title">Final Pemusnahan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -186,19 +184,19 @@ Edit Pengeluaran Baru
                     <span>Yakin akan merubah status menjadi final?</span>
                   </div>
                   <div class="form-group">
-                    <label>Kode Pengeluaran</label>
+                    <label>Kode Pemusnahan</label>
                     <input type="text" class="form-control" name="kodePengeluaran" id="kodePengeluaran" placeholder="Kode Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
-                    <label>Kode Penggunaan</label>
+                    <label>Kode Opname</label>
                     <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penerimaan" value="" readonly>
                   </div>
                   <div class="form-group">
-                    <label>Tanggal Pengeluaran</label>
+                    <label>Tanggal Pemusnahan</label>
                     <input type="text" class="form-control" name="tglPengeluaran" id="tglPengeluaran" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
-                    <label>Keterangan Pengeluaran</label>
+                    <label>Keterangan Pemusnahan</label>
                     <input type="text" class="form-control" name="ketPengeluaran" id="ketPengeluaran" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                 </div>
@@ -312,7 +310,7 @@ Edit Pengeluaran Baru
       }
     });
     //console.log(idEdit);
-    $("#finalPengeluaran").attr("action", "/pengeluaran/final/" + idEdit + "/detail/" + idPenggunaan);
+    $("#finalPemusnahan").attr("action", "/pemusnahan/final/" + idEdit + "/detail/" + idPenggunaan);
     $('#kodePengeluaran').val($('#kode_pengeluaran').val());
     $('#tglPengeluaran').val($('#tgl_input').val());
     $('#ketPengeluaran').val($('#ket_pengeluaran').val());

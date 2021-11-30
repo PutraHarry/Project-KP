@@ -11,11 +11,16 @@ class unitModel extends Model
 
     public function opd()
     {
-        return $this->belongsto(OPDModel::class, 'id_opd', 'id_opd');
+        return $this->belongsto(OPDModel::class, 'id_opd', 'id');
     }
 
     public function admin()
     {
         return $this->hasMany(AdminModel::class, 'id_unit', 'id');
+    }
+
+    public function gudangUnit()
+    {
+        return $this->hasOne(GudangUnitModel::class, 'id_gudang', 'id');
     }
 }

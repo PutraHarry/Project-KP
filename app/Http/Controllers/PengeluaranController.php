@@ -18,11 +18,9 @@ class PengeluaranController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function datapengeluaran()
+    public function dataPengeluaran()
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -37,9 +35,7 @@ class PengeluaranController extends Controller
 
     public function createPengeluaran()
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -53,10 +49,8 @@ class PengeluaranController extends Controller
 
     public function insertPengeluaran(Request $request)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', ['open'])->first();
-
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         $validator = Validator::make($request->all(), [
-            'kode_pengeluaran' => 'required',
             'tgl_input' => 'required',
             'id_penggunaan' => 'required',
             'status_pengeluaran' => 'required',
@@ -67,13 +61,34 @@ class PengeluaranController extends Controller
             return back()->withErrors($validator);
         }
 
+        $getOPD = Auth::user()->opd->nama_opd;
+        $lastestidPengeluaran = PengeluaranModel::max('id');
+        if ($lastestidPengeluaran) {
+            $getLastestPengeluaran = PengeluaranModel::find($lastestidPengeluaran);
+            $lastestKodePengeluaran = $getLastestPengeluaran->kode_pengeluaran;
+            if ($lastestKodePengeluaran) {
+                $getKodePengeluaran = explode("/", $lastestKodePengeluaran);
+                for ($i=0; $i < count($getKodePengeluaran); $i++) { 
+                    echo $getKodePengeluaran[$i];
+                }
+            }else {
+                $getKodePengeluaran[2] = "0";
+            }
+        } else {
+            $getKodePengeluaran[2] = "0";
+        }
+        
+        $newKodePengeluaran = $getKodePengeluaran[2] + 1;
+        $pengeluaranKode = $getOPD."/PGL/".$newKodePengeluaran;
+
         $pengeluaran = new PengeluaranModel();
-        $pengeluaran->kode_pengeluaran = $request->kode_pengeluaran;
+        $pengeluaran->kode_pengeluaran = $pengeluaranKode;
         $pengeluaran->tgl_keluar = $request->tgl_input;
         $pengeluaran->id_penggunaan = $request->id_penggunaan;
         $pengeluaran->status_pengeluaran = $request->status_pengeluaran;
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
         $pengeluaran->id_periode = $dataPeriodeAktif->id;
+        $pengeluaran->id_opd = Auth::user()->unit->opd->id;
         $pengeluaran->save();
 
         return redirect()->route('editPengeluaran', ['id' => $pengeluaran->id]);
@@ -81,9 +96,7 @@ class PengeluaranController extends Controller
 
     public function editPengeluaran($id)
     {
-        $open = ['open'];
-
-        $dataPeriodeAktif = PeriodeModel::whereIn('status_periode', $open)->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -175,6 +188,10 @@ class PengeluaranController extends Controller
             //dd($detailPenggunaan);
             $detailPengeluaran->save();
         }
+
+        $barangPengeluaran = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->updatee([
+            'status' => 'Digunakan'
+        ]);
 
         return redirect()->route('pengeluaran')->with('statusInput', 'Status Final Success');
     }

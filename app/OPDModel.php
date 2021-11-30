@@ -10,11 +10,21 @@ class OPDModel extends Model
 
     public function unit()
     {
-        return $this->hasMany(UnitModel::class, 'id_opd', 'id_opd');
+        return $this->hasMany(UnitModel::class, 'id_opd', 'id');
     }
     
     public function admin()
     {
         return $this->hasMany(AdminModel::class, 'id_opd', 'id');
+    }
+
+    public function periode()
+    {
+        return $this->hasMany(Periode::class, 'id_opd', 'id');
+    }
+
+    public function gudangOPD()
+    {
+        return $this->hasOne(GudangOPDModel::class, 'id_opd', 'id');
     }
 }

@@ -44,7 +44,7 @@ Route::post('/saldoawal/final/{id}', 'SaldoAwalController@finalSaldoAwal')->name
 Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan')->name('penerimaan');
 Route::get('/penerimaan/create', 'PenerimaanController@addPenerimaan')->name('createPenerimaan');
 Route::post('/penerimaan/insert', 'PenerimaanController@insertPenerimaan')->name('insertPenerimaan');
-Route::get('/penerimaan/edit/{id}', 'PenerimaanController@editPenerimaan')->name('penerimaanEdit');
+Route::get('/penerimaan/edit/{id}', 'PenerimaanController@editPenerimaan')->name('EditPenerimaan');
 Route::post('/penerimaan/update/{id}', 'PenerimaanController@updatePenerimaan')->name('updatePenerimaan');
 Route::post('/penerimaan/updateDetail/{id}', 'PenerimaanController@insertDetailPenerimaan')->name('updateDetailPenerimaan');
 Route::post('/penerimaan/editDetail/{id}', 'PenerimaanController@editDetailPenerimaan')->name('editDetailPenerimaan');
@@ -91,8 +91,13 @@ Route::post('/user/update/{id}', 'AdminController@updateUser')->name('updateUser
 Route::get('/user/dataUnit/{id}', 'AdminController@getDataUnit')->name('getDataUnit');
 Route::post('/user/delete/{id}', 'AdminController@deleteUser')->name('deleteUser');
 
-//BUKTI UMUM
-//Rsoute::get('/buktiumum', 'BuktiUmumController@dataBuktiUmum');
-//Route::get('/buktiumum/create', 'BuktiUmumController@addBuktiUmum');
-//Route::post('/buktiumum/insert','BuktiUmumController@insertBuktiUmum');
-//Route::get('/buktiumum/edit/{id}', 'BuktiUmumController@editBuktiUmum');
+//OPNAME
+Route::get('/opname', 'OpnameController@dataOpname')->name('opname');
+Route::get('/opname/create', 'OpnameController@createOpname')->name('createOpname');
+Route::post('/opname/insert', 'OpnameController@insertOpname')->name('insertOpname');
+Route::get('/opname/edit/{id}', 'OpnameController@editOpname')->name('editOpname');
+Route::post('/opname/update/{id}', 'OpnameController@updateOpname')->name('updateOpname');
+Route::post('/opname/updateDetail/{id}', 'OpnameController@insertDetailOpname')->name('updateDetailOpname');
+Route::post('/opname/editDetail/{id}', 'OpnameController@editDetailOpname')->name('editDetailOpname');
+Route::post('/opname/delete/{id}','OpnameController@deleteOpname')->name('deleteOpname');
+Route::post('/opname/final/{id}', 'OpnameController@finalOpname')->name('finalOpname');
