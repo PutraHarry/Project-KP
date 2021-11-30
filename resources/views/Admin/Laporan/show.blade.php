@@ -185,7 +185,7 @@
                             <div class="icon">
                             <i class="ion ion-android-menu"></i>
                             </div>
-                            <a href="/saldoawal" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/laporan/L_opname" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                         </div>
                 </div>
