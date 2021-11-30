@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Create Penerimaan Baru
+Create Opname Baru
 @endsection
 
 @push('css')
@@ -39,13 +39,13 @@ Create Penerimaan Baru
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/penerimaan">Penerimaan</a></li>
-              <li class="breadcrumb-item active">Penerimaan Baru</li>
+              <li class="breadcrumb-item"><a href="/opname">Opname</a></li>
+              <li class="breadcrumb-item active">Opname Baru</li>
             </ol>
           </div>
         </div>
         <div>
-          <a href="/penerimaan" class="btn btn-default btn-icon-split">
+          <a href="/opname" class="btn btn-default btn-icon-split">
               <span class="icon">
                   <i class="fas fa-arrow-left"></i>
               </span>
@@ -56,7 +56,7 @@ Create Penerimaan Baru
     </section>
       
     <!-- Main content -->
-    <form action="{{ route('insertPenerimaan') }}" method="POST">
+    <form action="{{ route('insertOpname') }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -64,7 +64,7 @@ Create Penerimaan Baru
             <div class="col-md-12">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Input Data Penerimaan Baru</h3>
+                  <h3 class="card-title">Input Data Opname Baru</h3>
                   <div class="card-tools">
                     <button type="submit" class="btn btn-danger btn-icon-split">
                       <span class="icon text-white-50">
@@ -78,67 +78,54 @@ Create Penerimaan Baru
                   <div class="card-body">
                     <div class="row">
                         <div class="col-3">
-                            <div class="form-group">
-                                <label>Jenis Penerimaan</label>
-                                <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan">
-                                    <option value="APBD Non Obat">APBD Non Obat</option>
-                                    <option value="APBD Obat">APBD OBAT</option>
-                                    <option value="Hibah Non Obat">Hibah Non Obat</option>
-                                    <option value="Hibah Obat">Hibah Obat</option>
-                                    <option value="Non APBD">Non APBD</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="penerimaan">Kode Penerimaan</label>
-                                <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Input Kode Penerimaan" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>Tanggal Penerimaan:</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input">
-                                </div>  
-                            </div>  
+                          <div class="form-group">
+                              <label for="kode_opname">Kode Opname</label>
+                              <input type="text" class="form-control" name="kode_opname" id="kode_opname" placeholder="Kode Opname" readonly>
+                          </div>
+                          <div class="form-group">
+                              <label>Tanggal Opname:</label>
+                              <div class="input-group">
+                                <input type="date" class="form-control" name="tgl_input" id="tgl_input">
+                              </div>  
+                          </div>  
                         </div>
                         <div class="col-3">
-                            <div class="form-group">
-                                <label>Status</label>
-                                <input class="form-control" name="status_penerimaan" id="status_penerimaan" value="draft" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>Pengirim</label>
-                                <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim">
-                            </div>
-                            <div class="form-group">
+                          <div class="form-group">
+                            <label>Status</label>
+                            <input class="form-control" name="status_opname" id="status_opname" value="draft" readonly>
+                          </div>
+                          <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..."></textarea>
-                            </div>
-                            </div>
-                            <div class="col-6">
-                            <div class="text-center">
-                                <label>Total Harga:</label>
-                                <h1>
-                                    <span class="text-bold">Rp.</span>
-                                    <span class="text-bold">0</span>
-                                </h1>
-                            </div>
+                              <textarea class="form-control" rows="5" name="ket_opname" id="ket_opname" placeholder="Input Keterangan..."></textarea>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="text-center">
+                              <label>Total Harga:</label>
+                              <h1>
+                                <span class="text-bold">Rp.</span>
+                                <span class="text-bold">0</span>
+                              </h1>
+                          </div>
                             <div class="row">
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama OPD:</label>
-                                        <p>{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
+                                      <p id="nama_opd">{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
                                     </select>
                                 </div> 
                               </div>
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama Unit Kerja:</label>
-                                        <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
+                                      <p id="nama_unit">{{ Auth::guard('admin')->user()->unit->unit }}</p>
                                     </select>
                                 </div> 
                               </div>
                             </div>
                         </div>
                     </div>
+                  </div>
                 </form>
             </div>
         </div>

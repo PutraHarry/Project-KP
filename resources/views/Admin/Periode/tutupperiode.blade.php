@@ -73,7 +73,7 @@
                     @foreach($tutupperiode as $tp)
                     <tr>
                       <td class="text-center">{{ $loop->iteration }}</td>
-                      <td>{{ $tp->nama_opd }}</td>
+                      <td>{{ $tp->opd->nama_opd }}</td>
                       <td>{{ $tp->nama_periode }}</td>
                       <td>{{ $tp->tgl_mulai }}</td>
                       <td>{{ $tp->tgl_selesai }}</td>
@@ -107,19 +107,22 @@
     <div class="modal fade" id="modal-tutup">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Tutup Periode</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-          <p>Yakin akan menutup periode tersebut?</p>
-          </div>
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <a href="/periode/tutupperiode/id" id="btutup" type="button" class="btn btn-success">Tutup</a>
-          </div>
+          <form action="" id="btutup" method="POST">
+            @csrf
+              <div class="modal-header">
+                <h4 class="modal-title">Tutup Periode</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              <p>Yakin akan menutup periode tersebut?</p>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="btutup" type="button" class="btn btn-success">Tutup</button>
+              </div>
+          </form>
         </div>
       </div>
     </div>
@@ -158,7 +161,7 @@
 
 <script>
     function tutupPeriode(id) {
-    $("#btutup").attr("href", "/periode/tutupperiode/"+id);
+    $("#btutup").attr("action", "/periode/prosestutupperiode/"+id);
     $('#modal-tutup').modal('show');
     }
 </script>

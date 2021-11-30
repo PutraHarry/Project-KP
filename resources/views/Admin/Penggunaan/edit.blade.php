@@ -119,7 +119,7 @@ Edit Penggunaan
                             <div class="form-group">
                                 <label>Kode Penggunaan Barang:</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="kode_penggunaan" id="kode_penggunaan" value="{{ $tpenggunaan->kode_penggunaan }}" @if($tpenggunaan->status_penggunaan != 'draft') readonly @endif>
+                                    <input type="text" class="form-control" name="kode_penggunaan" id="kode_penggunaan" value="{{ $tpenggunaan->kode_penggunaan }}" readonly>
                                 </div>  
                             </div>
                         </div>

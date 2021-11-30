@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Edit Penerimaan Baru
+Edit Opname
 @endsection
 
 @push('css')
@@ -39,13 +39,13 @@ Edit Penerimaan Baru
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="/penerimaan">Penerimaan</a></li>
-            <li class="breadcrumb-item active">Edit Penerimaan</li>
+            <li class="breadcrumb-item"><a href="/opname">Opname</a></li>
+            <li class="breadcrumb-item active">Edit Opname</li>
           </ol>
         </div>
       </div>
       <div>
-        <a href="/penerimaan" class="btn btn-default btn-icon-split">
+        <a href="/opname" class="btn btn-default btn-icon-split">
             <span class="icon">
                 <i class="fas fa-arrow-left"></i>
             </span>
@@ -57,7 +57,7 @@ Edit Penerimaan Baru
     
   <!-- Main content -->
   <section>
-    <form action="/penerimaan/update/{{ $idEdit }}" method="POST">
+    <form action="/opname/update/{{ $idEdit }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -65,22 +65,20 @@ Edit Penerimaan Baru
             <div class="col-md-12">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Edit Data Penerimaan</h3>
+                  <h3 class="card-title">Edit Data Opname</h3>
                   <div class="card-tools">
-                    @if ($tpenerimaan->status_penerimaan == 'draft')
-                      <button type="submit" class="btn btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-edit"></i>
-                        </span>
-                        <span class="text">Draft</span>
-                      </button>
-                      <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $tpenerimaan->total }})">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        <span class="text">Final</span>
-                      </button>
-                    @endif
+                    <button type="submit" class="btn btn-danger btn-icon-split">
+                      <span class="icon text-white-50">
+                          <i class="fas fa-edit"></i>
+                      </span>
+                      <span class="text">Draft</span>
+                    </button>
+                    <button type="button" class="btn btn-success btn-icon-split" onclick="#">
+                      <span class="icon text-white-50">
+                          <i class="fas fa-check"></i>
+                      </span>
+                      <span class="text">Final</span>
+                  </button>
                   </div>
                 </div>
                 <form id="quickForm">
@@ -88,36 +86,24 @@ Edit Penerimaan Baru
                     <div class="row">
                       <div class="col-3">
                         <div class="form-group">
-                          <label>Jenis Penerimaan</label>
-                          <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
-                            @foreach ($jenisPenerimaan as $jp)
-                              <option value="{{ $jp }}" @if($tpenerimaan->jenis_penerimaan == $jp) selected @endif>{{ $jp }}</option>
-                            @endforeach
-                          </select>
+                          <label for="opname">Kode Opname</label>
+                          <input type="text" class="form-control" name="kode_opname" id="kode_opname" placeholder="Kode Opname" value="{{ $topname->kode_opname }}" readonly>
                         </div>
                         <div class="form-group">
-                          <label for="penerimaan">Kode Penerimaan</label>
-                          <input type="text" class="form-control" name="kode_penerimaan" id="kode_penerimaan" placeholder="Kode Penerimaan" value="{{ $tpenerimaan->kode_penerimaan }}" readonly>
-                        </div>
-                        <div class="form-group">
-                          <label>Tanggal Penerimaan:</label>
+                          <label>Tanggal Opname:</label>
                           <div class="input-group">
-                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpenerimaan->tgl_terima }}" @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>
+                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $topname->tgl_opname }}" @if($topname->status_opname == 'final') readonly @endif>
                           </div>  
                         </div>  
                       </div>
                       <div class="col-3">
                         <div class="form-group">
                           <label>Status</label>
-                          <input class="form-control" name="status_saldo" id="status_saldo" @if($tpenerimaan->status_penerimaan == 'draft') value="draft" @elseif($tpenerimaan->status_penerimaan == 'final') value="final" @endif readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>Pengirim</label>
-                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}" readonly>
+                          <input class="form-control" name="status_opname" id="status_opname" @if($topname->status_opname == 'draft') value="draft" @elseif($topname->status_opname == 'final') value="final" @endif readonly>
                         </div>
                         <div class="form-group">
                           <label>Keterangan</label>
-                          <textarea class="form-control" rows="3" name="ket_penerimaan" id="ket_penerimaan" placeholder="Input Keterangan..." @if($tpenerimaan->status_penerimaan == 'final') readonly @endif>{{ $tpenerimaan->ket_penerimaan }}</textarea>
+                          <textarea class="form-control" rows="3" name="ket_opname" id="ket_opname" placeholder="Input Keterangan..." @if($topname->status_opname == 'final') readonly @endif>{{ $topname->ket_opname }}</textarea>
                         </div>
                       </div>
                       <div class="col-6">
@@ -125,7 +111,7 @@ Edit Penerimaan Baru
                             <label>Total Harga:</label>
                             <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold">{{ $tpenerimaan->total }}</span>
+                                <span class="text-bold">{{ $topname->total }}</span>
                             </h1>
                         </div>
                         <div class="row">
@@ -154,7 +140,7 @@ Edit Penerimaan Baru
         </div>
       </section>
     </form>
-    <form action="/penerimaan/updateDetail/{{ $idEdit }}" method="POST">
+    <form action="/opname/updateDetail/{{ $idEdit }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -177,25 +163,30 @@ Edit Penerimaan Baru
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($detailPenerimaan as $dpen)
-                        <tr>
+                        @foreach ($detailOpname as $do)
+                          <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td> {{ $dpen->barang->nama_m_barang }} </td>
-                            <td> {{ $dpen->qty }} </td>
-                            <td> {{ $dpen->barang->satuan_m_barang }} </td>
-                            <td> {{ $dpen->barang->harga_m_barang }} </td>
-                            <td> {{ $dpen->harga }} </td>
-                            <td> {{ $dpen->keterangan }} </td>
-                            <td class="text-center">
+                            <td>{{ $do->barang->nama_m_barang }}</td>
+                            <td>{{ $do->qty }}</td>
+                            <td>{{ $do->barang->satuan_m_barang }}</td>
+                            <td>{{ $do->barang->harga_m_barang }}</td>
+                            <td>{{ $do->harga }}</td>
+                            <td>{{ $do->keterangan }}</td>
+                            @if ($topname->status_opname == 'draft')
+                              <td class="text-center">
                                 <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-warning" type="button" onclick="editpenerimaan({{ $dpen->id }},{{ $dpen->barang->id }},{{ $dpen->qty }},'{{ $dpen->barang->satuan_m_barang }}',{{ $dpen->barang->harga_m_barang }},'{{ $dpen->keterangan }}')">
+                                    <button class="btn btn-warning" type="button" onclick="editopname({{ $do->id }},{{ $do->barang->id }},{{ $do->qty }},'{{ $do->barang->satuan_m_barang }}',{{ $do->barang->harga_m_barang }},'{{ $do->keterangan }}')">
                                         <i class="fas fa-edit"></i>
                                       </button>
                                 </div>
-                            </td>
-                        </tr>
+                              </td>
+                            @else
+                              <td></td>
+                            @endif
+                            
+                          </tr>
                         @endforeach
-                        @if($tpenerimaan->status_penerimaan == 'draft')
+                        @if($topname->status_opname == 'draft')
                           <tr>
                             <td class="text-center"></td>
                             <td>
@@ -253,14 +244,13 @@ Edit Penerimaan Baru
       </section>
     </form>
   </section>
-
   <div class="modal fade" id="modal-sedit">
       <div class="modal-dialog modal-lg">
           <div class="modal-content">
               <form action="" id="edit_form" method="POST">
                   @csrf
                   <div class="modal-header">
-                      <h4 class="modal-title">Edit Detail Penerimaan</h4>
+                      <h4 class="modal-title">Edit Detail Opname</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                       </button>
@@ -305,7 +295,7 @@ Edit Penerimaan Baru
             <form action="" id="finalPenerimaan" method="POST">
               @csrf
                 <div class="modal-header">
-                    <h4 class="modal-title">Final Penerimaan</h4>
+                    <h4 class="modal-title">Final Opname</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -315,23 +305,19 @@ Edit Penerimaan Baru
                     <span>Yakin akan merubah status menjadi final?</span>
                   </div>
                   <div class="form-group">
-                    <label>Kode Penerimaan</label>
-                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penggunaan" value="" readonly>
+                    <label>Kode Opname</label>
+                    <input type="text" class="form-control" name="kodeOpname" id="kodeOpname" placeholder="Kode Opname" value="" readonly>
                   </div>
                   <div class="form-group">
-                    <label>Jenis Penerimaan</label>
-                    <input type="text" class="form-control" name="jenisPenerimaan" id="jenisPenerimaan" placeholder="Kode Penggunaan" value="" readonly>
+                    <label>Tanggal Opname</label>
+                    <input type="text" class="form-control" name="tglOpname" id="tglOpname" placeholder="Tanggal Opname" value="" readonly>
                   </div>
                   <div class="form-group">
-                    <label>Tanggal Penerimaan</label>
-                    <input type="text" class="form-control" name="tglPenerimaan" id="tglPenerimaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <label>Total Opname</label>
+                    <input type="text" class="form-control" name="totalOpname" id="totalOpname" placeholder="Total Opname" value="" readonly>
                   </div>
                   <div class="form-group">
-                    <label>Total Penerimaan</label>
-                    <input type="text" class="form-control" name="totalPenerimaan" id="totalPenerimaan" placeholder="Total Saldo Awal" value="" readonly>
-                  </div>
-                  <div class="form-group">
-                    <label>Keterangan Penerimaan</label>
+                    <label>Keterangan Opname</label>
                     <input type="text" class="form-control" name="ketPenerimaan" id="ketPenerimaan" placeholder="Keterangan Penerimaan" value="" readonly>
                   </div>
                 </div>
@@ -416,8 +402,8 @@ Edit Penerimaan Baru
 </script>
 
 <script>
-  function editpenerimaan(id, id_barang, qty, satuan, harga, keterangan) {
-      $("#edit_form").attr("action", "/penerimaan/editDetail/"+id);
+  function editopname(id, id_barang, qty, satuan, harga, keterangan) {
+      $("#edit_form").attr("action", "/opname/editDetail/"+id);
       $('#edit_id_barang').val(id_barang).change();
       $('#edit_qty').val(qty);
       $('#edit_satuan').val(satuan);
