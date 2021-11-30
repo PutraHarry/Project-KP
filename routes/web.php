@@ -101,3 +101,16 @@ Route::post('/opname/updateDetail/{id}', 'OpnameController@insertDetailOpname')-
 Route::post('/opname/editDetail/{id}', 'OpnameController@editDetailOpname')->name('editDetailOpname');
 Route::post('/opname/delete/{id}','OpnameController@deleteOpname')->name('deleteOpname');
 Route::post('/opname/final/{id}', 'OpnameController@finalOpname')->name('finalOpname');
+
+//PEMUSNAHAN
+Route::get('/pemusnahan', 'PemusnahanController@dataPemusnahan')->name('pemusnahan');
+Route::get('/pemusnahan/create', 'PemusnahanController@createPemusnahan')->name('createPemusnahan');
+Route::post('/pemusnahan/insert', 'PemusnahanController@insertPemusnahan')->name('insertPemusnahan');
+Route::get('/pemusnahan/edit/{id}', 'PemusnahanController@editPemusnahan')->name('editPemusnahan');
+Route::post('/pemusnahan/update/{id}', 'PemusnahanController@updatePemusnahan')->name('updatePemusnahan');
+Route::get('/pemusnahan/detailOpname/{id}', 'PemusnahanController@getDataDetailOpname')->name('getDataDetailOpname');
+Route::post('/pemusnahan/delete/{id}','PemusnahanController@deletePemusnahan')->name('deletePemusnahan');
+Route::post('/pemusnahan/final/{idPenggunaan}/detail/{idOpname}', 'PemusnahanController@finalPemusnahan')->name('finalPemusnahan');
+// Route::post('/penggunaan/approved/{idPenggunaan}', 'PenggunaanController@approvedPenggunaan')->name('approvedPenggunaan');
+// Route::post('/penggunaan/disetujui_ppbp/{idPenggunaan}', 'PenggunaanController@disetujui_ppbpPenggunaan')->name('disetujui_ppbpPenggunaan');
+// Route::post('/penggunaan/disetujui_atasanLangsung/{idPenggunaan}', 'PenggunaanController@disetujui_atasanLangsungPenggunaan')->name('disetujui_atasanLangsungPenggunaan');

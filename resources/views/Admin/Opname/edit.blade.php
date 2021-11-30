@@ -73,7 +73,7 @@ Edit Opname
                       </span>
                       <span class="text">Draft</span>
                     </button>
-                    <button type="button" class="btn btn-success btn-icon-split" onclick="#">
+                    <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $topname->total }})">
                       <span class="icon text-white-50">
                           <i class="fas fa-check"></i>
                       </span>
