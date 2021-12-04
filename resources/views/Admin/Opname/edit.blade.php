@@ -57,7 +57,7 @@ Edit Opname
     
   <!-- Main content -->
   <section>
-    <form action="/opname/update/#" method="POST">
+    <form action="/opname/update/{{ $idEdit }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -73,7 +73,7 @@ Edit Opname
                       </span>
                       <span class="text">Draft</span>
                     </button>
-                    <button type="button" class="btn btn-success btn-icon-split" onclick="#">
+                    <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $topname->total }})">
                       <span class="icon text-white-50">
                           <i class="fas fa-check"></i>
                       </span>
@@ -87,23 +87,23 @@ Edit Opname
                       <div class="col-3">
                         <div class="form-group">
                           <label for="opname">Kode Opname</label>
-                          <input type="text" class="form-control" name="kode_opname" id="kode_opname" placeholder="Kode Opname" value="#">
+                          <input type="text" class="form-control" name="kode_opname" id="kode_opname" placeholder="Kode Opname" value="{{ $topname->kode_opname }}" readonly>
                         </div>
                         <div class="form-group">
                           <label>Tanggal Opname:</label>
                           <div class="input-group">
-                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="#">
+                            <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $topname->tgl_opname }}" @if($topname->status_opname == 'final') readonly @endif>
                           </div>  
                         </div>  
                       </div>
                       <div class="col-3">
                         <div class="form-group">
                           <label>Status</label>
-                          <input class="form-control" name="status_opname" id="status_opname" value="draft" readonly>
+                          <input class="form-control" name="status_opname" id="status_opname" @if($topname->status_opname == 'draft') value="draft" @elseif($topname->status_opname == 'final') value="final" @endif readonly>
                         </div>
                         <div class="form-group">
                           <label>Keterangan</label>
-                          <textarea class="form-control" rows="3" name="ket_opname" id="ket_opname" placeholder="Input Keterangan..."></textarea>
+                          <textarea class="form-control" rows="3" name="ket_opname" id="ket_opname" placeholder="Input Keterangan..." @if($topname->status_opname == 'final') readonly @endif>{{ $topname->ket_opname }}</textarea>
                         </div>
                       </div>
                       <div class="col-6">
@@ -111,21 +111,21 @@ Edit Opname
                             <label>Total Harga:</label>
                             <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold"></span>
+                                <span class="text-bold">{{ $topname->total }}</span>
                             </h1>
                         </div>
                         <div class="row">
                           <div class="col-6">
                             <div class="text">
                                 <label>Nama OPD:</label>
-                                    <p></p>
+                                    <p>{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
                                 </select>
                             </div> 
                           </div>
                           <div class="col-6">
                             <div class="text">
                                 <label>Nama Unit Kerja:</label>
-                                    <p></p>
+                                    <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
                                 </select>
                             </div> 
                           </div>
@@ -140,7 +140,7 @@ Edit Opname
         </div>
       </section>
     </form>
-    <form action="/opname/updateDetail/#" method="POST">
+    <form action="/opname/updateDetail/{{ $idEdit }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -163,69 +163,76 @@ Edit Opname
                         </tr>
                       </thead>
                       <tbody>
-                        
-                        <tr>
-                            <td class="text-center"></td>
-                            <td> barang1 </td>
-                            <td>1</td>
-                            <td>testing </td>
-                            <td>  testing</td>
-                            <td> TESTING</td>
-                            <td> okeokeokeokeo</td>
-                            <td class="text-center">
+                        @foreach ($detailOpname as $do)
+                          <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $do->barang->nama_m_barang }}</td>
+                            <td>{{ $do->qty }}</td>
+                            <td>{{ $do->barang->satuan_m_barang }}</td>
+                            <td>{{ $do->barang->harga_m_barang }}</td>
+                            <td>{{ $do->harga }}</td>
+                            <td>{{ $do->keterangan }}</td>
+                            @if ($topname->status_opname == 'draft')
+                              <td class="text-center">
                                 <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-warning" type="button" onclick="editpenerimaan()">
+                                    <button class="btn btn-warning" type="button" onclick="editopname({{ $do->id }},{{ $do->barang->id }},{{ $do->qty }},'{{ $do->barang->satuan_m_barang }}',{{ $do->barang->harga_m_barang }},'{{ $do->keterangan }}')">
                                         <i class="fas fa-edit"></i>
                                       </button>
                                 </div>
+                              </td>
+                            @else
+                              <td></td>
+                            @endif
+                            
+                          </tr>
+                        @endforeach
+                        @if($topname->status_opname == 'draft')
+                          <tr>
+                            <td class="text-center"></td>
+                            <td>
+                              <div class="form-group">
+                                <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
+                                @foreach ($tbarang as $tb)
+                                  <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
+                                @endforeach
+                                </select>
+                              </div>
                             </td>
-                        </tr>
-                        
-                        <tr>
-                          <td class="text-center"></td>
-                          <td>
-                            <div class="form-group">
-                              <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                              
-                                <option value=></option>
-                              
+                            <td>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" readonly>
+                              </div>
+                            </td>
+                            <td>
+                              <select class="form-control" name="keterangan">
+                                <option value="baik">Baik</option>
+                                <option value="rusak">Rusak</option>
                               </select>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="number" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga">
-                            </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                              <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" readonly>
-                            </div>
-                          </td>
-                          <td>
-                            <select class="form-control" name="keterangan">
-                              <option value="baik">Baik</option>
-                              <option value="rusak">Rusak</option>
-                            </select>
-                          </td>
-                          <td class="text-center">
-                            <div class="btn-group btn-group-sm">
-                              <button type="submit" class="btn btn-success">
-                                <i class="fas fa-check"></i>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
+                            </td>
+                            <td class="text-center">
+                              <div class="btn-group btn-group-sm">
+                                <button type="submit" class="btn btn-success">
+                                  <i class="fas fa-check"></i>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        @endif
                       </tbody>
                     </table>
                   </div>
@@ -237,7 +244,6 @@ Edit Opname
       </section>
     </form>
   </section>
-
   <div class="modal fade" id="modal-sedit">
       <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -396,8 +402,8 @@ Edit Opname
 </script>
 
 <script>
-  function editpenerimaan(id, id_barang, qty, satuan, harga, keterangan) {
-      $("#edit_form").attr("action", "/penerimaan/editDetail/"+id);
+  function editopname(id, id_barang, qty, satuan, harga, keterangan) {
+      $("#edit_form").attr("action", "/opname/editDetail/"+id);
       $('#edit_id_barang').val(id_barang).change();
       $('#edit_qty').val(qty);
       $('#edit_satuan').val(satuan);

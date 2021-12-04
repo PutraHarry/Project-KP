@@ -18,17 +18,16 @@
 
 @section('content')
   @if (session()->has('statusInput'))
-      <div class="row">
-        <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
-            {{session()->get('statusInput')}}
-            <button type="button" class="close" data-dismiss="alert"
-                aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    <div class="row">
+      <div class="col-sm-12 alert alert-success alert-dismissible fade show" role="alert">
+          {{session()->get('statusInput')}}
+          <button type="button" class="close" data-dismiss="alert"
+              aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
       </div>
-    @endif
-
+    </div>
+  @endif
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -55,7 +54,6 @@
                 <div class="card-header">
                   <h3 class="card-title">List Data Opname</h3>
                     <div class="card-tools">
-                     
                         <a href="/opname/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>
@@ -81,18 +79,18 @@
                       <tbody>
                         @foreach ($topname as $to)
                           <tr>
-                            <td class="text-center"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $to->kode_opname }}</td>
+                            <td>{{ $to->tgl_opname }}</td>
+                            <td>{{ $to->status_opname }}</td>
+                            <td>{{ $to->ket_opname }}</td>
                             <td class="text-center">
-                                <a href="/opname/edit/#" class="btn btn-warning btn-icon-split">
+                                <a href="/opname/edit/{{ $to->id }}" class="btn btn-warning btn-icon-split">
                                   <span class="icon">
                                       <i class="fas fa-edit"></i>
                                   </span>
                                 </a>
-                                <a onclick="statusdelete(#)" class="btn btn-danger btn-icon-split">
+                                <a onclick="statusdelete({{ $to->id }})" class="btn btn-danger btn-icon-split">
                                   <span class="icon">
                                       <i class="fas fa-trash"></i>
                                   </span>

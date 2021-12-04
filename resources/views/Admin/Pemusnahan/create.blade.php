@@ -86,10 +86,9 @@ Create Pemusnahan Baru
                           <div class="form-group">
                             <label>Kode Opname</label>
                             <select class="select2" name="id_opname" id="id_opname" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
-                              
-                                <option value= "testing1"></option>
-                                <option value= "testing2"></option>
-                              
+                              @foreach($topname as $to)  
+                                <option value={{ $to->id }}>{{ $to->kode_opname }}</option>
+                              @endforeach
                             </select>
                           </div>
                           <div class="form-group">
@@ -121,14 +120,14 @@ Create Pemusnahan Baru
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama OPD:</label>
-                                      <p id="nama_opd"></p>
+                                      <p id="nama_opd">{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
                                     </select>
                                 </div> 
                               </div>
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama Unit Kerja:</label>
-                                      <p id="nama_unit"></p>
+                                      <p id="nama_unit">{{ Auth::guard('admin')->user()->unit->unit }}</p>
                                     </select>
                                 </div> 
                               </div>

@@ -56,7 +56,7 @@ Create Opname Baru
     </section>
       
     <!-- Main content -->
-    <form action="/pengeluaran/insert" method="POST">
+    <form action="{{ route('insertOpname') }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -74,7 +74,6 @@ Create Opname Baru
                     </button>
                   </div>
                 </div>
-
                 <form id="quickForm">
                   <div class="card-body">
                     <div class="row">
