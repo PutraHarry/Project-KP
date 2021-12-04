@@ -57,7 +57,7 @@ Edit Pemusnahan Baru
       
     <!-- Main content -->
   <section>
-    <form action="/pengeluaran/update/#" method="POST">
+    <form action="/pemusnahan/update/{{ $tpemusnahan->id }}" method="POST">
       @csrf
       <section class="content">
         <div class="container-fluid">
@@ -87,32 +87,32 @@ Edit Pemusnahan Baru
                     <div class="row">
                         <div class="col-3">
                           <div class="form-group">
-                              <label for="kode_pengeluaran">Kode Pemusnahan</label>
-                              <input type="text" class="form-control" name="kode_pemusnahan" id="kode_pemusnahan" placeholder="Kode Pemusnahan" value="">
+                              <label for="kode_Pemusnahan">Kode Pemusnahan</label>
+                              <input type="text" class="form-control" name="kode_pemusnahan" id="kode_pemusnahan" placeholder="Kode Pemusnahan" value="{{ $tpemusnahan->kode_pemusnahan }}" readonly>
                           </div>
                           <div class="form-group">
                             <label>Kode Opname</label>
-                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
-                               
-                                <option value=></option>
-                              
+                            <select class="select2" name="id_opname" id="id_opname" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
+                              @foreach ($topname as $to)
+                                <option value="{{ $to->id }}" @if($to->id == $tpemusnahan->id_opname) selected @endif>{{ $to->kode_opname }}</option>
+                              @endforeach
                             </select>
                           </div>
                           <div class="form-group">
-                              <label>Tanggal Pengeluaran:</label>
+                              <label>Tanggal Pemusnahan:</label>
                               <div class="input-group">
-                                <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="">
+                                <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $tpemusnahan->tgl_pemusnahan }}" @if($tpemusnahan->status_pemusnahan != 'draft') readonly @endif>
                               </div>  
                           </div>  
                         </div>
                         <div class="col-3">
                           <div class="form-group">
                             <label>Status</label>
-                            <input class="form-control" name="status_pemusnahan" id="status_pemusnahan" value="draft" readonly>
+                            <input class="form-control" name="status_pemusnahan" id="status_pemusnahan" @if($tpemusnahan->status_pemusnahan == 'draft') value="draft" @elseif($tpemusnahan->status_pemusnahan == 'final') value="final" @endif readonly>
                           </div>
                           <div class="form-group">
                               <label>Keterangan</label>
-                              <textarea class="form-control" rows="5" name="ket_pemusnahan" id="ket_pemusnahan" placeholder="Input Keterangan..."></textarea>
+                              <textarea class="form-control" rows="5" name="ket_pemusnahan" id="ket_pemusnahan" placeholder="Input Keterangan..." @if($tpemusnahan->status_pemusnahan != 'draft') readonly @endif>{{ $tpemusnahan->ket_pemusnahan }}</textarea>
                           </div>
                         </div>
                         <div class="col-6">
@@ -240,11 +240,11 @@ Edit Pemusnahan Baru
 
   })
 
-  let id = $('#id_penggunaan').val();
+  let id = $('#id_opname').val();
   //console.log(id);
   $.ajax({
       type: 'GET',
-      url: '/pengeluaran/detailPenggunaan/'+id,
+      url: '/pemusnahan/detailOpname/'+id,
       success: function (response){
         //console.log(response);
           $('#data').empty();
@@ -261,12 +261,12 @@ Edit Pemusnahan Baru
       }
   });
 
-  $('#id_penggunaan').change(function() {
-      if($('#id_penggunaan').val() != ""){ 
+  $('#id_opname').change(function() {
+      if($('#id_opname').val() != ""){ 
           let id = $(this).val();
           $.ajax({
               type: 'GET',
-              url: '/pengeluaran/detailPenggunaan/'+id,
+              url: '/pengeluaran/detailOpname/'+id,
               success: function (response){
                 console.log(response);
                   $('#data').empty();
@@ -303,7 +303,7 @@ Edit Pemusnahan Baru
 <script>
   function statusFinal(idEdit) {
     var idPenggunaan = $('#id_penggunaan').val();
-    var penggunaan = {!! json_encode($tpenggunaan->toArray()) !!}
+    var penggunaan = {!! json_encode($topname->toArray()) !!}
     penggunaan.forEach(element => {
       if(element.id == idPenggunaan){
         $('#kodePenggunaan').val(element.kode_penggunaan);

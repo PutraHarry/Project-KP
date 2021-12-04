@@ -94,4 +94,23 @@ Route::post('/user/delete/{id}', 'AdminController@deleteUser')->name('deleteUser
 //OPNAME
 Route::get('/opname', 'OpnameController@dataOpname')->name('opname');
 Route::get('/opname/create', 'OpnameController@createOpname')->name('createOpname');
-Route::get('/opname/edit', 'OpnameController@editOpname')->name('editOpname');
+Route::post('/opname/insert', 'OpnameController@insertOpname')->name('insertOpname');
+Route::get('/opname/edit/{id}', 'OpnameController@editOpname')->name('editOpname');
+Route::post('/opname/update/{id}', 'OpnameController@updateOpname')->name('updateOpname');
+Route::post('/opname/updateDetail/{id}', 'OpnameController@insertDetailOpname')->name('updateDetailOpname');
+Route::post('/opname/editDetail/{id}', 'OpnameController@editDetailOpname')->name('editDetailOpname');
+Route::post('/opname/delete/{id}','OpnameController@deleteOpname')->name('deleteOpname');
+Route::post('/opname/final/{id}', 'OpnameController@finalOpname')->name('finalOpname');
+
+//PEMUSNAHAN
+Route::get('/pemusnahan', 'PemusnahanController@dataPemusnahan')->name('pemusnahan');
+Route::get('/pemusnahan/create', 'PemusnahanController@createPemusnahan')->name('createPemusnahan');
+Route::post('/pemusnahan/insert', 'PemusnahanController@insertPemusnahan')->name('insertPemusnahan');
+Route::get('/pemusnahan/edit/{id}', 'PemusnahanController@editPemusnahan')->name('editPemusnahan');
+Route::post('/pemusnahan/update/{id}', 'PemusnahanController@updatePemusnahan')->name('updatePemusnahan');
+Route::get('/pemusnahan/detailOpname/{id}', 'PemusnahanController@getDataDetailOpname')->name('getDataDetailOpname');
+Route::post('/pemusnahan/delete/{id}','PemusnahanController@deletePemusnahan')->name('deletePemusnahan');
+Route::post('/pemusnahan/final/{idPenggunaan}/detail/{idOpname}', 'PemusnahanController@finalPemusnahan')->name('finalPemusnahan');
+// Route::post('/penggunaan/approved/{idPenggunaan}', 'PenggunaanController@approvedPenggunaan')->name('approvedPenggunaan');
+// Route::post('/penggunaan/disetujui_ppbp/{idPenggunaan}', 'PenggunaanController@disetujui_ppbpPenggunaan')->name('disetujui_ppbpPenggunaan');
+// Route::post('/penggunaan/disetujui_atasanLangsung/{idPenggunaan}', 'PenggunaanController@disetujui_atasanLangsungPenggunaan')->name('disetujui_atasanLangsungPenggunaan');

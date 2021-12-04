@@ -24,7 +24,6 @@ class PenggunaanController extends Controller
     public function dataPenggunaan()
     {
         $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
-        //dd($dataPeriodeAktif);
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -43,9 +42,7 @@ class PenggunaanController extends Controller
         } else {
             $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
         }
-
         
-
         return view("Admin.Penggunaan.show", compact('periodeAktif', 'tpenggunaan'));
     }
 

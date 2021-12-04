@@ -28,7 +28,6 @@
         </div>
       </div>
     @endif
-
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -45,7 +44,6 @@
         </div>
       </div>
     </section>
-
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -79,28 +77,29 @@
                           </tr>
                       </thead>
                       <tbody>
+                        @foreach ($tpemusnahan as $tp)
                           <tr>
-                            <td class="text-center"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $tp->kode_pemusnahan }}</td>
+                            <td>{{ $tp->tgl_pemusnahan }}</td>
+                            <td>{{ $tp->status_pemusnahan }}</td>
+                            <td>{{ $tp->ket_pemusnahan }}</td>
                             <td class="text-center">
-                                <a href="/pemusnahan/edit/#" class="btn btn-warning btn-icon-split">
+                                <a href="/pemusnahan/edit/{{ $tp->id }}" class="btn btn-warning btn-icon-split">
                                   <span class="icon">
                                       <i class="fas fa-edit"></i>
                                   </span>
                                 </a>
-                                
-                                  <a onclick="statusdelete(#)" class="btn btn-danger btn-icon-split">
+                                @if ($tp->status_pemusnahan == 'draft')
+                                  <a onclick="statusdelete({{ $tp->id }})" class="btn btn-danger btn-icon-split">
                                     <span class="icon">
                                         <i class="fas fa-trash"></i>
                                     </span>
                                   </a>
-                                
+                                @endif
                             </td>
                           </tr>
-                        
+                        @endforeach
                       </tbody>
                   </table>
                 </div>

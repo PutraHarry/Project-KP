@@ -101,7 +101,7 @@ Edit Saldo Awal
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label>Status</label>
-                                                    <input class="form-control" name="status_saldo" id="status_saldo" @if($saldoawal->status_saldo == 'draft') value="draft" @elseif($saldoawal->status_saldo == 'final') value="final" @endif @if($saldoawal->status_saldo == 'final') @endif readonly>
+                                                    <input class="form-control" name="status_saldo" id="status_saldo" @if($saldoawal->status_saldo == 'draft') value="draft" @elseif($saldoawal->status_saldo == 'final') value="final" @endif readonly>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">

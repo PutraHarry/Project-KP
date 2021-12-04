@@ -109,7 +109,7 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div class="form-group">
                           <label>Status</label>
-                          <input class="form-control" name="status_saldo" id="status_saldo" value="draft" readonly>
+                          <input class="form-control" name="status_saldo" id="status_saldo" @if($tpenerimaan->status_penerimaan == 'draft') value="draft" @elseif($tpenerimaan->status_penerimaan == 'final') value="final" @endif readonly>
                         </div>
                         <div class="form-group">
                             <label>Pengirim</label>

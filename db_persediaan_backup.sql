@@ -213,19 +213,6 @@ CREATE TABLE `tb_master_barang` (
 
 /*Data for the table `tb_master_barang` */
 
-/*Table structure for table `tb_master_kegiatan` */
-
-DROP TABLE IF EXISTS `tb_master_kegiatan`;
-
-CREATE TABLE `tb_master_kegiatan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode` varchar(10) DEFAULT NULL,
-  `nama_kegiatan` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `tb_master_kegiatan` */
-
 /*Table structure for table `tb_opd` */
 
 DROP TABLE IF EXISTS `tb_opd`;
@@ -269,7 +256,6 @@ DROP TABLE IF EXISTS `tb_opname`;
 
 CREATE TABLE `tb_opname` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_m_kegiatan` int(11) DEFAULT NULL,
   `kode_opname` varchar(255) DEFAULT NULL,
   `status_opname` enum('draft','final') DEFAULT NULL,
   `tgl_opname` date DEFAULT NULL,
@@ -279,9 +265,7 @@ CREATE TABLE `tb_opname` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_periode` (`id_periode`),
-  KEY `id_m_kegiatan` (`id_m_kegiatan`),
-  CONSTRAINT `tb_opname_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`),
-  CONSTRAINT `tb_opname_ibfk_2` FOREIGN KEY (`id_m_kegiatan`) REFERENCES `tb_master_kegiatan` (`id`)
+  CONSTRAINT `tb_opname_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_opname` */
@@ -294,16 +278,13 @@ CREATE TABLE `tb_pemusnahan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_opname` int(11) DEFAULT NULL,
   `tgl_pemusnahan` date DEFAULT NULL,
-  `id_m_kegiatan` int(11) DEFAULT NULL,
   `id_periode` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `id_opname` (`id_opname`),
-  KEY `id_m_kegiatan` (`id_m_kegiatan`),
-  CONSTRAINT `tb_pemusnahan_ibfk_1` FOREIGN KEY (`id_opname`) REFERENCES `tb_opname` (`id`),
-  CONSTRAINT `tb_pemusnahan_ibfk_2` FOREIGN KEY (`id_m_kegiatan`) REFERENCES `tb_master_kegiatan` (`id`)
+  CONSTRAINT `tb_pemusnahan_ibfk_1` FOREIGN KEY (`id_opname`) REFERENCES `tb_opname` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_pemusnahan` */
@@ -314,7 +295,6 @@ DROP TABLE IF EXISTS `tb_penerimaan`;
 
 CREATE TABLE `tb_penerimaan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_m_kegiatan` int(11) DEFAULT NULL,
   `kode_penerimaan` varchar(255) DEFAULT NULL,
   `jenis_penerimaan` enum('APBD Non Obat','APBD Obat','Hibah Non Obat','Hibah Obat','Non APBD') DEFAULT NULL,
   `tgl_terima` date DEFAULT NULL,
@@ -331,10 +311,8 @@ CREATE TABLE `tb_penerimaan` (
   KEY `id_jenis_penerimaan` (`jenis_penerimaan`),
   KEY `id_periode` (`id_periode`),
   KEY `id_opd` (`id_opd`),
-  KEY `id_m_kegiatan` (`id_m_kegiatan`),
   CONSTRAINT `tb_penerimaan_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`),
-  CONSTRAINT `tb_penerimaan_ibfk_2` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`),
-  CONSTRAINT `tb_penerimaan_ibfk_3` FOREIGN KEY (`id_m_kegiatan`) REFERENCES `tb_master_kegiatan` (`id`)
+  CONSTRAINT `tb_penerimaan_ibfk_2` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_penerimaan` */
@@ -345,7 +323,6 @@ DROP TABLE IF EXISTS `tb_pengeluaran`;
 
 CREATE TABLE `tb_pengeluaran` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_m_kegiatan` int(11) DEFAULT NULL,
   `kode_pengeluaran` varchar(255) DEFAULT NULL,
   `tgl_keluar` date DEFAULT NULL,
   `ket_pengeluaran` text DEFAULT NULL,
@@ -360,11 +337,9 @@ CREATE TABLE `tb_pengeluaran` (
   KEY `id_periode` (`id_periode`),
   KEY `id_penggunaan` (`id_penggunaan`),
   KEY `id_opd` (`id_opd`),
-  KEY `id_m_kegiatan` (`id_m_kegiatan`),
   CONSTRAINT `tb_pengeluaran_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`),
   CONSTRAINT `tb_pengeluaran_ibfk_3` FOREIGN KEY (`id_penggunaan`) REFERENCES `tb_penggunaan` (`id`),
-  CONSTRAINT `tb_pengeluaran_ibfk_4` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`),
-  CONSTRAINT `tb_pengeluaran_ibfk_5` FOREIGN KEY (`id_m_kegiatan`) REFERENCES `tb_master_kegiatan` (`id`)
+  CONSTRAINT `tb_pengeluaran_ibfk_4` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_pengeluaran` */
@@ -375,7 +350,6 @@ DROP TABLE IF EXISTS `tb_penggunaan`;
 
 CREATE TABLE `tb_penggunaan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_m_kegiatan` int(11) DEFAULT NULL,
   `id_penerimaan` int(11) DEFAULT NULL,
   `tgl_penggunaan` date DEFAULT NULL,
   `id_gudang_opd` int(11) DEFAULT NULL,
@@ -393,13 +367,11 @@ CREATE TABLE `tb_penggunaan` (
   KEY `id_opd` (`id_opd`),
   KEY `id_gudang_opd` (`id_gudang_opd`),
   KEY `id_gudang_unit` (`id_gudang_unit`),
-  KEY `id_m_kegiatan` (`id_m_kegiatan`),
   CONSTRAINT `tb_penggunaan_ibfk_1` FOREIGN KEY (`id_penerimaan`) REFERENCES `tb_penerimaan` (`id`),
   CONSTRAINT `tb_penggunaan_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`),
   CONSTRAINT `tb_penggunaan_ibfk_3` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`),
   CONSTRAINT `tb_penggunaan_ibfk_4` FOREIGN KEY (`id_gudang_opd`) REFERENCES `tb_opd_gudang` (`id`),
-  CONSTRAINT `tb_penggunaan_ibfk_5` FOREIGN KEY (`id_gudang_unit`) REFERENCES `tb_unit_gudang` (`id`),
-  CONSTRAINT `tb_penggunaan_ibfk_6` FOREIGN KEY (`id_m_kegiatan`) REFERENCES `tb_master_kegiatan` (`id`)
+  CONSTRAINT `tb_penggunaan_ibfk_5` FOREIGN KEY (`id_gudang_unit`) REFERENCES `tb_unit_gudang` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_penggunaan` */
