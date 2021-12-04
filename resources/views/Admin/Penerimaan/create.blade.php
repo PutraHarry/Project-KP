@@ -78,6 +78,16 @@ Create Penerimaan Baru
                   <div class="card-body">
                     <div class="row">
                         <div class="col-3">
+                          <div form="form-group">
+                            <label>Program</label>
+                            <select class="form-control" name="program" id="program">
+                              <option value="APBD Non Obat">APBD Non Obat</option>
+                              <option value="APBD Obat">APBD OBAT</option>
+                              <option value="Hibah Non Obat">Hibah Non Obat</option>
+                              <option value="Hibah Obat">Hibah Obat</option>
+                              <option value="Non APBD">Non APBD</option>
+                            </select> 
+                          </div>
                             <div class="form-group">
                                 <label>Jenis Penerimaan</label>
                                 <select class="form-control" name="jenis_penerimaan" id="jenis_penerimaan">
@@ -100,6 +110,16 @@ Create Penerimaan Baru
                             </div>  
                         </div>
                         <div class="col-3">
+                          <div form="form-group">
+                            <label>Kegiatan</label>
+                            <select class="form-control" name="kegiatan" id="kegiatan">
+                              <option value="APBD Non Obat">APBD Non Obat</option>
+                              <option value="APBD Obat">APBD OBAT</option>
+                              <option value="Hibah Non Obat">Hibah Non Obat</option>
+                              <option value="Hibah Obat">Hibah Obat</option>
+                              <option value="Non APBD">Non APBD</option>
+                            </select> 
+                          </div>
                             <div class="form-group">
                                 <label>Status</label>
                                 <input class="form-control" name="status_penerimaan" id="status_penerimaan" value="draft" readonly>
@@ -114,6 +134,16 @@ Create Penerimaan Baru
                             </div>
                             </div>
                             <div class="col-6">
+                              <div form="form-group">
+                                <label>Kode Rekening</label>
+                                <select class="form-control" name="kode_rekening" id="kode_rekening">
+                                  <option value="APBD Non Obat">APBD Non Obat</option>
+                                  <option value="APBD Obat">APBD OBAT</option>
+                                  <option value="Hibah Non Obat">Hibah Non Obat</option>
+                                  <option value="Hibah Obat">Hibah Obat</option>
+                                  <option value="Non APBD">Non APBD</option>
+                                </select> 
+                              </div>
                             <div class="text-center">
                                 <label>Total Harga:</label>
                                 <h1>

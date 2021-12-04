@@ -109,6 +109,16 @@ Create Pengeluaran Baru
                           </div>
                         </div>
                         <div class="col-6">
+                          <div form="form-group">
+                            <label>Kegiatan</label>
+                            <select class="form-control" name="kegiatan" id="kegiatan">
+                              <option value="APBD Non Obat">APBD Non Obat</option>
+                              <option value="APBD Obat">APBD OBAT</option>
+                              <option value="Hibah Non Obat">Hibah Non Obat</option>
+                              <option value="Hibah Obat">Hibah Obat</option>
+                              <option value="Non APBD">Non APBD</option>
+                            </select> 
+                          </div>
                           <div class="text-center">
                               <label>Total Harga:</label>
                               <h1>
