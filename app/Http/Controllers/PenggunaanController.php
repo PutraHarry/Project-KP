@@ -249,7 +249,7 @@ class PenggunaanController extends Controller
             $finalPenggunaan->id_gudang = Auth::user()->unit->gudangUnit->id;
             $finalPenggunaan->id_barang = $dp->id_barang;
             $finalPenggunaan->kode_transaksi = $penggunaan->kode_penggunaan;
-            $finalPenggunaan->jumlah = $dp->qty;
+            $finalPenggunaan->qty = $dp->qty;
             $finalPenggunaan->status = 'Diterima';
             $finalPenggunaan->save();
         }

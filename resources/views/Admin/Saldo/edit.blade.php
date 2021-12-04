@@ -94,7 +94,7 @@ Edit Saldo Awal
                                                 <div class="form-group">
                                                     <label>Tanggal Saldo:</label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}" @if($saldoawal->status_saldo == 'final') readonly @endif>
+                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}" @if($saldoawal->status_saldo == 'final')  @endif readonly>
                                                     </div>  
                                                 </div>  
                                             </div>

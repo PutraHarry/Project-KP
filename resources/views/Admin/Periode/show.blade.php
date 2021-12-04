@@ -82,7 +82,6 @@
                       <th>Tanggal Berakhir</th>
                       <th>Status</th>
                       <th>Keterangan</th>
-                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -101,13 +100,6 @@
                         @endif  
                       </td>
                       <td>{{ $tp->ket_periode }}</td>
-                      <td class="text-center">
-                        <a href="#" class="btn btn-warning btn-icon-split">
-                          <span class="icon">
-                              <i class="fas fa-edit"></i>
-                          </span>
-                        </a>
-                      </td>
                     </tr>
                     @endforeach
                   </tbody>

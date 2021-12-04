@@ -210,7 +210,7 @@ class PenerimaanController extends Controller
             $finalPenerimaan->id_gudang = Auth::user()->unit->opd->gudangOPD->id;
             $finalPenerimaan->id_barang = $dp->id_barang;
             $finalPenerimaan->kode_transaksi = $penerimaan->kode_penerimaan;
-            $finalPenerimaan->jumlah = $dp->qty;
+            $finalPenerimaan->qty = $dp->qty;
             $finalPenerimaan->status = 'Diterima';
             $finalPenerimaan->save();
         }
