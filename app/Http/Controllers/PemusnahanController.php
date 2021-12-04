@@ -21,21 +21,21 @@ class PemusnahanController extends Controller
 
     public function dataPemusnahan()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
 
-        $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
+        $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
 
         return view("Admin.Pemusnahan.show", compact('periodeAktif', 'tpemusnahan'));
     }
 
     public function createPemusnahan()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -50,7 +50,7 @@ class PemusnahanController extends Controller
     public function insertPemusnahan(Request $request)
     {
         //dd($request);
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
             'tgl_input' => 'required',
@@ -90,7 +90,7 @@ class PemusnahanController extends Controller
         $pemusnahan->status_pemusnahan = $request->status_pemusnahan;
         $pemusnahan->ket_pemusnahan = $request->ket_pemusnahan;
         $pemusnahan->id_periode = $dataPeriodeAktif->id;
-        $pemusnahan->id_opd = Auth::user()->unit->opd->id;
+        $pemusnahan->id_opd = Auth::user()->opd->id;
         //dd($penggunaan);
         $pemusnahan->save();
         
@@ -99,7 +99,7 @@ class PemusnahanController extends Controller
 
     public function editPemusnahan($id)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{

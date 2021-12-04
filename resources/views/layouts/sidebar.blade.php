@@ -115,55 +115,58 @@
               </a>
             </li>
           @endif
-
-          <li class="nav-item">
-            <a href="/opname" class="nav-link">
-              <i class="nav-icon fas fa-warehouse"></i>
-              <p>
-                Opname
-              </p>
-            </a>
-          </li>
-
-
-          <li class="nav-item">
-            <a href="/pemusnahan" class="nav-link">
-              <i class="nav-icon fas fa-fire"></i>
-              <p>
-                Pemusnahan
-              </p>
-            </a>
-          </li>
+          
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD']))
+            <li class="nav-item">
+              <a href="/opname" class="nav-link">
+                <i class="nav-icon fas fa-warehouse"></i>
+                <p>
+                  Opname
+                </p>
+              </a>
+            </li>
+          @endif
 
           @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD']))
-          <li class="nav-header">Admin</li>
-          <li class="nav-item">
-            <a href="/user" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Tambah User
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/barang" class="nav-link">
-              <i class="nav-icon fas fa-box"></i>
-              <p>
-                Master Barang
-              </p>
-            </a>
-          </li>
+            <li class="nav-item">
+              <a href="/pemusnahan" class="nav-link">
+                <i class="nav-icon fas fa-fire"></i>
+                <p>
+                  Pemusnahan
+                </p>
+              </a>
+            </li>
+          @endif
+
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD']))
+            <li class="nav-header">Admin</li>
+            <li class="nav-item">
+              <a href="/user" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Tambah User
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/barang" class="nav-link">
+                <i class="nav-icon fas fa-box"></i>
+                <p>
+                  Master Barang
+                </p>
+              </a>
+            </li>
           @endif
           @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'KASI', 'KASUBAG', 'PPBP', 'Admin BPKAD']))
-          <li class="nav-header">PELAPORAN</li>
-          <li class="nav-item">
-            <a href="/laporan" class="nav-link">
-              <i class="nav-icon fas fa-file-alt"></i>
-              <p>
-                Laporan
-              </p>
-            </a>
-          </li>
+            <li class="nav-header">PELAPORAN</li>
+            <li class="nav-item">
+              <a href="/laporan" class="nav-link">
+                <i class="nav-icon fas fa-file-alt"></i>
+                <p>
+                  Laporan
+                </p>
+              </a>
+            </li>
           @endif
           <li class="nav-header">USER</li>
           <li class="nav-item">
