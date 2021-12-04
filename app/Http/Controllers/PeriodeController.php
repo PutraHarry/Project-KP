@@ -20,14 +20,14 @@ class PeriodeController extends Controller
 
     public function dataPeriode()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
 
-        $tperiode = PeriodeModel::with('opd')->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
+        $tperiode = PeriodeModel::with('opd')->whereIn('id_opd', [Auth::user()->opd->id])->get();
 
         return view("Admin.Periode.show", compact('tperiode', 'periodeAktif'));
     }
@@ -36,7 +36,7 @@ class PeriodeController extends Controller
     {
         $topd = OPDModel::get();
 
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -62,7 +62,7 @@ class PeriodeController extends Controller
         }
 
         $periode = new PeriodeModel();
-        $periode->id_opd = Auth::user()->unit->opd->id;
+        $periode->id_opd = Auth::user()->opd->id;
         $periode->nama_periode = $request->nama_periode;
         $periode->tgl_mulai = $request->tgl_mulai;
         $periode->tgl_selesai = $request->tgl_selesai;
@@ -76,9 +76,9 @@ class PeriodeController extends Controller
 
     public function bukaPeriode()
     {
-        $bukaperiode = PeriodeModel::with('opd')->where('status_periode', 'close')->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
+        $bukaperiode = PeriodeModel::with('opd')->where('status_periode', 'close')->whereIn('id_opd', [Auth::user()->opd->id])->get();
 
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -90,7 +90,7 @@ class PeriodeController extends Controller
 
     public function prosesBuka($id)
     {
-        $dataPeriode = PeriodeModel::whereIn('status_periode', ['open'])->whereIn('id_opd', [Auth::user()->unit->opd->id])->first();
+        $dataPeriode = PeriodeModel::whereIn('status_periode', ['open'])->whereIn('id_opd', [Auth::user()->opd->id])->first();
         
         //dd($id_dataPeriode);
         if($dataPeriode){
@@ -111,9 +111,9 @@ class PeriodeController extends Controller
 
     public function tutupPeriode()
     {
-        $tutupperiode = PeriodeModel::with('opd')->where('status_periode', 'open')->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
+        $tutupperiode = PeriodeModel::with('opd')->where('status_periode', 'open')->whereIn('id_opd', [Auth::user()->opd->id])->get();
 
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -125,7 +125,7 @@ class PeriodeController extends Controller
     
     public function prosesTutup($id)
     {
-        $lastest_id = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->max('id');
+        $lastest_id = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->max('id');
         $tutupperiode = PeriodeModel::find($id);
         $tutupperiode->status_periode = 'close';
         $tutupperiode->update();
@@ -142,13 +142,12 @@ class PeriodeController extends Controller
 
             //Periode Baru
             $periode_baru = new PeriodeModel();
-            $periode_baru->id_opd = Auth::user()->unit->opd->id_opd;
             $periode_baru->nama_periode = $nama_periode;
             $periode_baru->tgl_mulai = $tanggal_mulai_baru;
             $periode_baru->tgl_selesai = $tanggal_selesai_baru;
             $periode_baru->status_periode = "open";
             $periode_baru->ket_periode = $nama_periode;
-            $periode_baru->id_opd = Auth::user()->unit->opd->id;
+            $periode_baru->id_opd = Auth::user()->opd->id;
             $periode_baru->save();
         }
 

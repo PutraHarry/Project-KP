@@ -20,7 +20,7 @@ class PengeluaranController extends Controller
 
     public function dataPengeluaran()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -35,7 +35,7 @@ class PengeluaranController extends Controller
 
     public function createPengeluaran()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -49,7 +49,7 @@ class PengeluaranController extends Controller
 
     public function insertPengeluaran(Request $request)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         $validator = Validator::make($request->all(), [
             'tgl_input' => 'required',
             'id_penggunaan' => 'required',
@@ -88,7 +88,7 @@ class PengeluaranController extends Controller
         $pengeluaran->status_pengeluaran = $request->status_pengeluaran;
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
         $pengeluaran->id_periode = $dataPeriodeAktif->id;
-        $pengeluaran->id_opd = Auth::user()->unit->opd->id;
+        $pengeluaran->id_opd = Auth::user()->opd->id;
         $pengeluaran->save();
 
         return redirect()->route('editPengeluaran', ['id' => $pengeluaran->id]);
@@ -96,7 +96,7 @@ class PengeluaranController extends Controller
 
     public function editPengeluaran($id)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{

@@ -21,21 +21,21 @@ class SaldoAwalController extends Controller
 
     public function dataSaldoAwal()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
 
-        $tsaldo = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
+        $tsaldo = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
         
         return view("Admin.Saldo.show", compact("tsaldo", "periodeAktif"));
     }
 
     public function addSaldoAwal()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -47,7 +47,7 @@ class SaldoAwalController extends Controller
 
     public function insertSaldoAwal(Request $request)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
             'tgl_input' => 'required',
@@ -83,7 +83,7 @@ class SaldoAwalController extends Controller
         $saldoawal->tgl_input = $request->tgl_input;
         $saldoawal->status_saldo = 'draft';
         $saldoawal->ket_saldo = $request->ket_saldo;
-        $saldoawal->id_opd = Auth::user()->unit->opd->id;
+        $saldoawal->id_opd = Auth::user()->opd->id;
         $saldoawal->id_periode = $dataPeriodeAktif->id;
         $saldoawal->save();
         
@@ -97,7 +97,7 @@ class SaldoAwalController extends Controller
         $tbarang = BarangModel::get();
         $idEdit = $id;
 
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -187,7 +187,7 @@ class SaldoAwalController extends Controller
         
         foreach ($dsaldoawal as $dsa) {
             $finalsaldo = new BarangOPDModel();
-            $finalsaldo->id_gudang = Auth::user()->unit->opd->gudangOPD->id;
+            $finalsaldo->id_gudang = Auth::user()->opd->gudangOPD->id;
             $finalsaldo->id_barang = $dsa->id_barang;
             $finalsaldo->kode_transaksi = $saldoawal->kode_saldo;
             $finalsaldo->jumlah = $dsa->qty;
