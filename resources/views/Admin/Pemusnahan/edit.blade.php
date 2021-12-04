@@ -127,14 +127,14 @@ Edit Pemusnahan Baru
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama OPD:</label>
-                                    <p></p>
+                                    <p>{{ Auth::guard('admin')->user()->opd->nama_opd }}</p>
                                     </select>
                                 </div> 
                               </div>
                               <div class="col-6">
                                 <div class="text">
                                     <label>Lokasi Unit Kerja:</label>
-                                    <p></p>
+                                    <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
                                     </select>
                                 </div> 
                               </div>

@@ -186,7 +186,7 @@ class SaldoAwalController extends Controller
         $dsaldoawal = DetailSaldoAwalModel::whereIn('id_saldo', [$id])->get();
         
         foreach ($dsaldoawal as $dsa) {
-            $finalsaldo = new BarangOPDModel();
+            $finalsaldo = new BarangUnitModel();
             $finalsaldo->id_gudang = Auth::user()->opd->gudangOPD->id;
             $finalsaldo->id_barang = $dsa->id_barang;
             $finalsaldo->kode_transaksi = $saldoawal->kode_saldo;

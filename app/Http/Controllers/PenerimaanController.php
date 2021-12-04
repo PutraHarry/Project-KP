@@ -7,6 +7,7 @@ use App\PenerimaanModel;
 use App\BarangModel;
 use App\PeriodeModel;
 use App\DetailPenerimaanModel;
+use App\BarangOPDModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -211,6 +212,7 @@ class PenerimaanController extends Controller
             $finalPenerimaan->id_barang = $dp->id_barang;
             $finalPenerimaan->kode_transaksi = $penerimaan->kode_penerimaan;
             $finalPenerimaan->qty = $dp->qty;
+            $finalPenerimaan->harga_barang = $dp->harga;
             $finalPenerimaan->status = 'Diterima';
             $finalPenerimaan->save();
         }
