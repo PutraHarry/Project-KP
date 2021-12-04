@@ -72,6 +72,7 @@
                           <tr class="text-center">
                             <th>No.</th>
                             <th>Kode Pengeluaran</th>
+                            <th>Kegiatan</th>
                             <th>Tanggal</th>
                             <th>Status</th>
                             <th>Keterangan</th>
@@ -83,6 +84,7 @@
                           <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $tp->kode_pengeluaran }}</td>
+                            <td></td>
                             <td>{{ $tp->tgl_keluar }}</td>
                             <td>{{ $tp->status_pengeluaran }}</td>
                             <td>{{ $tp->ket_pengeluaran }}</td>

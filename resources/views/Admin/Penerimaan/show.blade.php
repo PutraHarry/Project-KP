@@ -84,6 +84,9 @@
                                       <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Obat</th>
+                                        <th>Kegiatan</th>
+                                        <th>Diterima dari</th>
+                                        <th>Digunakan oleh</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
                                         <th>Pengirim</th>
@@ -95,6 +98,9 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpo->kode_penerimaan }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>{{ $tpo->tgl_terima }}</td>
                                         <td>
                                           @if($tpo->status_penerimaan == "draft")
@@ -129,6 +135,9 @@
                                       <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Non Obat</th>
+                                        <th>Kegiatan</th>
+                                        <th>Diterima dari</th>
+                                        <th>Digunakan oleh</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
                                         <th>Pengirim</th>
@@ -140,6 +149,9 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpno->kode_penerimaan }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>{{ $tpno->tgl_terima }}</td>
                                         <td>
                                           @if($tpno->status_penerimaan == "draft")
@@ -174,6 +186,9 @@
                                       <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Hibah</th>
+                                        <th>Kegiatan</th>
+                                        <th>Diterima dari</th>
+                                        <th>Digunakan oleh</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
                                         <th>Pengirim</th>
@@ -185,6 +200,9 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tph->kode_penerimaan }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>{{ $tph->tgl_terima }}</td>
                                         <td>
                                           @if($tph->status_penerimaan == "draft")
@@ -219,6 +237,9 @@
                                       <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Non Hibah</th>
+                                        <th>Kegiatan</th>
+                                        <th>Diterima dari</th>
+                                        <th>Digunakan oleh</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
                                         <th>Pengirim</th>
@@ -230,6 +251,9 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpnh->kode_penerimaan }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>{{ $tpnh->tgl_terima }}</td>
                                         <td>
                                           @if($tpnh->status_penerimaan == "draft")
@@ -264,6 +288,9 @@
                                       <tr class="text-center">
                                         <th>No.</th>
                                         <th>Penerimaan Non APBD</th>
+                                        <th>Kegiatan</th>
+                                        <th>Diterima dari</th>
+                                        <th>Digunakan oleh</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>
                                         <th>Pengirim</th>
@@ -275,6 +302,9 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpna->kode_penerimaan }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>{{ $tpna->tgl_terima }}</td>
                                         <td>
                                           @if($tpna->status_penerimaan == "draft")
