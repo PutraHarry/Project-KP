@@ -190,7 +190,7 @@ class SaldoAwalController extends Controller
             $finalsaldo->id_gudang = Auth::user()->unit->opd->gudangOPD->id;
             $finalsaldo->id_barang = $dsa->id_barang;
             $finalsaldo->kode_transaksi = $saldoawal->kode_saldo;
-            $finalsaldo->jumlah = $dsa->qty;
+            $finalsaldo->qty = $dsa->qty;
             $finalsaldo->status = 'Diterima';
             $finalsaldo->save();
         }
