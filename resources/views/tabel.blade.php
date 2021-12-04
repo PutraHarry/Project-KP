@@ -59,36 +59,31 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th width="40px" class="text-center">No.</th>
-                                            <th>Name</th>
-                                            <th>Keterangan</th>
-                                            <th width="100px" class="text-center">Action</th>
+                                            <th colspan="5"> Kegiatan</th>
                                         </tr>
+                                        <tr class="text-center">
+                                            <th rowspan="2" class="align-middle">No</th>
+                                            <th rowspan="2" class="align-middle">Uraian</th>
+                                            <th colspan="3" class="align-middle">Saldo Awal</th>                                            
+                                        </tr>
+                                        <tr class="text-center">
+                                            <th>KIB A</th>
+                                            <th>KIB B</th>
+                                            <th>KIB C</th>
+                                        </tr>
+
                                     </thead>
                                     
-                                    <tfoot>
-                                        <tr>
-                                            <th width="40px" class="text-center">No.</th>
-                                            <th>Name</th>
-                                            <th>Keterangan</th>
-                                            <th width="100px" class="text-center">Action</th>
-                                        </tr>
-                                    </tfoot>
+                                    
                                     <tbody>
-                                        @foreach($Total as $test)
                                         <tr>
-                                            <td class="text-center">{{$loop->iteration}}</td>
-                                            <td>{{$test->nama}}</td>
-                                            <td>{{$test->keterangan}}</td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-sm">
-                                                    <a href="/tabel/edit/{{$test->id}}" class="btn btn-warning"><i class="fas fa-edit"></i><a>
-                                                    <button class="btn btn-sm btn-flat btn-danger" onclick="deletedata({{$test->id}})"><i class="fa fa-trash"></i></button>
-                                                </div>
-                                            </td>
+                                            <td>1</td>
+                                            <td>Jualan</td>
+                                            <td>23000</td>
+                                            <td>30000</td>
+                                            <td>50000</td>
                                         </tr>
-                                        @endforeach
-
+                                        
 
                                         
                                     </tbody>

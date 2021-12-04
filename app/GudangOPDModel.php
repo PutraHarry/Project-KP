@@ -17,4 +17,9 @@ class GudangOPDModel extends Model
     {
         return $this->hasOne(BarangOPDModel::class, 'id_gudang', 'id');
     }
+
+    public function penggunaan()
+    {
+        return $this->hasMany(PenggunaanModel::class,'id_gudang_opd','id');
+    }
 }

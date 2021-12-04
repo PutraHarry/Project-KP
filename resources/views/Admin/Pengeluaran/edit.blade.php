@@ -94,7 +94,7 @@ Edit Pengeluaran Baru
                           </div>
                           <div class="form-group">
                             <label>Kode Penerimaan</label>
-                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;" @if($tpengeluaran->status_pengeluaran == 'final') disabled @endif>
+                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Kode Penerimaan" style="width: 100%;" @if($tpengeluaran->status_pengeluaran == 'final') disabled @endif>
                               @foreach($tpenggunaan as $tp)  
                                 <option value={{ $tp->id }} @if($tp->id == $tpengeluaran->id_penggunaan) selected @endif>{{ $tp->kode_penggunaan }}</option>
                               @endforeach
@@ -143,28 +143,107 @@ Edit Pengeluaran Baru
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th width="40px">No.</th>
-                                        <th width="400px">Barang</th>
-                                        <th width="120px">Qty</th>
-                                        <th>Satuan</th>
-                                        <th>Harga</th>
-                                        <th>Total</th>
-                                        <th width="200px">Keterangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="data">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                   </div>
                 </form>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
+    </form>
+    <form action="/pengeluaran/updateDetail/{{ $idEdit }}" method="POST">
+      @csrf
+      <section class="content">
+        <div class="container-fluid">
+          <form id="quickForm">
+            <div class="card card-default">
+              <div class="card-body">
+                <div class="row">
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      <thead>
+                        <tr class="text-center">
+                          <th width="40px">No.</th>
+                          <th width="400px">Barang</th>
+                          <th width="120px">Qty</th>
+                          <th>Satuan</th>
+                          <th>Harga</th>
+                          <th>Total</th>
+                          <th width="200px">Keterangan</th>
+                          <th>Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!--
+                        <tr>
+                            <td class="text-center"></td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-warning" type="button" onclick="editpenerimaan()">
+                                        <i class="fas fa-edit"></i>
+                                      </button>
+                                </div>
+                            </td>
+                        </tr>
+                        -->
+                        
+                          <tr>
+                            <td class="text-center"></td>
+                            <td>
+                              <div class="form-group">
+                                <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
+                                
+                                </select>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="qty" id="qty" placeholder="Kuantitas">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="satuan" id="satuan" placeholder="Satuan">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="total" id="total" placeholder="Kehitung otomatis" readonly>
+                              </div>
+                            </td>
+                            <td>
+                              <select class="form-control" name="keterangan">
+                                <option value="baik">Baik</option>
+                                <option value="rusak">Rusak</option>
+                              </select>
+                            </td>
+                            <td class="text-center">
+                              <div class="btn-group btn-group-sm">
+                                <button type="submit" class="btn btn-success">
+                                  <i class="fas fa-check"></i>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </section>
     </form>
