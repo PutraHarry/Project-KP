@@ -21,6 +21,11 @@ class unitModel extends Model
 
     public function gudangUnit()
     {
-        return $this->hasOne(GudangUnitModel::class, 'id_gudang', 'id');
+        return $this->hasOne(GudangUnitModel::class, 'id_unit', 'id');
+    }
+
+    public function penggunaan() 
+    {
+        return $this->hasMany(GudangUnitModel::class, 'id_gudang_unit', 'id');
     }
 }

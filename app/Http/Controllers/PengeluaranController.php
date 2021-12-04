@@ -88,7 +88,7 @@ class PengeluaranController extends Controller
         $pengeluaran->status_pengeluaran = $request->status_pengeluaran;
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
         $pengeluaran->id_periode = $dataPeriodeAktif->id;
-        $pengeluaran->id_opd = Auth::user()->unit->opd->id;
+        $pengeluaran->id_unit = Auth::user()->unit->id;
         $pengeluaran->save();
 
         return redirect()->route('editPengeluaran', ['id' => $pengeluaran->id]);

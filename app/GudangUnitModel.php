@@ -16,6 +16,6 @@ class GudangUnitModel extends Model
     
     public function barangUnit()
     {
-        return $this->hasOne(BarangUnitModel::class, 'id_gudang', 'id');
+        return $this->hasOne(BarangUnitModel::class, 'id_unit', 'id');
     }
 }
