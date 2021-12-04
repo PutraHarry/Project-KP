@@ -20,13 +20,12 @@ class PengeluaranController extends Controller
 
     public function dataPengeluaran()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
-
 
         $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->get();
 
@@ -35,21 +34,21 @@ class PengeluaranController extends Controller
 
     public function createPengeluaran()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
 
-        $tpenggunaan = PenggunaanModel::get();
+        $tpenggunaan = PenggunaanModel::where('status_penggunaan', 'final')->get();
 
         return view("Admin.Pengeluaran.create", compact('periodeAktif', 'tpenggunaan'));
     }
 
     public function insertPengeluaran(Request $request)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         $validator = Validator::make($request->all(), [
             'tgl_input' => 'required',
             'id_penggunaan' => 'required',
@@ -96,7 +95,7 @@ class PengeluaranController extends Controller
 
     public function editPengeluaran($id)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -175,8 +174,8 @@ class PengeluaranController extends Controller
         $pengeluaran->ket_pengeluaran = $request->ketPengeluaran;
         $pengeluaran->update();
 
-        $penggunaanDetail = DetailPenggunaanModel::whereIn('id_penggunaan', [$idPenggunaan])->get();
-        //dd($penerimaan);
+        $penggunaanDetail = BarangOPDModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->get();
+        //dd($penerimaan);*
 
         foreach ($penggunaanDetail as $dataPenggunaan) {
             $detailPengeluaran = new DetailPengeluaranModel();
@@ -189,7 +188,7 @@ class PengeluaranController extends Controller
             $detailPengeluaran->save();
         }
 
-        $barangPengeluaran = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->updatee([
+        $barangPengeluaran = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->update([
             'status' => 'Digunakan'
         ]);
 

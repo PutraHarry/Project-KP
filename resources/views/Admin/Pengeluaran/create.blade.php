@@ -120,7 +120,7 @@ Create Pengeluaran Baru
                               <div class="col-6">
                                 <div class="text">
                                     <label>Nama OPD:</label>
-                                      <p id="nama_opd">{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
+                                      <p id="nama_opd">{{ Auth::guard('admin')->user()->opd->nama_opd }}</p>
                                     </select>
                                 </div> 
                               </div>

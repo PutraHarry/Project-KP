@@ -23,7 +23,7 @@ class PenggunaanController extends Controller
 
     public function dataPenggunaan()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -40,7 +40,7 @@ class PenggunaanController extends Controller
         } elseif (Auth::user()->jabatan->jabatan == 'KASUBAG') {
             $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['disetujui_ppbp', 'disetujui_atasanLangsung'])->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
         } else {
-            $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
+            $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
         }
         
         return view("Admin.Penggunaan.show", compact('periodeAktif', 'tpenggunaan'));
@@ -48,14 +48,14 @@ class PenggunaanController extends Controller
 
     public function createPenggunaan()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
 
-        $tpenerimaan = PenerimaanModel::get();
+        $tpenerimaan = PenerimaanModel::where('status_penerimaan', 'final')->get();
 
         return view("Admin.Penggunaan.create", compact('periodeAktif', 'tpenerimaan'));
     }
@@ -63,7 +63,7 @@ class PenggunaanController extends Controller
     public function insertPenggunaan(Request $request)
     {
         //dd($request);
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
             'tgl_input' => 'required',
@@ -114,7 +114,7 @@ class PenggunaanController extends Controller
 
     public function editPenggunaan($id)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -194,19 +194,12 @@ class PenggunaanController extends Controller
         $penggunaan->ket_penggunaan = $request->ketPenggunaan;
         $penggunaan->update();
 
-        $penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
-        //dd($penerimaan);
+        $penerimaan = Penerimaan::find($idPenerimaan)->update([
+            'status_penerimaan' => 'digunakan'
+        ]);
 
-        foreach ($penerimaan as $dataPenerimaan) {
-            $detailPenggunaan = new DetailPenggunaanModel();
-            $detailPenggunaan->id_penggunaan = $idPenggunaan;
-            $detailPenggunaan->id_barang = $dataPenerimaan->id_barang;
-            $detailPenggunaan->qty = $dataPenerimaan->qty;
-            $detailPenggunaan->harga = $dataPenerimaan->harga;
-            $detailPenggunaan->keterangan = $dataPenerimaan->keterangan;
-            //dd($detailPenggunaan);
-            $detailPenggunaan->save();
-        }
+        //$penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
+        //dd($penerimaan);
 
         return redirect()->route('penggunaan')->with('statusInput', 'Status Final Success');
     }
@@ -242,9 +235,9 @@ class PenggunaanController extends Controller
             'status' => 'Digunakan'
         ]);
 
-        $dpenggunaan = DetailPenggunaanModel::whereIn('id_penggunaan', [$id])->get();
+        $dpenerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
 
-        foreach ($dpenggunaan as $dp) {
+        foreach ($dpenerimaan as $dp) {
             $finalPenggunaan = new BarangUnitModel();
             $finalPenggunaan->id_gudang = Auth::user()->unit->gudangUnit->id;
             $finalPenggunaan->id_barang = $dp->id_barang;

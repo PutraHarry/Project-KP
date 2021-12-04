@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.1.36-MariaDB : Database - db_persediaan
+SQLyog Enterprise v13.1.1 (32 bit)
+MySQL - 10.4.8-MariaDB : Database - db_persediaan
 *********************************************************************
 */
 
@@ -103,7 +103,7 @@ CREATE TABLE `tb_d_penerimaan` (
   `qty` int(11) DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
   `keterangan` enum('baik','rusak') DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -149,7 +149,7 @@ CREATE TABLE `tb_d_penggunaan` (
   `qty` int(11) DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
   `keterangan` enum('baik','rusak') DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -318,7 +318,7 @@ CREATE TABLE `tb_pemusnahan` (
   `tgl_pemusnahan` date DEFAULT NULL,
   `id_m_kegiatan` int(11) DEFAULT NULL,
   `id_periode` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -345,7 +345,7 @@ CREATE TABLE `tb_penerimaan` (
   `total` int(11) DEFAULT NULL,
   `id_opd` int(11) DEFAULT NULL,
   `id_periode` int(11) DEFAULT NULL,
-  `ket_penerimaan` text,
+  `ket_penerimaan` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -370,22 +370,22 @@ CREATE TABLE `tb_pengeluaran` (
   `id_m_kegiatan` int(11) DEFAULT NULL,
   `kode_pengeluaran` varchar(255) DEFAULT NULL,
   `tgl_keluar` date DEFAULT NULL,
-  `ket_pengeluaran` text,
+  `ket_pengeluaran` text DEFAULT NULL,
   `status_pengeluaran` enum('draft','final') DEFAULT NULL,
   `id_periode` int(11) DEFAULT NULL,
   `id_penggunaan` int(11) DEFAULT NULL,
-  `id_opd` int(11) DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_periode` (`id_periode`),
   KEY `id_penggunaan` (`id_penggunaan`),
-  KEY `id_opd` (`id_opd`),
+  KEY `id_opd` (`id_unit`),
   KEY `id_m_kegiatan` (`id_m_kegiatan`),
   CONSTRAINT `tb_pengeluaran_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`),
   CONSTRAINT `tb_pengeluaran_ibfk_3` FOREIGN KEY (`id_penggunaan`) REFERENCES `tb_penggunaan` (`id`),
-  CONSTRAINT `tb_pengeluaran_ibfk_4` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`),
+  CONSTRAINT `tb_pengeluaran_ibfk_4` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`),
   CONSTRAINT `tb_pengeluaran_ibfk_5` FOREIGN KEY (`id_m_kegiatan`) REFERENCES `tb_master_kegiatan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -404,21 +404,21 @@ CREATE TABLE `tb_penggunaan` (
   `id_gudang_unit` int(11) DEFAULT NULL,
   `status_penggunaan` enum('draft','approved','final','disetujui') DEFAULT NULL,
   `id_periode` int(11) DEFAULT NULL,
-  `id_opd` int(11) DEFAULT NULL,
-  `ket_penggunaan` text,
+  `id_unit` int(11) DEFAULT NULL,
+  `ket_penggunaan` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_BU` (`id_penerimaan`),
   KEY `id_periode` (`id_periode`),
-  KEY `id_opd` (`id_opd`),
+  KEY `id_opd` (`id_unit`),
   KEY `id_gudang_opd` (`id_gudang_opd`),
   KEY `id_gudang_unit` (`id_gudang_unit`),
   KEY `id_m_kegiatan` (`id_m_kegiatan`),
   CONSTRAINT `tb_penggunaan_ibfk_1` FOREIGN KEY (`id_penerimaan`) REFERENCES `tb_penerimaan` (`id`),
   CONSTRAINT `tb_penggunaan_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`),
-  CONSTRAINT `tb_penggunaan_ibfk_3` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`),
+  CONSTRAINT `tb_penggunaan_ibfk_3` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`),
   CONSTRAINT `tb_penggunaan_ibfk_4` FOREIGN KEY (`id_gudang_opd`) REFERENCES `tb_opd_gudang` (`id`),
   CONSTRAINT `tb_penggunaan_ibfk_5` FOREIGN KEY (`id_gudang_unit`) REFERENCES `tb_unit_gudang` (`id`),
   CONSTRAINT `tb_penggunaan_ibfk_6` FOREIGN KEY (`id_m_kegiatan`) REFERENCES `tb_master_kegiatan` (`id`)
@@ -437,7 +437,7 @@ CREATE TABLE `tb_periode` (
   `tgl_mulai` date DEFAULT NULL,
   `tgl_selesai` date DEFAULT NULL,
   `status_periode` enum('open','close') DEFAULT NULL,
-  `ket_periode` text,
+  `ket_periode` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -460,23 +460,23 @@ CREATE TABLE `tb_saldo_awal` (
   `kode_saldo` varchar(255) DEFAULT NULL,
   `tgl_input` date DEFAULT NULL,
   `status_saldo` enum('draft','final','closed') DEFAULT NULL,
-  `ket_saldo` text,
+  `ket_saldo` text DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
   `id_periode` int(11) DEFAULT NULL,
-  `id_opd` int(11) DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_periode` (`id_periode`),
-  KEY `id_opd` (`id_opd`),
+  KEY `id_opd` (`id_unit`),
   CONSTRAINT `tb_saldo_awal_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `tb_periode` (`id`),
-  CONSTRAINT `tb_saldo_awal_ibfk_2` FOREIGN KEY (`id_opd`) REFERENCES `tb_opd` (`id`)
+  CONSTRAINT `tb_saldo_awal_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `tb_unit` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_saldo_awal` */
 
-insert  into `tb_saldo_awal`(`id`,`kode_saldo`,`tgl_input`,`status_saldo`,`ket_saldo`,`total`,`id_periode`,`id_opd`,`created_at`,`updated_at`,`deleted_at`) values 
+insert  into `tb_saldo_awal`(`id`,`kode_saldo`,`tgl_input`,`status_saldo`,`ket_saldo`,`total`,`id_periode`,`id_unit`,`created_at`,`updated_at`,`deleted_at`) values 
 (1,'BPKAD/SDA/1','2021-11-01','final','Sisa Barang periode Oktober 2021',108000,1,1,'2021-12-04 04:21:52','2021-12-04 04:36:59',NULL);
 
 /*Table structure for table `tb_unit` */

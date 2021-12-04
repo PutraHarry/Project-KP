@@ -19,21 +19,21 @@ class OpnameController extends Controller
 
     public function dataOpname()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
             $periodeAktif = "-";
         }
 
-        $topname = OpnameModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->unit->opd->id])->get();
+        $topname = OpnameModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
 
         return view("Admin.Opname.show", compact("periodeAktif", "topname"));
     }
 
     public function createOpname()
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -45,7 +45,7 @@ class OpnameController extends Controller
 
     public function insertOpname(Request $request)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         $validator = Validator::make($request->all(), [
             'tgl_input' => 'required',
             'status_opname' => 'required',
@@ -81,7 +81,7 @@ class OpnameController extends Controller
         $opname->status_opname = $request->status_opname;
         $opname->ket_opname = $request->ket_opname;
         $opname->id_periode = $dataPeriodeAktif->id;
-        $opname->id_opd = Auth::user()->unit->opd->id;
+        $opname->id_opd = Auth::user()->opd->id;
         $opname->save();
         
         
@@ -90,7 +90,7 @@ class OpnameController extends Controller
 
     public function editOpname($id)
     {
-        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->unit->opd->id])->whereIn('status_periode', ['open'])->first();
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         if ($dataPeriodeAktif) {
             $periodeAktif = $dataPeriodeAktif->nama_periode;
         } else{
@@ -187,7 +187,7 @@ class OpnameController extends Controller
 
         foreach ($dopname as $dp) {
             $finalOpname = new BarangOPDModel();
-            $finalOpname->id_gudang = Auth::user()->unit->opd->gudangOPD->id;
+            $finalOpname->id_gudang = Auth::user()->opd->gudangOPD->id;
             $finalOpname->id_barang = $dp->id_barang;
             $finalOpname->kode_transaksi = $opname->kode_opname;
             $finalOpname->jumlah = $dp->qty;
