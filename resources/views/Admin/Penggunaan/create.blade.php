@@ -128,7 +128,7 @@ Create Penggunaan Baru
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Lokasi Gudang:</label>
-                                    <p id="nama_opd">{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
+                                    <p id="nama_opd">{{ Auth::guard('admin')->user()->opd->nama_opd }}</p>
                                 </select>
                             </div> 
                         </div>

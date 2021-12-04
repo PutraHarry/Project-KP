@@ -55,7 +55,7 @@ class PenggunaanController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpenerimaan = PenerimaanModel::get();
+        $tpenerimaan = PenerimaanModel::where('status_penerimaan', 'final')->get();
 
         return view("Admin.Penggunaan.create", compact('periodeAktif', 'tpenerimaan'));
     }
@@ -194,19 +194,12 @@ class PenggunaanController extends Controller
         $penggunaan->ket_penggunaan = $request->ketPenggunaan;
         $penggunaan->update();
 
-        $penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
-        //dd($penerimaan);
+        $penerimaan = Penerimaan::find($idPenerimaan)->update([
+            'status_penerimaan' => 'digunakan'
+        ]);
 
-        foreach ($penerimaan as $dataPenerimaan) {
-            $detailPenggunaan = new DetailPenggunaanModel();
-            $detailPenggunaan->id_penggunaan = $idPenggunaan;
-            $detailPenggunaan->id_barang = $dataPenerimaan->id_barang;
-            $detailPenggunaan->qty = $dataPenerimaan->qty;
-            $detailPenggunaan->harga = $dataPenerimaan->harga;
-            $detailPenggunaan->keterangan = $dataPenerimaan->keterangan;
-            //dd($detailPenggunaan);
-            $detailPenggunaan->save();
-        }
+        //$penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
+        //dd($penerimaan);
 
         return redirect()->route('penggunaan')->with('statusInput', 'Status Final Success');
     }
@@ -242,9 +235,9 @@ class PenggunaanController extends Controller
             'status' => 'Digunakan'
         ]);
 
-        $dpenggunaan = DetailPenggunaanModel::whereIn('id_penggunaan', [$id])->get();
+        $dpenerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
 
-        foreach ($dpenggunaan as $dp) {
+        foreach ($dpenerimaan as $dp) {
             $finalPenggunaan = new BarangUnitModel();
             $finalPenggunaan->id_gudang = Auth::user()->unit->gudangUnit->id;
             $finalPenggunaan->id_barang = $dp->id_barang;

@@ -79,7 +79,7 @@ Route::get('/barang', 'BarangController@dataBarang')->name('barang')->middleware
 Route::get('/barang/create', 'BarangController@createBarang')->name('createBarang')->middleware("permission:Buat Master Barang");
 Route::post('/barang/insert', 'BarangController@insertBarang')->name('insertBarang')->middleware("permission:Buat Master Barang");
 Route::get('/barang/edit/{id}', 'BarangController@editBarang')->name('editBarang')->middleware("permission:Edit Master Barang");
-Route::post('/barang/update/{id}', 'BarangController@updateBarang')->name('updateBarang'->middleware("permission:Edit Master Barang"));
+Route::post('/barang/update/{id}', 'BarangController@updateBarang')->name('updateBarang')->middleware("permission:Edit Master Barang");
 Route::post('/barang/delete/{id}', 'BarangController@deleteBarang')->name('deleteBarang')->middleware("permission:Delete Master Barang");
 
 //TAMBAH USER

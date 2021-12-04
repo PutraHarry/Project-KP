@@ -121,7 +121,7 @@ Edit Saldo Awal
                                                     <div class="col-6">
                                                         <div class="text">
                                                             <label>Nama OPD:</label>
-                                                                <p>{{ Auth::guard('admin')->user()->unit->opd->nama_opd }}</p>
+                                                                <p>{{ Auth::guard('admin')->user()->opd->nama_opd }}</p>
                                                             </select>
                                                         </div> 
                                                     </div>

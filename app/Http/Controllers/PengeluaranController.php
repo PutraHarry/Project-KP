@@ -27,7 +27,6 @@ class PengeluaranController extends Controller
             $periodeAktif = "-";
         }
 
-
         $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->get();
 
         return view("Admin.Pengeluaran.show", compact('periodeAktif', 'tpengeluaran'));
@@ -42,7 +41,7 @@ class PengeluaranController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpenggunaan = PenggunaanModel::get();
+        $tpenggunaan = PenggunaanModel::where('status_penggunaan', 'final')->get();
 
         return view("Admin.Pengeluaran.create", compact('periodeAktif', 'tpenggunaan'));
     }
@@ -175,8 +174,8 @@ class PengeluaranController extends Controller
         $pengeluaran->ket_pengeluaran = $request->ketPengeluaran;
         $pengeluaran->update();
 
-        $penggunaanDetail = DetailPenggunaanModel::whereIn('id_penggunaan', [$idPenggunaan])->get();
-        //dd($penerimaan);
+        $penggunaanDetail = BarangOPDModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->get();
+        //dd($penerimaan);*
 
         foreach ($penggunaanDetail as $dataPenggunaan) {
             $detailPengeluaran = new DetailPengeluaranModel();
@@ -189,7 +188,7 @@ class PengeluaranController extends Controller
             $detailPengeluaran->save();
         }
 
-        $barangPengeluaran = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->updatee([
+        $barangPengeluaran = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->update([
             'status' => 'Digunakan'
         ]);
 
