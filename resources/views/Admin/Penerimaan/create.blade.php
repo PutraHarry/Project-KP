@@ -80,7 +80,7 @@ Create Penerimaan Baru
                         <div class="col-3">
                           <div form="form-group">
                             <label>Program</label>
-                            <select class="form-control" name="program" id="program">
+                            <select class="select2" style="width: 100%;" name="program" id="program">
                               <option value="APBD Non Obat">APBD Non Obat</option>
                               <option value="APBD Obat">APBD OBAT</option>
                               <option value="Hibah Non Obat">Hibah Non Obat</option>
@@ -112,7 +112,7 @@ Create Penerimaan Baru
                         <div class="col-3">
                           <div form="form-group">
                             <label>Kegiatan</label>
-                            <select class="form-control" name="kegiatan" id="kegiatan">
+                            <select class="select2" style="width: 100%;" name="kegiatan" id="kegiatan">
                               <option value="APBD Non Obat">APBD Non Obat</option>
                               <option value="APBD Obat">APBD OBAT</option>
                               <option value="Hibah Non Obat">Hibah Non Obat</option>
@@ -136,7 +136,7 @@ Create Penerimaan Baru
                             <div class="col-6">
                               <div form="form-group">
                                 <label>Kode Rekening</label>
-                                <select class="form-control" name="kode_rekening" id="kode_rekening">
+                                <select class="select2" style="width: 100%;" name="kode_rekening" id="kode_rekening">
                                   <option value="APBD Non Obat">APBD Non Obat</option>
                                   <option value="APBD Obat">APBD OBAT</option>
                                   <option value="Hibah Non Obat">Hibah Non Obat</option>
