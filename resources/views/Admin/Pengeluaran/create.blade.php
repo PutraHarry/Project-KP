@@ -111,7 +111,7 @@ Create Pengeluaran Baru
                         <div class="col-6">
                           <div form="form-group">
                             <label>Kegiatan</label>
-                            <select class="form-control" name="kegiatan" id="kegiatan">
+                            <select class="select2" style="width: 100%;" name="kegiatan" id="kegiatan">
                               @foreach ($kegiatan as $kegiatan)
                                 <option value="{{ $kegiatan->id }}">{{ $kegiatan->nama_kegiatan }}</option>
                               @endforeach
