@@ -10,6 +10,9 @@ use App\PeriodeModel;
 use App\PenggunaanModel;
 use App\DetailPenggunaanModel;
 use App\DetailPengeluaranModel;
+use App\BarangUnitModel;
+use App\BarangModel;
+use App\KegiatanModel;
 
 class PengeluaranController extends Controller
 {
@@ -41,9 +44,10 @@ class PengeluaranController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpenggunaan = PenggunaanModel::where('status_penggunaan', 'final')->get();
+        $tpenggunaan = PenggunaanModel::where('status_penggunaan', 'disetujui_atasanLangsung')->get();
+        $kegiatan = KegiatanModel::get();
 
-        return view("Admin.Pengeluaran.create", compact('periodeAktif', 'tpenggunaan'));
+        return view("Admin.Pengeluaran.create", compact('periodeAktif', 'tpenggunaan', 'kegiatan'));
     }
 
     public function insertPengeluaran(Request $request)
@@ -53,7 +57,8 @@ class PengeluaranController extends Controller
             'tgl_input' => 'required',
             'id_penggunaan' => 'required',
             'status_pengeluaran' => 'required',
-            'ket_pengeluaran' => 'required'
+            'ket_pengeluaran' => 'required',
+            'kegiatan' => 'required',
         ]);
 
         if($validator->fails()){
@@ -86,6 +91,7 @@ class PengeluaranController extends Controller
         $pengeluaran->id_penggunaan = $request->id_penggunaan;
         $pengeluaran->status_pengeluaran = $request->status_pengeluaran;
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
+        $pengeluaran->id_m_kegiatan = $request->kegiatan;
         $pengeluaran->id_periode = $dataPeriodeAktif->id;
         $pengeluaran->id_unit = Auth::user()->unit->id;
         $pengeluaran->save();
@@ -101,19 +107,67 @@ class PengeluaranController extends Controller
         } else{
             $periodeAktif = "-";
         }
-
+        
+        $tbarang = BarangModel::get();
         $tpengeluaran = PengeluaranModel::find($id);
         $tpenggunaan = PenggunaanModel::get();
+        $dataPenggunaan = PenggunaanModel::find($tpengeluaran->id_penggunaan);
         $idEdit = $id;
+        $kegiatan = KegiatanModel::get();
 
-        return view("Admin.Pengeluaran.edit", compact('periodeAktif', 'idEdit', 'tpengeluaran', 'tpenggunaan'));
+        $barangPenggunaan = BarangUnitModel::with('barang')->where('kode_transaksi', $dataPenggunaan->kode_penggunaan)->where('status', 'Diterima')->get();
+        //dd($barangPenggunaan);
+        $detailPengeluaran = DetailPengeluaranModel::with('barang')->where('id_pengeluaran',$id)->get();
+
+        return view("Admin.Pengeluaran.edit", compact('periodeAktif', 'idEdit', 'tpengeluaran', 'tpenggunaan', 'barangPenggunaan', 'tbarang', 'detailPengeluaran', 'kegiatan'));
     }
 
-    public function getDataDetailPenggunaan($id)
+    public function insertDetailPengeluaran($id, Request $request)
     {
-        $detailPenggunaan = DetailPenggunaanModel::with('barang')->where('id_penggunaan',$id)->get();
+        $tpengeluaran = PengeluaranModel::find($id);
+        $dataPenggunaan = PenggunaanModel::find($tpengeluaran->id_penggunaan);
+        $dataDetailPenggunaan = BarangUnitModel::with('barang')->where('kode_transaksi', $dataPenggunaan->kode_penggunaan)->where('id_barang', $request->id_barang)->where('status', 'Diterima')->first();
+        //dd($dataDetailPenggunaan);
 
-        return response()->json($detailPenggunaan);
+        if ($request->qty > $dataDetailPenggunaan->qty) {
+            return redirect()->back()->with(['failed' => 'Jumlah melebihi dengan stok']);
+        }
+        
+        $dpengeluaran = new DetailPengeluaranModel();
+        $dpengeluaran->id_pengeluaran = $id;
+        $dpengeluaran->id_barang = $request->id_barang;
+        $dpengeluaran->qty = $request->qty;
+        $dpengeluaran->harga = $request->total;
+        $dpengeluaran->keterangan = $request->keterangan;
+        $dpengeluaran->save();
+    
+        $mpengeluaran = PengeluaranModel::find($id);
+        $mpengeluaran->total = $mpengeluaran->total + $request->total;
+        $mpengeluaran->update();
+    
+        return redirect()->back();
+    }
+
+    public function editDetailPengeluaran($id, Request $request)
+    {
+        //dd($id);
+        $dpengeluaran = DetailPengeluaranModel::find($id);
+
+        $newTotal = $request->total;
+        $oldTotal = $dpengeluaran->total;
+        $gapTotal = $newTotal-$oldTotal;
+
+
+        $dpengeluaran->id_barang = $request->id_barang;
+        $dpengeluaran->qty = $request->qty;
+        $dpengeluaran->harga = $request->total;
+        $dpengeluaran->keterangan = $request->keterangan;
+        $dpengeluaran->update();
+
+        $mpengeluaran = PengeluaranModel::find($dpengeluaran->id_saldo);
+        $mpengeluaran->total = $mpengeluaran->total + $gapTotal;
+        $mpengeluaran->update();
+        return redirect()->back();
     }
 
     public function updatePengeluaran($id, Request $request)
@@ -122,7 +176,8 @@ class PengeluaranController extends Controller
             'kode_pengeluaran' => 'required',
             'tgl_input' => 'required',
             'id_penggunaan' => 'required',
-            'ket_pengeluaran' => 'required'
+            'ket_pengeluaran' => 'required',
+            'kegiatan' => 'required',
         ]);
 
         if($validator->fails()){
@@ -134,6 +189,7 @@ class PengeluaranController extends Controller
         $pengeluaran->tgl_keluar = $request->tgl_input;
         $pengeluaran->id_penggunaan = $request->id_penggunaan;
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
+        $pengeluaran->id_m_kegiatan = $request->kegiatan;
         //dd($penggunaan);
         $pengeluaran->update();
 
@@ -164,6 +220,8 @@ class PengeluaranController extends Controller
 
         $penggunaanData = PenggunaanModel::find($idPenggunaan);
         //dd($Penerimaandata);
+       
+        //dd($dpengeluaran);
 
         $pengeluaran = PengeluaranModel::find($idPengeluaran);
         $pengeluaran->kode_pengeluaran = $request->kodePengeluaran;
@@ -174,24 +232,51 @@ class PengeluaranController extends Controller
         $pengeluaran->ket_pengeluaran = $request->ketPengeluaran;
         $pengeluaran->update();
 
-        $penggunaanDetail = BarangOPDModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->get();
-        //dd($penerimaan);*
+        $dpengeluaran = DetailPengeluaranModel::whereIn('id_pengeluaran', [$idPengeluaran])->get();
 
-        foreach ($penggunaanDetail as $dataPenggunaan) {
-            $detailPengeluaran = new DetailPengeluaranModel();
-            $detailPengeluaran->id_pengeluaran = $idPengeluaran;
-            $detailPengeluaran->id_barang = $dataPenggunaan->id_barang;
-            $detailPengeluaran->qty = $dataPenggunaan->qty;
-            $detailPengeluaran->harga = $dataPenggunaan->harga;
-            $detailPengeluaran->keterangan = $dataPenggunaan->keterangan;
-            //dd($detailPenggunaan);
-            $detailPengeluaran->save();
+        foreach ($dpengeluaran as $dp) {
+            $dataBarangUnit = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->where('id_barang', $dp->id_barang)->where('status', 'Diterima')->first();
+            //dd($dataBarangUnit);
+            if ($dp->qty < $dataBarangUnit->qty) {
+                $statusBarang = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->where('id_barang', $dp->id_barang)->update([
+                    'status' => 'Digunakan'
+                ]);
+
+                $newQty = $dataBarangUnit->qty - $dp->qty;
+                //dd($newQty);
+
+                $finalPengeluaran = new BarangUnitModel();
+                $finalPengeluaran->id_gudang = Auth::user()->unit->gudangUnit->id;
+                $finalPengeluaran->id_barang = $dp->id_barang;
+                $finalPengeluaran->kode_transaksi = $dataBarangUnit->kode_transaksi;
+                $finalPengeluaran->qty = $newQty;
+                $finalPengeluaran->harga_barang = $dp->harga;
+                $finalPengeluaran->status = 'Diterima';
+                $finalPengeluaran->save();
+
+                $finalPengeluaran = new BarangUnitModel();
+                $finalPengeluaran->id_gudang = Auth::user()->unit->gudangUnit->id;
+                $finalPengeluaran->id_barang = $dp->id_barang;
+                $finalPengeluaran->kode_transaksi = $pengeluaran->kode_pengeluaran;
+                $finalPengeluaran->qty = $dp->qty;
+                $finalPengeluaran->harga_barang = $dp->harga;
+                $finalPengeluaran->status = 'Keluar';
+                $finalPengeluaran->save();
+            } else {
+                $finalPengeluaran = new BarangUnitModel();
+                $finalPengeluaran->id_gudang = Auth::user()->unit->gudangUnit->id;
+                $finalPengeluaran->id_barang = $dp->id_barang;
+                $finalPengeluaran->kode_transaksi = $pengeluaran->kode_pengeluaran;
+                $finalPengeluaran->qty = $dp->qty;
+                $finalPengeluaran->harga_barang = $dp->harga;
+                $finalPengeluaran->status = 'Keluar';
+                $finalPengeluaran->save();
+
+                $barangPengeluaran = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->where('id_barang', $dp->id_barang)->update([
+                    'status' => 'Digunakan'
+                ]);
+            }
         }
-
-        $barangPengeluaran = BarangUnitModel::where('kode_transaksi', $penggunaanData->kode_penggunaan)->update([
-            'status' => 'Digunakan'
-        ]);
-
         return redirect()->route('pengeluaran')->with('statusInput', 'Status Final Success');
     }
 }

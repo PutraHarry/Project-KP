@@ -9,6 +9,7 @@ use App\PeriodeModel;
 use App\OpnameModel;
 use App\DetailOpnameModel;
 use App\BarangModel;
+use App\BarangUnitModel;
 
 class OpnameController extends Controller
 {
@@ -26,7 +27,7 @@ class OpnameController extends Controller
             $periodeAktif = "-";
         }
 
-        $topname = OpnameModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $topname = OpnameModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
 
         return view("Admin.Opname.show", compact("periodeAktif", "topname"));
     }
@@ -81,7 +82,7 @@ class OpnameController extends Controller
         $opname->status_opname = $request->status_opname;
         $opname->ket_opname = $request->ket_opname;
         $opname->id_periode = $dataPeriodeAktif->id;
-        $opname->id_opd = Auth::user()->opd->id;
+        $opname->id_unit = Auth::user()->unit->id;
         $opname->save();
         
         
@@ -102,7 +103,9 @@ class OpnameController extends Controller
         $tbarang = BarangModel::get();
         $idEdit = $id;
 
-        return view("Admin.Opname.edit", compact("periodeAktif", "topname", "tbarang", "detailOpname", "idEdit"));
+        $barangGudang = BarangUnitModel::with('barang')->where('status', 'diterima')->get();
+
+        return view("Admin.Opname.edit", compact("periodeAktif", "topname", "tbarang", "detailOpname", "idEdit", 'barangGudang'));
     }
 
     public function updateOpname($id, Request $request)
@@ -186,8 +189,10 @@ class OpnameController extends Controller
         $dopname = DetailOpnameModel::whereIn('id_opname', [$id])->get();
 
         foreach ($dopname as $dp) {
-            $finalOpname = new BarangOPDModel();
-            $finalOpname->id_gudang = Auth::user()->opd->gudangOPD->id;
+            
+
+            $finalOpname = new BarangUnitModel();
+            $finalOpname->id_gudang = Auth::user()->unit->gudangUnit->id;
             $finalOpname->id_barang = $dp->id_barang;
             $finalOpname->kode_transaksi = $opname->kode_opname;
             $finalOpname->jumlah = $dp->qty;

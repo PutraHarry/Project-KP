@@ -28,7 +28,7 @@ class SaldoAwalController extends Controller
             $periodeAktif = "-";
         }
 
-        $tsaldo = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tsaldo = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
         
         return view("Admin.Saldo.show", compact("tsaldo", "periodeAktif"));
     }

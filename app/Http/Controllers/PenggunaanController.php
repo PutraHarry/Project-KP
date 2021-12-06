@@ -40,7 +40,7 @@ class PenggunaanController extends Controller
         } elseif (Auth::user()->jabatan->jabatan == 'KASUBAG') {
             $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['disetujui_ppbp', 'disetujui_atasanLangsung'])->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
         } else {
-            $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->opd->id])->get();
         }
         
         return view("Admin.Penggunaan.show", compact('periodeAktif', 'tpenggunaan'));
@@ -194,7 +194,7 @@ class PenggunaanController extends Controller
         $penggunaan->ket_penggunaan = $request->ketPenggunaan;
         $penggunaan->update();
 
-        $penerimaan = Penerimaan::find($idPenerimaan)->update([
+        $penerimaan = PenerimaanModel::find($idPenerimaan)->update([
             'status_penerimaan' => 'digunakan'
         ]);
 
@@ -231,10 +231,6 @@ class PenggunaanController extends Controller
         $idPenerimaan = $penggunaan->id_penerimaan;
         $penerimaan = PenerimaanModel::find($idPenerimaan);
 
-        $dpenerimaan = BarangOPDModel::where('kode_transaksi', $penerimaan->kode_penerimaan)->update([
-            'status' => 'Digunakan'
-        ]);
-
         $dpenerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
 
         foreach ($dpenerimaan as $dp) {
@@ -242,10 +238,15 @@ class PenggunaanController extends Controller
             $finalPenggunaan->id_gudang = Auth::user()->unit->gudangUnit->id;
             $finalPenggunaan->id_barang = $dp->id_barang;
             $finalPenggunaan->kode_transaksi = $penggunaan->kode_penggunaan;
+            $finalPenggunaan->harga_barang = $dp->harga;
             $finalPenggunaan->qty = $dp->qty;
             $finalPenggunaan->status = 'Diterima';
             $finalPenggunaan->save();
         }
+
+        $dpenerimaan = BarangOPDModel::where('kode_transaksi', $penerimaan->kode_penerimaan)->update([
+            'status' => 'Digunakan'
+        ]);
         
         return redirect('/penggunaan')->with('statusInput', 'Disetujui Atasan Langsung Success');
     }

@@ -121,36 +121,34 @@ Edit Pengeluaran Baru
                           <div form="form-group">
                             <label>Kegiatan</label>
                             <select class="form-control" name="kegiatan" id="kegiatan">
-                              <option value="APBD Non Obat">APBD Non Obat</option>
-                              <option value="APBD Obat">APBD OBAT</option>
-                              <option value="Hibah Non Obat">Hibah Non Obat</option>
-                              <option value="Hibah Obat">Hibah Obat</option>
-                              <option value="Non APBD">Non APBD</option>
+                              @foreach ($kegiatan as $kegiatan)
+                                <option value="{{ $kegiatan->id }}" @if($tpengeluaran->id_m_kegiatan == $kegiatan->id) selected @endif>{{ $kegiatan->nama_kegiatan }}</option>
+                              @endforeach
                             </select> 
                           </div>
                           <div class="text-center">
                               <label>Total Harga:</label>
                               <h1>
                                 <span class="text-bold">Rp.</span>
-                                <span class="text-bold" id="total_harga"></span>
+                                <span class="text-bold">{{ $tpengeluaran->total }}</span>
                               </h1>
                           </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <div class="text">
-                                    <label>Nama OPD:</label>
-                                    <p>{{ Auth::guard('admin')->user()->opd->nama_opd }}</p>
-                                    </select>
-                                </div> 
-                              </div>
-                              <div class="col-6">
-                                <div class="text">
-                                    <label>Lokasi Unit Kerja:</label>
-                                    <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
-                                    </select>
-                                </div> 
-                              </div>
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="text">
+                                  <label>Nama OPD:</label>
+                                  <p>{{ Auth::guard('admin')->user()->opd->nama_opd }}</p>
+                                  </select>
+                              </div> 
                             </div>
+                            <div class="col-6">
+                              <div class="text">
+                                  <label>Lokasi Unit Kerja:</label>
+                                  <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
+                                  </select>
+                              </div> 
+                            </div>
+                          </div>
                         </div>
                     </div>
                   </div>
@@ -184,15 +182,15 @@ Edit Pengeluaran Baru
                         </tr>
                       </thead>
                       <tbody>
-                        <!--
-                        <tr>
-                            <td class="text-center"></td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
+                        @foreach ($detailPengeluaran as $dp)
+                          <tr>
+                            <td class="text-center"> {{ $loop->iteration }} </td>
+                            <td> {{ $dp->barang->nama_m_barang }} </td>
+                            <td> {{ $dp->qty }} </td>
+                            <td> {{ $dp->barang->satuan_m_barang }} </td>
+                            <td> {{ $dp->barang->harga_m_barang }} </td>
+                            <td> {{ $dp->harga }} </td>
+                            <td> {{ $dp->keterangan }} </td>
                             <td class="text-center">
                                 <div class="btn-group btn-group-sm">
                                     <button class="btn btn-warning" type="button" onclick="editpenerimaan()">
@@ -200,15 +198,17 @@ Edit Pengeluaran Baru
                                       </button>
                                 </div>
                             </td>
-                        </tr>
-                        -->
-                        
+                          </tr>
+                        @endforeach
+
                           <tr>
                             <td class="text-center"></td>
                             <td>
                               <div class="form-group">
                                 <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                                
+                                  @foreach ($barangPenggunaan as $bp)
+                                    <option value="{{ $bp->id_barang }}">{{ $bp->barang->nama_m_barang }}</option>
+                                  @endforeach
                                 </select>
                               </div>
                             </td>
@@ -329,52 +329,31 @@ Edit Pengeluaran Baru
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
 
-  })
-
-  let id = $('#id_penggunaan').val();
-  //console.log(id);
-  $.ajax({
-      type: 'GET',
-      url: '/pengeluaran/detailPenggunaan/'+id,
-      success: function (response){
-        //console.log(response);
-          $('#data').empty();
-          let count = 0;
-          let total_harga = 0;
-          response.forEach(element => {
-            count = count + 1;
-            total_harga = total_harga + element['harga'];
-              $('#data').append('<tr><td class="text-center">'+count+'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
-          });
-          $('#total_harga').text(total_harga);
-          total_harga = 0;
-          count = 0;
+    //Data Barang
+    var barang_id = $('#id_barang').val();
+    var barangs = {!! json_encode($tbarang->toArray()) !!}
+    barangs.forEach(element => {
+      if(element.id == barang_id){
+        $('#harga').val(element.harga_m_barang);
+        $('#satuan').val(element.satuan_m_barang);
       }
-  });
+    });
 
-  $('#id_penggunaan').change(function() {
-      if($('#id_penggunaan').val() != ""){ 
-          let id = $(this).val();
-          $.ajax({
-              type: 'GET',
-              url: '/pengeluaran/detailPenggunaan/'+id,
-              success: function (response){
-                console.log(response);
-                  $('#data').empty();
-                  let count = 0;
-                  let total_harga = 0;
-                  response.forEach(element => {
-                    count = count + 1;
-                    total_harga = total_harga + element['harga'];
-                      $('#data').append('<tr><td class="text-center">' + count + '</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
-                  });
-                  $('#total_harga').text(total_harga);
-                  total_harga = 0;
-                  count = 0;
-              }
-          });
-      } 
-  });
+    $('#id_barang').change(function(){
+      var id_barang = $('#id_barang').val();
+      var barang = {!! json_encode($tbarang->toArray()) !!}
+      barang.forEach(element => {
+        if(element.id == id_barang){
+          $('#harga').val(element.harga_m_barang);
+          $('#satuan').val(element.satuan_m_barang);
+        }
+      });
+    })
+
+    $('#qty').keyup(function(){
+        $('#total').val($('#qty').val() * $('#harga').val());
+    })
+  })
 </script>
 
 <script>

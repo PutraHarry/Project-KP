@@ -90,11 +90,9 @@ Edit Penerimaan Baru
                         <div form="form-group">
                           <label>Program</label>
                           <select class="form-control" name="program" id="program">
-                            <option value="APBD Non Obat">APBD Non Obat</option>
-                            <option value="APBD Obat">APBD OBAT</option>
-                            <option value="Hibah Non Obat">Hibah Non Obat</option>
-                            <option value="Hibah Obat">Hibah Obat</option>
-                            <option value="Non APBD">Non APBD</option>
+                            @foreach ($program as $program)
+                              <option value="{{ $program->id }}" @if($tpenerimaan->id_m_program == $program->id) selected @endif>{{ $program->nama_program }}</option>
+                            @endforeach
                           </select>
                         </div>
                         <div class="form-group">
@@ -120,11 +118,6 @@ Edit Penerimaan Baru
                         <div form="form-group">
                           <label>Kegiatan</label>
                           <select class="form-control" name="kegiatan" id="kegiatan">
-                            <option value="APBD Non Obat">APBD Non Obat</option>
-                            <option value="APBD Obat">APBD OBAT</option>
-                            <option value="Hibah Non Obat">Hibah Non Obat</option>
-                            <option value="Hibah Obat">Hibah Obat</option>
-                            <option value="Non APBD">Non APBD</option>
                           </select> 
                         </div>
                         <div class="form-group">
@@ -144,11 +137,9 @@ Edit Penerimaan Baru
                         <div form="form-group">
                           <label>Kode Rekening</label>
                           <select class="form-control" name="kode_rekening" id="kode_rekening">
-                            <option value="APBD Non Obat">APBD Non Obat</option>
-                            <option value="APBD Obat">APBD OBAT</option>
-                            <option value="Hibah Non Obat">Hibah Non Obat</option>
-                            <option value="Hibah Obat">Hibah Obat</option>
-                            <option value="Non APBD">Non APBD</option>
+                            @foreach ($rekening as $rekening)
+                              <option value="{{ $rekening->id }}" @if($tpenerimaan->id_rekening == $rekening->id) selected @endif>{{ $rekening->nama_rekening }}</option>
+                            @endforeach
                           </select> 
                         </div>
                         <div class="text-center">
@@ -427,8 +418,42 @@ Edit Penerimaan Baru
     $('#qty').keyup(function(){
         $('#total').val($('#qty').val() * $('#harga').val());
     })
-  })
-  
+  });
+</script>
+
+<script>
+  $(function () {
+    let id = $('#program').val();
+    var penerimaan = {!! json_encode($tpenerimaan->toArray()) !!}
+    $.ajax({
+        type: 'GET',
+        url: '/penerimaan/kegiatan/'+id,
+        success: function (response){
+          console.log(penerimaan);
+          $('#kegiatan').empty();
+          response.forEach(element => {
+            $('#kegiatan').append('<option value="' + element['id'] + '"' +'>' + element['nama_kegiatan'] + '</option>');
+          });
+        }
+    });
+
+    $('#program').change(function() {
+      if($('#program').val() != ""){ 
+          let id = $(this).val();
+          $.ajax({
+              type: 'GET',
+              url: '/penerimaan/kegiatan/'+id,
+              success: function (response){
+                console.log(response);
+                  $('#kegiatan').empty();
+                  response.forEach(element => {
+                    $('#kegiatan').append('<option value="' + element['id'] + '"' +'>' + element['nama_kegiatan'] + '</option>');
+                  });
+              }
+          });
+      } 
+    });
+  });
 </script>
 
 <script>
@@ -471,7 +496,7 @@ Edit Penerimaan Baru
 
   $('#edit_qty').keyup(function(){
       $('#edit_total').val($('#edit_qty').val() * $('#edit_harga').val());
-  })
+  });
 </script>
 
 <script>
