@@ -98,14 +98,14 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpo->kode_penerimaan }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{ $tpo->kegiatan->nama_kegiatan }}</td>
+                                        <td>{{ $tpo-> }}</td>
+                                        <td>{{ $tpo->penggunaan->kode_penggunaan }}</td>
                                         <td>{{ $tpo->tgl_terima }}</td>
                                         <td>
                                           @if($tpo->status_penerimaan == "draft")
                                             <span class="badge badge-primary">Draft</span>
-                                          @elseif($tpo->status_penerimaan == "final")
+                                          @elseif($tpo->status_penerimaan != "draft")
                                             <span class="badge badge-danger">Final</span>                       
                                           @endif    
                                         </td>

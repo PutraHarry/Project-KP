@@ -81,11 +81,9 @@ Create Penerimaan Baru
                           <div form="form-group">
                             <label>Program</label>
                             <select class="select2" style="width: 100%;" name="program" id="program">
-                              <option value="APBD Non Obat">APBD Non Obat</option>
-                              <option value="APBD Obat">APBD OBAT</option>
-                              <option value="Hibah Non Obat">Hibah Non Obat</option>
-                              <option value="Hibah Obat">Hibah Obat</option>
-                              <option value="Non APBD">Non APBD</option>
+                            @foreach ($program as $program)
+                              <option value="{{ $program->id }}">{{ $program->nama_program }}</option>
+                            @endforeach
                             </select> 
                           </div>
                             <div class="form-group">
@@ -113,11 +111,6 @@ Create Penerimaan Baru
                           <div form="form-group">
                             <label>Kegiatan</label>
                             <select class="select2" style="width: 100%;" name="kegiatan" id="kegiatan">
-                              <option value="APBD Non Obat">APBD Non Obat</option>
-                              <option value="APBD Obat">APBD OBAT</option>
-                              <option value="Hibah Non Obat">Hibah Non Obat</option>
-                              <option value="Hibah Obat">Hibah Obat</option>
-                              <option value="Non APBD">Non APBD</option>
                             </select> 
                           </div>
                             <div class="form-group">
@@ -137,37 +130,35 @@ Create Penerimaan Baru
                               <div form="form-group">
                                 <label>Kode Rekening</label>
                                 <select class="select2" style="width: 100%;" name="kode_rekening" id="kode_rekening">
-                                  <option value="APBD Non Obat">APBD Non Obat</option>
-                                  <option value="APBD Obat">APBD OBAT</option>
-                                  <option value="Hibah Non Obat">Hibah Non Obat</option>
-                                  <option value="Hibah Obat">Hibah Obat</option>
-                                  <option value="Non APBD">Non APBD</option>
+                                  @foreach ($rekening as $rekening)
+                                    <option value="{{ $rekening->id }}">{{ $rekening->nama_rekening }}</option>
+                                  @endforeach
                                 </select> 
                               </div>
-                            <div class="text-center">
-                                <label>Total Harga:</label>
-                                <h1>
-                                    <span class="text-bold">Rp.</span>
-                                    <span class="text-bold">0</span>
-                                </h1>
-                            </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <div class="text">
-                                    <label>Nama OPD:</label>
-                                        <p>{{ Auth::guard('admin')->user()->opd->nama_opd }}</p>
-                                    </select>
-                                </div> 
+                              <div class="text-center">
+                                  <label>Total Harga:</label>
+                                  <h1>
+                                      <span class="text-bold">Rp.</span>
+                                      <span class="text-bold">0</span>
+                                  </h1>
                               </div>
-                              <div class="col-6">
-                                <div class="text">
-                                    <label>Nama Unit Kerja:</label>
-                                        <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
-                                    </select>
-                                </div> 
+                              <div class="row">
+                                <div class="col-6">
+                                  <div class="text">
+                                      <label>Nama OPD:</label>
+                                          <p>{{ Auth::guard('admin')->user()->opd->nama_opd }}</p>
+                                      </select>
+                                  </div> 
+                                </div>
+                                <div class="col-6">
+                                  <div class="text">
+                                      <label>Nama Unit Kerja:</label>
+                                          <p>{{ Auth::guard('admin')->user()->unit->unit }}</p>
+                                      </select>
+                                  </div> 
+                                </div>
                               </div>
                             </div>
-                        </div>
                     </div>
                 </form>
             </div>
@@ -202,6 +193,35 @@ Create Penerimaan Baru
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
 
+    let id = $('#program').val();
+    $.ajax({
+        type: 'GET',
+        url: '/penerimaan/kegiatan/'+id,
+        success: function (response){
+          //console.log(response);
+            $('#kegiatan').empty();
+            response.forEach(element => {
+              $('#kegiatan').append('<option value="' + element['id'] + '"' +'>' + element['nama_kegiatan'] + '</option>');
+            });
+        }
+    });
+
+    $('#program').change(function() {
+      if($('#program').val() != ""){ 
+          let id = $(this).val();
+          $.ajax({
+              type: 'GET',
+              url: '/penerimaan/kegiatan/'+id,
+              success: function (response){
+                console.log(response);
+                  $('#kegiatan').empty();
+                  response.forEach(element => {
+                    $('#kegiatan').append('<option value="' + element['id'] + '"' +'>' + element['nama_kegiatan'] + '</option>');
+                  });
+              }
+          });
+      } 
+    });
   })
   
 </script>

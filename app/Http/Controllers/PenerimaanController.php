@@ -8,6 +8,9 @@ use App\BarangModel;
 use App\PeriodeModel;
 use App\DetailPenerimaanModel;
 use App\BarangOPDModel;
+use App\ProgramModel;
+use App\KegiatanModel;
+use App\RekeningModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -28,11 +31,13 @@ class PenerimaanController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpenerimaanObat = PenerimaanModel::where('jenis_penerimaan', 'APBD Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanNonObat = PenerimaanModel::where('jenis_penerimaan', 'APBD Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanHibah = PenerimaanModel::where('jenis_penerimaan', 'Hibah Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanNonHibah = PenerimaanModel::where('jenis_penerimaan', 'Hibah Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanNonAPBD = PenerimaanModel::where('jenis_penerimaan', 'Non APBD')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'APBD Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanNonObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'APBD Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Hibah Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanNonHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Hibah Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanNonAPBD = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Non APBD')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+
+        //dd($tpenerimaanObat);
 
         return view("Admin.Penerimaan.show", compact("tpenerimaanObat","tpenerimaanNonObat","tpenerimaanHibah","tpenerimaanNonHibah","tpenerimaanNonAPBD", "periodeAktif"));
     }
@@ -45,7 +50,17 @@ class PenerimaanController extends Controller
         } else{
             $periodeAktif = "-";
         }
-        return view("Admin.Penerimaan.create", compact("periodeAktif"));
+
+        $program = ProgramModel::get();
+        $rekening = RekeningModel::get();
+        return view("Admin.Penerimaan.create", compact("periodeAktif", "program", "rekening"));
+    }
+
+    public function getDataKegiatan($id)
+    {
+        $kegiatan = KegiatanModel::where('id_program', $id)->get();
+
+        return response()->json($kegiatan);
     }
 
     public function insertPenerimaan(Request $request)
@@ -56,7 +71,10 @@ class PenerimaanController extends Controller
             'tgl_input' => 'required',
             'status_penerimaan' => 'required',
             'pengirim' => 'required',
-            'ket_penerimaan' => 'required'
+            'ket_penerimaan' => 'required',
+            'program' => 'required',
+            'kegiatan' => 'required',
+            'kode_rekening' => 'required',
         ]);
 
         if($validator->fails()){
@@ -88,6 +106,9 @@ class PenerimaanController extends Controller
         $penerimaan->jenis_penerimaan = $request->jenis_penerimaan;
         $penerimaan->tgl_terima = $request->tgl_input;
         $penerimaan->pengirim = $request->pengirim;
+        $penerimaan->id_m_program = $request->program;
+        $penerimaan->id_m_kegiatan = $request->kegiatan;
+        $penerimaan->id_rekening = $request->kode_rekening;
         $penerimaan->status_penerimaan = $request->status_penerimaan;
         $penerimaan->ket_penerimaan = $request->ket_penerimaan;
         $penerimaan->id_periode = $dataPeriodeAktif->id;
@@ -104,6 +125,9 @@ class PenerimaanController extends Controller
         $tbarang = BarangModel::get();
         $idEdit = $id;
 
+        $program = ProgramModel::get();
+        $rekening = RekeningModel::get();
+
         $jenisPenerimaan = ['APBD Non Obat', 'APBD Obat', 'Hibah Non Obat', 'Hibah Obat', 'Non APBD'];
         $statusPenerimaan = ['draft', 'final'];
 
@@ -116,7 +140,7 @@ class PenerimaanController extends Controller
 
         $detailPenerimaan = DetailPenerimaanModel::with('barang')->where('id_penerimaan',$id)->get();
 
-        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan', 'statusPenerimaan', 'detailPenerimaan'));
+        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan', 'statusPenerimaan', 'detailPenerimaan', "program", "rekening"));
     }
 
     public function updatePenerimaan($id, Request $request)
@@ -126,7 +150,10 @@ class PenerimaanController extends Controller
             'kode_penerimaan' => 'required',
             'tgl_input' => 'required',
             'pengirim' => 'required',
-            'ket_penerimaan' => 'required'
+            'ket_penerimaan' => 'required',
+            'program' => 'required',
+            'kegiatan' => 'required',
+            'kode_rekening' => 'required',
         ]);
 
         if($validator->fails()){
@@ -138,6 +165,9 @@ class PenerimaanController extends Controller
         $penerimaan->jenis_penerimaan = $request->jenis_penerimaan;
         $penerimaan->tgl_terima = $request->tgl_input;
         $penerimaan->pengirim = $request->pengirim;
+        $penerimaan->id_m_program = $request->program;
+        $penerimaan->id_m_kegiatan = $request->kegiatan;
+        $penerimaan->id_rekening = $request->kode_rekening;
         $penerimaan->ket_penerimaan = $request->ket_penerimaan;
         $penerimaan->update();
         
@@ -217,6 +247,6 @@ class PenerimaanController extends Controller
             $finalPenerimaan->save();
         }
         
-        return redirect('/penerimaan')->with('statusInput', 'Status Final Berhasil');
+        return redirect()->back();
     }
 }

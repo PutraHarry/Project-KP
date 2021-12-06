@@ -84,7 +84,7 @@ Edit Penggunaan
                       @endif
                     @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['KASI']))
                       @if ($tpenggunaan->status_penggunaan == 'final')
-                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusApproved({{ $idEdit }})">
                           <span class="icon text-white-50">
                               <i class="fas fa-check"></i>
                           </span>
@@ -93,7 +93,7 @@ Edit Penggunaan
                       @endif
                     @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBP']))
                       @if ($tpenggunaan->status_penggunaan == 'approved')
-                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusDisetujuiPPBP({{ $idEdit }})">
                           <span class="icon text-white-50">
                               <i class="fas fa-check"></i>
                           </span>
@@ -102,7 +102,7 @@ Edit Penggunaan
                       @endif
                     @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['KASUBAG']))
                       @if ($tpenggunaan->status_penggunaan == 'disetujui_ppbp')
-                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                        <button class="btn btn-success btn-icon-split" type="button" onclick="statusDisetujuiKASUBAG({{ $idEdit }})">
                           <span class="icon text-white-50">
                               <i class="fas fa-check"></i>
                           </span>
@@ -145,7 +145,7 @@ Edit Penggunaan
                                 <label>Kode Penerimaan</label>
                                 <select class="select2" name="id_penerimaan" id="id_penerimaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;" @if($tpenggunaan->status_penggunaan != 'draft') disabled @endif>
                                   @foreach($tpenerimaan as $tp)  
-                                    <option value={{ $tp->id }} @if($tp->id == $tpenggunaan->id_penerimaan) selected @endif>{{ $tp->kode_penerimaan }}</option>
+                                    <option value="{{ $tp->id }}" @if($tp->id == $tpenggunaan->id_penerimaan) selected @endif>{{ $tp->kode_penerimaan }}</option>
                                   @endforeach
                                 </select>
                             </div>
@@ -243,6 +243,129 @@ Edit Penggunaan
               </form>
           </div>
       </div>
+  </div>
+
+  <div class="modal fade" id="modal-sapproved">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="" id="approvedPenggunaan" method="POST">
+              @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Approved Penggunaan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <span>Yakin akan merubah status menjadi approved?</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Penggunaan</label>
+                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Penerimaan</label>
+                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penerimaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Penggunaan</label>
+                    <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan</label>
+                    <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-sdisetujuiPPBP">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="" id="disetujuiPPBPPenggunaan" method="POST">
+              @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Disetujui PPBP Penggunaan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <span>Yakin akan merubah status menjadi Disetujui PPBP?</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Penggunaan</label>
+                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Penerimaan</label>
+                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penerimaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Penggunaan</label>
+                    <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan</label>
+                    <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-sdisetujuiKASUBAG">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="" id="disetujuiKASUBAGPenggunaan" method="POST">
+              @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Disetujui KASUBAG Penggunaan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <span>Yakin akan merubah status menjadi Disetujui KASUBAG?</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Penggunaan</label>
+                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Penerimaan</label>
+                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penerimaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Penggunaan</label>
+                    <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan</label>
+                    <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
   </div>
 @endsection
 
@@ -350,6 +473,54 @@ Edit Penggunaan
     $('#tglPenggunaan').val($('#tgl_input').val());
     $('#ketPenggunaan').val($('#ket_penggunaan').val());
     $('#modal-sfinal').modal('show');
+  }
+
+  function statusApproved(idEdit) {
+    var idPenerimaan = $('#id_penerimaan').val();
+    var penerimaan = {!! json_encode($tpenerimaan->toArray()) !!}
+    penerimaan.forEach(element => {
+      if(element.id == idPenerimaan){
+        $('#kodePenerimaan').val(element.kode_penerimaan);
+      }
+    });
+    //console.log(idEdit);
+    $("#approvedPenggunaan").attr("action", "/penggunaan/approved/" + idEdit);
+    $('#kodePenggunaan').val($('#kode_penggunaan').val());
+    $('#tglPenggunaan').val($('#tgl_input').val());
+    $('#ketPenggunaan').val($('#ket_penggunaan').val());
+    $('#modal-sapproved').modal('show');
+  }
+
+  function statusDisetujuiPPBP(idEdit) {
+    var idPenerimaan = $('#id_penerimaan').val();
+    var penerimaan = {!! json_encode($tpenerimaan->toArray()) !!}
+    penerimaan.forEach(element => {
+      if(element.id == idPenerimaan){
+        $('#kodePenerimaan').val(element.kode_penerimaan);
+      }
+    });
+    //console.log(idEdit);
+    $("#disetujuiPPBPPenggunaan").attr("action", "/penggunaan/disetujui_ppbp/" + idEdit);
+    $('#kodePenggunaan').val($('#kode_penggunaan').val());
+    $('#tglPenggunaan').val($('#tgl_input').val());
+    $('#ketPenggunaan').val($('#ket_penggunaan').val());
+    $('#modal-sdisetujuiPPBP').modal('show');
+  }
+
+  function statusDisetujuiKASUBAG(idEdit) {
+    var idPenerimaan = $('#id_penerimaan').val();
+    var penerimaan = {!! json_encode($tpenerimaan->toArray()) !!}
+    penerimaan.forEach(element => {
+      if(element.id == idPenerimaan){
+        $('#kodePenerimaan').val(element.kode_penerimaan);
+      }
+    });
+    //console.log(idEdit);
+    $("#disetujuiKASUBAGPenggunaan").attr("action", "/penggunaan/disetujui_atasanLangsung/" + idEdit);
+    $('#kodePenggunaan').val($('#kode_penggunaan').val());
+    $('#tglPenggunaan').val($('#tgl_input').val());
+    $('#ketPenggunaan').val($('#ket_penggunaan').val());
+    $('#modal-sdisetujuiKASUBAG').modal('show');
   }
 </script>
 @endpush
