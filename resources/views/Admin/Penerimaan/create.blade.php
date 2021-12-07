@@ -118,8 +118,8 @@ Create Penerimaan Baru
                                 <input class="form-control" name="status_penerimaan" id="status_penerimaan" value="draft" readonly>
                             </div>
                             <div class="form-group">
-                                <label>Pengirim</label>
-                                <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim">
+                                <label>Diterima dari</label>
+                                <input type="text" class="form-control" name="diterima_dari" id="diterima_dari" placeholder="Input PPK">
                             </div>
                             <div class="form-group">
                               <label>Keterangan</label>

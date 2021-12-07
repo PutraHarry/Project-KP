@@ -125,8 +125,8 @@ Edit Penerimaan Baru
                           <input class="form-control" name="status_saldo" id="status_saldo" @if($tpenerimaan->status_penerimaan == 'draft') value="draft" @elseif($tpenerimaan->status_penerimaan == 'final') value="final" @endif readonly>
                         </div>
                         <div class="form-group">
-                            <label>Pengirim</label>
-                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}" readonly>
+                            <label>Diterima dari</label>
+                            <input type="text" class="form-control" name="diterima_dari" id="diterima_dari" placeholder="Input PPK" value="{{ $tpenerimaan->pengirim }}" readonly>
                         </div>
                         <div class="form-group">
                           <label>Keterangan</label>
