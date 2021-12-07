@@ -15,5 +15,9 @@ class PenggunaanModel extends Model
     public function gudangUnit() {
         return $this->belongsTo(GudangUnitModel::class,'id_gudang_unit','id');
     }
+
+    public function penerimaan() {
+        return $this->belongsTo('App\PenerimaanModel','id_penerimaan','id');
+    }
 }
 

@@ -192,8 +192,8 @@ Edit Opname
                             <td>
                               <div class="form-group">
                                 <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                                @foreach ($tbarang as $tb)
-                                  <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
+                                @foreach ($barangGudang as $bg)
+                                  <option value="{{ $bg->id_barang }}">{{ $bg->barang->nama_m_barang }}</option>
                                 @endforeach
                                 </select>
                               </div>

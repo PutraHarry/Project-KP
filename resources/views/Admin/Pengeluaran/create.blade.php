@@ -112,11 +112,9 @@ Create Pengeluaran Baru
                           <div form="form-group">
                             <label>Kegiatan</label>
                             <select class="select2" style="width: 100%;" name="kegiatan" id="kegiatan">
-                              <option value="APBD Non Obat">APBD Non Obat</option>
-                              <option value="APBD Obat">APBD OBAT</option>
-                              <option value="Hibah Non Obat">Hibah Non Obat</option>
-                              <option value="Hibah Obat">Hibah Obat</option>
-                              <option value="Non APBD">Non APBD</option>
+                              @foreach ($kegiatan as $kegiatan)
+                                <option value="{{ $kegiatan->id }}">{{ $kegiatan->nama_kegiatan }}</option>
+                              @endforeach
                             </select> 
                           </div>
                           <div class="text-center">

@@ -175,6 +175,10 @@ class PemusnahanController extends Controller
         $pemusnahan->ket_pemusnahan = $request->ketPemusnahan;
         $pemusnahan->update();
 
+        $statusOpname = OpnameModel::where('id', $idOpname)->update([
+            'status_opname' => 'Digunakan'
+        ]);
+
         return redirect()->route('penggunaan')->with('statusInput', 'Status Final Success');
     }
 }

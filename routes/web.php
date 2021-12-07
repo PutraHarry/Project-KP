@@ -43,6 +43,7 @@ Route::post('/saldoawal/final/{id}', 'SaldoAwalController@finalSaldoAwal')->name
 //PENERIMAAN
 Route::get('/penerimaan', 'PenerimaanController@dataPenerimaan')->name('penerimaan')->middleware("permission:Lihat Penerimaan");
 Route::get('/penerimaan/create', 'PenerimaanController@addPenerimaan')->name('createPenerimaan')->middleware("permission:Buat Penerimaan");
+Route::get('/penerimaan/kegiatan/{id}', 'PenerimaanController@getDataKegiatan')->name('getDataKegiatan')->middleware("permission:Buat Penerimaan");
 Route::post('/penerimaan/insert', 'PenerimaanController@insertPenerimaan')->name('insertPenerimaan')->middleware("permission:Buat Penerimaan");
 Route::get('/penerimaan/edit/{id}', 'PenerimaanController@editPenerimaan')->name('EditPenerimaan')->middleware("permission:Edit Penerimaan");
 Route::post('/penerimaan/update/{id}', 'PenerimaanController@updatePenerimaan')->name('updatePenerimaan')->middleware("permission:Edit Penerimaan");
@@ -70,7 +71,8 @@ Route::get('/pengeluaran/create', 'PengeluaranController@createPengeluaran')->na
 Route::post('/pengeluaran/insert', 'PengeluaranController@insertPengeluaran')->name('insertPengeluaran')->middleware("permission:Buat Pengeluaran");
 Route::get('/pengeluaran/edit/{id}', 'PengeluaranController@editPengeluaran')->name('editPengeluaran')->middleware("permission:Edit Pengeluaran");
 Route::post('/pengeluaran/update/{id}', 'PengeluaranController@updatePengeluaran')->name('updatePengeluaran')->middleware("permission:Edit Pengeluaran");
-Route::get('/pengeluaran/detailPenggunaan/{id}', 'PengeluaranController@getDataDetailPenggunaan')->name('getDataDetailPenggunaan')->middleware("permission:Edit Pengeluaran");
+Route::post('/pengeluaran/updateDetail/{id}', 'PengeluaranController@insertDetailPengeluaran')->name('updateDetailPengeluaran')->middleware("permission:Edit Pengeluaran");
+Route::post('/pengeluaran/editDetail/{id}', 'PengeluaranController@editDetailPengeluaran')->name('editDetailPengeluaran')->middleware("permission:Edit Pengeluaran");
 Route::post('/pengeluaran/delete/{id}','PengeluaranController@deletePengeluaran')->name('deletePengeluaran')->middleware("permission:Delete Pengeluaran");
 Route::post('/pengeluaran/final/{idPengeluaran}/detail/{idPenggunaan}', 'PengeluaranController@finalPengeluaran')->name('finalPengeluaran')->middleware("permission:Final Pengeluaran");
 
