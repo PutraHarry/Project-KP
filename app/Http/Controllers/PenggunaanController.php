@@ -234,19 +234,24 @@ class PenggunaanController extends Controller
         $dpenerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
 
         foreach ($dpenerimaan as $dp) {
-            $finalPenggunaan = new BarangUnitModel();
-            $finalPenggunaan->id_gudang = Auth::user()->unit->gudangUnit->id;
-            $finalPenggunaan->id_barang = $dp->id_barang;
-            $finalPenggunaan->kode_transaksi = $penggunaan->kode_penggunaan;
-            $finalPenggunaan->harga_barang = $dp->harga;
-            $finalPenggunaan->qty = $dp->qty;
-            $finalPenggunaan->status = 'Diterima';
-            $finalPenggunaan->save();
-        }
+            $barangOPD = BarangOPDModel::where('id_barang', $dp->id_barang)->first();
+            $idBarangOPD = BarangOPDModel::find($barangOPD->id);
+            $idBarangOPD->qty = $idBarangOPD->qty - $dp->qty;
+            $idBarangOPD->update(); 
 
-        $dpenerimaan = BarangOPDModel::where('kode_transaksi', $penerimaan->kode_penerimaan)->update([
-            'status' => 'Digunakan'
-        ]);
+            $barangUnit = BarangUnitModel::where('id_barang', $dp->id_barang)->first();
+            // dd($barangOPD);
+            if ($barangUnit) {
+                $finalPenerimaan = BarangUnitModel::find($barangUnit->id);
+                $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
+                $finalPenerimaan->update();
+            } else{
+                $finalPenerimaan = new BarangUnitModel();
+                $finalPenerimaan->id_barang = $dp->id_barang;
+                $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
+                $finalPenerimaan->save();
+            }
+        }
         
         return redirect('/penggunaan')->with('statusInput', 'Disetujui Atasan Langsung Success');
     }

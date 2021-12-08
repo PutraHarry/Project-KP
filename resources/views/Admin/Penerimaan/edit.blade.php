@@ -432,7 +432,11 @@ Edit Penerimaan Baru
           console.log(penerimaan);
           $('#kegiatan').empty();
           response.forEach(element => {
-            $('#kegiatan').append('<option value="' + element['id'] + '"' +'>' + element['nama_kegiatan'] + '</option>');
+            if(element.id == penerimaan.id_m_kegiatan){
+              $('#kegiatan').append('<option value="' + element['id'] + '"' +' selected>' + element['nama_kegiatan'] + '</option>');
+            } else{
+              $('#kegiatan').append('<option value="' + element['id'] + '"' +'>' + element['nama_kegiatan'] + '</option>');
+            }
           });
         }
     });
