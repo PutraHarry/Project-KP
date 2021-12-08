@@ -73,7 +73,7 @@ Edit Pemusnahan Baru
                       </span>
                       <span class="text">Draft</span>
                     </button>
-                    <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal()">
+                    <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
                       <span class="icon text-white-50">
                           <i class="fas fa-check"></i>
                       </span>
@@ -185,19 +185,19 @@ Edit Pemusnahan Baru
                   </div>
                   <div class="form-group">
                     <label>Kode Pemusnahan</label>
-                    <input type="text" class="form-control" name="kodePengeluaran" id="kodePengeluaran" placeholder="Kode Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodePemusnahan" id="kodePemusnahan" placeholder="Kode Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Kode Opname</label>
-                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penerimaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodeOpname" id="kodeOpname" placeholder="Kode Penerimaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Tanggal Pemusnahan</label>
-                    <input type="text" class="form-control" name="tglPengeluaran" id="tglPengeluaran" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="tglPemusnahan" id="tglPemusnahan" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Keterangan Pemusnahan</label>
-                    <input type="text" class="form-control" name="ketPengeluaran" id="ketPengeluaran" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="ketPemusnahan" id="ketPemusnahan" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -302,18 +302,18 @@ Edit Pemusnahan Baru
 
 <script>
   function statusFinal(idEdit) {
-    var idPenggunaan = $('#id_penggunaan').val();
-    var penggunaan = {!! json_encode($topname->toArray()) !!}
-    penggunaan.forEach(element => {
-      if(element.id == idPenggunaan){
-        $('#kodePenggunaan').val(element.kode_penggunaan);
+    var idOpname = $('#id_opname').val();
+    var opname = {!! json_encode($topname->toArray()) !!}
+    opname.forEach(element => {
+      if(element.id == idOpname){
+        $('#kodeOpname').val(element.kode_opname);
       }
     });
-    //console.log(idEdit);
-    $("#finalPemusnahan").attr("action", "/pemusnahan/final/" + idEdit + "/detail/" + idPenggunaan);
-    $('#kodePengeluaran').val($('#kode_pengeluaran').val());
-    $('#tglPengeluaran').val($('#tgl_input').val());
-    $('#ketPengeluaran').val($('#ket_pengeluaran').val());
+    console.log(idEdit);
+    $("#finalPemusnahan").attr("action", "/pemusnahan/final/" + idEdit + "/detail/" + idOpname);
+    $('#kodePemusnahan').val($('#kode_pemusnahan').val());
+    $('#tglPemusnahan').val($('#tgl_input').val());
+    $('#ketPemusnahan').val($('#ket_pemusnahan').val());
     $('#modal-sfinal').modal('show');
   }
 </script>

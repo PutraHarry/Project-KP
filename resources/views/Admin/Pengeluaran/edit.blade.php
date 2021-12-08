@@ -200,14 +200,13 @@ Edit Pengeluaran Baru
                             </td>
                           </tr>
                         @endforeach
-
                           <tr>
                             <td class="text-center"></td>
                             <td>
                               <div class="form-group">
                                 <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                                  @foreach ($barangPenggunaan as $bp)
-                                    <option value="{{ $bp->id_barang }}">{{ $bp->barang->nama_m_barang }}</option>
+                                  @foreach ($barangUnit as $bu)
+                                    <option value="{{ $bu->id_barang }}">{{ $bu->barang->nama_m_barang }}</option>
                                   @endforeach
                                 </select>
                               </div>

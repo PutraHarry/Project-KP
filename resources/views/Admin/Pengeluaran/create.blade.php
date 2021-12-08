@@ -84,14 +84,6 @@ Create Pengeluaran Baru
                               <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran" readonly>
                           </div>
                           <div class="form-group">
-                            <label>Kode Penggunaan</label>
-                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
-                              @foreach ($tpenggunaan as $tp)
-                                <option value={{ $tp->id }}>{{ $tp->kode_penggunaan }}</option>
-                              @endforeach
-                            </select>
-                          </div>
-                          <div class="form-group">
                               <label>Tanggal Pengeluaran:</label>
                               <div class="input-group">
                                 <input type="date" class="form-control" name="tgl_input" id="tgl_input">

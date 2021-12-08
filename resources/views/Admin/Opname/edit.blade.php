@@ -192,8 +192,8 @@ Edit Opname
                             <td>
                               <div class="form-group">
                                 <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                                @foreach ($barangGudang as $bg)
-                                  <option value="{{ $bg->id_barang }}">{{ $bg->barang->nama_m_barang }}</option>
+                                @foreach ($barangUnit as $bu)
+                                  <option value="{{ $bu->id_barang }}">{{ $bu->barang->nama_m_barang }}</option>
                                 @endforeach
                                 </select>
                               </div>
@@ -292,7 +292,7 @@ Edit Opname
   <div class="modal fade" id="modal-sfinal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="" id="finalPenerimaan" method="POST">
+            <form action="" id="finalOpname" method="POST">
               @csrf
                 <div class="modal-header">
                     <h4 class="modal-title">Final Opname</h4>
@@ -318,7 +318,7 @@ Edit Opname
                   </div>
                   <div class="form-group">
                     <label>Keterangan Opname</label>
-                    <input type="text" class="form-control" name="ketPenerimaan" id="ketPenerimaan" placeholder="Keterangan Penerimaan" value="" readonly>
+                    <input type="text" class="form-control" name="ketOpname" id="ketOpname" placeholder="Keterangan Penerimaan" value="" readonly>
                   </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -432,12 +432,12 @@ Edit Opname
 
 <script>
   function statusFinal(idEdit, total) {
-    $("#finalPenerimaan").attr("action", "/penerimaan/final/" + idEdit);
-    $('#kodePenerimaan').val($('#kode_penerimaan').val());
-    $('#jenisPenerimaan').val($('#jenis_penerimaan').val());
-    $('#tglPenerimaan').val($('#tgl_input').val());
-    $('#totalPenerimaan').val(total);
-    $('#ketPenerimaan').val($('#ket_penerimaan').val());
+    $("#finalOpname").attr("action", "/opname/final/" + idEdit);
+    $('#kodeOpname').val($('#kode_opname').val());
+    $('#jenisOpname').val($('#jenis_opname').val());
+    $('#tglOpname').val($('#tgl_input').val());
+    $('#totalOpname').val(total);
+    $('#ketOpname').val($('#ket_opname').val());
     $('#modal-sfinal').modal('show');
   }
 </script>

@@ -185,14 +185,19 @@ class SaldoAwalController extends Controller
 
         $dsaldoawal = DetailSaldoAwalModel::whereIn('id_saldo', [$id])->get();
         
-        foreach ($dsaldoawal as $dsa) {
-            $finalsaldo = new BarangUnitModel();
-            $finalsaldo->id_gudang = Auth::user()->opd->gudangOPD->id;
-            $finalsaldo->id_barang = $dsa->id_barang;
-            $finalsaldo->kode_transaksi = $saldoawal->kode_saldo;
-            $finalsaldo->qty = $dsa->qty;
-            $finalsaldo->status = 'Diterima';
-            $finalsaldo->save();
+        foreach ($dsaldoawal as $ds) {
+            $barangUnit = BarangUnitModel::where('id_barang', $ds->id_barang)->first();
+            // dd($barangOPD);
+            if ($barangUnit) {
+                $finalSaldoAwal = BarangUnitModel::find($barangUnit->id);
+                $finalSaldoAwal->qty = $finalSaldoAwal->qty + $ds->qty;
+                $finalSaldoAwal->update();
+            } else{
+                $finalSaldoAwal = new BarangUnitModel();
+                $finalSaldoAwal->id_barang = $ds->id_barang;
+                $finalSaldoAwal->qty = $finalSaldoAwal->qty + $ds->qty;
+                $finalSaldoAwal->save();
+            }
         }
         
         return redirect('/saldoawal')->with('statusInput', 'Status Final Berhasil');

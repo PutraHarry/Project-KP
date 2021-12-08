@@ -28,7 +28,7 @@ class PemusnahanController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
 
         return view("Admin.Pemusnahan.show", compact('periodeAktif', 'tpemusnahan'));
     }
@@ -90,7 +90,7 @@ class PemusnahanController extends Controller
         $pemusnahan->status_pemusnahan = $request->status_pemusnahan;
         $pemusnahan->ket_pemusnahan = $request->ket_pemusnahan;
         $pemusnahan->id_periode = $dataPeriodeAktif->id;
-        $pemusnahan->id_opd = Auth::user()->opd->id;
+        $pemusnahan->id_unit = Auth::user()->unit->id;
         //dd($penggunaan);
         $pemusnahan->save();
         
@@ -179,6 +179,6 @@ class PemusnahanController extends Controller
             'status_opname' => 'Digunakan'
         ]);
 
-        return redirect()->route('penggunaan')->with('statusInput', 'Status Final Success');
+        return redirect()->route('pemusnahan')->with('statusInput', 'Status Final Success');
     }
 }

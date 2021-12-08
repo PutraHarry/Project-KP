@@ -11,6 +11,8 @@ use App\BarangOPDModel;
 use App\ProgramModel;
 use App\KegiatanModel;
 use App\RekeningModel;
+use App\PenggunaanModel;
+use App\TestModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -31,13 +33,15 @@ class PenerimaanController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpenerimaanObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'APBD Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanNonObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'APBD Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Hibah Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanNonHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Hibah Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanNonAPBD = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Non APBD')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'APBD Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanNonObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'APBD Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'Hibah Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanNonHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'Hibah Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        $tpenerimaanNonAPBD = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'Non APBD')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
 
         //dd($tpenerimaanObat);
+        
+        
 
         return view("Admin.Penerimaan.show", compact("tpenerimaanObat","tpenerimaanNonObat","tpenerimaanHibah","tpenerimaanNonHibah","tpenerimaanNonAPBD", "periodeAktif"));
     }
@@ -237,14 +241,18 @@ class PenerimaanController extends Controller
         $dpenerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$id])->get();
 
         foreach ($dpenerimaan as $dp) {
-            $finalPenerimaan = new BarangOPDModel();
-            $finalPenerimaan->id_gudang = Auth::user()->opd->gudangOPD->id;
-            $finalPenerimaan->id_barang = $dp->id_barang;
-            $finalPenerimaan->kode_transaksi = $penerimaan->kode_penerimaan;
-            $finalPenerimaan->qty = $dp->qty;
-            $finalPenerimaan->harga_barang = $dp->harga;
-            $finalPenerimaan->status = 'Diterima';
-            $finalPenerimaan->save();
+            $barangOPD = BarangOPDModel::where('id_barang', $dp->id_barang)->first();
+            // dd($barangOPD);
+            if ($barangOPD) {
+                $finalPenerimaan = BarangOPDModel::find($barangOPD->id);
+                $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
+                $finalPenerimaan->update();
+            } else{
+                $finalPenerimaan = new BarangOPDModel();
+                $finalPenerimaan->id_barang = $dp->id_barang;
+                $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
+                $finalPenerimaan->save();
+            }
         }
         
         return redirect()->back();
