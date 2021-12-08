@@ -89,7 +89,7 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div form="form-group">
                           <label>Program</label>
-                          <select class="form-control" name="program" id="program">
+                          <select class="select2" style="width: 100%;" name="program" id="program">
                             @foreach ($program as $program)
                               <option value="{{ $program->id }}" @if($tpenerimaan->id_m_program == $program->id) selected @endif>{{ $program->nama_program }}</option>
                             @endforeach
@@ -117,7 +117,7 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div form="form-group">
                           <label>Kegiatan</label>
-                          <select class="form-control" name="kegiatan" id="kegiatan">
+                          <select class="select2" style="width: 100%;" name="kegiatan" id="kegiatan">
                           </select> 
                         </div>
                         <div class="form-group">
@@ -125,8 +125,8 @@ Edit Penerimaan Baru
                           <input class="form-control" name="status_saldo" id="status_saldo" @if($tpenerimaan->status_penerimaan == 'draft') value="draft" @elseif($tpenerimaan->status_penerimaan == 'final') value="final" @endif readonly>
                         </div>
                         <div class="form-group">
-                            <label>Pengirim</label>
-                            <input type="text" class="form-control" name="pengirim" id="pengirim" placeholder="Input Pengirim" value="{{ $tpenerimaan->pengirim }}" readonly>
+                            <label>Diterima dari</label>
+                            <input type="text" class="form-control" name="diterima_dari" id="diterima_dari" placeholder="Input PPK" value="{{ $tpenerimaan->pengirim }}" readonly>
                         </div>
                         <div class="form-group">
                           <label>Keterangan</label>
@@ -136,7 +136,7 @@ Edit Penerimaan Baru
                       <div class="col-6">
                         <div form="form-group">
                           <label>Kode Rekening</label>
-                          <select class="form-control" name="kode_rekening" id="kode_rekening">
+                          <select class="select2" style="width: 100%;" name="kode_rekening" id="kode_rekening">
                             @foreach ($rekening as $rekening)
                               <option value="{{ $rekening->id }}" @if($tpenerimaan->id_rekening == $rekening->id) selected @endif>{{ $rekening->nama_rekening }}</option>
                             @endforeach

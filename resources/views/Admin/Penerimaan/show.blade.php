@@ -87,8 +87,7 @@
                                         <th>Kegiatan</th>
                                         <th>Diterima dari</th>
                                         <th>Tanggal Penerimaan</th>
-                                        <th>Status</th>
-                                        <th>Pengirim</th>
+                                        <th>Status</th>                                        
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
@@ -98,7 +97,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpo->kode_penerimaan }}</td>
                                         <td>{{ $tpo->kegiatan->nama_kegiatan }}</td>
-                                        <td></td>
+                                        <td>{{ $tpo->pengirim }}</td>
                                         <td>{{ $tpo->tgl_terima }}</td>
                                         <td>
                                           @if($tpo->status_penerimaan == "draft")
@@ -106,9 +105,8 @@
                                           @elseif($tpo->status_penerimaan != "draft")
                                             <span class="badge badge-danger">Final</span>                       
                                           @endif    
-                                        </td>
-                                        <td>{{ $tpo->pengirim }}</td>
-                                        <td class="text-center">
+                                        </td>                                        
+                                        <td class="text-center">x
                                           <a href="/penerimaan/edit/{{ $tpo->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
                                                 <i class="fas fa-edit"></i>
@@ -136,8 +134,7 @@
                                         <th>Kegiatan</th>
                                         <th>Diterima dari</th>
                                         <th>Tanggal Penerimaan</th>
-                                        <th>Status</th>
-                                        <th>Pengirim</th>
+                                        <th>Status</th>                                        
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
@@ -147,7 +144,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpno->kode_penerimaan }}</td>
                                         <td>{{ $tpno->kegiatan->nama_kegiatan }}</td>
-                                        <td></td>
+                                        <td>{{ $tpno->pengirim }}</td>
                                         <td>{{ $tpno->tgl_terima }}</td>
                                         <td>
                                           @if($tpno->status_penerimaan == "draft")
@@ -155,8 +152,7 @@
                                           @elseif($tpno->status_penerimaan == "final")
                                             <span class="badge badge-danger">Final</span>                       
                                           @endif  
-                                        </td>
-                                        <td>{{ $tpno->pengirim }}</td>
+                                        </td>                                        
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tpno->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
@@ -185,8 +181,7 @@
                                         <th>Kegiatan</th>
                                         <th>Diterima dari</th>
                                         <th>Tanggal Penerimaan</th>
-                                        <th>Status</th>
-                                        <th>Pengirim</th>
+                                        <th>Status</th>                                        
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
@@ -196,7 +191,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tph->kode_penerimaan }}</td>
                                         <td>{{ $tph->kegiatan->nama_kegiatan }}</td>
-                                        <td></td>
+                                        <td>{{ $tph->pengirim }}</td>
                                         <td>{{ $tph->tgl_terima }}</td>
                                         <td>
                                           @if($tph->status_penerimaan == "draft")
@@ -204,8 +199,7 @@
                                           @elseif($tph->status_penerimaan == "final")
                                             <span class="badge badge-danger">Final</span>                       
                                           @endif  
-                                        </td>
-                                        <td>{{ $tph->pengirim }}</td>
+                                        </td>                                        
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tph->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
@@ -234,8 +228,7 @@
                                         <th>Kegiatan</th>
                                         <th>Diterima dari</th>
                                         <th>Tanggal Penerimaan</th>
-                                        <th>Status</th>
-                                        <th>Pengirim</th>
+                                        <th>Status</th>                                        
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
@@ -245,7 +238,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpnh->kode_penerimaan }}</td>
                                         <td>{{ $tpnh->kegiatan->nama_kegiatan }}</td>
-                                        <td></td>
+                                        <td>{{ $tpnh->pengirim }}</td>
                                         <td>{{ $tpnh->tgl_terima }}</td>
                                         <td>
                                           @if($tpnh->status_penerimaan == "draft")
@@ -254,7 +247,6 @@
                                             <span class="badge badge-danger">Final</span>                       
                                           @endif  
                                         </td>
-                                        <td>{{ $tpnh->pengirim }}</td>
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tpnh->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
@@ -283,8 +275,7 @@
                                         <th>Kegiatan</th>
                                         <th>Diterima dari</th>
                                         <th>Tanggal Penerimaan</th>
-                                        <th>Status</th>
-                                        <th>Pengirim</th>
+                                        <th>Status</th>                                        
                                         <th>Aksi</th>
                                       </tr>
                                   </thead>
@@ -296,14 +287,14 @@
                                         <td>{{ $tpna->kegiatan->nama_kegiatan }}</td>
                                         <td></td>
                                         <td>{{ $tpna->tgl_terima }}</td>
+                                        <td>{{ $tpna->pengirim }}</td>
                                         <td>
                                           @if($tpna->status_penerimaan == "draft")
                                             <span class="badge badge-primary">Draft</span>
                                           @elseif($tpna->status_penerimaan == "final")
                                             <span class="badge badge-danger">Final</span>                       
                                           @endif  
-                                        </td>
-                                        <td>{{ $tpna->pengirim }}</td>
+                                        </td>                                       
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tpna->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
