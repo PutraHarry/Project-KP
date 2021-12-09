@@ -89,7 +89,7 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div form="form-group">
                           <label>Program</label>
-                          <select class="select2" style="width: 100%;" name="program" id="program">
+                          <select class="select2" style="width: 100%;" name="program" id="program" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
                             @foreach ($program as $program)
                               <option value="{{ $program->id }}" @if($tpenerimaan->id_m_program == $program->id) selected @endif>{{ $program->nama_program }}</option>
                             @endforeach
@@ -117,7 +117,7 @@ Edit Penerimaan Baru
                       <div class="col-3">
                         <div form="form-group">
                           <label>Kegiatan</label>
-                          <select class="select2" style="width: 100%;" name="kegiatan" id="kegiatan">
+                          <select class="select2" style="width: 100%;" name="kegiatan" id="kegiatan" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
                           </select> 
                         </div>
                         <div class="form-group">
@@ -126,7 +126,11 @@ Edit Penerimaan Baru
                         </div>
                         <div class="form-group">
                             <label>Diterima dari</label>
-                            <input type="text" class="form-control" name="diterima_dari" id="diterima_dari" placeholder="Input PPK" value="{{ $tpenerimaan->pengirim }}" readonly>
+                            <select class="select2" style="width: 100%;" name="diterima_dari" id="diterima_dari" placeholder="Input PPK" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
+                              @foreach ($dataPPK as $dp)
+                                <option value="{{ $dp->id }}" @if($tpenerimaan->diterima_dari == $dp->id) selected @endif>{{ $dp->nama_user }}</option>
+                              @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                           <label>Keterangan</label>
@@ -136,7 +140,7 @@ Edit Penerimaan Baru
                       <div class="col-6">
                         <div form="form-group">
                           <label>Kode Rekening</label>
-                          <select class="select2" style="width: 100%;" name="kode_rekening" id="kode_rekening">
+                          <select class="select2" style="width: 100%;" name="kode_rekening" id="kode_rekening" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
                             @foreach ($rekening as $rekening)
                               <option value="{{ $rekening->id }}" @if($tpenerimaan->id_rekening == $rekening->id) selected @endif>{{ $rekening->nama_rekening }}</option>
                             @endforeach
