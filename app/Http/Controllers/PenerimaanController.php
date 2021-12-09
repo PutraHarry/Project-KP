@@ -13,6 +13,8 @@ use App\KegiatanModel;
 use App\RekeningModel;
 use App\PenggunaanModel;
 use App\TestModel;
+use App\AdminModel;
+use App\JabatanModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -57,7 +59,10 @@ class PenerimaanController extends Controller
 
         $program = ProgramModel::get();
         $rekening = RekeningModel::get();
-        return view("Admin.Penerimaan.create", compact("periodeAktif", "program", "rekening"));
+        $idPPK = JabatanModel::where('jabatan', 'PPK')->first();
+        $dataPPK = AdminModel::where('id_jabatan', $idPPK->id)->get();
+        // dd($dataPPK);
+        return view("Admin.Penerimaan.create", compact("periodeAktif", "program", "rekening", "dataPPK"));
     }
 
     public function getDataKegiatan($id)
@@ -74,7 +79,7 @@ class PenerimaanController extends Controller
             'jenis_penerimaan' => 'required',
             'tgl_input' => 'required',
             'status_penerimaan' => 'required',
-            'pengirim' => 'required',
+            'diterima_dari' => 'required',
             'ket_penerimaan' => 'required',
             'program' => 'required',
             'kegiatan' => 'required',
@@ -109,7 +114,7 @@ class PenerimaanController extends Controller
         $penerimaan->kode_penerimaan = $penerimaanKode;
         $penerimaan->jenis_penerimaan = $request->jenis_penerimaan;
         $penerimaan->tgl_terima = $request->tgl_input;
-        $penerimaan->pengirim = $request->pengirim;
+        $penerimaan->diterima_dari = $request->diterima_dari;
         $penerimaan->id_m_program = $request->program;
         $penerimaan->id_m_kegiatan = $request->kegiatan;
         $penerimaan->id_rekening = $request->kode_rekening;
@@ -144,7 +149,9 @@ class PenerimaanController extends Controller
 
         $detailPenerimaan = DetailPenerimaanModel::with('barang')->where('id_penerimaan',$id)->get();
 
-        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan', 'statusPenerimaan', 'detailPenerimaan', "program", "rekening"));
+        $idPPK = JabatanModel::where('jabatan', 'PPK')->first();
+        $dataPPK = AdminModel::where('id_jabatan', $idPPK->id)->get();
+        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan', 'statusPenerimaan', 'detailPenerimaan', "program", "rekening", "dataPPK"));
     }
 
     public function updatePenerimaan($id, Request $request)
@@ -153,7 +160,7 @@ class PenerimaanController extends Controller
             'jenis_penerimaan' => 'required',
             'kode_penerimaan' => 'required',
             'tgl_input' => 'required',
-            'pengirim' => 'required',
+            'diterima_dari' => 'required',
             'ket_penerimaan' => 'required',
             'program' => 'required',
             'kegiatan' => 'required',
@@ -168,7 +175,7 @@ class PenerimaanController extends Controller
         $penerimaan->kode_penerimaan = $request->kode_penerimaan;
         $penerimaan->jenis_penerimaan = $request->jenis_penerimaan;
         $penerimaan->tgl_terima = $request->tgl_input;
-        $penerimaan->pengirim = $request->pengirim;
+        $penerimaan->diterima_dari = $request->diterima_dari;
         $penerimaan->id_m_program = $request->program;
         $penerimaan->id_m_kegiatan = $request->kegiatan;
         $penerimaan->id_rekening = $request->kode_rekening;

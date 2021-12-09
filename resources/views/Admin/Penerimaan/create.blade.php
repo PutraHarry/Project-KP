@@ -119,7 +119,11 @@ Create Penerimaan Baru
                             </div>
                             <div class="form-group">
                                 <label>Diterima dari</label>
-                                <input type="text" class="form-control" name="diterima_dari" id="diterima_dari" placeholder="Input PPK">
+                                <select class="select2" style="width: 100%;" name="diterima_dari" id="diterima_dari" placeholder="Input PPK">
+                                  @foreach ($dataPPK as $dp)
+                                    <option value="{{ $dp->id }}">{{ $dp->nama_user }}</option>
+                                  @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                               <label>Keterangan</label>
