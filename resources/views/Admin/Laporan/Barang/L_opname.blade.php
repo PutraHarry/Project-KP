@@ -7,6 +7,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- Bootstrap4 Duallistbox -->
+<link rel="stylesheet" href="/adminlte/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -89,130 +93,63 @@
                                       <div class="form-group row">
                                         <label for="inputOPD" class="col-sm-1 col-form-label">OPD</label>
                                         <div class="col-sm-11">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
+                                          <select class="select2" name="" id="" style="width: 100%">
+                                              <option>OPD 1</option>
+                                              <option>BPKAD</option>
+                                              <option>KOMINFO</option>
+                                          </select>
                                         </div>
                                       </div>
                                       <div class="form-group row">
                                         <label for="inputOPD" class="col-sm-1 col-form-label">Periode</label>
                                         <div class="col-sm-11">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
+                                          <select class="select2" name="" id="" style="width: 100%">
+                                              <option>OPD 1</option>
+                                              <option>BPKAD</option>
+                                              <option>KOMINFO</option>
+                                          </select>
                                         </div>
                                       </div>
                                       <div class="form-group row">
                                         <label for="inputOPD" class="col-sm-1 col-form-label">Kategori</label>
                                         <div class="col-sm-11">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
+                                          <select class="select2" name="" id="" style="width: 100%">
+                                              <option>OPD 1</option>
+                                              <option>BPKAD</option>
+                                              <option>KOMINFO</option>
+                                          </select>
                                         </div>
                                       </div>
                                       <div class="form-group row">
                                         <label for="inputOPD" class="col-sm-1 col-form-label">Unit Kerja</label>
                                         <div class="col-sm-11">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
+                                          <select class="select2" name="" id="" style="width: 100%">
+                                              <option>OPD 1</option>
+                                              <option>BPKAD</option>
+                                              <option>KOMINFO</option>
+                                          </select>
                                         </div>
                                       </div>
                                       <div class="form-group row">
                                         <label for="inputOPD" class="col-sm-1 col-form-label">Kegiatan</label>
                                         <div class="col-sm-11">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
+                                          <select class="select2" name="" id="" style="width: 100%">
+                                            <option>OPD 1</option>
+                                            <option>BPKAD</option>
+                                            <option>KOMINFO</option>
+                                          </select>
                                         </div>
                                       </div>
                                       <div class="form-group row">
                                         <label for="inputOPD" class="col-sm-1 col-form-label">Periode Stok</label>
                                         <div class="col-sm-11">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
+                                          <select class="select2" name="" id="" style="width: 100%">
+                                              <option>OPD 1</option>
+                                              <option>BPKAD</option>
+                                              <option>KOMINFO</option>
+                                          </select>
                                         </div>
                                       </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer">
-                                      <button type="submit" class="btn btn-info">Sign in</button>
-                                      <button type="submit" class="btn btn-default float-right">Cancel</button>
-                                    </div>
-                                    <!-- /.card-footer -->
-                                </form>
-
-                                <form class="form">
-                                    <div class="card-body mx-lg-5">
-                                        <label for="inputOPD" class="col-sm-1 col-form-label">OPD</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
-                                        </div>
-                                      
-                                        <label for="inputOPD" class="col-sm-1 col-form-label">Periode</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
-                                        </div>
-                                      
-                                        <label for="inputOPD" class="col-sm-1 col-form-label">Kategori</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
-                                        </div>
-                                     
-                                        <label for="inputOPD" class="col-sm-1 col-form-label">Unit Kerja</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
-                                        </div>
-                                      
-                                        <label for="inputOPD" class="col-sm-1 col-form-label">Kegiatan</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <label for="inputOPD" class="col-sm-1 col-form-label">Kegiatan</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control" name="inputOPD" id="inputOPD">
-                                                <option>OPD 1</option>
-                                                <option>BPKAD</option>
-                                                <option>KOMINFO</option>
-                                            </select>
-                                        </div>
-                                        
-                                        
-                                      
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
@@ -248,10 +185,24 @@
 
 <script src="/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script src="/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <!-- Page specific script -->
 <script>
+$('.select2').select2()
+
+//Initialize Select2 Elements
+$('.select2bs4').select2({
+  theme: 'bootstrap4'
+})
+//Bootstrap Duallistbox
+$('.duallistbox').bootstrapDualListbox()
+
+$("input[data-bootstrap-switch]").each(function(){
+  $(this).bootstrapSwitch('state', $(this).prop('checked'));
+})
+
   $(function () {
     $('#example2').DataTable({
       "paging": true,
