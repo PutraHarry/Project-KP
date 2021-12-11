@@ -234,12 +234,12 @@ class PenggunaanController extends Controller
         $dpenerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
 
         foreach ($dpenerimaan as $dp) {
-            $barangOPD = BarangOPDModel::where('id_barang', $dp->id_barang)->first();
+            $barangOPD = BarangOPDModel::where('id_opd', Auth::user()->opd->id)->where('id_barang', $dp->id_barang)->first();
             $idBarangOPD = BarangOPDModel::find($barangOPD->id);
             $idBarangOPD->qty = $idBarangOPD->qty - $dp->qty;
             $idBarangOPD->update(); 
 
-            $barangUnit = BarangUnitModel::where('id_barang', $dp->id_barang)->first();
+            $barangUnit = BarangUnitModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $dp->id_barang)->first();
             // dd($barangOPD);
             if ($barangUnit) {
                 $finalPenerimaan = BarangUnitModel::find($barangUnit->id);

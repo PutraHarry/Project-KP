@@ -248,7 +248,7 @@ class PenerimaanController extends Controller
         $dpenerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$id])->get();
 
         foreach ($dpenerimaan as $dp) {
-            $barangOPD = BarangOPDModel::where('id_barang', $dp->id_barang)->first();
+            $barangOPD = BarangOPDModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $dp->id_barang)->first();
             // dd($barangOPD);
             if ($barangOPD) {
                 $finalPenerimaan = BarangOPDModel::find($barangOPD->id);

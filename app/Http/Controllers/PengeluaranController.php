@@ -230,7 +230,7 @@ class PengeluaranController extends Controller
         $dpengeluaran = DetailPengeluaranModel::whereIn('id_pengeluaran', [$idPengeluaran])->get();
 
         foreach ($dpengeluaran as $dp) {
-            $barangUnit = BarangUnitModel::where('id_barang', $dp->id_barang)->first();
+            $barangUnit = BarangUnitModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $dp->id_barang)->first();
             // dd($barangOPD);
             
             $finalPengeluaran = BarangUnitModel::find($barangUnit->id);

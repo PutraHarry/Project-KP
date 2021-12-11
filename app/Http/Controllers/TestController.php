@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\TestModel;
 use Illuminate\Support\Facades\Validator;
+use App\BarangModel;
 
 use Illuminate\Http\Request;
 
@@ -87,5 +88,22 @@ class TestController extends Controller
         return redirect('/tabel')->with('statusInput', 'Delete Success');
     }
 
-    
+    public function testTabel()
+    {
+        return view("tabel");
+    }
+
+    public function testDataTabel()
+    {
+        $test = TestModel::get();
+
+        $barang = BarangModel::get();
+
+        return response()->json(['var1' => $test, 'var2' => $barang]);
+    }
+
+    public function test()
+    {
+        return view("Admin.Laporan.Barang.L_opname");
+    }
 }
