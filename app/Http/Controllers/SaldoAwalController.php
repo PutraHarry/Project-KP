@@ -9,6 +9,7 @@ use App\DetailSaldoAwalModel;
 use App\PeriodeModel;
 use App\BarangOPDModel;
 use App\GudangOPDModel;
+use App\barangUnitModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -186,7 +187,7 @@ class SaldoAwalController extends Controller
         $dsaldoawal = DetailSaldoAwalModel::whereIn('id_saldo', [$id])->get();
         
         foreach ($dsaldoawal as $ds) {
-            $barangUnit = BarangUnitModel::where('id_barang', $ds->id_barang)->first();
+            $barangUnit = BarangUnitModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $ds->id_barang)->first();
             // dd($barangOPD);
             if ($barangUnit) {
                 $finalSaldoAwal = BarangUnitModel::find($barangUnit->id);

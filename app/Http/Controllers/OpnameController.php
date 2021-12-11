@@ -195,7 +195,7 @@ class OpnameController extends Controller
         $dopname = DetailOpnameModel::whereIn('id_opname', [$id])->get();
 
         foreach ($dopname as $do) {
-            $barangUnit = BarangUnitModel::where('id_barang', $do->id_barang)->first();
+            $barangUnit = BarangUnitModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $do->id_barang)->first();
             
             $finalPengeluaran = BarangUnitModel::find($barangUnit->id);
             $finalPengeluaran->qty = $finalPengeluaran->qty - $do->qty;

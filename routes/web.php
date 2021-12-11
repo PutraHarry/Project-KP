@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/tabel', 'TestController@testTabel');
+Route::get('/tabel/getDataTabel', 'TestController@testDataTabel');
+Route::get('/test', 'TestController@test');
+
+
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
  
 //CONTROLLER FIX
