@@ -19,7 +19,6 @@
         
         
         <tbody>
-        @foreach ($test as $test)
             <tr class="text-center">
                 <th rowspan="2" class="align-middle">No</th>
                 <th rowspan="2" class="align-middle">Uraian</th>
@@ -33,13 +32,11 @@
 
             <tr>
                 <td>1</td>
-                <td>{{ $test->id_barang }}</td>
-                <td>{{ $test->qty }}</td>
+                <td></td>
+                <td></td>
                 <td>30000</td>
                 <td>50000</td>
             </tr>
-        @endforeach
-            
         </tbody>
     </table>
 </div>
