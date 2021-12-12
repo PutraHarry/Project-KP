@@ -115,6 +115,177 @@
                     </div>
                     <!-- /.modal -->
                 </section>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Bordered Table</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="5"> Kegiatan</th>
+                            </tr>
+                            <tr class="text-center">
+                                <th rowspan="2" class="align-middle">No</th>
+                                <th rowspan="2" class="align-middle">Uraian</th>
+                                <th colspan="3" class="align-middle">Saldo Awal</th>                                            
+                            </tr>
+                            <tr class="text-center">
+                                <th>KIB A</th>
+                                <th>KIB B</th>
+                                <th>KIB C</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Jualan</td>
+                                <td>23000</td>
+                                <td>30000</td>
+                                <td>50000</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="5"> Kegiatan</th>
+                            </tr>
+                            <tr class="text-center">
+                                <th rowspan="2" class="align-middle">No</th>
+                                <th rowspan="2" class="align-middle">Uraian</th>
+                                <th colspan="3" class="align-middle">Saldo Awal</th>                                            
+                            </tr>
+                            <tr class="text-center">
+                                <th>KIB A</th>
+                                <th>KIB B</th>
+                                <th>KIB C</th>
+                            </tr>
+                        </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                        </ul>
+                    </div>                                                                              
+                </div>
+                  <!-- /.card -->
+
+                  <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Test Table</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <style>
+                            table {border: 1px solid #000000;border-collapse: collapse; margin: 0 auto;  padding: 0px;table-layout: fixed;min-width: 100%;}table th {text-align: center;padding: 8px;border: 1px solid #000000;background:#1b90bb;color:#FFFFFF;font-weight:bold;text-align:center}table td{padding: 8px;border: 1px solid #000000;}table tr{background-color: #dddddd;color:#000000;text-align:center;}
+                        </style>
+                        <table>
+                            <tr>
+                                <th colspan='18' >SKPD : Badan Pengelola Keuangan dan Aset Daerah</th>
+                            
+                            </tr>
+                            <tr>
+                                <td rowspan='1' colspan='18' >Unit Kerja : Badan Pengelola Keuangan dan Aset Daerah</td>
+                            </tr>
+                            <tr>
+                                <td rowspan='1' colspan='18' >Kode Kegiatan : 4.4.1.1.1.1 - Penyusunan Dokumen Perencanaan Perangkat Daerah</td>
+                            </tr>
+                            <tr>
+                                <td rowspan='2' colspan='1' >No.</td>
+                                <td rowspan='2' colspan='1' >Uraian</td>
+                                <td rowspan='1' colspan='4' >Saldo Awal</td>
+                                <td rowspan='1' colspan='4' >Masuk</td>
+                                <td rowspan='1' colspan='4' >Keluar</td>
+                                <td rowspan='1' colspan='4' >Sisa</td>
+                            </tr>
+                            <tr>
+                                <td>Volume</td> <!--Saldo Awal punya-->>
+                                <td>Satuan</td>
+                                <td>Harga Satuan</td>
+                                <td>Jumlah</td>
+                                <td>Volume</td> <!--Masuk punya-->>
+                                <td>Satuan</td>
+                                <td>Harga Satuan</td>
+                                <td>Jumlah</td>
+                                <td>Volume</td> <!--Keluar punya-->>
+                                <td>Satuan</td>
+                                <td>Harga Satuan</td>
+                                <td>Jumlah</td>
+                                <td>Volume</td> <!--Sisa punya-->>
+                                <td>Satuan</td>
+                                <td>Harga Satuan</td>
+                                <td>Jumlah</td>
+                            </tr>
+                            <tr>
+                                <td rowspan='1' colspan='18' >Alat Tulis Kantor</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Binder Klip</td>
+                                <td>0</td>
+                                <td>Kotak</td>
+                                <td>11.500,00</td>
+                                <td>0,00</td>
+                                <td>0</td>
+                                <td>Kotak</td>
+                                <td>11.500,00</td>
+                                <td>0,00</td>
+                                <td>0</td>
+                                <td>Kotak</td>
+                                <td>11.500,00</td>
+                                <td>0,00</td>
+                                <td>0</td>
+                                <td>Kotak</td>
+                                <td>11.500,00</td>
+                                <td>0,00</td>
+                            </tr>
+                            <tr>
+                                <td rowspan='1' colspan='2' >JUMLAH</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>0,00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>0,00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>0,00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>0,00</td>
+                            </tr>
+                            <tr>
+                                <td rowspan='1' colspan='2' >Total Keseluruhan</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>0,00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>0,00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>0,00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>0,00</td>
+                            </tr>
+                        </table>                                                                            
+                </div>
                     
 @endsection
 @push('js')
