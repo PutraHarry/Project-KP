@@ -39,7 +39,7 @@ Create Barang Baru
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/master-barang">Kelola Barang</a></li>
+              <li class="breadcrumb-item"><a href="/barang">Kelola Barang</a></li>
               <li class="breadcrumb-item active">Tambah Barang Baru</li>
             </ol>
           </div>
