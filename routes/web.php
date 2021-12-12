@@ -20,7 +20,7 @@ Route::get('/test', 'TestController@test');
 
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
  
-//CONTROLLER FIX
+//LOGIN
 Route::get('/', 'LoginController@loginForm')->name('login')->middleware('guest');
 Route::post('/login', 'LoginController@login')->name('Login');
 Route::get('/logout', 'LoginController@logout')->name('logout');
@@ -118,3 +118,5 @@ Route::post('/pemusnahan/update/{id}', 'PemusnahanController@updatePemusnahan')-
 Route::get('/pemusnahan/detailOpname/{id}', 'PemusnahanController@getDataDetailOpname')->name('getDataDetailOpname')->middleware("permission:Edit Pemusnahan");
 Route::post('/pemusnahan/delete/{id}','PemusnahanController@deletePemusnahan')->name('deletePemusnahan')->middleware("permission:Delete Pemusnahan");
 Route::post('/pemusnahan/final/{idPenggunaan}/detail/{idOpname}', 'PemusnahanController@finalPemusnahan')->name('finalPemusnahan')->middleware("permission:Final Pemusnahan");
+
+//LAPORAN

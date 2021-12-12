@@ -17,7 +17,7 @@ class PenggunaanModel extends Model
     }
 
     public function penerimaan() {
-        return $this->belongsTo('App\PenerimaanModel','id_penerimaan','id');
+        return $this->belongsTo(PenerimaanModel::class,'id_penerimaan','id');
     }
 }
 
