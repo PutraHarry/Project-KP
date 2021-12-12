@@ -67,21 +67,22 @@ Edit Pemusnahan Baru
                 <div class="card-header">
                   <h3 class="card-title">Edit Data Pemusnahan</h3>
                   <div class="card-tools">
-                    <button type="submit" class="btn btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-edit"></i>
-                      </span>
-                      <span class="text">Draft</span>
-                    </button>
-                    <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal()">
-                      <span class="icon text-white-50">
-                          <i class="fas fa-check"></i>
-                      </span>
-                      <span class="text">Final</span>
-                    </button>
+                    @if ($tpemusnahan->status_pemusnahan == 'draft')
+                      <button type="submit" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Draft</span>
+                      </button>
+                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusFinal({{ $idEdit }})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Final</span>
+                      </button>
+                    @endif
                   </div>
                 </div>
-
                 <form id="quickForm">
                   <div class="card-body">
                     <div class="row">
@@ -92,7 +93,7 @@ Edit Pemusnahan Baru
                           </div>
                           <div class="form-group">
                             <label>Kode Opname</label>
-                            <select class="select2" name="id_opname" id="id_opname" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;">
+                            <select class="select2" name="id_opname" id="id_opname" data-placeholder="Pilih Nota Bukti Umum" style="width: 100%;" @if($tpemusnahan->status_pemusnahan == 'final') disabled @endif>
                               @foreach ($topname as $to)
                                 <option value="{{ $to->id }}" @if($to->id == $tpemusnahan->id_opname) selected @endif>{{ $to->kode_opname }}</option>
                               @endforeach
@@ -167,7 +168,6 @@ Edit Pemusnahan Baru
       </section>
     </form>
   </section>
-
   <div class="modal fade" id="modal-sfinal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -185,19 +185,19 @@ Edit Pemusnahan Baru
                   </div>
                   <div class="form-group">
                     <label>Kode Pemusnahan</label>
-                    <input type="text" class="form-control" name="kodePengeluaran" id="kodePengeluaran" placeholder="Kode Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodePemusnahan" id="kodePemusnahan" placeholder="Kode Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Kode Opname</label>
-                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penerimaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodeOpname" id="kodeOpname" placeholder="Kode Penerimaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Tanggal Pemusnahan</label>
-                    <input type="text" class="form-control" name="tglPengeluaran" id="tglPengeluaran" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="tglPemusnahan" id="tglPemusnahan" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Keterangan Pemusnahan</label>
-                    <input type="text" class="form-control" name="ketPengeluaran" id="ketPengeluaran" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="ketPemusnahan" id="ketPemusnahan" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -302,18 +302,18 @@ Edit Pemusnahan Baru
 
 <script>
   function statusFinal(idEdit) {
-    var idPenggunaan = $('#id_penggunaan').val();
-    var penggunaan = {!! json_encode($topname->toArray()) !!}
-    penggunaan.forEach(element => {
-      if(element.id == idPenggunaan){
-        $('#kodePenggunaan').val(element.kode_penggunaan);
+    var idOpname = $('#id_opname').val();
+    var opname = {!! json_encode($topname->toArray()) !!}
+    opname.forEach(element => {
+      if(element.id == idOpname){
+        $('#kodeOpname').val(element.kode_opname);
       }
     });
-    //console.log(idEdit);
-    $("#finalPemusnahan").attr("action", "/pemusnahan/final/" + idEdit + "/detail/" + idPenggunaan);
-    $('#kodePengeluaran').val($('#kode_pengeluaran').val());
-    $('#tglPengeluaran').val($('#tgl_input').val());
-    $('#ketPengeluaran').val($('#ket_pengeluaran').val());
+    console.log(idEdit);
+    $("#finalPemusnahan").attr("action", "/pemusnahan/final/" + idEdit + "/detail/" + idOpname);
+    $('#kodePemusnahan').val($('#kode_pemusnahan').val());
+    $('#tglPemusnahan').val($('#tgl_input').val());
+    $('#ketPemusnahan').val($('#ket_pemusnahan').val());
     $('#modal-sfinal').modal('show');
   }
 </script>

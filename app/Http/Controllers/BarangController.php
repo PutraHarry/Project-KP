@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\PeriodeModel;
 use App\BarangModel;
 
+
 class BarangController extends Controller
 {
     public function __construct()

@@ -35,6 +35,6 @@ class PenerimaanModel extends Model
 
     public function penggunaan()
     {
-        return $this->hasOne('App\PenggunaanModel', 'id_penerimaan', 'id');
+        return $this->hasOne(PenggunaanModel::class, 'id_penerimaan', 'id');
     }
 }

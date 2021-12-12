@@ -85,7 +85,7 @@
                                         <th>No.</th>
                                         <th>Penerimaan Obat</th>
                                         <th>Kegiatan</th>
-                                        <th>Diterima dari</th>                                        
+                                        <th>Diterima dari</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>                                        
                                         <th>Aksi</th>
@@ -132,7 +132,7 @@
                                         <th>No.</th>
                                         <th>Penerimaan Non Obat</th>
                                         <th>Kegiatan</th>
-                                        <th>Diterima dari</th>                                        
+                                        <th>Diterima dari</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>                                        
                                         <th>Aksi</th>
@@ -143,7 +143,7 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpno->kode_penerimaan }}</td>
-                                        <td></td>
+                                        <td>{{ $tpno->kegiatan->nama_kegiatan }}</td>
                                         <td>{{ $tpno->pengirim }}</td>
                                         <td>{{ $tpno->tgl_terima }}</td>
                                         <td>
@@ -179,7 +179,7 @@
                                         <th>No.</th>
                                         <th>Penerimaan Hibah</th>
                                         <th>Kegiatan</th>
-                                        <th>Diterima dari</th>                                        
+                                        <th>Diterima dari</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>                                        
                                         <th>Aksi</th>
@@ -190,7 +190,7 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tph->kode_penerimaan }}</td>
-                                        <td></td>
+                                        <td>{{ $tph->kegiatan->nama_kegiatan }}</td>
                                         <td>{{ $tph->pengirim }}</td>
                                         <td>{{ $tph->tgl_terima }}</td>
                                         <td>
@@ -237,7 +237,7 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpnh->kode_penerimaan }}</td>
-                                        <td></td>
+                                        <td>{{ $tpnh->kegiatan->nama_kegiatan }}</td>
                                         <td>{{ $tpnh->pengirim }}</td>
                                         <td>{{ $tpnh->tgl_terima }}</td>
                                         <td>
@@ -273,7 +273,7 @@
                                         <th>No.</th>
                                         <th>Penerimaan Non APBD</th>
                                         <th>Kegiatan</th>
-                                        <th>Diterima dari</th>                                        
+                                        <th>Diterima dari</th>
                                         <th>Tanggal Penerimaan</th>
                                         <th>Status</th>                                        
                                         <th>Aksi</th>
@@ -284,7 +284,8 @@
                                       <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpna->kode_penerimaan }}</td>
-                                        <td></td>                                       
+                                        <td>{{ $tpna->kegiatan->nama_kegiatan }}</td>
+                                        <td></td>
                                         <td>{{ $tpna->tgl_terima }}</td>
                                         <td>{{ $tpna->pengirim }}</td>
                                         <td>

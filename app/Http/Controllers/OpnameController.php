@@ -103,9 +103,9 @@ class OpnameController extends Controller
         $tbarang = BarangModel::get();
         $idEdit = $id;
 
-        $barangGudang = BarangUnitModel::with('barang')->where('status', 'diterima')->get();
+        $barangUnit = BarangUnitModel::with('barang')->get();
 
-        return view("Admin.Opname.edit", compact("periodeAktif", "topname", "tbarang", "detailOpname", "idEdit", 'barangGudang'));
+        return view("Admin.Opname.edit", compact("periodeAktif", "topname", "tbarang", "detailOpname", "idEdit", 'barangUnit'));
     }
 
     public function updateOpname($id, Request $request)
@@ -131,6 +131,13 @@ class OpnameController extends Controller
 
     public function insertDetailOpname($id, Request $request)
     {
+        $dataDetailBarang = BarangUnitModel::with('barang')->where('id_barang', $request->id_barang)->first();
+        //dd($dataDetailPenggunaan);
+
+        if ($request->qty > $dataDetailBarang->qty) {
+            return redirect()->back()->with(['failed' => 'Jumlah melebihi dengan stok']);
+        }
+
         $dopname = new DetailOpnameModel();
         $dopname->id_opname = $id;
         $dopname->id_barang = $request->id_barang;
@@ -180,24 +187,19 @@ class OpnameController extends Controller
     {
         $opname = OpnameModel::find($id);
         $opname->kode_opname = $request->kodeOpname;
-        $opname->jenis_opname = $request->jenisOpname;
-        $opname->tgl_terima = $request->tglOpname;
+        $opname->tgl_opname = $request->tglOpname;
         $opname->ket_opname = $request->ketOpname;
         $opname->status_opname = 'final';
         $opname->update();
 
         $dopname = DetailOpnameModel::whereIn('id_opname', [$id])->get();
 
-        foreach ($dopname as $dp) {
+        foreach ($dopname as $do) {
+            $barangUnit = BarangUnitModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $do->id_barang)->first();
             
-
-            $finalOpname = new BarangUnitModel();
-            $finalOpname->id_gudang = Auth::user()->unit->gudangUnit->id;
-            $finalOpname->id_barang = $dp->id_barang;
-            $finalOpname->kode_transaksi = $opname->kode_opname;
-            $finalOpname->jumlah = $dp->qty;
-            $finalOpname->status = 'Diterima';
-            $finalOpname->save();
+            $finalPengeluaran = BarangUnitModel::find($barangUnit->id);
+            $finalPengeluaran->qty = $finalPengeluaran->qty - $do->qty;
+            $finalPengeluaran->update();
         }
         
         return redirect('/opname')->with('statusInput', 'Status Final Berhasil');
