@@ -16,7 +16,7 @@ class BarangModel extends Model
 
     public function detailSaldoAwal()
     {
-        return $this->hasMany(DetailSaldoAwal::class, 'id_barang', 'id');
+        return $this->hasMany(DetailSaldoAwalModel::class, 'id_barang', 'id');
     }
 
     public function detailPenerimaan()
@@ -31,6 +31,6 @@ class BarangModel extends Model
 
     public function detailOpname()
     {
-        return $this->hasMany(DetailOpnamePengeluaran::class, 'id_barang', 'id');
+        return $this->hasMany(DetailOpnameModel::class, 'id_barang', 'id');
     }
 }

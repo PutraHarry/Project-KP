@@ -32,75 +32,9 @@
 
       
           <!-- Main content -->
-                <section class="content">
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="5"> Kegiatan</th>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <th rowspan="2" class="align-middle">No</th>
-                                            <th rowspan="2" class="align-middle">Uraian</th>
-                                            <th colspan="3" class="align-middle">Saldo Awal</th>                                            
-                                        </tr>
-                                        <tr class="text-center">
-                                            <th>KIB A</th>
-                                            <th>KIB B</th>
-                                            <th>KIB C</th>
-                                        </tr>
-
-                                    </thead>
-                                    
-                                    
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Jualan</td>
-                                            <td>23000</td>
-                                            <td>30000</td>
-                                            <td>50000</td>
-                                        </tr>
-                                        
-
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal fade" id="modal-delete">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h4 class="modal-title">Delete Data</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                            <p>anda yakin akan menghapus data ini?</p>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <a href="/tabel/delete/id" id="bdelete" type="button" class="btn btn-danger">Yes</a>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!-- /.modal -->
-                </section>
+                
 
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Bordered Table</h3>
-                    </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div class="table-responsive">
@@ -124,19 +58,19 @@
                                         <th rowspan='1' colspan='4' class="text-center">Sisa</th>
                                     </tr>
                                     <tr>
-                                        <th>Volume</th> <!--Saldo Awal punya-->>
+                                        <th>Volume</th> <!--Saldo Awal punya-->
                                         <th>Satuan</th>
                                         <th>Harga Satuan</th>
                                         <th>Jumlah</th>
-                                        <th>Volume</th> <!--Masuk punya-->>
+                                        <th>Volume</th> <!--Masuk punya-->
                                         <th>Satuan</th>
                                         <th>Harga Satuan</th>
                                         <th>Jumlah</th>
-                                        <th>Volume</th> <!--Keluar punya-->>
+                                        <th>Volume</th> <!--Keluar punya-->
                                         <th>Satuan</th>
                                         <th>Harga Satuan</th>
                                         <th>Jumlah</th>
-                                        <th>Volume</th> <!--Sisa punya-->>
+                                        <th>Volume</th> <!--Sisa punya-->
                                         <th>Satuan</th>
                                         <th>Harga Satuan</th>
                                         <th>Jumlah</th>
@@ -209,17 +143,7 @@
                                 </tfoot>
                             </table>
                         </div>
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer clearfix">
-                        <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                        </ul>
-                    </div>                                                                              
+                    </div>                                                                       
                 </div>
                   <!-- /.card -->
                     
@@ -235,23 +159,7 @@
     <!-- Custom scripts for all pages-->
     <script src="/sbadmin/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/sbadmin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/sbadmin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/sbadmin/js/demo/datatables-demo.js"></script>
-
     <script>
-        function deletedata(id) {
-            $("#bdelete").attr("href", "/tabel/delete/"+id);
-            $('#modal-delete').modal('show');
-            
-        }
+        
     </script>
-
-    
-                    
-
-    
 @endpush

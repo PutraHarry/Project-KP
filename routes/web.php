@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/tabel', 'TestController@testTabel');
 Route::get('/tabel/getDataTabel', 'TestController@testDataTabel');
 Route::get('/test', 'TestController@test');
+Route::get('/coba', 'TestController@tabel');
 
 
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
@@ -79,7 +80,7 @@ Route::post('/pengeluaran/update/{id}', 'PengeluaranController@updatePengeluaran
 Route::post('/pengeluaran/updateDetail/{id}', 'PengeluaranController@insertDetailPengeluaran')->name('updateDetailPengeluaran')->middleware("permission:Edit Pengeluaran");
 Route::post('/pengeluaran/editDetail/{id}', 'PengeluaranController@editDetailPengeluaran')->name('editDetailPengeluaran')->middleware("permission:Edit Pengeluaran");
 Route::post('/pengeluaran/delete/{id}','PengeluaranController@deletePengeluaran')->name('deletePengeluaran')->middleware("permission:Delete Pengeluaran");
-Route::post('/pengeluaran/final/{idPengeluaran}/detail/{idPenggunaan}', 'PengeluaranController@finalPengeluaran')->name('finalPengeluaran')->middleware("permission:Final Pengeluaran");
+Route::post('/pengeluaran/final/{idPengeluaran}', 'PengeluaranController@finalPengeluaran')->name('finalPengeluaran')->middleware("permission:Final Pengeluaran");
 
 //MASTER BARANG
 Route::get('/barang', 'BarangController@dataBarang')->name('barang')->middleware("permission:Lihat Master Barang");

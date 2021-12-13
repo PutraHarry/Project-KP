@@ -433,7 +433,7 @@ Edit Penerimaan Baru
         type: 'GET',
         url: '/penerimaan/kegiatan/'+id,
         success: function (response){
-          console.log(penerimaan);
+          // console.log(penerimaan);
           $('#kegiatan').empty();
           response.forEach(element => {
             if(element.id == penerimaan.id_m_kegiatan){
