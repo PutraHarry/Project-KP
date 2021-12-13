@@ -94,7 +94,7 @@ class TestController extends Controller
     public function testTabel()
     {
         $barang = BarangModel::with('barangOPD', 'detailSaldoAwal', 'detailPenerimaan', 'detailPengeluaran', 'detailOpname')->get();
-        dd($barang);
+        //dd($barang);
 
         return view("tabel");
     }
@@ -102,16 +102,55 @@ class TestController extends Controller
     public function tabel()
     {
         $coba = BarangModel::get();
-        $detailPenerimaan = BarangUnitModel::get();
+        $barangUnit = BarangUnitModel::with('barang')->get();
+        $detailSaldoAwal = DetailSaldoAwalModel::with('barang')->get();
+        $detailPenerimaan = DetailPenerimaanModel::with('barang')->get();
+        $detailPengeluaran = DetailPengeluaranModel::with('barang')->get();
 
-        return view("coba-tabel", compact('coba'));
+        $dataBarang = DetailSaldoAwalModel::where('id_barang', 1)->get();
+        $totalHarga = $dataBarang->sum('harga');
+        // dd($totalHarga);
+
+        return view("coba-tabel", compact('coba', 'barangUnit', 'detailSaldoAwal', 'detailPenerimaan', 'detailPengeluaran'));
+    }
+
+    public function getDataSaldoAwal($id)
+    {
+        $dataBarang = DetailSaldoAwalModel::where('id_barang', $id)->get();
+        $jumlahBarang = $dataBarang->sum('qty');
+        $totalHarga = $dataBarang->sum('harga');
+        return response()->json(['jumlahBarang' => $jumlahBarang, 'dataBarang' => $dataBarang, 'totalHarga' => $totalHarga]);
+    }
+
+    public function getDataPenerimaan($id)
+    {
+        $dataBarang = DetailPenerimaanModel::where('id_barang', $id)->get();
+        $jumlahBarang = $dataBarang->sum('qty');
+        $totalHarga = $dataBarang->sum('harga');
+        return response()->json(['jumlahBarang' => $jumlahBarang, 'dataBarang' => $dataBarang, 'totalHarga' => $totalHarga]);
+    }
+
+    public function getDataPengeluaran($id)
+    {
+        $dataBarang = DetailPengeluaranModel::where('id_barang', $id)->get();
+        $jumlahBarang = $dataBarang->sum('qty');
+        $totalHarga = $dataBarang->sum('harga');
+        return response()->json(['jumlahBarang' => $jumlahBarang, 'dataBarang' => $dataBarang, 'totalHarga' => $totalHarga]);
+    }
+
+    public function getDataBarangOPD($id)
+    {
+        $barang = BarangModel::find($id);
+        $dataBarang = BarangOPDModel::where('id_barang', $id)->first();
+        $totalHarga = $dataBarang->qty * $barang->harga_m_barang;
+        return response()->json(['dataBarang' => $dataBarang, 'totalHarga' => $totalHarga]);
     }
 
     public function testDataTabel()
     {
-        // $barang = BarangModel::with('barangOPD', 'detailSaldoAwal', 'detailPenerimaan', 'detailPengeluaran', 'detailOpname')->get();
-        // dd($barang);
-        $test = view('coba-tabel')->render();
+        $barang = BarangModel::get();
+
+        $test = view('coba-tabel', ['barang' => $barang])->render();
 
         return response()->json($test);
     }

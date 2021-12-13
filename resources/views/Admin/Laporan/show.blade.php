@@ -77,7 +77,7 @@
                             <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="/laporan/laporan-persediaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/laporan/laporan-persediaan-opd" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6">

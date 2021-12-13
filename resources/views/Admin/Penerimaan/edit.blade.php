@@ -128,7 +128,7 @@ Edit Penerimaan Baru
                             <label>Diterima dari</label>
                             <select class="select2" style="width: 100%;" name="diterima_dari" id="diterima_dari" placeholder="Input PPK" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
                               @foreach ($dataPPK as $dp)
-                                <option value="{{ $dp->id }}" @if($tpenerimaan->diterima_dari == $dp->id) selected @endif>{{ $dp->nama_user }}</option>
+                                <option value="{{ $dp->nama_user }}" @if($tpenerimaan->diterima_dari == $dp->nama_user) selected @endif>{{ $dp->nama_user }}</option>
                               @endforeach
                             </select>
                         </div>
