@@ -256,6 +256,7 @@ class PenerimaanController extends Controller
                 $finalPenerimaan->update();
             } else{
                 $finalPenerimaan = new BarangOPDModel();
+                $finalPenerimaan->id_opd = Auth::user()->opd->id;
                 $finalPenerimaan->id_barang = $dp->id_barang;
                 $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
                 $finalPenerimaan->save();

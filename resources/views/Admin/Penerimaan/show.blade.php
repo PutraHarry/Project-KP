@@ -106,7 +106,7 @@
                                             <span class="badge badge-danger">Final</span>                       
                                           @endif    
                                         </td>                                        
-                                        <td class="text-center">x
+                                        <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tpo->id }}" class="btn btn-warning btn-icon-split">
                                             <span class="icon">
                                                 <i class="fas fa-edit"></i>

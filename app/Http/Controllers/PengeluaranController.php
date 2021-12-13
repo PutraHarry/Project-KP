@@ -204,23 +204,18 @@ class PengeluaranController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'tglPengeluaran' => 'required',
-            'kodePenggunaan' => 'required',
             'kodePengeluaran' => 'required'
         ]);
 
         if($validator->fails()){
             return back()->withErrors($validator);
         }
-
-        $penggunaanData = PenggunaanModel::find($idPenggunaan);
-        //dd($Penerimaandata);
        
         //dd($dpengeluaran);
         $pengeluaran = PengeluaranModel::find($idPengeluaran);
         $pengeluaran->kode_pengeluaran = $request->kodePengeluaran;
         $pengeluaran->tgl_keluar = $request->tglPengeluaran;
         $pengeluaran->status_pengeluaran = 'final';
-        $pengeluaran->total = $penggunaanData->total;
         $pengeluaran->ket_pengeluaran = $request->ketPengeluaran;
         $pengeluaran->update();
 
@@ -228,7 +223,7 @@ class PengeluaranController extends Controller
 
         foreach ($dpengeluaran as $dp) {
             $barangUnit = BarangUnitModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $dp->id_barang)->first();
-            // dd($barangOPD);
+            // dd($barangunit);
             
             $finalPengeluaran = BarangUnitModel::find($barangUnit->id);
             $finalPengeluaran->qty = $finalPengeluaran->qty - $dp->qty;
