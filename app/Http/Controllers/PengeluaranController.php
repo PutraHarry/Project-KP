@@ -216,7 +216,6 @@ class PengeluaranController extends Controller
         //dd($Penerimaandata);
        
         //dd($dpengeluaran);
-
         $pengeluaran = PengeluaranModel::find($idPengeluaran);
         $pengeluaran->kode_pengeluaran = $request->kodePengeluaran;
         $pengeluaran->tgl_keluar = $request->tglPengeluaran;
