@@ -85,7 +85,6 @@ class SaldoAwalController extends Controller
         $saldoawal->status_saldo = 'draft';
         $saldoawal->ket_saldo = $request->ket_saldo;
         $saldoawal->id_unit = Auth::user()->unit->id;
-        $saldoawal->id_opd = Auth::user()->opd->id;
         $saldoawal->id_periode = $dataPeriodeAktif->id;
         $saldoawal->save();
         
