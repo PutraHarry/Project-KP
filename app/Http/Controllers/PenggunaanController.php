@@ -247,6 +247,7 @@ class PenggunaanController extends Controller
                 $finalPenerimaan->update();
             } else{
                 $finalPenerimaan = new BarangUnitModel();
+                $finalPenerimaan->id_unit = Auth::user()->unit->id;
                 $finalPenerimaan->id_barang = $dp->id_barang;
                 $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
                 $finalPenerimaan->save();
