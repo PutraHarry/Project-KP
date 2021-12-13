@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/tabel', 'TestController@testTabel');
-Route::get('/tabel/getDataTabel', 'TestController@testDataTabel');
-Route::get('/test', 'TestController@test');
-Route::get('/coba', 'TestController@tabel');
+// Route::get('/tabel', 'TestController@testTabel');
+// Route::get('/tabel/getDataTabel', 'TestController@testDataTabel');
+// Route::get('/test', 'TestController@testDataTabel');
+// Route::get('/coba', 'TestController@tabel');
+// Route::get('/coba1/{id}', 'TestController@getDataSaldoAwal');
+// Route::get('/coba2/{id}', 'TestController@getDataPenerimaan');
+// Route::get('/coba3/{id}', 'TestController@getDataPengeluaran');
+// Route::get('/coba4/{id}', 'TestController@getDataBarangOPD');
 
 
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
@@ -121,3 +125,10 @@ Route::post('/pemusnahan/delete/{id}','PemusnahanController@deletePemusnahan')->
 Route::post('/pemusnahan/final/{idPenggunaan}/detail/{idOpname}', 'PemusnahanController@finalPemusnahan')->name('finalPemusnahan')->middleware("permission:Final Pemusnahan");
 
 //LAPORAN
+Route::get('/laporan', 'LaporanController@showLaporan')->name('Laporan');
+Route::get('/laporan/laporan-persediaan-opd', 'LaporanController@laporanOPD')->name('laporanOPD');
+Route::get('/laporan/getDataTabel/{idOPD}/{idPeriode}', 'LaporanController@getTabel')->name('getTabel');
+Route::get('/coba1/{id}/{idOPD}/{idPeriode}', 'LaporanController@getDataSaldoAwal');
+Route::get('/coba2/{id}', 'LaporanController@getDataPenerimaan');
+Route::get('/coba3/{id}', 'LaporanController@getDataPengeluaran');
+Route::get('/coba4/{id}', 'LaporanController@getDataBarangOPD');
