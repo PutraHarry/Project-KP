@@ -182,7 +182,6 @@ class PengeluaranController extends Controller
         $pengeluaran = PengeluaranModel::find($id);
         $pengeluaran->kode_pengeluaran = $request->kode_pengeluaran;
         $pengeluaran->tgl_keluar = $request->tgl_input;
-        $pengeluaran->id_penggunaan = $request->id_penggunaan;
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
         $pengeluaran->id_m_kegiatan = $request->kegiatan;
         //dd($penggunaan);
@@ -201,7 +200,7 @@ class PengeluaranController extends Controller
         return redirect('/pengeluaran')->with('statusInput', 'Delete Success');
     }
 
-    public function finalPengeluaran($idPengeluaran, $idPenggunaan, Request $request)
+    public function finalPengeluaran($idPengeluaran, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'tglPengeluaran' => 'required',
@@ -221,7 +220,6 @@ class PengeluaranController extends Controller
         $pengeluaran = PengeluaranModel::find($idPengeluaran);
         $pengeluaran->kode_pengeluaran = $request->kodePengeluaran;
         $pengeluaran->tgl_keluar = $request->tglPengeluaran;
-        $pengeluaran->id_penggunaan = $idPenggunaan;
         $pengeluaran->status_pengeluaran = 'final';
         $pengeluaran->total = $penggunaanData->total;
         $pengeluaran->ket_pengeluaran = $request->ketPengeluaran;

@@ -11,7 +11,7 @@
         <a href="#" class="nav-link">Contact</a>
       </li>-->
       <li class="nav-item d-none d-sm-inline-block">
-        <a class="nav-link">Periode Aktif : {{ $periodeAktif }}</a>
+        <a class="nav-link">Periode Aktif :</a>
       </li>
     </ul>
 

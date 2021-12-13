@@ -278,10 +278,6 @@ Edit Pengeluaran Baru
                     <input type="text" class="form-control" name="kodePengeluaran" id="kodePengeluaran" placeholder="Kode Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
-                    <label>Kode Penggunaan</label>
-                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penerimaan" value="" readonly>
-                  </div>
-                  <div class="form-group">
                     <label>Tanggal Pengeluaran</label>
                     <input type="text" class="form-control" name="tglPengeluaran" id="tglPengeluaran" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
@@ -379,7 +375,7 @@ Edit Pengeluaran Baru
       }
     });
     //console.log(idEdit);
-    $("#finalPengeluaran").attr("action", "/pengeluaran/final/" + idEdit + "/detail/" + idPenggunaan);
+    $("#finalPengeluaran").attr("action", "/pengeluaran/final/" + idEdit);
     $('#kodePengeluaran').val($('#kode_pengeluaran').val());
     $('#tglPengeluaran').val($('#tgl_input').val());
     $('#ketPengeluaran').val($('#ket_pengeluaran').val());
