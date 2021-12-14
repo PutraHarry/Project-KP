@@ -55,7 +55,7 @@
                 <div class="card-header">
                   <h3 class="card-title">List Data Saldo</h3>
                     <div class="card-tools">
-                      @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB', 'PPBP']))
+                      @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB']))
                         <a href="/saldoawal/create" class="btn btn-primary btn-icon-split">
                             <span class="icon">
                                 <i class="fas fa-plus"></i>

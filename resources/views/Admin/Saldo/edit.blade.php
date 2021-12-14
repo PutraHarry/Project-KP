@@ -156,19 +156,21 @@ Edit Saldo Awal
                                             <thead>
                                                 <tr class="text-center">
                                                     <th width="40px">No.</th>
-                                                    <th width="400px">Barang</th>
+                                                    <th width="300px">Kategori Barang</th><!--ini tambahan baru-->
+                                                    <th width="300px">Barang</th>
                                                     <th width="120px">Qty</th>
-                                                    <th>Satuan</th>
-                                                    <th>Harga</th>
-                                                    <th>Total</th>
+                                                    <th width="120px">Satuan</th>
+                                                    <th width="120px">Harga</th>
+                                                    <th width="120px">Total</th>
                                                     <th width="200px">Keterangan</th>
-                                                    <th>Aksi</th>
+                                                    <th width="100px">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach($detailSaldoAwal as $dsa)
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration }}</td>
+                                                    <td>kategori barang</td><!--ini tambahan baru-->
                                                     <td> {{ $dsa->barang->nama_m_barang }} </td>
                                                     <td> {{ $dsa->qty }} </td>
                                                     <td> {{ $dsa->barang->satuan_m_barang }} </td>
@@ -191,6 +193,13 @@ Edit Saldo Awal
                                                 @if ($saldoawal->status_saldo == 'draft')
                                                     <tr>
                                                         <td class="text-center">1</td>
+                                                        <td>
+                                                            <div class="form-group"><!--ini tambahan baru-->
+                                                              <select class="select2" name="kategori_barang" id="kategori_barang" data-placeholder="Pilih Jenis Barang" style="width: 100%;">
+                                                                <option value="place holder">Place Holder</option>
+                                                              </select>
+                                                            </div>
+                                                          </td>
                                                         <td>
                                                             <div class="form-group">
                                                                 <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">

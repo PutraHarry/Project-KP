@@ -155,19 +155,21 @@ Edit Opname
                       <thead>
                         <tr class="text-center">
                           <th width="40px">No.</th>
-                          <th width="400px">Barang</th>
+                          <th width="300px">Kategori Barang</th><!--ini tambahan baru-->
+                          <th width="300px">Barang</th>
                           <th width="120px">Qty</th>
-                          <th>Satuan</th>
-                          <th>Harga</th>
-                          <th>Total</th>
+                          <th width="120px">Satuan</th>
+                          <th width="120px">Harga</th>
+                          <th width="120px">Total</th>
                           <th width="200px">Keterangan</th>
-                          <th>Aksi</th>
+                          <th width="100px">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach ($detailOpname as $do)
                           <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>kategori barang Placeholder</td><!--ini tambahan baru-->
                             <td>{{ $do->barang->nama_m_barang }}</td>
                             <td>{{ $do->qty }}</td>
                             <td>{{ $do->barang->satuan_m_barang }}</td>
@@ -191,6 +193,15 @@ Edit Opname
                         @if($topname->status_opname == 'draft')
                           <tr>
                             <td class="text-center"></td>
+                            <td>
+                              <div class="form-group"><!--ini tambahan baru-->
+                                <select class="select2" name="kategori_barang" id="kategori_barang" data-placeholder="Pilih Kategori Barang" style="width: 100%;">
+                                  
+                                    <option value="placeholder kategori barang">Ini Kategori Placeholder</option>
+                                  
+                                </select>
+                              </div>
+                            </td>
                             <td>
                               <div class="form-group">
                                 <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
