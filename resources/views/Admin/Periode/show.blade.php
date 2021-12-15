@@ -63,12 +63,12 @@
                           <span class="text">Periode Baru</span>
                       </a>
                     @endif
-                      <a href="#" class="btn btn-success btn-icon-split">
+                      {{-- <a href="#" class="btn btn-success btn-icon-split">
                           <span class="icon text-white-50">
                               <i class="fas fa-download"></i>
                           </span>
                           <span class="text">Ekspor</span>
-                      </a>
+                      </a> --}}
                   </div>
               </div>
               <div class="card-body">

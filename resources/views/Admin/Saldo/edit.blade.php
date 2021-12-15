@@ -67,19 +67,21 @@ Edit Saldo Awal
                                 <div class="card-header">
                                     <h3 class="card-title">Edit Data Saldo </h3>
                                     <div class="card-tools">
-                                        @if ($saldoawal->status_saldo == 'draft')
-                                            <button type="submit" class="btn btn-danger btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-edit"></i>
-                                                </span>
-                                                <span class="text">Draft</span>
-                                            </button>
-                                            <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $saldoawal->total }})">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-check"></i>
-                                                </span>
-                                                <span class="text">Final</span>
-                                            </button>
+                                        @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB']))
+                                            @if ($saldoawal->status_saldo == 'draft')
+                                                <button type="submit" class="btn btn-danger btn-icon-split">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-edit"></i>
+                                                    </span>
+                                                    <span class="text">Draft</span>
+                                                </button>
+                                                <button type="button" class="btn btn-success btn-icon-split" onclick="statusFinal({{ $idEdit }}, {{ $saldoawal->total }})">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                                                    <span class="text">Final</span>
+                                                </button>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>
@@ -94,7 +96,7 @@ Edit Saldo Awal
                                                 <div class="form-group">
                                                     <label>Tanggal Saldo:</label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}" @if($saldoawal->status_saldo == 'final')  @endif readonly>
+                                                        <input type="date" class="form-control" name="tgl_input" id="tgl_input" value="{{ $saldoawal->tgl_input }}" @if($saldoawal->status_saldo == 'final') readonly @endif >
                                                     </div>  
                                                 </div>  
                                             </div>

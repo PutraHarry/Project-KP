@@ -29,9 +29,15 @@ class SaldoAwalController extends Controller
             $periodeAktif = "-";
         }
 
-        $tsaldo = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+        if (Auth::user()->jabatan->jabatan == 'PPBPB') {
+            $saldoawal = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+        } elseif (Auth::user()->jabatan->jabatan == 'PPBP') {
+            $saldoawal = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->where('status_saldo', 'final')->get();
+        } else {
+            $saldoawal = SaldoAwalModel::where('id_periode', $dataPeriodeAktif->id)->where('status_saldo', 'final')->get();
+        }
         
-        return view("Admin.Saldo.show", compact("tsaldo", "periodeAktif"));
+        return view("Admin.Saldo.show", compact("periodeAktif", "saldoawal"));
     }
 
     public function addSaldoAwal()
@@ -84,6 +90,7 @@ class SaldoAwalController extends Controller
         $saldoawal->tgl_input = $request->tgl_input;
         $saldoawal->status_saldo = 'draft';
         $saldoawal->ket_saldo = $request->ket_saldo;
+        $saldoawal->id_opd = Auth::user()->opd->id;
         $saldoawal->id_unit = Auth::user()->unit->id;
         $saldoawal->id_periode = $dataPeriodeAktif->id;
         $saldoawal->save();

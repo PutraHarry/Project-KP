@@ -31,16 +31,16 @@ class PenggunaanController extends Controller
         }
 
         if (Auth::user()->jabatan->jabatan == 'PPBPB') {
-            $tpenggunaan = PenggunaanModel::with('gudangOPD', 'gudangUnit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+            $tpenggunaan = PenggunaanModel::with('opd', 'unit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
             //dd($tpenggunaan);
         } elseif (Auth::user()->jabatan->jabatan == 'KASI') {
-            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['final', 'approved'])->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+            $tpenggunaan = PenggunaanModel::with('opd', 'unit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
         } elseif (Auth::user()->jabatan->jabatan == 'PPBP') {
-            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['approved', 'disetujui_ppbp'])->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+            $tpenggunaan = PenggunaanModel::with('opd', 'unit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
         } elseif (Auth::user()->jabatan->jabatan == 'KASUBAG') {
-            $tpenggunaan = PenggunaanModel::whereIn('status_penggunaan', ['disetujui_ppbp', 'disetujui_atasanLangsung'])->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+            $tpenggunaan = PenggunaanModel::with('opd', 'unit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
         } else {
-            $tpenggunaan = PenggunaanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->opd->id])->get();
+            $tpenggunaan = PenggunaanModel::with('opd', 'unit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
         }
         
         return view("Admin.Penggunaan.show", compact('periodeAktif', 'tpenggunaan'));
@@ -105,6 +105,7 @@ class PenggunaanController extends Controller
         $penggunaan->status_penggunaan = $request->status_saldo;
         $penggunaan->ket_penggunaan = $request->ket_penggunaan;
         $penggunaan->id_periode = $dataPeriodeAktif->id;
+        $penggunaan->id_opd = Auth::user()->opd->id;
         $penggunaan->id_unit = Auth::user()->unit->id;
         //dd($penggunaan);
         $penggunaan->save();

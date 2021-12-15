@@ -115,8 +115,7 @@
               </a>
             </li>
           @endif
-          
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD', 'PPBPB']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD', 'PPBPB', 'PPBP']))
             <li class="nav-item">
               <a href="/opname" class="nav-link">
                 <i class="nav-icon fas fa-warehouse"></i>
@@ -126,8 +125,7 @@
               </a>
             </li>
           @endif
-
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD', 'PPBPB']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD', 'PPBPB', 'PPBP']))
             <li class="nav-item">
               <a href="/pemusnahan" class="nav-link">
                 <i class="nav-icon fas fa-fire"></i>
@@ -157,7 +155,7 @@
               </a>
             </li>
           @endif
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'KASI', 'KASUBAG', 'PPBP', 'Admin BPKAD']))
+          {{-- @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'KASI', 'KASUBAG', 'PPBP', 'Admin BPKAD']))
             <li class="nav-header">PELAPORAN</li>
             <li class="nav-item">
               <a href="/laporan" class="nav-link">
@@ -167,7 +165,7 @@
                 </p>
               </a>
             </li>
-          @endif
+          @endif --}}
           <li class="nav-header">USER</li>
           <li class="nav-item">
             <a href="/logout" class="nav-link">

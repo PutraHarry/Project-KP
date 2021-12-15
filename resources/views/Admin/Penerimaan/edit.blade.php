@@ -211,13 +211,18 @@ Edit Penerimaan Baru
                             <td> {{ $dpen->barang->harga_m_barang }} </td>
                             <td> {{ $dpen->harga }} </td>
                             <td> {{ $dpen->keterangan }} </td>
-                            <td class="text-center">
+                            @if ($dpen->status_penerimaan == 'draft')
+                              <td class="text-center">
                                 <div class="btn-group btn-group-sm">
                                     <button class="btn btn-warning" type="button" onclick="editpenerimaan({{ $dpen->id }},{{ $dpen->barang->id }},{{ $dpen->qty }},'{{ $dpen->barang->satuan_m_barang }}',{{ $dpen->barang->harga_m_barang }},'{{ $dpen->keterangan }}')">
                                         <i class="fas fa-edit"></i>
                                       </button>
                                 </div>
-                            </td>
+                              </td>
+                            @else
+                              <td class="text-center"></td>
+                            @endif
+                            
                         </tr>
                         @endforeach
                         @if($tpenerimaan->status_penerimaan == 'draft')
