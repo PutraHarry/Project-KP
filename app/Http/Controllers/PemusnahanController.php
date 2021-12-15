@@ -28,7 +28,11 @@ class PemusnahanController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+        if (Auth::user()->jabatan->jabatan == 'PPBPB') {
+            $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+        } else {
+            $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->where('status_pemusnahan', 'final')->get();
+        }
 
         return view("Admin.Pemusnahan.show", compact('periodeAktif', 'tpemusnahan'));
     }
@@ -90,6 +94,7 @@ class PemusnahanController extends Controller
         $pemusnahan->status_pemusnahan = $request->status_pemusnahan;
         $pemusnahan->ket_pemusnahan = $request->ket_pemusnahan;
         $pemusnahan->id_periode = $dataPeriodeAktif->id;
+        $pemusnahan->id_opd = Auth::user()->opd->id;
         $pemusnahan->id_unit = Auth::user()->unit->id;
         //dd($penggunaan);
         $pemusnahan->save();

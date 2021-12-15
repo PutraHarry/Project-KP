@@ -27,7 +27,11 @@ class OpnameController extends Controller
             $periodeAktif = "-";
         }
 
-        $topname = OpnameModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+        if (Auth::user()->jabatan->jabatan == 'PPBP') {
+            $topname = OpnameModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+        } else {
+            $topname = OpnameModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->whereIn('status_opname', ['final', 'digunakan'])->get();
+        }
 
         return view("Admin.Opname.show", compact("periodeAktif", "topname"));
     }
@@ -82,6 +86,7 @@ class OpnameController extends Controller
         $opname->status_opname = $request->status_opname;
         $opname->ket_opname = $request->ket_opname;
         $opname->id_periode = $dataPeriodeAktif->id;
+        $opname->id_opd = Auth::user()->opd->id;
         $opname->id_unit = Auth::user()->unit->id;
         $opname->save();
         

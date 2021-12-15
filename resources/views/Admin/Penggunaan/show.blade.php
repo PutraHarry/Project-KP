@@ -84,8 +84,8 @@
                           <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $tp->kode_penggunaan}}</td>
-                            <td>{{ $tp->gudangOPD->nama_gudang }}</td>
-                            <td>{{ $tp->gudangUnit->nama_gudang }}</td>
+                            <td>{{ $tp->opd->nama_opd }}</td>
+                            <td>{{ $tp->unit->unit }}</td>
                             <td>{{ $tp->tgl_penggunaan }}</td>
                             <td>
                               @if($tp->status_penggunaan == "draft")

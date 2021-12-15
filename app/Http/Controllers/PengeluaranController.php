@@ -30,7 +30,13 @@ class PengeluaranController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->get();
+        if (Auth::user()->jabatan->jabatan == 'PPBPB') {
+            $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->where('id_unit', [Auth::user()->unit->id])->get();
+        } else {
+            $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->where('id_opd', [Auth::user()->opd->id])->where('status_pengeluaran', 'final')->get();
+        }
+
+        
 
         return view("Admin.Pengeluaran.show", compact('periodeAktif', 'tpengeluaran'));
     }
@@ -90,6 +96,7 @@ class PengeluaranController extends Controller
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
         $pengeluaran->id_m_kegiatan = $request->kegiatan;
         $pengeluaran->id_periode = $dataPeriodeAktif->id;
+        $pengeluaran->id_opd = Auth::user()->opd->id;
         $pengeluaran->id_unit = Auth::user()->unit->id;
         $pengeluaran->save();
 
