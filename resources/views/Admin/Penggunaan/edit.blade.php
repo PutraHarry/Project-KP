@@ -182,13 +182,14 @@ Edit Penggunaan
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="text-center">
-                                        <th width="40px">No.</th>
-                                        <th width="400px">Barang</th>
-                                        <th width="120px">Qty</th>
-                                        <th>Satuan</th>
-                                        <th>Harga</th>
-                                        <th>Total</th>
-                                        <th width="200px">Keterangan</th>
+                                      <th width="40px">No.</th>
+                                      <th width="300px">Kategori Barang</th><!--ini tambahan baru sama cek juga di jquery variabel #data ada tak tambah-->
+                                      <th width="300px">Barang</th>
+                                      <th width="120px">Qty</th>
+                                      <th width="120px">Satuan</th>
+                                      <th width="120px">Harga</th>
+                                      <th width="120px">Total</th>
+                                      <th width="200px">Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody id="data">
@@ -410,7 +411,7 @@ Edit Penggunaan
           response.forEach(element => {
             count = count + 1;
             total_harga = total_harga + element['harga'];
-              $('#data').append('<tr><td class="text-center">'+count+'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
+              $('#data').append('<tr><td class="text-center">'+count+'</td><td>Ini Placeholder</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
           });
           $('#total_harga').text(total_harga);
           total_harga = 0;
@@ -432,7 +433,7 @@ Edit Penggunaan
                   response.forEach(element => {
                     count = count + 1;
                     total_harga = total_harga + element['harga'];
-                      $('#data').append('<tr><td class="text-center">' + count + '</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
+                      $('#data').append('<tr><td class="text-center">' + count + '</td><td>Ini Placeholder</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
                   });
                   $('#total_harga').text(total_harga);
                   total_harga = 0;
