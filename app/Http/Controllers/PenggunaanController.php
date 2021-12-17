@@ -100,8 +100,6 @@ class PenggunaanController extends Controller
         $penggunaan->kode_penggunaan = $penggunaanKode;
         $penggunaan->tgl_penggunaan = $request->tgl_input;
         $penggunaan->id_penerimaan = $request->id_penerimaan;
-        $penggunaan->id_gudang_opd = Auth::user()->opd->gudangOPD->id;
-        $penggunaan->id_gudang_unit = Auth::user()->unit->gudangUnit->id;
         $penggunaan->status_penggunaan = $request->status_saldo;
         $penggunaan->ket_penggunaan = $request->ket_penggunaan;
         $penggunaan->id_periode = $dataPeriodeAktif->id;
@@ -241,6 +239,7 @@ class PenggunaanController extends Controller
             $idBarangOPD->update(); 
 
             $barangUnit = BarangUnitModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $dp->id_barang)->first();
+            $dataBarang = BarangModel::where('id', $dp->id_barang)->first();
             // dd($barangOPD);
             if ($barangUnit) {
                 $finalPenerimaan = BarangUnitModel::find($barangUnit->id);
@@ -249,6 +248,7 @@ class PenggunaanController extends Controller
             } else{
                 $finalPenerimaan = new BarangUnitModel();
                 $finalPenerimaan->id_unit = Auth::user()->unit->id;
+                $finalPenerimaan->id_jenis = $dataBarang->id_jenis;
                 $finalPenerimaan->id_barang = $dp->id_barang;
                 $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
                 $finalPenerimaan->save();

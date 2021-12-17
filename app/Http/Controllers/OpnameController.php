@@ -10,6 +10,8 @@ use App\OpnameModel;
 use App\DetailOpnameModel;
 use App\BarangModel;
 use App\BarangUnitModel;
+use App\JenisBarangModel;
+
 
 class OpnameController extends Controller
 {
@@ -108,9 +110,10 @@ class OpnameController extends Controller
         $tbarang = BarangModel::get();
         $idEdit = $id;
 
-        $barangUnit = BarangUnitModel::with('barang')->get();
+        $barangUnit = BarangUnitModel::with('barang')->where('id_unit', Auth::user()->unit->id)->get();
+        $jenisBarang = JenisBarangModel::get();
 
-        return view("Admin.Opname.edit", compact("periodeAktif", "topname", "tbarang", "detailOpname", "idEdit", 'barangUnit'));
+        return view("Admin.Opname.edit", compact("periodeAktif", "topname", "tbarang", "detailOpname", "idEdit", 'barangUnit', 'jenisBarang'));
     }
 
     public function updateOpname($id, Request $request)
@@ -134,13 +137,20 @@ class OpnameController extends Controller
         return redirect()->route('opname')->with('statusInput', 'Update Success');
     }
 
+    public function getBarang($id)
+    {
+        $barangUnit = BarangUnitModel::with('barang')->where('id_unit', Auth::user()->unit->id)->where('id_jenis', $id)->get();
+
+        return response()->json($barangUnit);
+    }
+
     public function insertDetailOpname($id, Request $request)
     {
         $dataDetailBarang = BarangUnitModel::with('barang')->where('id_barang', $request->id_barang)->first();
         //dd($dataDetailPenggunaan);
 
         if ($request->qty > $dataDetailBarang->qty) {
-            return redirect()->back()->with(['failed' => 'Jumlah melebihi dengan stok']);
+            return redirect()->back()->with('statusInput', 'Barang yang dimasukkan melebihi stok');
         }
 
         $dopname = new DetailOpnameModel();
@@ -176,6 +186,21 @@ class OpnameController extends Controller
         $mopname->total = $mopname->total + $gapTotal;
         $mopname->update();
         return redirect()->back();
+    }
+
+    public function deleteDetailOpname($id)
+    {
+        //dd($id);
+        $detailOpname = DetailOpnameModel::find($id);
+        $totaldelete = $detailOpname->harga;
+        $opname = OpnameModel::where('id', $detailOpname->id_opname)->first();
+        $opname->total = $opname->total - $totaldelete;
+        $opname->update();
+
+        $dopname = DetailOpnameModel::find($id);
+        $dopname->delete();
+        
+        return response()->json();
     }
 
     public function deleteOpname($id)

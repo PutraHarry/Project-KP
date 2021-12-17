@@ -172,7 +172,7 @@ Edit Saldo Awal
                                                 @foreach($detailSaldoAwal as $dsa)
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                                    <td>kategori barang</td><!--ini tambahan baru-->
+                                                    <td> {{ $dsa->barang->jenisBarang->jenis_barang }} </td><!--ini tambahan baru-->
                                                     <td> {{ $dsa->barang->nama_m_barang }} </td>
                                                     <td> {{ $dsa->qty }} </td>
                                                     <td> {{ $dsa->barang->satuan_m_barang }} </td>
@@ -182,8 +182,13 @@ Edit Saldo Awal
                                                     @if ($saldoawal->status_saldo == 'draft')
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm">
-                                                                <button class="btn btn-warning" type="button" onclick="editsaldoawal({{ $dsa->id }},{{ $dsa->barang->id }},{{ $dsa->qty }},'{{ $dsa->barang->satuan_m_barang }}',{{ $dsa->barang->harga_m_barang }},'{{ $dsa->keterangan }}')">
+                                                                <button class="btn btn-warning" type="button" onclick="editsaldoawal({{ $dsa->id }},{{ $dsa->barang->jenisBarang->id }},{{ $dsa->barang->id }},{{ $dsa->qty }},'{{ $dsa->barang->satuan_m_barang }}',{{ $dsa->barang->harga_m_barang }},'{{ $dsa->keterangan }}')">
                                                                     <i class="fas fa-edit"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm">
+                                                                <button class="btn btn-danger" type="button" value="{{ $dsa->id }}" id="btn_delete{{ $dsa->id }}">
+                                                                    <i class="fas fa-trash"></i>
                                                                 </button>
                                                             </div>
                                                         </td>
@@ -198,16 +203,15 @@ Edit Saldo Awal
                                                         <td>
                                                             <div class="form-group"><!--ini tambahan baru-->
                                                               <select class="select2" name="kategori_barang" id="kategori_barang" data-placeholder="Pilih Jenis Barang" style="width: 100%;">
-                                                                <option value="place holder">Place Holder</option>
-                                                              </select>
+                                                                @foreach ($jenisBarang as $jb)
+                                                                    <option value="{{ $jb->id }}">{{ $jb->jenis_barang }}</option>
+                                                                @endforeach
+                                                                </select>
                                                             </div>
                                                           </td>
                                                         <td>
                                                             <div class="form-group">
                                                                 <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                                                                @foreach ($tbarang as $tb)
-                                                                    <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
-                                                                @endforeach
                                                                 </select>
                                                             </div>
                                                         </td>
@@ -271,9 +275,16 @@ Edit Saldo Awal
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <select class="select2" name="id_barang" id="edit_id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
+                            <select class="select2" name="kategori_barang" id="edit_kategori_barang" data-placeholder="Pilih Barang" style="width: 100%;" disabled>
+                            @foreach ($jenisBarang as $jb)
+                                <option value="{{ $jb->id }}">{{ $jb->jenis_barang }}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="select2" name="id_barang" id="edit_id_barang" data-placeholder="Pilih Barang" style="width: 100%;" disabled>
                             @foreach ($tbarang as $tb)
-                            <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
+                                <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
                             @endforeach
                             </select>
                         </div>
@@ -281,10 +292,10 @@ Edit Saldo Awal
                             <input type="number" class="form-control" name="qty" id="edit_qty" placeholder="Kuantitas" value="">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="satuan" id="edit_satuan" placeholder="Satuan">
+                            <input type="text" class="form-control" name="satuan" id="edit_satuan" placeholder="Satuan" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" name="harga" id="edit_harga" placeholder="Harga">
+                            <input type="number" class="form-control" name="harga" id="edit_harga" placeholder="Harga" readonly>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="total" id="edit_total" placeholder="Kehitung otomatis" readonly>
@@ -372,22 +383,46 @@ Edit Saldo Awal
     $("input[data-bootstrap-switch]").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
-
   })
 
+  var jenis_id = $('#kategori_barang').val();
+//   console.log(jenis_id);
+  $.ajax({
+    type: 'GET',
+    url: '/saldoawal/barang/' + jenis_id,
+    success: function (response){
+        // console.log(response);
+        $('#id_barang').empty();
+        $('#id_barang').append('<option value=""> Pilih Barang </option>');
+        response.forEach(element => {
+            $('#id_barang').append('<option value="' + element['id'] + '"' +'>' + element['nama_m_barang'] + '</option>');
+        });
+    }
+  });
 
-    //Data Barang
-    var barang_id = $('#id_barang').val();
-    var barangs = {!! json_encode($tbarang->toArray()) !!}
-    barangs.forEach(element => {
-        if(element.id == barang_id){
-        $('#harga').val(element.harga_m_barang);
-        $('#satuan').val(element.satuan_m_barang);
-        }
-    });
+  $('#kategori_barang').change(function() {
+    if($('#kategori_barang').val() != ""){ 
+        let id = $(this).val();
+        $.ajax({
+            type: 'GET',
+            url: '/saldoawal/barang/'+id,
+            success: function (response){
+            // console.log(response);
+                $('#id_barang').empty();
+                $('#id_barang').append('<option value=""> Pilih Barang </option>');
+                response.forEach(element => {
+                $('#id_barang').append('<option value="' + element['id'] + '"' +'>' + element['nama_m_barang'] + '</option>');
+                });
+            }
+        });
+    } 
+  });
+</script>
 
+<script>
     $('#id_barang').change(function(){
         var id_barang = $('#id_barang').val();
+        console.log(id_barang);
         var barang = {!! json_encode($tbarang->toArray()) !!}
         barang.forEach(element => {
             if(element.id == id_barang){
@@ -401,7 +436,23 @@ Edit Saldo Awal
     $('#qty').keyup(function(){
         $('#total').val($('#qty').val() * $('#harga').val());
     })
-  
+</script>
+
+<script>
+    var id_detail = {!! json_encode($detailSaldoAwal->toArray()) !!}
+    id_detail.forEach(element => {
+        $('#btn_delete'+element.id).click(function(){
+            var id = $(this).val();
+            console.log(id);
+            $.ajax({
+                type: 'GET',
+                url: '/saldoawal/deleteDetail/'+id,
+                success:function(response){
+                    location.reload();
+                }
+            });
+        })
+    });
 </script>
 
 <script>
@@ -419,8 +470,9 @@ Edit Saldo Awal
 </script>
   
 <script>
-    function editsaldoawal(id, id_barang, qty, satuan, harga, keterangan) {
+    function editsaldoawal(id, id_jenis, id_barang, qty, satuan, harga, keterangan) {
         $("#edit_form").attr("action", "/saldoawal/editDetail/"+id);
+        $('#edit_kategori_barang').val(id_jenis).change();
         $('#edit_id_barang').val(id_barang).change();
         $('#edit_qty').val(qty);
         $('#edit_satuan').val(satuan);
@@ -429,6 +481,25 @@ Edit Saldo Awal
         $('#edit_total').val($('#edit_qty').val() * $('#edit_harga').val());
         $('#modal-sedit').modal('show');
     }
+    
+    $('#edit_kategori_barang').change(function() {
+        if($('#edit_kategori_barang').val() != ""){ 
+            let id = $(this).val();
+            console.log(id);
+            $.ajax({
+                type: 'GET',
+                url: '/saldoawal/barang/'+id,
+                success: function (response){
+                // console.log(response);
+                    $('#edit_id_barang').empty();
+                    // $('#edit_id_barang').append('<option value=""></option>');
+                    response.forEach(element => {
+                    $('#edit_id_barang').append('<option value="' + element['id'] + '"' +'>' + element['nama_m_barang'] + '</option>');
+                    });
+                }
+            });
+        } 
+    });
 
     $('#edit_id_barang').change(function(){
         var id_barang = $('#edit_id_barang').val();

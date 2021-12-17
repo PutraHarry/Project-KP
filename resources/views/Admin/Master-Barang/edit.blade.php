@@ -77,7 +77,7 @@ Edit Barang
                         <label>Jenis Barang</label>
                         <select class="select2" name="jenis_barang" id="jenis_barang" data-placeholder="Pilih Unit Perangkat Daeerah" style="width: 100%;">
                           @foreach ($jenisBarang as $jb)
-                          <option value="{{ $jb }}" @if($dataBarang->jenis_m_barang == $jb) selected @endif>{{ $jb }}</option>
+                            <option value="{{ $jb->id }}" @if($dataBarang->id_jenis == $jb->id) selected @endif>{{ $jb->jenis_barang }}</option>
                           @endforeach
                         </select>
                     </div>

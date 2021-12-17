@@ -15,6 +15,7 @@ use App\PenggunaanModel;
 use App\TestModel;
 use App\AdminModel;
 use App\JabatanModel;
+use App\JenisBarangModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -78,7 +79,7 @@ class PenerimaanController extends Controller
 
     public function insertPenerimaan(Request $request)
     {
-        dd($request);
+        // dd($request);
 
         $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         $validator = Validator::make($request->all(), [
@@ -153,11 +154,12 @@ class PenerimaanController extends Controller
             $periodeAktif = "-";
         }
 
-        $detailPenerimaan = DetailPenerimaanModel::with('barang')->where('id_penerimaan',$id)->get();
+        $detailPenerimaan = DetailPenerimaanModel::with('barang.jenisBarang')->where('id_penerimaan',$id)->get();
+        $jenisBarang = JenisBarangModel::get();
 
         $idPPK = JabatanModel::where('jabatan', 'PPK')->first();
         $dataPPK = AdminModel::where('id_jabatan', $idPPK->id)->get();
-        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan', 'statusPenerimaan', 'detailPenerimaan', "program", "rekening", "dataPPK"));
+        return view("Admin.Penerimaan.edit", compact("periodeAktif", 'tpenerimaan', 'tbarang', 'idEdit', 'jenisPenerimaan', 'statusPenerimaan', 'detailPenerimaan', "program", "rekening", "dataPPK", "jenisBarang"));
     }
 
     public function updatePenerimaan($id, Request $request)
@@ -189,6 +191,13 @@ class PenerimaanController extends Controller
         $penerimaan->update();
         
         return redirect()->route('penerimaan')->with('statusInput', 'Update Success');
+    }
+
+    public function getBarang($id)
+    {
+        $barang = BarangModel::where('id_jenis', $id)->get();
+
+        return response()->json($barang);
     }
 
     public function insertDetailPenerimaan($id, Request $request)
@@ -231,6 +240,21 @@ class PenerimaanController extends Controller
         return redirect()->back();
     }
 
+    public function deleteDetailPenerimaan($id)
+    {
+        //dd($id);
+        $detailPenerimaan = DetailPenerimaanModel::find($id);
+        $totaldelete = $detailPenerimaan->harga;
+        $penerimaan = PenerimaanModel::where('id', $detailPenerimaan->id_penerimaan)->first();
+        $penerimaan->total = $penerimaan->total - $totaldelete;
+        $penerimaan->update();
+
+        $dpenerimaan = DetailPenerimaanModel::find($id);
+        $dpenerimaan->delete();
+        
+        return response()->json();
+    }
+
     public function deletePenerimaan($id)
     {
         $detailPenerimaan = DetailPenerimaanModel::where('id_penerimaan', $id)->delete();
@@ -255,6 +279,7 @@ class PenerimaanController extends Controller
 
         foreach ($dpenerimaan as $dp) {
             $barangOPD = BarangOPDModel::where('id_opd', Auth::user()->opd->id)->where('id_barang', $dp->id_barang)->first();
+            $dataBarang = BarangModel::where('id', $dp->id_barang)->first();
             // dd($barangOPD);
             if ($barangOPD) {
                 $finalPenerimaan = BarangOPDModel::find($barangOPD->id);
@@ -263,6 +288,7 @@ class PenerimaanController extends Controller
             } else{
                 $finalPenerimaan = new BarangOPDModel();
                 $finalPenerimaan->id_opd = Auth::user()->opd->id;
+                $finalPenerimaan->id_jenis = $dataBarang->id_jenis;
                 $finalPenerimaan->id_barang = $dp->id_barang;
                 $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
                 $finalPenerimaan->save();

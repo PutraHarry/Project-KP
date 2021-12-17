@@ -13,6 +13,7 @@ use App\DetailPengeluaranModel;
 use App\BarangUnitModel;
 use App\BarangModel;
 use App\KegiatanModel;
+use App\JenisBarangModel;
 
 class PengeluaranController extends Controller
 {
@@ -35,8 +36,6 @@ class PengeluaranController extends Controller
         } else {
             $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->where('id_opd', [Auth::user()->opd->id])->where('status_pengeluaran', 'final')->get();
         }
-
-        
 
         return view("Admin.Pengeluaran.show", compact('periodeAktif', 'tpengeluaran'));
     }
@@ -119,11 +118,19 @@ class PengeluaranController extends Controller
         $idEdit = $id;
         $kegiatan = KegiatanModel::get();
 
-        $barangUnit = BarangUnitModel::with('barang')->get();
+        $barangUnit = BarangUnitModel::with('barang')->where('id_unit', Auth::user()->unit->id)->get();
         //dd($barangPenggunaan);
-        $detailPengeluaran = DetailPengeluaranModel::with('barang')->where('id_pengeluaran',$id)->get();
+        $detailPengeluaran = DetailPengeluaranModel::with('barang.jenisBarang')->where('id_pengeluaran',$id)->get();
+        $jenisBarang = JenisBarangModel::get();
 
-        return view("Admin.Pengeluaran.edit", compact('periodeAktif', 'idEdit', 'tpengeluaran', 'tpenggunaan', 'barangUnit', 'tbarang', 'detailPengeluaran', 'kegiatan'));
+        return view("Admin.Pengeluaran.edit", compact('periodeAktif', 'idEdit', 'tpengeluaran', 'tpenggunaan', 'barangUnit', 'tbarang', 'detailPengeluaran', 'kegiatan', 'jenisBarang'));
+    }
+
+    public function getBarang($id)
+    {
+        $barangUnit = BarangUnitModel::with('barang')->where('id_unit', Auth::user()->unit->id)->where('id_jenis', $id)->get();
+
+        return response()->json($barangUnit);
     }
 
     public function insertDetailPengeluaran($id, Request $request)
@@ -132,7 +139,7 @@ class PengeluaranController extends Controller
         //dd($dataDetailPenggunaan);
 
         if ($request->qty > $dataDetailPenggunaan->qty) {
-            return redirect()->back()->with(['failed' => 'Jumlah melebihi dengan stok']);
+            return redirect()->back()->with('statusInput', 'Barang yang dimasukkan melebihi stok');
         }
         
         $dpengeluaran = new DetailPengeluaranModel();
@@ -195,6 +202,21 @@ class PengeluaranController extends Controller
         $pengeluaran->update();
 
         return redirect()->route('pengeluaran')->with('statusInput', 'Update Success');
+    }
+
+    public function deleteDetailPengeluaran($id)
+    {
+        //dd($id);
+        $detailPengeluaran = DetailPengeluaranModel::find($id);
+        $totaldelete = $detailPengeluaran->harga;
+        $pengeluaran = PengeluaranModel::where('id', $detailPengeluaran->id_pengeluaran)->first();
+        $pengeluaran->total = $pengeluaran->total - $totaldelete;
+        $pengeluaran->update();
+
+        $dpengeluaran = DetailPengeluaranModel::find($id);
+        $dpengeluaran->delete();
+        
+        return response()->json();
     }
 
     public function deletePengeluaran($id)
