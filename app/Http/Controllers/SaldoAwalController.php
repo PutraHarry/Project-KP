@@ -10,6 +10,7 @@ use App\PeriodeModel;
 use App\BarangOPDModel;
 use App\GudangOPDModel;
 use App\barangUnitModel;
+use App\JenisBarangModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -112,9 +113,11 @@ class SaldoAwalController extends Controller
             $periodeAktif = "-";
         }
 
-        $detailSaldoAwal = DetailSaldoAwalModel::with('barang')->where('id_saldo',$id)->get();
+        $detailSaldoAwal = DetailSaldoAwalModel::with('barang.jenisBarang')->where('id_saldo',$id)->get();
+        $jenisBarang = JenisBarangModel::get();
+        // dd($jenisBarang);
         
-        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang', 'idEdit', 'detailSaldoAwal', "periodeAktif"));
+        return view("Admin.Saldo.edit", compact('saldoawal', 'tbarang', 'idEdit', 'detailSaldoAwal', "periodeAktif", 'jenisBarang'));
     }
 
     public function updateSaldoAwal($id, Request $request)
@@ -133,6 +136,13 @@ class SaldoAwalController extends Controller
         $saldoawal->ket_saldo = $request->ket_saldo;
         $saldoawal->update();
         return redirect('/saldoawal')->with('statusInput', 'Update Success');
+    }
+
+    public function getBarang($id)
+    {
+        $barang = BarangModel::where('id_jenis', $id)->get();
+
+        return response()->json($barang);
     }
     
     public function insertDetailSaldoBarang($id, Request $request)
@@ -162,17 +172,29 @@ class SaldoAwalController extends Controller
         $oldTotal = $dsaldoawal->total;
         $gapTotal = $newTotal-$oldTotal;
 
-
-        $dsaldoawal->id_barang = $request->id_barang;
         $dsaldoawal->qty = $request->qty;
         $dsaldoawal->harga = $request->total;
-        $dsaldoawal->keterangan = $request->keterangan;
         $dsaldoawal->update();
 
         $msaldoawal = SaldoAwalModel::find($dsaldoawal->id_saldo);
         $msaldoawal->total = $msaldoawal->total + $gapTotal;
         $msaldoawal->update();
         return redirect()->back();
+    }
+
+    public function deleteDetailSaldoAwal($id)
+    {
+        //dd($id);
+        $detailSaldoAwal = DetailSaldoAwalModel::find($id);
+        $totaldelete = $detailSaldoAwal->harga;
+        $saldoawal = SaldoAwalModel::where('id', $detailSaldoAwal->id_saldo)->first();
+        $saldoawal->total = $saldoawal->total - $totaldelete;
+        $saldoawal->update();
+
+        $dsaldoawal = DetailSaldoAwalModel::find($id);
+        $dsaldoawal->delete();
+        
+        return response()->json();
     }
 
     public function deleteSaldoAwal($id)

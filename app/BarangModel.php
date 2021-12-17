@@ -9,11 +9,6 @@ class BarangModel extends Model
 {
     protected $table = 'tb_master_barang';
 
-    public function barangOPD()
-    {
-        return $this->hasMany(BarangOPDModel::class, 'id_barang', 'id');
-    }
-
     public function detailSaldoAwal()
     {
         return $this->hasMany(DetailSaldoAwalModel::class, 'id_barang', 'id');
@@ -32,5 +27,10 @@ class BarangModel extends Model
     public function detailOpname()
     {
         return $this->hasMany(DetailOpnameModel::class, 'id_barang', 'id');
+    }
+
+    public function jenisBarang()
+    {
+        return $this->belongsTo(JenisBarangModel::class, 'id_jenis', 'id');
     }
 }

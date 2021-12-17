@@ -72,10 +72,8 @@ Create Periode Baru
     
                     <div class="form-group">
                         <label>Perangkat Daerah</label>
-                        <select class="select2" name="id_opd" id="id_opd" data-placeholder="Pilih Perangkat Daeerah" style="width: 100%;">
-                        @foreach($topd as $to)
-                        <option value={{ $to->id }}>{{ $to->nama_opd }}</option>
-                        @endforeach
+                        <input type="text" class="form-control" name="id_opd" id="id_opd" value="{{ Auth::guard('admin')->user()->opd->id }}" placeholder="Input OPD" hidden>
+                        <input type="text" class="form-control" name="nama_opd" id="nama_opd" value="{{ Auth::guard('admin')->user()->opd->nama_opd }}" placeholder="Input OPD" readonly>
                         </select>
                     </div>
                     <div class="form-group">
@@ -86,7 +84,6 @@ Create Periode Baru
                         <div class="col-2">
                             <div class="form-group">
                                 <label>Tanggal Mulai:</label>
-            
                                 <div class="input-group">
                                 <input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai">
                                 </div>

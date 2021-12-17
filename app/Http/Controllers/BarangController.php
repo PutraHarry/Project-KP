@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\PeriodeModel;
 use App\BarangModel;
+use App\JenisBarangModel;
 
 
 class BarangController extends Controller
@@ -39,7 +40,7 @@ class BarangController extends Controller
             $periodeAktif = "-";
         }
         
-        $jenisBarang = ['KIB A', 'KIB B', 'KIB C', 'KIB D', 'KIB E', 'KIB F'];
+        $jenisBarang = JenisBarangModel::get();
         
         return view("Admin.Master-Barang.create", compact("periodeAktif", "jenisBarang"));
     }
@@ -60,7 +61,7 @@ class BarangController extends Controller
 
         $barang = new BarangModel();
         $barang->nama_m_barang = $request->nama_barang;
-        $barang->jenis_m_barang = $request->jenis_barang;
+        $barang->id_jenis = $request->jenis_barang;
         $barang->satuan_m_barang = $request->satuan;
         $barang->harga_m_barang = $request->harga;
         $barang->save();
@@ -80,7 +81,7 @@ class BarangController extends Controller
         
         $idEdit = $id;
         $dataBarang = BarangModel::find($id);
-        $jenisBarang = ['KIB A', 'KIB B', 'KIB C', 'KIB D', 'KIB E', 'KIB F'];
+        $jenisBarang = JenisBarangModel::get();
         
         return view("Admin.Master-Barang.edit", compact("periodeAktif", "dataBarang", "jenisBarang", "idEdit"));
     }
@@ -101,7 +102,7 @@ class BarangController extends Controller
 
         $barang = BarangModel::find($id);
         $barang->nama_m_barang = $request->nama_barang;
-        $barang->jenis_m_barang = $request->jenis_barang;
+        $barang->id_jenis = $request->jenis_barang;
         $barang->satuan_m_barang = $request->satuan;
         $barang->harga_m_barang = $request->harga;
         $barang->update();

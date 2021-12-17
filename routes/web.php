@@ -45,8 +45,10 @@ Route::get('/saldoawal/create', 'SaldoAwalController@addSaldoAwal')->name('creat
 Route::post('/saldoawal/insert','SaldoAwalController@insertSaldoAwal')->name('insertSaldoAwal')->middleware("permission:Buat Saldo Awal");
 Route::get('/saldoawal/edit/{id}','SaldoAwalController@editSaldoAwal')->name('editSaldoAwal')->middleware("permission:Lihat Saldo Awal");
 Route::post('/saldoawal/update/{id}', 'SaldoAwalController@updateSaldoAwal')->name('updateSaldoAwal')->middleware("permission:Edit Saldo Awal");
+Route::get('/saldoawal/barang/{id}', 'SaldoAwalController@getBarang')->name('getBarang')->middleware("permission:Edit Saldo Awal");
 Route::post('/saldoawal/updateDetail/{id}', 'SaldoAwalController@insertDetailSaldoBarang')->name('updateDetailSaldoAwal')->middleware("permission:Edit Saldo Awal");
 Route::post('/saldoawal/editDetail/{id}', 'SaldoAwalController@editDetailSaldoBarang')->name('editDetailSaldoAwal')->middleware("permission:Edit Saldo Awal");
+Route::get('/saldoawal/deleteDetail/{id}', 'SaldoAwalController@deleteDetailSaldoAwal')->name('deleteDetailSaldoAwal')->middleware("permission:Edit Saldo Awal");
 Route::post('/saldoawal/delete/{id}','SaldoAwalController@deleteSaldoAwal')->name('deleteSaldoAwal')->middleware("permission:Delete Saldo Awal");
 Route::post('/saldoawal/final/{id}', 'SaldoAwalController@finalSaldoAwal')->name('finalSaldoAwal')->middleware("permission:Final Saldo Awal");
 
@@ -57,8 +59,10 @@ Route::get('/penerimaan/kegiatan/{id}', 'PenerimaanController@getDataKegiatan')-
 Route::post('/penerimaan/insert', 'PenerimaanController@insertPenerimaan')->name('insertPenerimaan')->middleware("permission:Buat Penerimaan");
 Route::get('/penerimaan/edit/{id}', 'PenerimaanController@editPenerimaan')->name('EditPenerimaan')->middleware("permission:Lihat Penerimaan");
 Route::post('/penerimaan/update/{id}', 'PenerimaanController@updatePenerimaan')->name('updatePenerimaan')->middleware("permission:Edit Penerimaan");
+Route::get('/penerimaan/barang/{id}', 'PenerimaanController@getBarang')->name('getBarang')->middleware("permission:Edit Penerimaan");
 Route::post('/penerimaan/updateDetail/{id}', 'PenerimaanController@insertDetailPenerimaan')->name('updateDetailPenerimaan')->middleware("permission:Edit Penerimaan");
 Route::post('/penerimaan/editDetail/{id}', 'PenerimaanController@editDetailPenerimaan')->name('editDetailPenerimaan')->middleware("permission:Edit Penerimaan");
+Route::get('/penerimaan/deleteDetail/{id}', 'PenerimaanController@deleteDetailPenerimaan')->name('deleteDetailPenerimaan')->middleware("permission:Edit Penerimaan");
 Route::post('/penerimaan/delete/{id}','PenerimaanController@deletePenerimaan')->name('deletePenerimaan')->middleware("permission:Delete Penerimaan");
 Route::post('/penerimaan/final/{id}', 'PenerimaanController@finalPenerimaan')->name('finalPenerimaan')->middleware("permission:Final Penerimaan");
 
@@ -81,8 +85,10 @@ Route::get('/pengeluaran/create', 'PengeluaranController@createPengeluaran')->na
 Route::post('/pengeluaran/insert', 'PengeluaranController@insertPengeluaran')->name('insertPengeluaran')->middleware("permission:Buat Pengeluaran");
 Route::get('/pengeluaran/edit/{id}', 'PengeluaranController@editPengeluaran')->name('editPengeluaran')->middleware("permission:Lihat Pengeluaran");
 Route::post('/pengeluaran/update/{id}', 'PengeluaranController@updatePengeluaran')->name('updatePengeluaran')->middleware("permission:Edit Pengeluaran");
+Route::get('/pengeluaran/barang/{id}', 'PengeluaranController@getBarang')->name('getBarang')->middleware("permission:Edit Pengeluaran");
 Route::post('/pengeluaran/updateDetail/{id}', 'PengeluaranController@insertDetailPengeluaran')->name('updateDetailPengeluaran')->middleware("permission:Edit Pengeluaran");
 Route::post('/pengeluaran/editDetail/{id}', 'PengeluaranController@editDetailPengeluaran')->name('editDetailPengeluaran')->middleware("permission:Edit Pengeluaran");
+Route::get('/pengeluaran/deleteDetail/{id}', 'PengeluaranController@deleteDetailPengeluaran')->name('deleteDetailPengeluaran')->middleware("permission:Edit Pengeluaran");
 Route::post('/pengeluaran/delete/{id}','PengeluaranController@deletePengeluaran')->name('deletePengeluaran')->middleware("permission:Delete Pengeluaran");
 Route::post('/pengeluaran/final/{idPengeluaran}', 'PengeluaranController@finalPengeluaran')->name('finalPengeluaran')->middleware("permission:Final Pengeluaran");
 
@@ -109,8 +115,10 @@ Route::get('/opname/create', 'OpnameController@createOpname')->name('createOpnam
 Route::post('/opname/insert', 'OpnameController@insertOpname')->name('insertOpname')->middleware("permission:Buat Opname");
 Route::get('/opname/edit/{id}', 'OpnameController@editOpname')->name('editOpname')->middleware("permission:Lihat Opname");
 Route::post('/opname/update/{id}', 'OpnameController@updateOpname')->name('updateOpname')->middleware("permission:Edit Opname");
+Route::get('/opname/barang/{id}', 'OpnameController@getBarang')->name('getBarang')->middleware("permission:Edit Opname");
 Route::post('/opname/updateDetail/{id}', 'OpnameController@insertDetailOpname')->name('updateDetailOpname')->middleware("permission:Edit Opname");
 Route::post('/opname/editDetail/{id}', 'OpnameController@editDetailOpname')->name('editDetailOpname')->middleware("permission:Edit Opname");
+Route::get('/opname/deleteDetail/{id}', 'OpnameController@deleteDetailOpname')->name('deleteDetailOpname')->middleware("permission:Edit Opname");
 Route::post('/opname/delete/{id}','OpnameController@deleteOpname')->name('deleteOpname')->middleware("permission:Delete Opname");
 Route::post('/opname/final/{id}', 'OpnameController@finalOpname')->name('finalOpname')->middleware("permission:Final Opname");
 

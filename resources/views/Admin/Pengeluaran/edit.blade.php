@@ -30,6 +30,17 @@ Edit Pengeluaran Baru
 @endpush
 
 @section('content')
+    @if (session()->has('statusInput'))
+      <div class="row">
+        <div class="col-sm-12 alert alert-danger alert-dismissible fade show" role="alert">
+            {{session()->get('statusInput')}}
+            <button type="button" class="close" data-dismiss="alert"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      </div>
+    @endif
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -91,14 +102,6 @@ Edit Pengeluaran Baru
                           <div class="form-group">
                               <label for="kode_pengeluaran">Kode Pengeluaran</label>
                               <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran" value="{{ $tpengeluaran->kode_pengeluaran }}" readonly>
-                          </div>
-                          <div class="form-group">
-                            <label>Kode Penerimaan</label>
-                            <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Kode Penerimaan" style="width: 100%;" @if($tpengeluaran->status_pengeluaran == 'final') disabled @endif>
-                              @foreach($tpenggunaan as $tp)  
-                                <option value={{ $tp->id }} @if($tp->id == $tpengeluaran->id_penggunaan) selected @endif>{{ $tp->kode_penggunaan }}</option>
-                              @endforeach
-                            </select>
                           </div>
                           <div class="form-group">
                               <label>Tanggal Pengeluaran:</label>
@@ -186,19 +189,24 @@ Edit Pengeluaran Baru
                         @foreach ($detailPengeluaran as $dp)
                           <tr>
                             <td class="text-center"> {{ $loop->iteration }} </td>
-                            <td>Kategori barang placeholder</td><!--ini tambahan baru-->
+                            <td> {{ $dp->barang->jenisBarang->jenis_barang }} </td><!--ini tambahan baru-->
                             <td> {{ $dp->barang->nama_m_barang }} </td>
                             <td> {{ $dp->qty }} </td>
                             <td> {{ $dp->barang->satuan_m_barang }} </td>
                             <td> {{ $dp->barang->harga_m_barang }} </td>
                             <td> {{ $dp->harga }} </td>
                             <td> {{ $dp->keterangan }} </td>
-                            @if ($dp->status_pengeluaran == 'draft')
+                            @if ($tpengeluaran->status_pengeluaran == 'draft')
                               <td class="text-center">
                                 <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-warning" type="button" onclick="editpengeluaran({{ $dp->id }},{{ $dp->barang->id }},{{ $dp->qty }},'{{ $dp->barang->satuan_m_barang }}',{{ $dp->barang->harga_m_barang }},'{{ $dp->keterangan }}')">
+                                    <button class="btn btn-warning" type="button" onclick="editpengeluaran({{ $dp->id }},{{ $dp->barang->jenisBarang->id }},{{ $dp->barang->id }},{{ $dp->qty }},'{{ $dp->barang->satuan_m_barang }}',{{ $dp->barang->harga_m_barang }},'{{ $dp->keterangan }}')">
                                         <i class="fas fa-edit"></i>
                                       </button>
+                                </div>
+                                <div class="btn-group btn-group-sm">
+                                  <button class="btn btn-danger" type="button" value="{{ $dp->id }}" id="btn_delete{{ $dp->id }}">
+                                      <i class="fas fa-trash"></i>
+                                  </button>
                                 </div>
                               </td>
                             @else
@@ -212,18 +220,15 @@ Edit Pengeluaran Baru
                             <td>
                               <div class="form-group"><!--ini tambahan baru-->
                                 <select class="select2" name="kategori_barang" id="kategori_barang" data-placeholder="Pilih Kategori Barang" style="width: 100%;">
-                                  
-                                    <option value="placeholder kategori barang">Ini Kategori Placeholder</option>
-                                  
+                                  @foreach ($jenisBarang as $jb)
+                                      <option value="{{ $jb->id }}">{{ $jb->jenis_barang }}</option>
+                                  @endforeach
                                 </select>
                               </div>
                             </td>
                             <td>
                               <div class="form-group">
                                 <select class="select2" name="id_barang" id="id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
-                                  @foreach ($barangUnit as $bu)
-                                    <option value="{{ $bu->id_barang }}">{{ $bu->barang->nama_m_barang }}</option>
-                                  @endforeach
                                 </select>
                               </div>
                             </td>
@@ -287,9 +292,16 @@ Edit Pengeluaran Baru
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <select class="select2" name="id_barang" id="edit_id_barang" data-placeholder="Pilih Barang" style="width: 100%;">
+                        <select class="select2" name="kategori_barang" id="edit_kategori_barang" data-placeholder="Pilih Barang" style="width: 100%;" disabled>
+                        @foreach ($jenisBarang as $jb)
+                          <option value="{{ $jb->id }}">{{ $jb->jenis_barang }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="select2" name="id_barang" id="edit_id_barang" data-placeholder="Pilih Barang" style="width: 100%;" disabled>
                         @foreach ($tbarang as $tb)
-                        <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
+                          <option value="{{ $tb->id }}">{{ $tb->nama_m_barang }}</option>
                         @endforeach
                         </select>
                     </div>
@@ -297,15 +309,15 @@ Edit Pengeluaran Baru
                         <input type="number" class="form-control" name="qty" id="edit_qty" placeholder="Kuantitas" value="">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="satuan" id="edit_satuan" placeholder="Satuan">
+                        <input type="text" class="form-control" name="satuan" id="edit_satuan" placeholder="Satuan" readonly>
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" name="harga" id="edit_harga" placeholder="Harga">
+                        <input type="number" class="form-control" name="harga" id="edit_harga" placeholder="Harga" readonly>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="total" id="edit_total" placeholder="Kehitung otomatis" readonly>
                     </div>
-                    <select class="form-control" name="keterangan" id="edit_keterangan">
+                    <select class="form-control" name="keterangan" id="edit_keterangan" disabled>
                         <option value="baik">Baik</option>
                         <option value="rusak">Rusak</option>
                     </select>
@@ -385,6 +397,38 @@ Edit Pengeluaran Baru
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
 
+    var jenis_id = $('#kategori_barang').val();
+    $.ajax({
+      type: 'GET',
+      url: '/pengeluaran/barang/' + jenis_id,
+      success: function (response){
+          // console.log(response);
+          $('#id_barang').empty();
+          $('#id_barang').append('<option value=""> Pilih Barang </option>');
+          response.forEach(element => {
+              $('#id_barang').append('<option value="' + element['id_barang'] + '"' +'>' + element.barang['nama_m_barang'] + '</option>');
+          });
+      }
+    });
+
+    $('#kategori_barang').change(function() {
+      if($('#kategori_barang').val() != ""){ 
+          let id = $(this).val();
+          $.ajax({
+              type: 'GET',
+              url: '/pengeluaran/barang/'+id,
+              success: function (response){
+              // console.log(response);
+                  $('#id_barang').empty();
+                  $('#id_barang').append('<option value=""> Pilih Barang </option>');
+                  response.forEach(element => {
+                  $('#id_barang').append('<option value="' + element['id_barang'] + '"' +'>' + element.barang['nama_m_barang'] + '</option>');
+                  });
+              }
+          });
+      } 
+    });
+
     //Data Barang
     var barang_id = $('#id_barang').val();
     var barangs = {!! json_encode($tbarang->toArray()) !!}
@@ -413,8 +457,27 @@ Edit Pengeluaran Baru
 </script>
 
 <script>
-  function editpengeluaran(id, id_barang, qty, satuan, harga, keterangan) {
+  var id_detail = {!! json_encode($detailPengeluaran->toArray()) !!}
+  id_detail.forEach(element => {
+      $('#btn_delete'+element.id).click(function(){
+          var id = $(this).val();
+          console.log(id);
+          $.ajax({
+              type: 'GET',
+              url: '/pengeluaran/deleteDetail/'+id,
+              success:function(response){
+                  location.reload();
+              }
+          });
+      })
+  });
+</script>
+
+<script>
+  function editpengeluaran(id, id_jenis, id_barang, qty, satuan, harga, keterangan) {
+    console.log(id_barang);
       $("#edit_form").attr("action", "/pengeluaran/editDetail/"+id);
+      $('#edit_kategori_barang').val(id_jenis).change();
       $('#edit_id_barang').val(id_barang).change();
       $('#edit_qty').val(qty);
       $('#edit_satuan').val(satuan);
