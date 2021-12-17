@@ -79,7 +79,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                        @foreach($tsaldo as $ts)
+                        @foreach($saldoawal as $ts)
                           <tr>
                               <td class="text-center">{{ $loop->iteration }}</td>
                               <td>{{ $ts->kode_saldo }}</td>
@@ -98,12 +98,14 @@
                                         <i class="fas fa-edit"></i>
                                     </span>
                                   </a>
-                                  @if ($ts->status_saldo == 'draft')
-                                    <a onclick="statusdelete({{ $ts->id }})" class="btn btn-danger btn-icon-split">
-                                      <span class="icon">
-                                          <i class="fas fa-trash"></i>
-                                      </span>
-                                    </a>
+                                  @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBPB']))
+                                    @if ($ts->status_saldo == 'draft')
+                                      <a onclick="statusdelete({{ $ts->id }})" class="btn btn-danger btn-icon-split">
+                                        <span class="icon">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                      </a>
+                                    @endif
                                   @endif
                               </td>
                           </tr>

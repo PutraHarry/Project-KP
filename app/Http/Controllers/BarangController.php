@@ -25,14 +25,9 @@ class BarangController extends Controller
             $periodeAktif = "-";
         }
         
-        $barangKIBA = BarangModel::where('jenis_m_barang','KIB A')->get();
-        $barangKIBB = BarangModel::where('jenis_m_barang','KIB B')->get();
-        $barangKIBC = BarangModel::where('jenis_m_barang','KIB C')->get();
-        $barangKIBD = BarangModel::where('jenis_m_barang','KIB D')->get();
-        $barangKIBE = BarangModel::where('jenis_m_barang','KIB E')->get();
-        $barangKIBF = BarangModel::where('jenis_m_barang','KIB F')->get();
+        $barang = BarangModel::get();
         
-        return view("Admin.Master-Barang.show", compact("periodeAktif", "barangKIBA", "barangKIBB", "barangKIBC", "barangKIBD", "barangKIBE", "barangKIBF"));
+        return view("Admin.Master-Barang.show", compact("periodeAktif", "barang"));
     }
 
     public function createBarang()

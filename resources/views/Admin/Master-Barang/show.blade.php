@@ -64,18 +64,6 @@
                       </div>
                   </div>
                   <div class="card-body table-responsive-md">
-                      <div class="row">
-                        <div class="col-md-6 p-2">
-                            <ul class="nav nav-pills d-flex justify-content-center justify-content-md-start">
-                                <li class="nav-item"><a class="nav-link active" href="#kib-a" data-toggle="tab">KIB A</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#kib-b" data-toggle="tab">KIB B</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#kib-c" data-toggle="tab">KIB C</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#kib-d" data-toggle="tab">KIB D</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#kib-e" data-toggle="tab">KIB E</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#kib-f" data-toggle="tab">KIB F</a></li>
-                            </ul>
-                        </div>
-                      </div>
                       <div class="tab-content">
                           <div class="active tab-pane" id="kib-a">
                               <table id="data-kib-a" class="table table-responsive-md table-bordered table-hover">
@@ -89,19 +77,19 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      @foreach ($barangKIBA as $kiba)
+                                      @foreach ($barang as $barang)
                                         <tr>
                                           <td class="text-center">{{ $loop->iteration }}</td>
-                                          <td>{{ $kiba->nama_m_barang }}</td>
-                                          <td>{{ $kiba->harga_m_barang }}</td>
-                                          <td>{{ $kiba->satuan_m_barang }}</td>
+                                          <td>{{ $barang->nama_m_barang }}</td>
+                                          <td>{{ $barang->harga_m_barang }}</td>
+                                          <td>{{ $barang->satuan_m_barang }}</td>
                                           <td class="text-center">
-                                            <a href="barang/edit/{{ $kiba->id }}" class="btn btn-warning btn-icon-split">
+                                            <a href="barang/edit/{{ $barang->id }}" class="btn btn-warning btn-icon-split">
                                               <span class="icon">
                                                   <i class="fas fa-edit"></i>
                                               </span>
                                             </a>
-                                            <a onclick="statusdelete({{ $kiba->id }})" class="btn btn-danger btn-icon-split">
+                                            <a onclick="statusdelete({{ $barang->id }})" class="btn btn-danger btn-icon-split">
                                                 <span class="icon">
                                                     <i class="fas fa-trash"></i>
                                                 </span>
@@ -112,183 +100,7 @@
                                   </tbody>
                               </table>
                           </div>
-                          <div class="tab-pane" id="kib-b">
-                              <table id="data-kib-b" class="table table-responsive-md table-bordered table-hover">
-                                  <thead>
-                                      <tr class="text-center">
-                                        <th width='50px'>No.</th>
-                                        <th width='600px'>Nama</th>
-                                        <th>Harga</th>
-                                        <th>Satuan</th>
-                                        <th>Aksi</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                    @foreach ($barangKIBB as $kibb)
-                                      <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $kibb->nama_m_barang }}</td>
-                                        <td>{{ $kibb->harga_m_barang }}</td>
-                                        <td>{{ $kibb->satuan_m_barang }}</td>
-                                        <td class="text-center">
-                                          <a href="barang/edit/{{ $kibb->id }}" class="btn btn-warning btn-icon-split">
-                                            <span class="icon">
-                                                <i class="fas fa-edit"></i>
-                                            </span>
-                                          </a>
-                                          <a onclick="statusdelete({{ $kibb->id }})" class="btn btn-danger btn-icon-split">
-                                              <span class="icon">
-                                                  <i class="fas fa-trash"></i>
-                                              </span>
-                                            </a>
-                                        </td>
-                                      </tr>
-                                    @endforeach
-                                  </tbody>
-                              </table>
-                          </div>
-                          <div class="tab-pane" id="kib-c">
-                            <table id="data-kib-c" class="table table-responsive-md table-bordered table-hover">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th width='50px'>No.</th>
-                                        <th width='600px'>Nama</th>
-                                        <th>Harga</th>
-                                        <th>Satuan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  @foreach ($barangKIBC as $kibc)
-                                    <tr>
-                                      <td class="text-center">{{ $loop->iteration }}</td>
-                                      <td>{{ $kibc->nama_m_barang }}</td>
-                                      <td>{{ $kibc->harga_m_barang }}</td>
-                                      <td>{{ $kibc->satuan_m_barang }}</td>
-                                      <td class="text-center">
-                                        <a href="barang/edit/{{ $kibc->id }}" class="btn btn-warning btn-icon-split">
-                                          <span class="icon">
-                                              <i class="fas fa-edit"></i>
-                                          </span>
-                                        </a>
-                                        <a onclick="statusdelete({{ $kibc->id }})" class="btn btn-danger btn-icon-split">
-                                            <span class="icon">
-                                                <i class="fas fa-trash"></i>
-                                            </span>
-                                          </a>
-                                      </td>
-                                    </tr>
-                                  @endforeach
-                                </tbody>
-                            </table>
                         </div>
-                        <div class="tab-pane" id="kib-d">
-                            <table id="data-kib-d" class="table table-responsive-md table-bordered table-hover">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th width='50px'>No.</th>
-                                        <th width='600px'>Nama</th>
-                                        <th>Harga</th>
-                                        <th>Satuan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  @foreach ($barangKIBD as $kibd)
-                                    <tr>
-                                      <td class="text-center">{{ $loop->iteration }}</td>
-                                      <td>{{ $kibd->nama_m_barang }}</td>
-                                      <td>{{ $kibd->harga_m_barang }}</td>
-                                      <td>{{ $kibd->satuan_m_barang }}</td>
-                                      <td class="text-center">
-                                        <a href="barang/edit/{{ $kibd->id }}" class="btn btn-warning btn-icon-split">
-                                          <span class="icon">
-                                              <i class="fas fa-edit"></i>
-                                          </span>
-                                        </a>
-                                        <a onclick="statusdelete({{ $kibd->id }})" class="btn btn-danger btn-icon-split">
-                                            <span class="icon">
-                                                <i class="fas fa-trash"></i>
-                                            </span>
-                                          </a>
-                                      </td>
-                                    </tr>
-                                  @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane" id="kib-e">
-                            <table id="data-kib-e" class="table table-responsive-md table-bordered table-hover">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th width='50px'>No.</th>
-                                        <th width='600px'>Nama</th>
-                                        <th>Harga</th>
-                                        <th>Satuan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  @foreach ($barangKIBE as $kibe)
-                                    <tr>
-                                      <td class="text-center">{{ $loop->iteration }}</td>
-                                      <td>{{ $kibe->nama_m_barang }}</td>
-                                      <td>{{ $kibe->harga_m_barang }}</td>
-                                      <td>{{ $kibe->satuan_m_barang }}</td>
-                                      <td class="text-center">
-                                        <a href="barang/edit/{{ $kibe->id }}" class="btn btn-warning btn-icon-split">
-                                          <span class="icon">
-                                              <i class="fas fa-edit"></i>
-                                          </span>
-                                        </a>
-                                        <a onclick="statusdelete({{ $kibe->id }})" class="btn btn-danger btn-icon-split">
-                                            <span class="icon">
-                                                <i class="fas fa-trash"></i>
-                                            </span>
-                                          </a>
-                                      </td>
-                                    </tr>
-                                  @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane" id="kib-f">
-                            <table id="data-kib-f" class="table table-responsive-md table-bordered table-hover">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th width='50px'>No.</th>
-                                        <th width='600px'>Nama</th>
-                                        <th>Harga</th>
-                                        <th>Satuan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  @foreach ($barangKIBF as $kibf)
-                                    <tr>
-                                      <td class="text-center">{{ $loop->iteration }}</td>
-                                      <td>{{ $kibf->nama_m_barang }}</td>
-                                      <td>{{ $kibf->harga_m_barang }}</td>
-                                      <td>{{ $kibf->satuan_m_barang }}</td>
-                                      <td class="text-center">
-                                        <a href="barang/edit/{{ $kibf->id }}" class="btn btn-warning btn-icon-split">
-                                          <span class="icon">
-                                              <i class="fas fa-edit"></i>
-                                          </span>
-                                        </a>
-                                        <a onclick="statusdelete({{ $kibf->id }})" class="btn btn-danger btn-icon-split">
-                                            <span class="icon">
-                                                <i class="fas fa-trash"></i>
-                                            </span>
-                                          </a>
-                                      </td>
-                                    </tr>
-                                  @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                          
-                      </div>
                   </div>
               </div>
           </div>

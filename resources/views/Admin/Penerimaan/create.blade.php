@@ -121,7 +121,7 @@ Create Penerimaan Baru
                                 <label>Diterima dari</label>
                                 <select class="select2" style="width: 100%;" name="diterima_dari" id="diterima_dari" placeholder="Input PPK">
                                   @foreach ($dataPPK as $dp)
-                                    <option value="{{ $dp->id }}">{{ $dp->nama_user }}</option>
+                                    <option value="{{ $dp->nama_user }}">{{ $dp->nama_user }}</option>
                                   @endforeach
                                 </select>
                             </div>

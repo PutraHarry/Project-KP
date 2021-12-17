@@ -128,7 +128,7 @@ Edit Penerimaan Baru
                             <label>Diterima dari</label>
                             <select class="select2" style="width: 100%;" name="diterima_dari" id="diterima_dari" placeholder="Input PPK" @if($tpenerimaan->status_penerimaan == 'final') disabled @endif>
                               @foreach ($dataPPK as $dp)
-                                <option value="{{ $dp->id }}" @if($tpenerimaan->diterima_dari == $dp->id) selected @endif>{{ $dp->nama_user }}</option>
+                                <option value="{{ $dp->nama_user }}" @if($tpenerimaan->diterima_dari == $dp->nama_user) selected @endif>{{ $dp->nama_user }}</option>
                               @endforeach
                             </select>
                         </div>
@@ -213,13 +213,18 @@ Edit Penerimaan Baru
                             <td> {{ $dpen->barang->harga_m_barang }} </td>
                             <td> {{ $dpen->harga }} </td>
                             <td> {{ $dpen->keterangan }} </td>
-                            <td class="text-center">
+                            @if ($dpen->status_penerimaan == 'draft')
+                              <td class="text-center">
                                 <div class="btn-group btn-group-sm">
                                     <button class="btn btn-warning" type="button" onclick="editpenerimaan({{ $dpen->id }},{{ $dpen->barang->id }},{{ $dpen->qty }},'{{ $dpen->barang->satuan_m_barang }}',{{ $dpen->barang->harga_m_barang }},'{{ $dpen->keterangan }}')">
                                         <i class="fas fa-edit"></i>
                                       </button>
                                 </div>
-                            </td>
+                              </td>
+                            @else
+                              <td class="text-center"></td>
+                            @endif
+                            
                         </tr>
                         @endforeach
                         @if($tpenerimaan->status_penerimaan == 'draft')
@@ -442,7 +447,7 @@ Edit Penerimaan Baru
         type: 'GET',
         url: '/penerimaan/kegiatan/'+id,
         success: function (response){
-          console.log(penerimaan);
+          // console.log(penerimaan);
           $('#kegiatan').empty();
           response.forEach(element => {
             if(element.id == penerimaan.id_m_kegiatan){

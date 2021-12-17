@@ -35,16 +35,20 @@ class PenerimaanController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpenerimaanObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'APBD Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanNonObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'APBD Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'Hibah Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanNonHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'Hibah Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-        $tpenerimaanNonAPBD = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan.gudangUnit', 'penggunaan')->where('jenis_penerimaan', 'Non APBD')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
-
-        //dd($tpenerimaanObat);
+        if (Auth::user()->jabatan->jabatan == 'PPBP') {
+            $tpenerimaanObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'APBD Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            $tpenerimaanNonObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'APBD Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            $tpenerimaanHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Hibah Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            $tpenerimaanNonHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Hibah Non Obat')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            $tpenerimaanNonAPBD = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Non APBD')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+        } else {
+            $tpenerimaanObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'APBD Obat')->where('id_periode', $dataPeriodeAktif->id)->get();
+            $tpenerimaanNonObat = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'APBD Non Obat')->where('id_periode', $dataPeriodeAktif->id)->get();
+            $tpenerimaanHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Hibah Obat')->where('id_periode', $dataPeriodeAktif->id)->get();
+            $tpenerimaanNonHibah = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Hibah Non Obat')->where('id_periode', $dataPeriodeAktif->id)->get();
+            $tpenerimaanNonAPBD = PenerimaanModel::with('program', 'kegiatan', 'rekening', 'penggunaan')->where('jenis_penerimaan', 'Non APBD')->where('id_periode', $dataPeriodeAktif->id)->get();
+        }
         
-        
-
         return view("Admin.Penerimaan.show", compact("tpenerimaanObat","tpenerimaanNonObat","tpenerimaanHibah","tpenerimaanNonHibah","tpenerimaanNonAPBD", "periodeAktif"));
     }
 
@@ -74,6 +78,8 @@ class PenerimaanController extends Controller
 
     public function insertPenerimaan(Request $request)
     {
+        dd($request);
+
         $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         $validator = Validator::make($request->all(), [
             'jenis_penerimaan' => 'required',
@@ -248,7 +254,7 @@ class PenerimaanController extends Controller
         $dpenerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$id])->get();
 
         foreach ($dpenerimaan as $dp) {
-            $barangOPD = BarangOPDModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $dp->id_barang)->first();
+            $barangOPD = BarangOPDModel::where('id_opd', Auth::user()->opd->id)->where('id_barang', $dp->id_barang)->first();
             // dd($barangOPD);
             if ($barangOPD) {
                 $finalPenerimaan = BarangOPDModel::find($barangOPD->id);
@@ -256,6 +262,7 @@ class PenerimaanController extends Controller
                 $finalPenerimaan->update();
             } else{
                 $finalPenerimaan = new BarangOPDModel();
+                $finalPenerimaan->id_opd = Auth::user()->opd->id;
                 $finalPenerimaan->id_barang = $dp->id_barang;
                 $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
                 $finalPenerimaan->save();

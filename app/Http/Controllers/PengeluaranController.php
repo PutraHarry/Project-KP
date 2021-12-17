@@ -30,7 +30,13 @@ class PengeluaranController extends Controller
             $periodeAktif = "-";
         }
 
-        $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->get();
+        if (Auth::user()->jabatan->jabatan == 'PPBPB') {
+            $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->where('id_unit', [Auth::user()->unit->id])->get();
+        } else {
+            $tpengeluaran = PengeluaranModel::where('id_periode', $dataPeriodeAktif->id)->where('id_opd', [Auth::user()->opd->id])->where('status_pengeluaran', 'final')->get();
+        }
+
+        
 
         return view("Admin.Pengeluaran.show", compact('periodeAktif', 'tpengeluaran'));
     }
@@ -90,6 +96,7 @@ class PengeluaranController extends Controller
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
         $pengeluaran->id_m_kegiatan = $request->kegiatan;
         $pengeluaran->id_periode = $dataPeriodeAktif->id;
+        $pengeluaran->id_opd = Auth::user()->opd->id;
         $pengeluaran->id_unit = Auth::user()->unit->id;
         $pengeluaran->save();
 
@@ -182,7 +189,6 @@ class PengeluaranController extends Controller
         $pengeluaran = PengeluaranModel::find($id);
         $pengeluaran->kode_pengeluaran = $request->kode_pengeluaran;
         $pengeluaran->tgl_keluar = $request->tgl_input;
-        $pengeluaran->id_penggunaan = $request->id_penggunaan;
         $pengeluaran->ket_pengeluaran = $request->ket_pengeluaran;
         $pengeluaran->id_m_kegiatan = $request->kegiatan;
         //dd($penggunaan);
@@ -201,29 +207,22 @@ class PengeluaranController extends Controller
         return redirect('/pengeluaran')->with('statusInput', 'Delete Success');
     }
 
-    public function finalPengeluaran($idPengeluaran, $idPenggunaan, Request $request)
+    public function finalPengeluaran($idPengeluaran, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'tglPengeluaran' => 'required',
-            'kodePenggunaan' => 'required',
             'kodePengeluaran' => 'required'
         ]);
 
         if($validator->fails()){
             return back()->withErrors($validator);
         }
-
-        $penggunaanData = PenggunaanModel::find($idPenggunaan);
-        //dd($Penerimaandata);
        
         //dd($dpengeluaran);
-
         $pengeluaran = PengeluaranModel::find($idPengeluaran);
         $pengeluaran->kode_pengeluaran = $request->kodePengeluaran;
         $pengeluaran->tgl_keluar = $request->tglPengeluaran;
-        $pengeluaran->id_penggunaan = $idPenggunaan;
         $pengeluaran->status_pengeluaran = 'final';
-        $pengeluaran->total = $penggunaanData->total;
         $pengeluaran->ket_pengeluaran = $request->ketPengeluaran;
         $pengeluaran->update();
 
@@ -231,7 +230,7 @@ class PengeluaranController extends Controller
 
         foreach ($dpengeluaran as $dp) {
             $barangUnit = BarangUnitModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $dp->id_barang)->first();
-            // dd($barangOPD);
+            // dd($barangunit);
             
             $finalPengeluaran = BarangUnitModel::find($barangUnit->id);
             $finalPengeluaran->qty = $finalPengeluaran->qty - $dp->qty;

@@ -84,7 +84,7 @@
                           <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $tp->kode_pengeluaran }}</td>
-                            <td></td>
+                            <td>{{ $tp->kegiatan->nama_kegiatan }}</td>
                             <td>{{ $tp->tgl_keluar }}</td>
                             <td>
                               @if($tp->status_pengeluaran == "draft")

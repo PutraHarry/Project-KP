@@ -97,7 +97,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpo->kode_penerimaan }}</td>
                                         <td>{{ $tpo->kegiatan->nama_kegiatan }}</td>
-                                        <td>{{ $tpo->pengirim }}</td>
+                                        <td>{{ $tpo->diterima_dari }}</td>
                                         <td>{{ $tpo->tgl_terima }}</td>
                                         <td>
                                           @if($tpo->status_penerimaan == "draft")
@@ -144,7 +144,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpno->kode_penerimaan }}</td>
                                         <td>{{ $tpno->kegiatan->nama_kegiatan }}</td>
-                                        <td>{{ $tpno->pengirim }}</td>
+                                        <td>{{ $tpno->diterima_dari }}</td>
                                         <td>{{ $tpno->tgl_terima }}</td>
                                         <td>
                                           @if($tpo->status_penerimaan == "draft")
@@ -191,7 +191,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tph->kode_penerimaan }}</td>
                                         <td>{{ $tph->kegiatan->nama_kegiatan }}</td>
-                                        <td>{{ $tph->pengirim }}</td>
+                                        <td>{{ $tph->diterima_dari }}</td>
                                         <td>{{ $tph->tgl_terima }}</td>
                                         <td>
                                           @if($tpo->status_penerimaan == "draft")
@@ -238,7 +238,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpnh->kode_penerimaan }}</td>
                                         <td>{{ $tpnh->kegiatan->nama_kegiatan }}</td>
-                                        <td>{{ $tpnh->pengirim }}</td>
+                                        <td>{{ $tpnh->diterima_dari }}</td>
                                         <td>{{ $tpnh->tgl_terima }}</td>
                                         <td>
                                           @if($tpo->status_penerimaan == "draft")
@@ -285,7 +285,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $tpna->kode_penerimaan }}</td>
                                         <td>{{ $tpna->kegiatan->nama_kegiatan }}</td>
-                                        <td></td>
+                                        <td>{{ $tpna->diterima_dari }}</td>
                                         <td>{{ $tpna->tgl_terima }}</td>
                                         <td>{{ $tpna->pengirim }}</td>
                                         <td>
