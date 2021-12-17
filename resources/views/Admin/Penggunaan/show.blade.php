@@ -123,7 +123,7 @@
                             @elseif($tp->status_penggunaan == "final")
                               <span class="badge badge-primary">Final</span>
                             @elseif($tp->status_penggunaan == "approved")
-                              <span class="badge badge-success">Approved</span>
+                              <span class="badge badge-success">Disetujui KASI</span>
                             @elseif($tp->status_penggunaan == "disetujui_ppbp")
                               <span class="badge badge-info">Disetujui PPBP</span>
                             @elseif($tp->status_penggunaan == "disetujui_atasanLangsung")
