@@ -125,7 +125,7 @@
               </a>
             </li>
           @endif
-          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD', 'PPBPB', 'PPBP']))
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD', 'PPBPB', 'PPBP', 'TIM VERIFIKASI', 'Kepala PD']))
             <li class="nav-item">
               <a href="/pemusnahan" class="nav-link">
                 <i class="nav-icon fas fa-fire"></i>

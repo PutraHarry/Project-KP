@@ -68,6 +68,7 @@ Route::post('/penerimaan/final/{id}', 'PenerimaanController@finalPenerimaan')->n
 
 //PENGGUNAAN
 Route::get('/penggunaan', 'PenggunaanController@dataPenggunaan')->name('penggunaan')->middleware("permission:Lihat Penggunaan");
+Route::get('/penggunaan/datapenggunaanPPBP/{id}', 'PenggunaanController@getDataPenggunaanPPBP')->name('getDataPenggunaanPPBP')->middleware("permission:Lihat Penggunaan");
 Route::get('/penggunaan/create', 'PenggunaanController@createPenggunaan')->name('createPenggunaan')->middleware("permission:Buat Penggunaan");
 Route::post('/penggunaan/insert', 'PenggunaanController@insertPenggunaan')->name('insertPenggunaan')->middleware("permission:Buat Penggunaan");
 Route::get('/penggunaan/edit/{id}', 'PenggunaanController@editPenggunaan')->name('editPenggunaan')->middleware("permission:Lihat Penggunaan");
@@ -124,13 +125,17 @@ Route::post('/opname/final/{id}', 'OpnameController@finalOpname')->name('finalOp
 
 //PEMUSNAHAN
 Route::get('/pemusnahan', 'PemusnahanController@dataPemusnahan')->name('pemusnahan')->middleware("permission:Lihat Pemusnahan");
+Route::get('/pemusnahan/datapemusnahan/{id}', 'PemusnahanController@getDataPemusnahan')->name('getDataPemusnahan')->middleware("permission:Lihat Pemusnahan");
 Route::get('/pemusnahan/create', 'PemusnahanController@createPemusnahan')->name('createPemusnahan')->middleware("permission:Buat Pemusnahan");
 Route::post('/pemusnahan/insert', 'PemusnahanController@insertPemusnahan')->name('insertPemusnahan')->middleware("permission:Buat Pemusnahan");
 Route::get('/pemusnahan/edit/{id}', 'PemusnahanController@editPemusnahan')->name('editPemusnahan')->middleware("permission:Lihat Pemusnahan");
 Route::post('/pemusnahan/update/{id}', 'PemusnahanController@updatePemusnahan')->name('updatePemusnahan')->middleware("permission:Edit Pemusnahan");
 Route::get('/pemusnahan/detailOpname/{id}', 'PemusnahanController@getDataDetailOpname')->name('getDataDetailOpname')->middleware("permission:Lihat Pemusnahan");
 Route::post('/pemusnahan/delete/{id}','PemusnahanController@deletePemusnahan')->name('deletePemusnahan')->middleware("permission:Delete Pemusnahan");
-Route::post('/pemusnahan/final/{idPenggunaan}/detail/{idOpname}', 'PemusnahanController@finalPemusnahan')->name('finalPemusnahan')->middleware("permission:Final Pemusnahan");
+Route::post('/pemusnahan/final/{idPemusnahan}/detail/{idOpname}', 'PemusnahanController@finalPemusnahan')->name('finalPemusnahan')->middleware("permission:Final Pemusnahan");
+Route::post('/pemusnahan/disetujuippbp/{id}', 'PemusnahanController@disetujuiPPBPPenggunaan')->name('disetujuiPPBPPenggunaan')->middleware("permission:Disetujui PPBP Pemusnahan");
+Route::post('/pemusnahan/disetujuikepalapd/{id}', 'PemusnahanController@disetujuiPPBPPenggunaan')->name('disetujuiPPBPPenggunaan')->middleware("permission:Disetujui Tim Verifikasi Pemusnahan");
+Route::post('/pemusnahan/disetujuitimverifikasi/{id}', 'PemusnahanController@disetujuiPPBPPenggunaan')->name('disetujuiPPBPPenggunaan')->middleware("permission:Disetujui Kepala PD");
 
 //LAPORAN
 Route::get('/laporan', 'LaporanController@showLaporan')->name('Laporan');
