@@ -86,7 +86,14 @@
                             <td>{{ $tp->kode_pengeluaran }}</td>
                             <td>{{ $tp->kegiatan->nama_kegiatan }}</td>
                             <td>{{ $tp->tgl_keluar }}</td>
-                            <td>{{ $tp->status_pengeluaran }}</td>
+                            <td>
+                              @if($tp->status_pengeluaran == "draft")
+                                <span class="badge badge-warning">Draft</span>
+                              @elseif($tp->status_pengeluaran == "final")
+                                <span class="badge badge-primary">Final</span>
+                              @endif
+                              {{-- {{ $tp->status_pengeluaran }} --}}
+                            </td>
                             <td>{{ $tp->ket_pengeluaran }}</td>
                             <td class="text-center">
                                 <a href="/pengeluaran/edit/{{ $tp->id }}" class="btn btn-warning btn-icon-split">
