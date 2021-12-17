@@ -49,34 +49,35 @@
     </section>
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Filter Data Pemusnahan Barang</h3>
-              </div>
-              <div class="card-body">
-                <form action="#">
-                  <form class="form-horizontal">
-                    <div class="card-body mx-lg-5">
-                      <div class="form-group row">
-                        <label for="Filter Data Pemusnahan" class="col-sm-2 col-form-label">Status Pemusnahan</label>
-                        <div class="col-sm-10">
-                          <select class="select2" name="filter_penggunaan" id="filter_penggunaan" placeholder="Status Pemusnahan" style="width: 100%">
-                            <option>Placeholder Belum diproses</option>
-                            <option>Placeholder Semua</option>
-                            <option>Placeholder Sudah diproses</option>
-                          </select>
+      @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBP', 'Kepala PD', 'TIM VERIFIKASI']))
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-info">
+                <div class="card-header">
+                  <h3 class="card-title">Filter Data Pemusnahan Barang</h3>
+                </div>
+                <div class="card-body">
+                  <form action="#">
+                    <form class="form-horizontal">
+                      <div class="card-body mx-lg-5">
+                        <div class="form-group row">
+                          <label for="Filter Data Pemusnahan" class="col-sm-2 col-form-label">Status Pemusnahan</label>
+                          <div class="col-sm-10">
+                            <select class="select2" name="filter_pemusnahan" id="filter_pemusnahan" placeholder="Status Pemusnahan" style="width: 100%">
+                              <option value="1">Belum diproses</option>
+                              <option value="2">Semua Data</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      @endif
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
@@ -95,50 +96,7 @@
                   </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                        <tr class="text-center">
-                          <th>No.</th>
-                          <th>Kode Pemusnahan</th>
-                          <th>Tanggal</th>
-                          <th>Status</th>
-                          <th>Keterangan</th>
-                          <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      @foreach ($tpemusnahan as $tp)
-                        <tr>
-                          <td class="text-center">{{ $loop->iteration }}</td>
-                          <td>{{ $tp->kode_pemusnahan }}</td>
-                          <td>{{ $tp->tgl_pemusnahan }}</td>
-                          <td>
-                            @if($tp->status_pemusnahan == "draft")
-                              <span class="badge badge-warning">Draft</span>
-                            @elseif($tp->status_pemusnahan == "final")
-                              <span class="badge badge-primary">Final</span>
-                            @endif
-                          </td>
-                          <td>{{ $tp->ket_pemusnahan }}</td>
-                          <td class="text-center">
-                              <a href="/pemusnahan/edit/{{ $tp->id }}" class="btn btn-warning btn-icon-split">
-                                <span class="icon">
-                                    <i class="fas fa-edit"></i>
-                                </span>
-                              </a>
-                              @if ($tp->status_pemusnahan == 'draft')
-                                <a onclick="statusdelete({{ $tp->id }})" class="btn btn-danger btn-icon-split">
-                                  <span class="icon">
-                                      <i class="fas fa-trash"></i>
-                                  </span>
-                                </a>
-                              @endif
-                          </td>
-                        </tr>
-                      @endforeach
-                    </tbody>
-                </table>
+              <div class="card-body" id="data">
               </div>
             </div>
           </div>
@@ -196,6 +154,37 @@ $('.select2bs4').select2({
   theme: 'bootstrap4'
 })
 </script>
+
+<script>
+  let id = $('#filter_pemusnahan').val();
+  // console.log(id);
+  $.ajax({
+      type: 'GET',
+      url: '/pemusnahan/datapemusnahan/'+id,
+      success: function (response){
+        console.log(response);
+          $('#data').empty();
+          $('#data').html(response);
+      }
+  });
+
+  $('#filter_pemusnahan').change(function() {
+      if($('#filter_pemusnahan').val() != ""){ 
+        let id = $('#filter_pemusnahan').val();
+        console.log(id);
+        $.ajax({
+            type: 'GET',
+            url: '/pemusnahan/datapemusnahan/'+id,
+            success: function (response){
+              console.log(response);
+              $('#data').empty();
+              $('#data').html(response);
+            }
+        });
+      } 
+  });
+</script>
+
 <script>
   $(function () {
     $('#example2').DataTable({

@@ -46,6 +46,39 @@ class PenggunaanController extends Controller
         return view("Admin.Penggunaan.show", compact('periodeAktif', 'tpenggunaan'));
     }
 
+    public function getDataPenggunaanPPBP($id)
+    {
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
+
+        if (Auth::user()->jabatan->jabatan == 'PPBPB') {
+            $dataPenggunaan = PenggunaanModel::with('opd', 'unit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+        } elseif (Auth::user()->jabatan->jabatan == 'KASI') {
+            if ($id == 1) {
+                $dataPenggunaan = PenggunaanModel::with('opd', 'unit')->where('status_penggunaan', 'final')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+            } else {
+                $dataPenggunaan = PenggunaanModel::with('opd', 'unit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+            }
+        } elseif (Auth::user()->jabatan->jabatan == 'PPBP') {
+            if ($id == 1) {
+                $dataPenggunaan = PenggunaanModel::with('opd', 'unit')->where('status_penggunaan', 'approved')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            } else {
+                $dataPenggunaan = PenggunaanModel::with('opd', 'unit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            }
+        } elseif (Auth::user()->jabatan->jabatan == 'KASUBAG') {
+            if ($id == 1) {
+                $dataPenggunaan = PenggunaanModel::with('opd', 'unit')->where('status_penggunaan', 'disetujui_ppbp')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            } else {
+                $dataPenggunaan = PenggunaanModel::with('opd', 'unit')->where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            }
+        } else {
+                $dataPenggunaan = PenggunaanModel::with('opd', 'unit')->whereIn('status_penggunaan', ['final', 'approved', 'disetujui_ppbp', 'disetujui_atasanLangsung'])->get();
+        }
+
+        $tabel = view('Admin.Penggunaan.tabel', ['tpenggunaan' =>$dataPenggunaan])->render();
+
+        return response()->json($tabel);
+    }
+
     public function createPenggunaan()
     {
         $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();

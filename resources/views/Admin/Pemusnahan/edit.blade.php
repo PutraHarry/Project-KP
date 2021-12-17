@@ -80,6 +80,27 @@ Edit Pemusnahan Baru
                         </span>
                         <span class="text">Final</span>
                       </button>
+                    @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['PPBP']))
+                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusDisetujuiPPBP({{ $idEdit }})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Final</span>
+                      </button>
+                    @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Kepala PD']))
+                    <button class="btn btn-success btn-icon-split" type="button" onclick="statusDisetujuiKepalaPD({{ $idEdit }})">
+                      <span class="icon text-white-50">
+                          <i class="fas fa-check"></i>
+                      </span>
+                      <span class="text">Final</span>
+                    </button>
+                    @elseif (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['TIM VERIFIKASI']))
+                      <button class="btn btn-success btn-icon-split" type="button" onclick="statusDisetujuiTimVerifikasi({{ $idEdit }})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Final</span>
+                      </button>
                     @endif
                   </div>
                 </div>
@@ -209,6 +230,126 @@ Edit Pemusnahan Baru
         </div>
     </div>
   </div>
+  <div class="modal fade" id="modal-sdisetujuiPPBP">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="" id="disetujuiPPBPPemusnahan" method="POST">
+              @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Disetujui PPBP Pemusnahan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <span>Yakin akan merubah status menjadi disetujui PPBP?</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Pemusnahan</label>
+                    <input type="text" class="form-control" name="kodePemusnahan" id="kodePemusnahanDisetujuiPPBP" placeholder="Kode Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Opname</label>
+                    <input type="text" class="form-control" name="kodeOpname" id="kodeOpnameDisetujuiPPBP" placeholder="Kode Penerimaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Pemusnahan</label>
+                    <input type="text" class="form-control" name="tglPemusnahan" id="tglPemusnahanDisetujuiPPBP" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan Pemusnahan</label>
+                    <input type="text" class="form-control" name="ketPemusnahan" id="ketPemusnahanDisetujuiPPBP" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modal-sdisetujuiKepalaPD">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="" id="disetujuiKepalaPDPemusnahan" method="POST">
+              @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Disetujui Kepala PD Pemusnahan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <span>Yakin akan merubah status menjadi disetujui Kepala PD?</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Pemusnahan</label>
+                    <input type="text" class="form-control" name="kodePemusnahan" id="kodePemusnahanDisetujuiKepalaPD" placeholder="Kode Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Opname</label>
+                    <input type="text" class="form-control" name="kodeOpname" id="kodeOpnameDisetujuiKepalaPD" placeholder="Kode Penerimaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Pemusnahan</label>
+                    <input type="text" class="form-control" name="tglPemusnahan" id="tglPemusnahanDisetujuiKepalaPD" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan Pemusnahan</label>
+                    <input type="text" class="form-control" name="ketPemusnahan" id="ketPemusnahanDisetujuiKepalaPD" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modal-sdisetujuiTimVerifikasi">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="" id="disetujuiTimVerifikasiPemusnahan" method="POST">
+              @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Disetujui Tim Verifikasi Pemusnahan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <span>Yakin akan merubah status menjadi disetujui Tim Verifikasi?</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Pemusnahan</label>
+                    <input type="text" class="form-control" name="kodePemusnahan" id="kodePemusnahanDisetujuiTimVerifikasi" placeholder="Kode Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Opname</label>
+                    <input type="text" class="form-control" name="kodeOpname" id="kodeOpnameDisetujuiTimVerifikasi" placeholder="Kode Penerimaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Pemusnahan</label>
+                    <input type="text" class="form-control" name="tglPemusnahan" id="tglPemusnahanDisetujuiTimVerifikasi" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan Pemusnahan</label>
+                    <input type="text" class="form-control" name="ketPemusnahan" id="ketPemusnahanDisetujuiTimVerifikasi" placeholder="Tanggal Penggunaan" value="" readonly>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
 @endsection
 
 @push('js')
@@ -316,6 +457,60 @@ Edit Pemusnahan Baru
     $('#tglPemusnahan').val($('#tgl_input').val());
     $('#ketPemusnahan').val($('#ket_pemusnahan').val());
     $('#modal-sfinal').modal('show');
+  }
+</script>
+
+<script>
+  function statusDisetujuiPPBP(idEdit) {
+    var idOpname = $('#id_opname').val();
+    var opname = {!! json_encode($topname->toArray()) !!}
+    opname.forEach(element => {
+      if(element.id == idOpname){
+        $('#kodeOpnameDisetujuiPPBP').val(element.kode_opname);
+      }
+    });
+    console.log(idEdit);
+    $("#disetujuiPPBPPemusnahan").attr("action", "/pemusnahan/disetujuippbp/" + idEdit);
+    $('#kodePemusnahanDisetujuiPPBP').val($('#kode_pemusnahan').val());
+    $('#tglPemusnahanDisetujuiPPBP').val($('#tgl_input').val());
+    $('#ketPemusnahanDisetujuiPPBP').val($('#ket_pemusnahan').val());
+    $('#modal-sdisetujuiPPBP').modal('show');
+  }
+</script>
+
+<script>
+  function statusDisetujuiKepalaPD(idEdit) {
+    var idOpname = $('#id_opname').val();
+    var opname = {!! json_encode($topname->toArray()) !!}
+    opname.forEach(element => {
+      if(element.id == idOpname){
+        $('#kodeOpnameDisetujuiKepalaPD').val(element.kode_opname);
+      }
+    });
+    console.log(idEdit);
+    $("#disetujuiKepalaPDPemusnahan").attr("action", "/pemusnahan/disetujuikepalapd/" + idEdit);
+    $('#kodePemusnahanDisetujuiKepalaPD').val($('#kode_pemusnahan').val());
+    $('#tglPemusnahanDisetujuiKepalaPD').val($('#tgl_input').val());
+    $('#ketPemusnahanDisetujuiKepalaPD').val($('#ket_pemusnahan').val());
+    $('#modal-sdisetujuiKepalaPD').modal('show');
+  }
+</script>
+
+<script>
+  function statusDisetujuiTimVerfikasi(idEdit) {
+    var idOpname = $('#id_opname').val();
+    var opname = {!! json_encode($topname->toArray()) !!}
+    opname.forEach(element => {
+      if(element.id == idOpname){
+        $('#kodeOpnameDisetujuiTimVerifikasi').val(element.kode_opname);
+      }
+    });
+    console.log(idEdit);
+    $("#disetujuiTimVerifikasiPemusnahan").attr("action", "/pemusnahan/disetujuitimverifikasi/" + idEdit);
+    $('#kodePemusnahanDisetujuiTimVerifikasi').val($('#kode_pemusnahan').val());
+    $('#tglPemusnahanDisetujuiTimVerifikasi').val($('#tgl_input').val());
+    $('#ketPemusnahanDisetujuiTimVerifikasi').val($('#ket_pemusnahan').val());
+    $('#modal-sdisetujuiTimVerifikasi').modal('show');
   }
 </script>
 @endpush

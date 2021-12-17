@@ -263,19 +263,19 @@ Edit Penggunaan
                   </div>
                   <div class="form-group">
                     <label>Kode Penggunaan</label>
-                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaanApproved" placeholder="Kode Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Kode Penerimaan</label>
-                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penerimaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaanApproved" placeholder="Kode Penerimaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Tanggal Penggunaan</label>
-                    <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaanApproved" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Keterangan</label>
-                    <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaanApproved" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -304,19 +304,19 @@ Edit Penggunaan
                   </div>
                   <div class="form-group">
                     <label>Kode Penggunaan</label>
-                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaanDisetujuiPPBP" placeholder="Kode Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Kode Penerimaan</label>
-                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penerimaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaanDisetujuiPPBP" placeholder="Kode Penerimaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Tanggal Penggunaan</label>
-                    <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaanDisetujuiPPBP" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Keterangan</label>
-                    <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaanDisetujuiPPBP" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -345,19 +345,19 @@ Edit Penggunaan
                   </div>
                   <div class="form-group">
                     <label>Kode Penggunaan</label>
-                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaan" placeholder="Kode Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodePenggunaan" id="kodePenggunaanDisetujuiKasubag" placeholder="Kode Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Kode Penerimaan</label>
-                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaan" placeholder="Kode Penerimaan" value="" readonly>
+                    <input type="text" class="form-control" name="kodePenerimaan" id="kodePenerimaanDisetujuiKasubag" placeholder="Kode Penerimaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Tanggal Penggunaan</label>
-                    <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="tglPenggunaan" id="tglPenggunaanDisetujuiKasubag" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Keterangan</label>
-                    <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaan" placeholder="Tanggal Penggunaan" value="" readonly>
+                    <input type="text" class="form-control" name="ketPenggunaan" id="ketPenggunaanDisetujuiKasubag" placeholder="Tanggal Penggunaan" value="" readonly>
                   </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -481,30 +481,32 @@ Edit Penggunaan
     var penerimaan = {!! json_encode($tpenerimaan->toArray()) !!}
     penerimaan.forEach(element => {
       if(element.id == idPenerimaan){
-        $('#kodePenerimaan').val(element.kode_penerimaan);
+        $('#kodePenerimaanApproved').val(element.kode_penerimaan);
       }
     });
     //console.log(idEdit);
     $("#approvedPenggunaan").attr("action", "/penggunaan/approved/" + idEdit);
-    $('#kodePenggunaan').val($('#kode_penggunaan').val());
-    $('#tglPenggunaan').val($('#tgl_input').val());
-    $('#ketPenggunaan').val($('#ket_penggunaan').val());
+    $('#kodePenggunaanApproved').val($('#kode_penggunaan').val());
+    $('#tglPenggunaanApproved').val($('#tgl_input').val());
+    $('#ketPenggunaanApproved').val($('#ket_penggunaan').val());
     $('#modal-sapproved').modal('show');
   }
 
   function statusDisetujuiPPBP(idEdit) {
     var idPenerimaan = $('#id_penerimaan').val();
+    // console.log(idPenerimaan);
     var penerimaan = {!! json_encode($tpenerimaan->toArray()) !!}
+    // console.log(penerimaan);
     penerimaan.forEach(element => {
       if(element.id == idPenerimaan){
-        $('#kodePenerimaan').val(element.kode_penerimaan);
+        $('#kodePenerimaanDisetujuiPPBP').val(element.kode_penerimaan);
       }
     });
     //console.log(idEdit);
     $("#disetujuiPPBPPenggunaan").attr("action", "/penggunaan/disetujui_ppbp/" + idEdit);
-    $('#kodePenggunaan').val($('#kode_penggunaan').val());
-    $('#tglPenggunaan').val($('#tgl_input').val());
-    $('#ketPenggunaan').val($('#ket_penggunaan').val());
+    $('#kodePenggunaanDisetujuiPPBP').val($('#kode_penggunaan').val());
+    $('#tglPenggunaanDisetujuiPPBP').val($('#tgl_input').val());
+    $('#ketPenggunaanDisetujuiPPBP').val($('#ket_penggunaan').val());
     $('#modal-sdisetujuiPPBP').modal('show');
   }
 
@@ -513,14 +515,14 @@ Edit Penggunaan
     var penerimaan = {!! json_encode($tpenerimaan->toArray()) !!}
     penerimaan.forEach(element => {
       if(element.id == idPenerimaan){
-        $('#kodePenerimaan').val(element.kode_penerimaan);
+        $('#kodePenerimaanDisetujuiKasubag').val(element.kode_penerimaan);
       }
     });
     //console.log(idEdit);
     $("#disetujuiKASUBAGPenggunaan").attr("action", "/penggunaan/disetujui_atasanLangsung/" + idEdit);
-    $('#kodePenggunaan').val($('#kode_penggunaan').val());
-    $('#tglPenggunaan').val($('#tgl_input').val());
-    $('#ketPenggunaan').val($('#ket_penggunaan').val());
+    $('#kodePenggunaanDisetujuiKasubag').val($('#kode_penggunaan').val());
+    $('#tglPenggunaanDisetujuiKasubag').val($('#tgl_input').val());
+    $('#ketPenggunaanDisetujuiKasubag').val($('#ket_penggunaan').val());
     $('#modal-sdisetujuiKASUBAG').modal('show');
   }
 </script>

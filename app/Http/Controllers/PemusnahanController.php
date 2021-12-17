@@ -30,11 +30,48 @@ class PemusnahanController extends Controller
 
         if (Auth::user()->jabatan->jabatan == 'PPBPB') {
             $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
-        } else {
+        } elseif (Auth::user()->jabatan->jabatan == 'PPBP') {
+            $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->where('status_pemusnahan', 'final')->get();
+        } elseif (Auth::user()->jabatan->jabatan == 'Kepala PD') {
+            $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->where('status_pemusnahan', 'final')->get();
+        } elseif (Auth::user()->jabatan->jabatan == 'TIM VERIFIKASI') {
             $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->where('status_pemusnahan', 'final')->get();
         }
 
         return view("Admin.Pemusnahan.show", compact('periodeAktif', 'tpemusnahan'));
+    }
+
+    public function getDataPemusnahan($id)
+    {
+        $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
+
+        if (Auth::user()->jabatan->jabatan == 'PPBPB') {
+            $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_unit', [Auth::user()->unit->id])->get();
+        } elseif (Auth::user()->jabatan->jabatan == 'PPBP') {
+            if ($id == 1) {
+                $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->where('status_pemusnahan', 'final')->get();
+            } else {
+                $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            }
+        } elseif (Auth::user()->jabatan->jabatan == 'Kepala PD') {
+            if ($id == 1) {
+                $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->where('status_pemusnahan', 'disetujui_ppbp')->get();
+            } else {
+                $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('id_opd', [Auth::user()->opd->id])->get();
+            }
+        } elseif (Auth::user()->jabatan->jabatan == 'TIM VERIFIKASI') {
+            if ($id == 1) {
+                $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->where('status_pemusnahan', 'disetujui_kepalaPD')->get();
+            } else {
+                $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->get();
+            }
+        } else {
+            $tpemusnahan = PemusnahanModel::where('id_periode', $dataPeriodeAktif->id)->whereIn('status_pemusnahan', ['final', 'disetujui_ppbp', 'disetujui_kepalaPD', 'disetujui_timVerifikasi'])->get();
+        }
+
+        $tabel = view('Admin.Pemusnahan.tabel', ['tpemusnahan' =>$tpemusnahan])->render();
+
+        return response()->json($tabel);
     }
 
     public function createPemusnahan()
@@ -185,5 +222,30 @@ class PemusnahanController extends Controller
         ]);
 
         return redirect()->route('pemusnahan')->with('statusInput', 'Status Final Success');
+    }
+
+    public function disetujuiPPBPPenggunaan($id)
+    {
+        $penggunaan = PenggunaanModel::find($id);
+        $penggunaan->status_penggunaan = 'disetujui_ppbp';
+        $penggunaan->update();
+        
+        return redirect('/penggunaan')->with('statusInput', 'Disetujui PPBP Success');
+    }
+    public function disetujuiKepalaPDPenggunaan($id)
+    {
+        $penggunaan = PenggunaanModel::find($id);
+        $penggunaan->status_penggunaan = 'disetujui_kepalaPD';
+        $penggunaan->update();
+        
+        return redirect('/penggunaan')->with('statusInput', 'Disetujui Kepala PD Success');
+    }
+    public function disetujuiTimVerifikasiPenggunaan($id)
+    {
+        $penggunaan = PenggunaanModel::find($id);
+        $penggunaan->status_penggunaan = 'disetujui_timVerifikasi';
+        $penggunaan->update();
+        
+        return redirect('/penggunaan')->with('statusInput', 'Disetujui Tim Verifikasi Success');
     }
 }
