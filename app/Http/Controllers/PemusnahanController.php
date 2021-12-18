@@ -90,7 +90,6 @@ class PemusnahanController extends Controller
 
     public function insertPemusnahan(Request $request)
     {
-        //dd($request);
         $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
@@ -133,7 +132,6 @@ class PemusnahanController extends Controller
         $pemusnahan->id_periode = $dataPeriodeAktif->id;
         $pemusnahan->id_opd = Auth::user()->opd->id;
         $pemusnahan->id_unit = Auth::user()->unit->id;
-        //dd($penggunaan);
         $pemusnahan->save();
         
         return redirect()->route('editPemusnahan', ['id' => $pemusnahan->id]);

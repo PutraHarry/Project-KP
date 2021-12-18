@@ -9,18 +9,6 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
-    /*public function register(Request $request)
-    {
-        $user = new AdminModel();
-        $user->nama ->request->nama;
-        $user->username = $request->username;
-        $user->password = bcrypt($request->password);
-        $user->role = $request->role;
-        $user->save();
-
-        return 'sukses';
-    }*/
-
     public function loginForm()
     {
         return view('Admin.login');

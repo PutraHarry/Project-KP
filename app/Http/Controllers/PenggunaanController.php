@@ -95,7 +95,6 @@ class PenggunaanController extends Controller
 
     public function insertPenggunaan(Request $request)
     {
-        //dd($request);
         $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
 
         $validator = Validator::make($request->all(), [
@@ -138,7 +137,6 @@ class PenggunaanController extends Controller
         $penggunaan->id_periode = $dataPeriodeAktif->id;
         $penggunaan->id_opd = Auth::user()->opd->id;
         $penggunaan->id_unit = Auth::user()->unit->id;
-        //dd($penggunaan);
         $penggunaan->save();
         
         return redirect()->route('editPenggunaan', ['id' => $penggunaan->id]);
@@ -155,7 +153,6 @@ class PenggunaanController extends Controller
 
         $tpenggunaan = PenggunaanModel::find($id);
         $tpenerimaan = PenerimaanModel::get();
-        //$barangPenggunaan = DetailPenggunaanModel::with('barang')->where('id_penggunaan', $id)->get();
         $idEdit = $id;
 
         return view("Admin.Penggunaan.edit", compact('periodeAktif', 'tpenggunaan', 'idEdit', 'tpenerimaan'));
@@ -179,7 +176,6 @@ class PenggunaanController extends Controller
         $penggunaan->tgl_penggunaan = $request->tgl_input;
         $penggunaan->id_penerimaan = $request->id_penerimaan;
         $penggunaan->ket_penggunaan = $request->ket_penggunaan;
-        //dd($penggunaan);
         $penggunaan->update();
 
         return redirect()->route('penggunaan')->with('statusInput', 'Update Success');
@@ -215,7 +211,6 @@ class PenggunaanController extends Controller
         }
 
         $penerimaanData = PenerimaanModel::find($idPenerimaan);
-        //dd($Penerimaandata);
 
         $penggunaan = PenggunaanModel::find($idPenggunaan);
         $penggunaan->kode_penggunaan = $request->kodePenggunaan;
@@ -229,9 +224,6 @@ class PenggunaanController extends Controller
         $penerimaan = PenerimaanModel::find($idPenerimaan)->update([
             'status_penerimaan' => 'digunakan'
         ]);
-
-        //$penerimaan = DetailPenerimaanModel::whereIn('id_penerimaan', [$idPenerimaan])->get();
-        //dd($penerimaan);
 
         return redirect()->route('penggunaan')->with('statusInput', 'Status Final Success');
     }
@@ -273,7 +265,6 @@ class PenggunaanController extends Controller
 
             $barangUnit = BarangUnitModel::where('id_unit', Auth::user()->unit->id)->where('id_barang', $dp->id_barang)->first();
             $dataBarang = BarangModel::where('id', $dp->id_barang)->first();
-            // dd($barangOPD);
             if ($barangUnit) {
                 $finalPenerimaan = BarangUnitModel::find($barangUnit->id);
                 $finalPenerimaan->qty = $finalPenerimaan->qty + $dp->qty;
