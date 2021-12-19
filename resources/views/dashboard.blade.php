@@ -37,7 +37,9 @@
             <div class="card-body">
               <center>
                 <img src="/adminlte/dist/img/logo_pemkab.jpg" alt="Logo Pemkab Badung" style="width:100px; height:100px;">
-                <p>Sistem yang dibangun untuk melakukan pengelolaan data persediaan di Badan Pengelolaan Keuangan dan Aset Daerah Kabupaten Badung</p>
+                <h4>Sistem yang dibangun untuk melakukan pengelolaan data persediaan di Badan Pengelolaan Keuangan dan Aset Daerah Kabupaten Badung.</h4>
+                <p></p>
+                <h4>Selamat datang! Anda login sebagai <span class="text-bold">{{Auth::guard('admin')->user()->nama_user}}</span>. Berikut adalah menu yang dapat anda gunakan.</h4>
               </center>
             </div>
             
