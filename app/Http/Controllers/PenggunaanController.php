@@ -183,7 +183,7 @@ class PenggunaanController extends Controller
 
     public function getDataDetailPenerimaan($id)
     {
-        $detailPenerimaan = DetailPenerimaanModel::with('barang')->where('id_penerimaan',$id)->get();
+        $detailPenerimaan = DetailPenerimaanModel::with('barang.jenisBarang')->where('id_penerimaan',$id)->get();
 
         return response()->json($detailPenerimaan);
     }

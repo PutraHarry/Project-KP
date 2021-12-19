@@ -404,14 +404,14 @@ Edit Penggunaan
       type: 'GET',
       url: '/penggunaan/detailPenerimaan/'+id,
       success: function (response){
-        //console.log(response);
+        // console.log(response);
           $('#data').empty();
           let count = 0;
           let total_harga = 0;
           response.forEach(element => {
             count = count + 1;
             total_harga = total_harga + element['harga'];
-              $('#data').append('<tr><td class="text-center">'+count+'</td><td>Ini Placeholder</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
+              $('#data').append('<tr><td class="text-center">'+count+'</td><td>'+ element.barang.jenis_barang['jenis_barang'] +'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
           });
           $('#total_harga').text(total_harga);
           total_harga = 0;
@@ -433,7 +433,7 @@ Edit Penggunaan
                   response.forEach(element => {
                     count = count + 1;
                     total_harga = total_harga + element['harga'];
-                      $('#data').append('<tr><td class="text-center">' + count + '</td><td>Ini Placeholder</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
+                      $('#data').append('<tr><td class="text-center">' + count + '</td><td>'+ element.barang.jenis_barang['jenis_barang'] +'</td><td>' + element.barang['nama_m_barang'] + '</td> <td>' + element['qty'] + '</td> <td>' + element.barang['satuan_m_barang'] + '</td> <td>' + element.barang['harga_m_barang'] + '</td> <td>' + element['harga'] + '</td> x<td>' + element['keterangan'] + '</td></tr>');
                   });
                   $('#total_harga').text(total_harga);
                   total_harga = 0;
