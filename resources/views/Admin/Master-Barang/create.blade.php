@@ -45,7 +45,7 @@ Create Barang Baru
           </div>
         </div>
         <div>
-            <a href="/master-barang" class="btn btn-default btn-icon-split">
+            <a href="/barang" class="btn btn-default btn-icon-split">
                 <span class="icon">
                     <i class="fas fa-arrow-left"></i>
                 </span>
