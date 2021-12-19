@@ -92,14 +92,14 @@ Edit Pengeluaran Baru
                               <label for="kode_pengeluaran">Kode Pengeluaran</label>
                               <input type="text" class="form-control" name="kode_pengeluaran" id="kode_pengeluaran" placeholder="Kode Pengeluaran" value="{{ $tpengeluaran->kode_pengeluaran }}" readonly>
                           </div>
-                          <div class="form-group">
+                          {{-- <div class="form-group">
                             <label>Kode Penerimaan</label>
                             <select class="select2" name="id_penggunaan" id="id_penggunaan" data-placeholder="Kode Penerimaan" style="width: 100%;" @if($tpengeluaran->status_pengeluaran == 'final') disabled @endif>
                               @foreach($tpenggunaan as $tp)  
                                 <option value={{ $tp->id }} @if($tp->id == $tpengeluaran->id_penggunaan) selected @endif>{{ $tp->kode_penggunaan }}</option>
                               @endforeach
                             </select>
-                          </div>
+                          </div> --}}
                           <div class="form-group">
                               <label>Tanggal Pengeluaran:</label>
                               <div class="input-group">
@@ -186,7 +186,7 @@ Edit Pengeluaran Baru
                         @foreach ($detailPengeluaran as $dp)
                           <tr>
                             <td class="text-center"> {{ $loop->iteration }} </td>
-                            <td>Kategori barang placeholder</td><!--ini tambahan baru-->
+                            <td>Kategori barang</td><!--ini tambahan baru-->
                             <td> {{ $dp->barang->nama_m_barang }} </td>
                             <td> {{ $dp->qty }} </td>
                             <td> {{ $dp->barang->satuan_m_barang }} </td>
@@ -213,7 +213,11 @@ Edit Pengeluaran Baru
                               <div class="form-group"><!--ini tambahan baru-->
                                 <select class="select2" name="kategori_barang" id="kategori_barang" data-placeholder="Pilih Kategori Barang" style="width: 100%;">
                                   
-                                    <option value="placeholder kategori barang">Ini Kategori Placeholder</option>
+                                    
+                                    <option value="place holder">Place Holder</option>
+                                    <option value="kertas cetak">Barang Cetakan</option>
+                                    <option value="alat tulis kantor">Alat Tulis Kantor</option>
+                                    <option value="alat kebersihan">Alat Kebersihan</option>
                                   
                                 </select>
                               </div>

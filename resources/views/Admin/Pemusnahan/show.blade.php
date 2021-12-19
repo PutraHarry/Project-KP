@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -46,7 +48,6 @@
     </section>
     <!-- Main content -->
     <section class="content">
-<<<<<<< Updated upstream
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
@@ -70,70 +71,10 @@
                       </div>
                     </div>
                 </form>
-=======
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">List Data Pemusnahan</h3>
-                    <div class="card-tools">
-                     
-                        <a href="/pemusnahan/create" class="btn btn-primary btn-icon-split">
-                            <span class="icon">
-                                <i class="fas fa-plus"></i>
-                            </span>
-                            <span class="text">Buat Baru</span>
-                        </a>
-                      
-                    </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <table id="example2" class="table table-bordered table-hover">
-                      <thead>
-                          <tr class="text-center">
-                            <th>No.</th>
-                            <th>Kode Pemusnahan</th>
-                            <th>Tanggal</th>
-                            <th>Status</th>
-                            <th>Keterangan</th>
-                            <th>Aksi</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        @foreach ($tpemusnahan as $tp)
-                          <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $tp->kode_pemusnahan }}</td>
-                            <td>{{ $tp->tgl_pemusnahan }}</td>
-                            <td>{{ $tp->status_pemusnahan }}</td>
-                            <td>{{ $tp->ket_pemusnahan }}</td>
-                            <td class="text-center">
-                                <a href="/pemusnahan/edit/{{ $tp->id }}" class="btn btn-warning btn-icon-split">
-                                  <span class="icon">
-                                      <i class="fas fa-edit"></i>
-                                  </span>
-                                </a>
-                                @if ($tp->status_pemusnahan == 'draft')
-                                  <a onclick="statusdelete({{ $tp->id }})" class="btn btn-danger btn-icon-split">
-                                    <span class="icon">
-                                        <i class="fas fa-trash"></i>
-                                    </span>
-                                  </a>
-                                @endif
-                            </td>
-                          </tr>
-                        @endforeach
-                      </tbody>
-                  </table>
-                </div>
->>>>>>> Stashed changes
               </div>
             </div>
           </div>
         </div>
-<<<<<<< Updated upstream
       </div>
       <div class="container-fluid">
         <div class="row">
@@ -198,7 +139,6 @@
                     </tbody>
                 </table>
               </div>
-=======
       </section>
       <div class="modal fade" id="modal-sdelete">
         <div class="modal-dialog">
@@ -218,7 +158,6 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button id="sdelete" type="submit" class="btn btn-danger">Delete</button>
                 </div>
->>>>>>> Stashed changes
             </div>
           </form>
         </div>
@@ -237,15 +176,14 @@
 <script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-
+<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script src="/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <!-- Page specific script -->
 <script>
-<<<<<<< Updated upstream
-  $('.select2').select2()
+$('.select2').select2()
 
 //Initialize Select2 Elements
 $('.select2bs4').select2({
@@ -253,8 +191,6 @@ $('.select2bs4').select2({
 })
 </script>
 <script>
-=======
->>>>>>> Stashed changes
   $(function () {
     $('#example2').DataTable({
       "paging": true,
