@@ -101,9 +101,9 @@
                                         <td>{{ $tpo->tgl_terima }}</td>
                                         <td>
                                           @if($tpo->status_penerimaan == "draft")
-                                            <span class="badge badge-warning">Draft</span>
+                                            <span class="badge badge-primary">Draft</span>
                                           @elseif($tpo->status_penerimaan != "draft")
-                                            <span class="badge badge-primary">Final</span>                       
+                                            <span class="badge badge-danger">Final</span>                       
                                           @endif    
                                         </td>                                        
                                         <td class="text-center">
@@ -147,10 +147,10 @@
                                         <td>{{ $tpno->diterima_dari }}</td>
                                         <td>{{ $tpno->tgl_terima }}</td>
                                         <td>
-                                          @if($tpo->status_penerimaan == "draft")
-                                            <span class="badge badge-warning">Draft</span>
-                                          @elseif($tpo->status_penerimaan != "draft")
-                                            <span class="badge badge-primary">Final</span>                       
+                                          @if($tpno->status_penerimaan == "draft")
+                                            <span class="badge badge-primary">Draft</span>
+                                          @elseif($tpno->status_penerimaan == "final")
+                                            <span class="badge badge-danger">Final</span>                       
                                           @endif  
                                         </td>                                        
                                         <td class="text-center">
@@ -194,10 +194,10 @@
                                         <td>{{ $tph->diterima_dari }}</td>
                                         <td>{{ $tph->tgl_terima }}</td>
                                         <td>
-                                          @if($tpo->status_penerimaan == "draft")
-                                            <span class="badge badge-warning">Draft</span>
-                                          @elseif($tpo->status_penerimaan != "draft")
-                                            <span class="badge badge-primary">Final</span>                       
+                                          @if($tph->status_penerimaan == "draft")
+                                            <span class="badge badge-primary">Draft</span>
+                                          @elseif($tph->status_penerimaan == "final")
+                                            <span class="badge badge-danger">Final</span>                       
                                           @endif  
                                         </td>                                        
                                         <td class="text-center">
@@ -241,11 +241,11 @@
                                         <td>{{ $tpnh->diterima_dari }}</td>
                                         <td>{{ $tpnh->tgl_terima }}</td>
                                         <td>
-                                          @if($tpo->status_penerimaan == "draft")
-                                            <span class="badge badge-warning">Draft</span>
-                                          @elseif($tpo->status_penerimaan != "draft")
-                                            <span class="badge badge-primary">Final</span>                       
-                                          @endif   
+                                          @if($tpnh->status_penerimaan == "draft")
+                                            <span class="badge badge-primary">Draft</span>
+                                          @elseif($tpnh->status_penerimaan == "final")
+                                            <span class="badge badge-danger">Final</span>                       
+                                          @endif  
                                         </td>
                                         <td class="text-center">
                                           <a href="/penerimaan/edit/{{ $tpnh->id }}" class="btn btn-warning btn-icon-split">
@@ -289,10 +289,10 @@
                                         <td>{{ $tpna->tgl_terima }}</td>
                                         <td>{{ $tpna->pengirim }}</td>
                                         <td>
-                                          @if($tpo->status_penerimaan == "draft")
-                                            <span class="badge badge-warning">Draft</span>
-                                          @elseif($tpo->status_penerimaan != "draft")
-                                            <span class="badge badge-primary">Final</span>                       
+                                          @if($tpna->status_penerimaan == "draft")
+                                            <span class="badge badge-primary">Draft</span>
+                                          @elseif($tpna->status_penerimaan == "final")
+                                            <span class="badge badge-danger">Final</span>                       
                                           @endif  
                                         </td>                                       
                                         <td class="text-center">

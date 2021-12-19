@@ -234,6 +234,10 @@ Edit Penerimaan Baru
                               <div class="form-group"><!--ini tambahan baru-->
                                 <select class="select2" name="kategori_barang" id="kategori_barang" data-placeholder="Pilih Jenis Barang" style="width: 100%;">
                                   <option value="place holder">Place Holder</option>
+                                  <option value="kertas cetak">Barang Cetakan</option>
+                                  <option value="alat tulis kantor">Alat Tulis Kantor</option>
+                                  <option value="alat kebersihan">Alat Kebersihan</option>
+                                  
                                 </select>
                               </div>
                             </td>

@@ -82,15 +82,7 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $to->kode_opname }}</td>
                             <td>{{ $to->tgl_opname }}</td>
-                            <td>
-                              @if($to->status_opname == "draft")
-                                <span class="badge badge-warning">Draft</span>
-                              @elseif($to->status_opname == "final")
-                                <span class="badge-primary">Final</span>
-                              @elseif($to->status_opname == "digunakan")
-                                <span class="badge badge-secondary">Digunakan</span>
-                              @endif
-                            </td>
+                            <td>{{ $to->status_opname }}</td>
                             <td>{{ $to->ket_opname }}</td>
                             <td class="text-center">
                                 <a href="/opname/edit/{{ $to->id }}" class="btn btn-warning btn-icon-split">

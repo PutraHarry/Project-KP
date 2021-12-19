@@ -78,7 +78,7 @@ class PenerimaanController extends Controller
 
     public function insertPenerimaan(Request $request)
     {
-        dd($request);
+        // dd($request);
 
         $dataPeriodeAktif = PeriodeModel::whereIn('id_opd', [Auth::user()->opd->id])->whereIn('status_periode', ['open'])->first();
         $validator = Validator::make($request->all(), [
