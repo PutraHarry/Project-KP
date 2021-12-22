@@ -47,21 +47,23 @@
           <!-- /.card -->
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-lg-4 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>Periode</h3>
-
-                <p>Pengelolaan Data Periode</p>
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBP', 'Admin BPKAD']))
+            <div class="col-lg-4 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>Periode</h3>
+                  <p>Pengelolaan Data Periode</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-calendar"></i>
+                </div>
+                <a href="/periode" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
               </div>
-              <div class="icon">
-                <i class="ion ion-calendar"></i>
-              </div>
-              <a href="/periode" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>
+          @endif
           <!-- ./col -->
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'PPBP', 'Admin BPKAD']))
           <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
@@ -76,7 +78,9 @@
               <a href="/saldoawal" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+          @endif
           <!-- ./col -->
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBP', 'Admin BPKAD']))
           <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
@@ -91,9 +95,11 @@
               <a href="/penerimaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+          @endif
         </div>
         <!-- /.row -->
         <div class="row">
+          @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'PPBP', 'KASI', 'KASUBAG', 'Admin BPKAD']))
              <!-- ./col -->
           <div class="col-lg-4 col-6">
               <!-- small box -->
@@ -109,7 +115,9 @@
                 <a href="/penggunaan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            @endif
             <!-- ./col -->
+            @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'PPBPB', 'PPBP', 'KASUBAG', 'Admin BPKAD']))
             <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-info">
@@ -124,7 +132,9 @@
                 <a href="/pengeluaran" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            @endif
             <!-- ./col -->
+            @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD', 'PPBPB', 'PPBP']))
             <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-success">
@@ -136,11 +146,13 @@
                 <div class="icon">
                   <i class="ion ion-social-dropbox"></i>
                 </div>
-                <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/opname" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            @endif
           </div>
           <div class="row">
+            @if (in_array(auth()->guard('admin')->user()->jabatan->jabatan, ['Administrator', 'Admin BPKAD', 'PPBPB', 'PPBP', 'TIM VERIFIKASI', 'Kepala PD']))
             <!-- ./col -->
             <div class="col-lg-4 col-6">
                 <!-- small box -->
@@ -153,11 +165,11 @@
                   <div class="icon">
                     <i class="ion ion-ios-flame"></i>
                   </div>
-                  <a href="#" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="/pemusnahan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-              
-              <div class="col-lg-4 col-6">
+              @endif
+              {{-- <div class="col-lg-4 col-6">
                   <!-- small box -->
                   <div class="small-box bg-primary">
                     <div class="inner">
@@ -171,7 +183,7 @@
                     <a href="/laporan" class="small-box-footer">Pilih <i class="fas fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
-                <!-- ./col -->
+                <!-- ./col --> --}}
           </div>
       </div><!-- /.container-fluid -->
     </section>
